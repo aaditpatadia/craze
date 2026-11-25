@@ -5,7 +5,7 @@ The lab named in the catalogue ("Northfield Test House") is fictional.
 No test described here took place.
 
 When real evidence arrives, replace this file with the lab's original PDF
-and update documentUrl in content/products/hm-2807-1300kv.json.
+and update documentUrl in content/products/vk-mot-2807-1300.json.
 
 Placeholder fields
   Report number:   NTH-0820

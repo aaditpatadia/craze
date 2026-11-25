@@ -116,9 +116,23 @@ function itemTokens(item: CatalogItem): Set<string> {
   return new Set(tokens([item.name, item.categoryName, ...item.keywords, ...specBits].join(" ")));
 }
 
+const normCode = (v: string) => v.toUpperCase().replace(/[^A-Z0-9]/g, "");
+
+/** Exact hits on a VK code (with or without the revision letter) or a supplier's own part number. */
+function exactMatch(row: BomRow, catalog: CatalogItem[]): CatalogItem | undefined {
+  const cells = [row.part, row.spec].map(normCode).filter((c) => c.length >= 5);
+  if (!cells.length) return undefined;
+  return catalog.find((item) => {
+    const keys = [item.code, item.code.replace(/-[A-Z]$/, ""), ...item.aliases].map(normCode);
+    return cells.some((c) => keys.includes(c));
+  });
+}
+
 export function matchRows(rows: BomRow[], catalog: CatalogItem[]): BomMatch[] {
   const indexed = catalog.map((item) => ({ item, toks: itemTokens(item) }));
   return rows.map((row) => {
+    const exact = exactMatch(row, catalog);
+    if (exact) return { row, item: exact, confidence: "strong" as const, score: 100 };
     const rt = [...new Set(tokens(`${row.part} ${row.spec}`))];
     let best: { item: CatalogItem; score: number; codes: number; words: number } | null = null;
     for (const { item, toks } of indexed) {
@@ -152,7 +166,7 @@ const csvCell = (v: string | number | null) => {
 };
 
 export function matchesToCsv(matches: BomMatch[], siteUrl: string): string {
-  const head = ["Line", "Your part", "Quantity", "Your spec", "Status", "Matched part", "Supplier", "Origin", "Highest evidence", "Link"];
+  const head = ["Line", "Your part", "Quantity", "Your spec", "Status", "VK code", "Matched part", "Supplier", "Origin", "Highest evidence", "Link"];
   const lines = matches.map((m) =>
     [
       m.row.line,
@@ -160,6 +174,7 @@ export function matchesToCsv(matches: BomMatch[], siteUrl: string): string {
       m.row.quantity,
       m.row.spec,
       m.item ? (m.confidence === "strong" ? "Strong match" : "Possible match, please confirm") : "No match yet",
+      m.item?.code ?? "",
       m.item?.name ?? "",
       m.item?.supplierName ?? "",
       m.item ? originLabel(m.item.originCountry) : "",
@@ -179,4 +194,6 @@ H7 flight controller,2,dual IMU
 15 inch folding carbon propeller,16,15x5
 650mm quad frame,2,folding arms
 5000mAh 6S LiPo battery,4,
-GNSS module,2,dual band`;
+GNSS module,2,dual band
+VK-FAN-8056-12,40,
+HM-4114-400,8,`;

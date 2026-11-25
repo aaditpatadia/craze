@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useUrlSearch } from "@/lib/useUrlSearch";
 import { useId, useMemo, useState, useSyncExternalStore } from "react";
 import type { CatalogItem } from "@/lib/content";
-import { TIER_LABEL, originLabel } from "@/lib/format";
+import { SECTOR_LABEL, TIER_LABEL, originLabel } from "@/lib/format";
 import { cn } from "@/lib/cn";
 import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -12,6 +12,7 @@ import { ProductCard } from "./ProductCard";
 
 export type CatalogCategory = {
   id: string;
+  sector: string;
   name: string;
   singular: string;
   filters: { specKey: string; label: string; unit: string | null }[];
@@ -44,6 +45,8 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
   const category = fixedCategory ?? params.get("category") ?? "";
   const origins = params.getAll("origin");
   const minTier = Number(params.get("tier") ?? 0);
+  const query = (params.get("q") ?? "").trim().toLowerCase();
+  const queryCode = query.replace(/[^a-z0-9]/g, "");
   const activeCategory = categories.find((c) => c.id === category);
 
   const setParams = (mutate: (p: URLSearchParams) => void) => {
@@ -68,6 +71,13 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
   const results = useMemo(
     () =>
       inCategory.filter((i) => {
+        if (query) {
+          const hay = [i.name, i.code, ...i.aliases, ...i.keywords, i.categoryName].join(" ").toLowerCase();
+          const codes = [i.code, ...i.aliases].map((c) => c.toLowerCase().replace(/[^a-z0-9]/g, ""));
+          const words = query.split(/\s+/).filter(Boolean);
+          const byCode = queryCode.length >= 3 && codes.some((c) => c.includes(queryCode));
+          if (!byCode && !words.every((w) => hay.includes(w))) return false;
+        }
         if (origins.length && !origins.includes(i.originCountry)) return false;
         if (minTier && i.highestTier < minTier) return false;
         for (const r of ranges) {
@@ -81,10 +91,10 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
         }
         return true;
       }),
-    [inCategory, origins, minTier, ranges, params],
+    [inCategory, origins, minTier, ranges, params, query, queryCode],
   );
 
-  const activeFilterCount = origins.length + (minTier ? 1 : 0) + ranges.filter((r) => params.get(`${r.specKey}_min`) || params.get(`${r.specKey}_max`)).length;
+  const activeFilterCount = (query ? 1 : 0) + origins.length + (minTier ? 1 : 0) + ranges.filter((r) => params.get(`${r.specKey}_min`) || params.get(`${r.specKey}_max`)).length;
 
   const clearAll = () => {
     setResetKey((k) => k + 1);
@@ -109,6 +119,22 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
           </div>
 
           <div className="mt-4 space-y-8">
+            <div key={`q-${resetKey}-${hydrated}`}>
+              <label htmlFor={`${ids}-q`} className="text-xs font-medium uppercase tracking-wide text-fg-subtle">
+                Search
+              </label>
+              <input
+                id={`${ids}-q`}
+                type="search"
+                placeholder="Name, VK code or supplier number"
+                defaultValue={params.get("q") ?? ""}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setParams((p) => (v.trim() ? p.set("q", v) : p.delete("q")));
+                }}
+                className="mt-2 h-11 w-full rounded-md border border-line bg-bg-elev px-3 text-sm text-fg placeholder:text-fg-subtle"
+              />
+            </div>
             <div>
               <label htmlFor={`${ids}-cat`} className="text-xs font-medium uppercase tracking-wide text-fg-subtle">
                 Category
@@ -128,10 +154,16 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
                 className="mt-2 h-11 w-full rounded-md border border-line bg-bg-elev px-3 text-sm text-fg"
               >
                 <option value="">All live categories</option>
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
+                {[...new Set(categories.map((c) => c.sector))].map((sector) => (
+                  <optgroup key={sector} label={SECTOR_LABEL[sector] ?? sector}>
+                    {categories
+                      .filter((c) => c.sector === sector)
+                      .map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.name}
+                        </option>
+                      ))}
+                  </optgroup>
                 ))}
               </select>
             </div>

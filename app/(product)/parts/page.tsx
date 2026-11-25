@@ -5,13 +5,13 @@ import { getCatalog, getLiveCategories } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "All parts",
-  description: "Drone motors, ESCs, flight controllers, propellers and frames, each with its evidence tier and origin shown.",
+  description: "Drone, robotics and data center components, each with a VK code, an exploded 3D view, its evidence tier and origin.",
   alternates: { canonical: "/parts" },
 };
 
 export default function PartsPage() {
   const items = getCatalog();
-  const categories = getLiveCategories().map(({ id, name, singular, filters }) => ({ id, name, singular, filters }));
+  const categories = getLiveCategories().map(({ id, sector, name, singular, filters }) => ({ id, sector, name, singular, filters }));
   return (
     <>
       <PageHeader
@@ -19,7 +19,7 @@ export default function PartsPage() {
         lead="Every listing shows the highest evidence tier we hold, and where the part is made. Filter by what matters to your build."
       />
       <Container className="pb-24">
-          <Catalog items={items} categories={categories} />
+        <Catalog items={items} categories={categories} />
       </Container>
     </>
   );

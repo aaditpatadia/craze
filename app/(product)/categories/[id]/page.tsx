@@ -24,7 +24,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ id: s
   if (category.status === "upcoming") redirect(`/upcoming#${category.id}`);
 
   const items = getCatalog();
-  const categories = getLiveCategories().map(({ id, name, singular, filters }) => ({ id, name, singular, filters }));
+  const categories = getLiveCategories().map(({ id, sector, name, singular, filters }) => ({ id, sector, name, singular, filters }));
 
   return (
     <>

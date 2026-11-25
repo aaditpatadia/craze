@@ -49,7 +49,7 @@ class CanvasBoundary extends Component<{ onError: () => void; children: ReactNod
   }
 }
 
-const LAYERS: LayerFilter[] = ["all", "moving", "electrical", "magnetic", "structural"];
+const LAYERS: LayerFilter[] = ["all", "moving", "electrical", "magnetic", "structural", "thermal"];
 
 function ViewerShell({ manifest, parts, productId, productName, category, categorySingular, store }: ViewerProps & { store: ViewerStore }) {
   const ids = useId();

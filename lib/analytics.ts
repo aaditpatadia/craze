@@ -2,7 +2,15 @@
  * Privacy-friendly analytics. Uses Plausible when NEXT_PUBLIC_PLAUSIBLE_DOMAIN is set,
  * otherwise does nothing. No cookies, no personal data in event properties.
  */
-export type AnalyticsEvent = "Part opened" | "Explode used" | "BOM uploaded" | "Request submitted" | "Notify submitted";
+export type AnalyticsEvent =
+  | "Part opened"
+  | "Explode used"
+  | "BOM uploaded"
+  | "Request submitted"
+  | "Notify submitted"
+  | "Supplier applied"
+  | "Code copied"
+  | "Quote add";
 
 type Plausible = (event: string, options?: { props?: Record<string, string | number | boolean> }) => void;
 

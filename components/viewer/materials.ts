@@ -21,6 +21,21 @@ const DEFS: Record<string, Def> = {
   "seal-rubber": { color: "#18191b", metalness: 0, roughness: 0.85 },
   insulation: { color: "#2d3036", metalness: 0.1, roughness: 0.6 },
   carbon: { color: "#1d1e21", metalness: 0.35, roughness: 0.3, clearcoat: 1 },
+  pcb: { color: "#1f4a3a", metalness: 0.1, roughness: 0.55, clearcoat: 0.4 },
+  "pcb-dark": { color: "#17191d", metalness: 0.15, roughness: 0.5, clearcoat: 0.4 },
+  chip: { color: "#232427", metalness: 0.2, roughness: 0.45 },
+  solder: { color: "#d8dadf", metalness: 0.9, roughness: 0.25 },
+  gold: { color: "#d4a94a", metalness: 1, roughness: 0.28 },
+  plastic: { color: "#2a2c31", metalness: 0, roughness: 0.6 },
+  "plastic-light": { color: "#c9ccd2", metalness: 0, roughness: 0.55 },
+  "plastic-amber": { color: "#c8892c", metalness: 0, roughness: 0.45, clearcoat: 0.3 },
+  rubber: { color: "#141516", metalness: 0, roughness: 0.92 },
+  brass: { color: "#c5a35a", metalness: 0.95, roughness: 0.3 },
+  ceramic: { color: "#e7e3d8", metalness: 0, roughness: 0.4 },
+  "cell-wrap": { color: "#3a5f8f", metalness: 0.1, roughness: 0.45, clearcoat: 0.6 },
+  "thermal-pad": { color: "#8a6fb8", metalness: 0, roughness: 0.8 },
+  glass: { color: "#9fb4c8", metalness: 0.1, roughness: 0.08, clearcoat: 1 },
+  "sheet-steel": { color: "#8d9198", metalness: 0.7, roughness: 0.45 },
 };
 
 export function makeMaterial(key: string): THREE.MeshPhysicalMaterial {

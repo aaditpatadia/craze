@@ -7,7 +7,13 @@
 import { appendFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
-export type Submission = { kind: "request" | "notify"; data: Record<string, unknown> };
+export type Submission = { kind: "request" | "notify" | "supplier"; data: Record<string, unknown>; reference?: string };
+
+const SUBJECT: Record<Submission["kind"], (s: Submission) => string> = {
+  request: (s) => `${s.reference ?? "Request"}: sourcing request from ${String(s.data.company ?? "unknown")}`,
+  notify: (s) => `Notify me: ${String(s.data.category ?? "")}`,
+  supplier: (s) => `${s.reference ?? "Application"}: supplier application from ${String(s.data.company ?? "unknown")}`,
+};
 
 const dir = process.env.VERCEL ? "/tmp" : join(process.cwd(), ".data");
 
@@ -17,16 +23,16 @@ export async function storeSubmission(s: Submission): Promise<{ id: string }> {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.SUBMISSIONS_EMAIL_TO;
   if (key && to) {
-    const from = process.env.SUBMISSIONS_EMAIL_FROM ?? "Catalogue <onboarding@resend.dev>";
+    const from = process.env.SUBMISSIONS_EMAIL_FROM ?? "Verkod <onboarding@resend.dev>";
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from,
         to: [to],
-        subject: s.kind === "request" ? `Sourcing request from ${String(s.data.company ?? "unknown")}` : `Notify me: ${String(s.data.category ?? "")}`,
+        subject: SUBJECT[s.kind](s),
         text: JSON.stringify(record, null, 2),
-        ...(typeof s.data.email === "string" && s.kind === "request" ? { reply_to: s.data.email } : {}),
+        ...(typeof s.data.email === "string" && s.kind !== "notify" ? { reply_to: s.data.email } : {}),
       }),
     });
     if (!res.ok) throw new Error(`Resend responded ${res.status}`);

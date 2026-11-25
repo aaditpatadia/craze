@@ -1,0 +1,525 @@
+{
+  "productId": "vk-esc-80-14s",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      2.6,
+      2.6,
+      3.6
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "pcb",
+      "name": "Circuit board",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            70,
+            1.6,
+            34,
+            1.5
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "pcb",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0,
+      "order": 0,
+      "layers": [
+        "electrical",
+        "structural"
+      ],
+      "material": "pcb",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The board is the base everything else is soldered to.",
+      "hotspots": []
+    },
+    {
+      "id": "mosfets",
+      "name": "Power MOSFETs",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            5,
+            1,
+            6
+          ],
+          "pos": [
+            -23,
+            1.3,
+            -8.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": {
+            "n": 3,
+            "step": [
+              10,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "type": "box",
+          "d": [
+            5,
+            1,
+            6
+          ],
+          "pos": [
+            -23,
+            1.3,
+            8.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": {
+            "n": 3,
+            "step": [
+              10,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.32,
+      "order": 1,
+      "layers": [
+        "electrical"
+      ],
+      "material": "chip",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "Six MOSFETs sit in two rows on the top side.",
+      "hotspots": []
+    },
+    {
+      "id": "gate-driver",
+      "name": "Gate driver",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            4,
+            0.9,
+            4
+          ],
+          "pos": [
+            25,
+            1.25,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0.2,
+        1,
+        0
+      ],
+      "distance": 0.5,
+      "order": 2,
+      "layers": [
+        "electrical"
+      ],
+      "material": "chip",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The gate driver sits between the controller and the MOSFETs.",
+      "hotspots": []
+    },
+    {
+      "id": "mcu",
+      "name": "Microcontroller",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            5,
+            0.9,
+            5
+          ],
+          "pos": [
+            21,
+            -1.25,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            2,
+            0.6,
+            3
+          ],
+          "pos": [
+            29,
+            -1.1,
+            4
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "ceramic",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.4,
+      "order": 3,
+      "layers": [
+        "electrical"
+      ],
+      "material": "chip",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The controller is on the underside, away from the hot MOSFETs.",
+      "hotspots": []
+    },
+    {
+      "id": "capacitor",
+      "name": "Input capacitor",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            6,
+            16
+          ],
+          "pos": [
+            -44,
+            2,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "aluminium",
+          "repeat": null
+        },
+        {
+          "type": "cyl",
+          "d": [
+            6.1,
+            1.5
+          ],
+          "pos": [
+            -52.5,
+            2,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "plastic",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        -1,
+        0.4,
+        0
+      ],
+      "distance": 0.55,
+      "order": 4,
+      "layers": [
+        "electrical"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The input capacitor hangs off the battery end of the board.",
+      "hotspots": []
+    },
+    {
+      "id": "power-leads",
+      "name": "Power and phase leads",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            1.6,
+            26
+          ],
+          "pos": [
+            48,
+            0.2,
+            -11.333333333333334
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "silicone",
+          "repeat": {
+            "n": 3,
+            "step": [
+              0,
+              0,
+              11.333333333333334
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "type": "cyl",
+          "d": [
+            2.2,
+            26
+          ],
+          "pos": [
+            -48,
+            -1.6,
+            -6.8
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "silicone",
+          "repeat": {
+            "n": 2,
+            "step": [
+              0,
+              0,
+              13.6
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.45,
+      "order": 5,
+      "layers": [
+        "electrical"
+      ],
+      "material": "silicone",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "Phase leads leave from one end, battery leads from the other.",
+      "hotspots": []
+    },
+    {
+      "id": "thermal-pad",
+      "name": "Thermal pad",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            32,
+            0.5,
+            30
+          ],
+          "pos": [
+            -13,
+            2.05,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "thermal-pad",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.75,
+      "order": 6,
+      "layers": [
+        "thermal"
+      ],
+      "material": "thermal-pad",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The thermal pad covers the MOSFET rows.",
+      "hotspots": []
+    },
+    {
+      "id": "heatsink",
+      "name": "Heatsink",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            34,
+            1.5,
+            32,
+            1
+          ],
+          "pos": [
+            -13,
+            3.05,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            1,
+            4,
+            32
+          ],
+          "pos": [
+            -28.75,
+            5.8,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": {
+            "n": 10,
+            "step": [
+              3.5,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 1.05,
+      "order": 7,
+      "layers": [
+        "thermal",
+        "structural"
+      ],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The heatsink closes over the pad and the MOSFETs.",
+      "hotspots": []
+    }
+  ]
+}

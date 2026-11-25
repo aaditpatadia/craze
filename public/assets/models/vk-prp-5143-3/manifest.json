@@ -1,0 +1,148 @@
+{
+  "productId": "vk-prp-5143-3",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      1.8,
+      3.2,
+      3
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "moulding",
+      "name": "One-piece moulding",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            6.5,
+            7
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        },
+        {
+          "type": "tube",
+          "d": [
+            2.5,
+            3,
+            7.2
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic-light",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            57,
+            1.4,
+            13,
+            5
+          ],
+          "pos": [
+            34.5,
+            0,
+            0
+          ],
+          "rot": [
+            24,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": {
+            "n": 3,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              120,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0,
+      "order": 0,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "plastic",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "Hub and blades are a single moulding.",
+      "hotspots": [
+        {
+          "id": "root",
+          "label": "Blade root",
+          "text": "Where the blade meets the hub. Stress peaks here, so look for voids and sink marks.",
+          "position": [
+            10,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "bore",
+          "label": "Hub bore",
+          "text": "Fits the motor shaft. A loose bore causes vibration that no filter can remove.",
+          "position": [
+            0,
+            4,
+            0
+          ]
+        },
+        {
+          "id": "tip",
+          "label": "Blade tip",
+          "text": "Fastest-moving point. Chips here unbalance the prop and add noise.",
+          "position": [
+            61,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

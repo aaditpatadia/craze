@@ -65,8 +65,8 @@ manifest, for each part:
 ```json
 {
   "id": "stator",
-  "glb": "/assets/models/hm-2807-1300kv/stator.glb",
-  "glbDetail": "/assets/models/hm-2807-1300kv/stator.detail.glb",
+  "glb": "/assets/models/vk-mot-2807-1300/stator.glb",
+  "glbDetail": "/assets/models/vk-mot-2807-1300/stator.detail.glb",
   "procedural": null,
   "modelSource": "supplier-cad"
 }
@@ -78,7 +78,7 @@ and at the top level:
 {
   "modelSource": "supplier-cad",
   "disclaimer": null,
-  "assembledGlb": "/assets/models/hm-2807-1300kv/assembled.glb",
+  "assembledGlb": "/assets/models/vk-mot-2807-1300/assembled.glb",
   "procedural": null
 }
 ```
@@ -98,7 +98,7 @@ spaced, same lighting and framing, plain background. Save as
 
 ```json
 "photoSpin": {
-  "frames": ["/assets/photos/hm-2807-1300kv/spin/01.webp", "..."],
+  "frames": ["/assets/photos/vk-mot-2807-1300/spin/01.webp", "..."],
   "capturedOn": "2026-07-18",
   "modelSource": "scanned-sample",
   "width": 1600,

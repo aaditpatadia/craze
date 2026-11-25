@@ -15,7 +15,7 @@ const id = z.string().regex(/^[a-z0-9][a-z0-9-]*$/, "ids are lowercase kebab-cas
 export const ModelSourceSchema = z.enum(["supplier-cad", "scanned-sample", "illustrative"]);
 export type ModelSource = z.infer<typeof ModelSourceSchema>;
 
-export const LayerSchema = z.enum(["moving", "electrical", "magnetic", "structural"]);
+export const LayerSchema = z.enum(["moving", "electrical", "magnetic", "structural", "thermal"]);
 export type Layer = z.infer<typeof LayerSchema>;
 
 /** "unknown" and "not-yet-verified" are first-class values, never hidden. */
@@ -72,6 +72,8 @@ export const SpecSchema = z.object({
   unit: z.string().nullable(),
   /** Every spec is a claim and points at the evidence behind it. */
   evidenceId: id,
+  /** Acceptance band printed on the build sheet, for example "plus or minus 5 percent". */
+  tolerance: z.string().nullable().default(null),
 });
 export type Spec = z.infer<typeof SpecSchema>;
 
@@ -119,8 +121,26 @@ export const PhotoSpinSchema = z.object({
   height: z.number().int().positive(),
 });
 
+/**
+ * Verkod part number: VK, a three letter category code, one or more spec segments
+ * and a revision letter. Buyers order by it and suppliers build to it.
+ */
+export const PART_CODE = /^VK-[A-Z]{3}(?:-[A-Z0-9]+)+-[A-Z]$/;
+
+export const SourceSchema = z.object({ title: z.string().min(1), url: z.url() });
+
+export const DemandSchema = z.object({
+  /** Who buys this, in plain words. */
+  buyers: z.array(z.string().min(1)).min(1),
+  /** Why we list it. Only what the sources below support. */
+  reason: z.string().min(1),
+  sources: z.array(SourceSchema).min(1, "a demand claim needs a source"),
+});
+export type Demand = z.infer<typeof DemandSchema>;
+
 export const ProductSchema = z.object({
   id,
+  code: z.string().regex(PART_CODE, "part codes look like VK-MOT-2807-1300-A"),
   name: z.string().min(1),
   category: id,
   supplierId: id,
@@ -140,11 +160,22 @@ export const ProductSchema = z.object({
   keywords: z.array(z.string()).default([]),
   photos: z.array(PhotoSchema).default([]),
   photoSpin: PhotoSpinSchema.nullable().default(null),
+  /** Copy the internal part descriptions from a sibling product. Part-level claims are not copied. */
+  partsFrom: id.nullable().default(null),
+  demand: DemandSchema,
+  /** The current supplier's own part number. Cross-referenced on the build sheet; buyers order by `code`. */
+  supplierPartNumber: z.string().nullable().default(null),
 });
 export type Product = z.infer<typeof ProductSchema>;
 
+export const SectorSchema = z.enum(["aerial", "robotics", "compute", "energy"]);
+export type Sector = z.infer<typeof SectorSchema>;
+
 export const CategorySchema = z.object({
   id,
+  /** The three letters after VK- in every part code of this category. */
+  code: z.string().regex(/^[A-Z]{3}$/),
+  sector: SectorSchema,
   name: z.string().min(1),
   singular: z.string().min(1),
   status: z.enum(["live", "upcoming"]),
@@ -155,11 +186,17 @@ export const CategorySchema = z.object({
   filters: z
     .array(z.object({ specKey: id, label: z.string(), unit: z.string().nullable() }))
     .default([]),
+  /** Printed on every build sheet in this category: how we accept a delivery. */
+  acceptance: z.array(z.string().min(1)).default([]),
+  /** Documents a supplier sends with a quote in this category. */
+  documents: z.array(z.string().min(1)).default([]),
 });
 export type Category = z.infer<typeof CategorySchema>;
 
 export const SupplierSchema = z.object({
   id,
+  /** Verkod supplier code, printed on purchase orders. */
+  code: z.string().regex(/^VKS-\d{3}$/),
   name: z.string().min(1),
   placeholder: z.boolean(),
   city: z.string().min(1),
@@ -184,6 +221,25 @@ export type Supplier = z.infer<typeof SupplierSchema>;
 
 const vec3 = z.tuple([z.number(), z.number(), z.number()]);
 
+/**
+ * Data-only geometry for illustrative models, in millimetres, Y up.
+ * box d=[w,h,depth,cornerRadius?], cyl d=[rBottom,h,rTop?], tube d=[rIn,rOut,h],
+ * torus d=[radius,tube], sphere d=[r]. Rotations are in degrees.
+ * repeat copies the shape n times, moving by step and turning about the part origin by turn.
+ */
+export const ShapeSchema = z.object({
+  type: z.enum(["box", "cyl", "tube", "torus", "sphere"]),
+  d: z.array(z.number().nonnegative()).min(1).max(4),
+  pos: vec3.default([0, 0, 0]),
+  rot: vec3.default([0, 0, 0]),
+  mat: z.string().min(1),
+  repeat: z
+    .object({ n: z.number().int().min(1).max(256), step: vec3.default([0, 0, 0]), turn: vec3.default([0, 0, 0]) })
+    .nullable()
+    .default(null),
+});
+export type Shape = z.infer<typeof ShapeSchema>;
+
 export const ManifestPartSchema = z.object({
   id,
   name: z.string().min(1),
@@ -193,6 +249,8 @@ export const ManifestPartSchema = z.object({
   glbDetail: z.string().nullable().default(null),
   /** Key into the procedural generator. Used only while glb is null. */
   procedural: z.string().nullable().default(null),
+  /** Data-only illustrative geometry. Used only while glb and procedural are null. */
+  shapes: z.array(ShapeSchema).default([]),
   axis: vec3,
   /** In multiples of the assembled model's bounding radius. */
   distance: z.number().min(0),
@@ -231,12 +289,38 @@ export const ManifestSchema = z
       });
     }
     for (const p of m.parts) {
-      if (!p.glb && !p.procedural) {
-        ctx.addIssue({ code: "custom", message: `manifest part ${p.id}: needs a glb path or a procedural key` });
+      if (!p.glb && !p.procedural && p.shapes.length === 0) {
+        ctx.addIssue({ code: "custom", message: `manifest part ${p.id}: needs a glb path, a procedural key or shapes` });
       }
-      if (p.procedural && !p.glb && p.modelSource !== "illustrative") {
+      if ((p.procedural || p.shapes.length > 0) && !p.glb && p.modelSource !== "illustrative") {
         ctx.addIssue({ code: "custom", message: `manifest part ${p.id}: procedural parts must be modelSource "illustrative"` });
       }
     }
   });
 export type Manifest = z.infer<typeof ManifestSchema>;
+
+/**
+ * Where we are in finding a maker for each listed part. Real company names live here,
+ * and are shown on the site only once that company has agreed (consented: true).
+ */
+export const SourcingStatusSchema = z.enum(["searching", "candidates", "contacted", "sample-requested", "qualified"]);
+export type SourcingStatus = z.infer<typeof SourcingStatusSchema>;
+
+export const SourcingSchema = z.object({
+  productId: id,
+  status: SourcingStatusSchema,
+  updated: isoDate,
+  candidates: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        city: z.string().nullable(),
+        url: z.url(),
+        /** What the company says publicly that makes it a candidate. Their claim, not ours. */
+        basis: z.string().min(1),
+        consented: z.boolean(),
+      }),
+    )
+    .default([]),
+});
+export type Sourcing = z.infer<typeof SourcingSchema>;

@@ -8,6 +8,7 @@ import { NAV, SITE } from "@/lib/config";
 import { cn } from "@/lib/cn";
 import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { QuoteBadge } from "@/components/quote/QuoteControls";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader() {
@@ -45,7 +46,7 @@ export function SiteHeader() {
         <Link href="/" className="-ml-2 flex min-h-11 items-center whitespace-nowrap rounded-md px-2 text-[15px] font-semibold tracking-tight">
           {SITE.name}
         </Link>
-        <nav aria-label="Main" className="ml-6 hidden md:block">
+        <nav aria-label="Main" className="ml-4 hidden lg:block">
           <ul className="flex items-center gap-1">
             {NAV.map((item) => (
               <li key={item.href}>
@@ -53,7 +54,7 @@ export function SiteHeader() {
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
-                    "flex min-h-11 items-center rounded-full px-3 text-sm transition-colors duration-200",
+                    "flex min-h-11 items-center whitespace-nowrap rounded-full px-2.5 text-sm transition-colors duration-200",
                     isActive(item.href) ? "text-fg" : "text-fg-subtle hover:text-fg",
                   )}
                 >
@@ -65,6 +66,7 @@ export function SiteHeader() {
         </nav>
         <div className="ml-auto flex items-center gap-1">
           <ThemeToggle />
+          <QuoteBadge />
           <span className="hidden sm:block">
             <LinkButton href="/request" variant="primary">
               Send your BOM
@@ -73,7 +75,7 @@ export function SiteHeader() {
           <button
             ref={menuButton}
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-full text-fg hover:bg-bg-subtle md:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-full text-fg hover:bg-bg-subtle lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -92,7 +94,7 @@ export function SiteHeader() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-line md:hidden"
+            className="overflow-hidden border-t border-line lg:hidden"
           >
             <ul className="flex flex-col px-4 py-2">
               {[...NAV, { href: "/request", label: "Send your BOM" }].map((item) => (

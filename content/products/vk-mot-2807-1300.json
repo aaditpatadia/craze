@@ -1,6 +1,6 @@
 {
-  "id": "hm-2807-1300kv",
-  "name": "HM-2807 1300KV outrunner motor",
+  "id": "vk-mot-2807-1300",
+  "name": "2807 1300KV outrunner motor",
   "category": "bldc-motors",
   "supplierId": "harrow-motion",
   "placeholder": true,
@@ -8,18 +8,89 @@
   "summary": "A 28 by 7 mm stator outrunner for 7-inch multirotors on 6S. Sample data: the supplier and every figure here are fictional.",
   "modelSource": "illustrative",
   "lastVerified": "2026-08-02",
-  "keywords": ["2807", "1300kv", "outrunner", "bldc", "brushless motor", "7 inch", "6s motor"],
-  "applications": ["7-inch multirotor", "Long-range FPV", "Light inspection drones"],
-  "origin": { "country": "India", "evidenceId": "ev-hm2807-factory" },
+  "keywords": [
+    "2807",
+    "1300kv",
+    "outrunner",
+    "bldc",
+    "brushless motor",
+    "7 inch",
+    "6s motor"
+  ],
+  "applications": [
+    "7-inch multirotor",
+    "Long-range FPV",
+    "Light inspection drones"
+  ],
+  "origin": {
+    "country": "India",
+    "evidenceId": "ev-hm2807-factory"
+  },
   "specs": [
-    { "key": "kv", "label": "KV", "value": 1300, "unit": "rpm/V", "evidenceId": "ev-hm2807-datasheet" },
-    { "key": "stator-diameter", "label": "Stator diameter", "value": 28, "unit": "mm", "evidenceId": "ev-hm2807-datasheet" },
-    { "key": "stator-height", "label": "Stator height", "value": 7, "unit": "mm", "evidenceId": "ev-hm2807-datasheet" },
-    { "key": "configuration", "label": "Configuration", "value": "12N14P", "unit": null, "evidenceId": "ev-hm2807-sample" },
-    { "key": "mass", "label": "Mass with leads", "value": 46.2, "unit": "g", "evidenceId": "ev-hm2807-sample" },
-    { "key": "max-cells", "label": "Rated cells", "value": 6, "unit": "S", "evidenceId": "ev-hm2807-datasheet" },
-    { "key": "peak-thrust", "label": "Peak thrust, 7x4 prop, 6S", "value": 1840, "unit": "g", "evidenceId": "ev-hm2807-thrust" },
-    { "key": "shaft-diameter", "label": "Shaft diameter", "value": 5, "unit": "mm", "evidenceId": "ev-hm2807-sample" }
+    {
+      "tolerance": "plus or minus 5 percent",
+      "key": "kv",
+      "label": "KV",
+      "value": 1300,
+      "unit": "rpm/V",
+      "evidenceId": "ev-hm2807-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "stator-diameter",
+      "label": "Stator diameter",
+      "value": 28,
+      "unit": "mm",
+      "evidenceId": "ev-hm2807-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "stator-height",
+      "label": "Stator height",
+      "value": 7,
+      "unit": "mm",
+      "evidenceId": "ev-hm2807-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "configuration",
+      "label": "Configuration",
+      "value": "12N14P",
+      "unit": null,
+      "evidenceId": "ev-hm2807-sample"
+    },
+    {
+      "tolerance": "plus or minus 2 g",
+      "key": "mass",
+      "label": "Mass with leads",
+      "value": 46.2,
+      "unit": "g",
+      "evidenceId": "ev-hm2807-sample"
+    },
+    {
+      "tolerance": null,
+      "key": "max-cells",
+      "label": "Rated cells",
+      "value": 6,
+      "unit": "S",
+      "evidenceId": "ev-hm2807-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "peak-thrust",
+      "label": "Peak thrust, 7x4 prop, 6S",
+      "value": 1840,
+      "unit": "g",
+      "evidenceId": "ev-hm2807-thrust"
+    },
+    {
+      "tolerance": "plus 0, minus 0.01 mm",
+      "key": "shaft-diameter",
+      "label": "Shaft diameter",
+      "value": 5,
+      "unit": "mm",
+      "evidenceId": "ev-hm2807-sample"
+    }
   ],
   "evidence": [
     {
@@ -36,12 +107,24 @@
         "Authenticity of the sub-supplier certificates"
       ],
       "date": "2026-07-02",
-      "checkedBy": "Assay inspection team",
+      "checkedBy": "Verkod inspection team",
       "documentUrl": null,
       "documents": [
-        { "title": "HM-2807 datasheet, revision C", "received": "2026-06-30", "url": null },
-        { "title": "Magnet supplier material certificate", "received": "2026-07-02", "url": null },
-        { "title": "Copper magnet wire supplier declaration", "received": "2026-07-02", "url": null }
+        {
+          "title": "HM-2807 datasheet, revision C",
+          "received": "2026-06-30",
+          "url": null
+        },
+        {
+          "title": "Magnet supplier material certificate",
+          "received": "2026-07-02",
+          "url": null
+        },
+        {
+          "title": "Copper magnet wire supplier declaration",
+          "received": "2026-07-02",
+          "url": null
+        }
       ],
       "measurements": [],
       "lab": null
@@ -62,15 +145,40 @@
         "Magnet temperature rating"
       ],
       "date": "2026-07-18",
-      "checkedBy": "Assay inspection team",
+      "checkedBy": "Verkod inspection team",
       "documentUrl": null,
       "documents": [],
       "measurements": [
-        { "label": "KV", "value": "1288", "unit": "rpm/V", "method": "Unloaded at 16.8 V, optical tachometer" },
-        { "label": "Mass with 150 mm leads", "value": "46.2", "unit": "g", "method": "Bench scale, 0.1 g resolution" },
-        { "label": "Phase-to-phase resistance", "value": "54", "unit": "mOhm", "method": "Four-wire measurement at 22 C" },
-        { "label": "Shaft diameter", "value": "4.99", "unit": "mm", "method": "Micrometer, three positions" },
-        { "label": "Slots and poles", "value": "12N14P", "unit": null, "method": "Counted after removing the bell" }
+        {
+          "label": "KV",
+          "value": "1288",
+          "unit": "rpm/V",
+          "method": "Unloaded at 16.8 V, optical tachometer"
+        },
+        {
+          "label": "Mass with 150 mm leads",
+          "value": "46.2",
+          "unit": "g",
+          "method": "Bench scale, 0.1 g resolution"
+        },
+        {
+          "label": "Phase-to-phase resistance",
+          "value": "54",
+          "unit": "mOhm",
+          "method": "Four-wire measurement at 22 C"
+        },
+        {
+          "label": "Shaft diameter",
+          "value": "4.99",
+          "unit": "mm",
+          "method": "Micrometer, three positions"
+        },
+        {
+          "label": "Slots and poles",
+          "value": "12N14P",
+          "unit": null,
+          "method": "Counted after removing the bell"
+        }
       ],
       "lab": null
     },
@@ -88,11 +196,16 @@
         "Working conditions or labour practices"
       ],
       "date": "2026-08-02",
-      "checkedBy": "Assay inspection team",
+      "checkedBy": "Verkod inspection team",
       "documentUrl": null,
       "documents": [],
       "measurements": [
-        { "label": "Production steps observed", "value": "Winding, magnet bonding, bell machining, final assembly", "unit": null, "method": "On-site visit, half a day" }
+        {
+          "label": "Production steps observed",
+          "value": "Winding, magnet bonding, bell machining, final assembly",
+          "unit": null,
+          "method": "On-site visit, half a day"
+        }
       ],
       "lab": null
     },
@@ -113,11 +226,25 @@
       "checkedBy": "Northfield Test House (fictional lab)",
       "documentUrl": "/documents/sample-thrust-report-hm-2807.txt",
       "documents": [
-        { "title": "Thrust stand report NTH-0820 (sample document)", "received": "2026-08-22", "url": "/documents/sample-thrust-report-hm-2807.txt" }
+        {
+          "title": "Thrust stand report NTH-0820 (sample document)",
+          "received": "2026-08-22",
+          "url": "/documents/sample-thrust-report-hm-2807.txt"
+        }
       ],
       "measurements": [
-        { "label": "Peak thrust", "value": "1840", "unit": "g", "method": "Calibrated thrust stand" },
-        { "label": "Peak current", "value": "41.6", "unit": "A", "method": "Calibrated shunt" }
+        {
+          "label": "Peak thrust",
+          "value": "1840",
+          "unit": "g",
+          "method": "Calibrated thrust stand"
+        },
+        {
+          "label": "Peak current",
+          "value": "41.6",
+          "unit": "A",
+          "method": "Calibrated shunt"
+        }
       ],
       "lab": "Northfield Test House (fictional lab)"
     }
@@ -136,12 +263,25 @@
       "gradeEvidenceId": "ev-hm2807-datasheet",
       "originCountry": "India",
       "originEvidenceId": "ev-hm2807-factory",
-      "layers": ["structural"],
-      "explode": { "order": 0 },
-      "specs": [
-        { "key": "mount-pattern", "label": "Mounting pattern", "value": "19 x 19, M3", "unit": "mm", "evidenceId": "ev-hm2807-datasheet" }
+      "layers": [
+        "structural"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "explode": {
+        "order": 0
+      },
+      "specs": [
+        {
+          "key": "mount-pattern",
+          "label": "Mounting pattern",
+          "value": "19 x 19, M3",
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-datasheet"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Mounting pattern matches your arm, usually 16 x 16 or 19 x 19 mm",
         "Screw length: screws that reach the stator will short the windings",
@@ -149,7 +289,11 @@
         "Anodising is even, with no bare patches near the screw holes"
       ],
       "evidence": [],
-      "interactsWith": ["stator", "bearing-lower", "retaining-clip"]
+      "interactsWith": [
+        "stator",
+        "bearing-lower",
+        "retaining-clip"
+      ]
     },
     {
       "id": "stator",
@@ -162,16 +306,55 @@
       "gradeEvidenceId": null,
       "originCountry": "unknown",
       "originEvidenceId": null,
-      "layers": ["magnetic", "electrical"],
-      "explode": { "order": 1 },
-      "specs": [
-        { "key": "stator-size", "label": "Stator size", "value": "28 x 7", "unit": "mm", "evidenceId": "ev-hm2807-datasheet" },
-        { "key": "slots", "label": "Slots", "value": 12, "unit": null, "evidenceId": "ev-hm2807-sample" },
-        { "key": "lamination", "label": "Lamination thickness", "value": 0.2, "unit": "mm", "evidenceId": "ev-hm2807-stator-docs" },
-        { "key": "wire-class", "label": "Winding wire temperature class", "value": "180", "unit": "C", "evidenceId": "ev-hm2807-datasheet" },
-        { "key": "phase-resistance", "label": "Phase-to-phase resistance", "value": 54, "unit": "mOhm", "evidenceId": "ev-hm2807-sample" }
+      "layers": [
+        "magnetic",
+        "electrical"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV", "Light inspection drones"],
+      "explode": {
+        "order": 1
+      },
+      "specs": [
+        {
+          "key": "stator-size",
+          "label": "Stator size",
+          "value": "28 x 7",
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-datasheet"
+        },
+        {
+          "key": "slots",
+          "label": "Slots",
+          "value": 12,
+          "unit": null,
+          "evidenceId": "ev-hm2807-sample"
+        },
+        {
+          "key": "lamination",
+          "label": "Lamination thickness",
+          "value": 0.2,
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-stator-docs"
+        },
+        {
+          "key": "wire-class",
+          "label": "Winding wire temperature class",
+          "value": "180",
+          "unit": "C",
+          "evidenceId": "ev-hm2807-datasheet"
+        },
+        {
+          "key": "phase-resistance",
+          "label": "Phase-to-phase resistance",
+          "value": 54,
+          "unit": "mOhm",
+          "evidenceId": "ev-hm2807-sample"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV",
+        "Light inspection drones"
+      ],
       "buyingChecks": [
         "Lamination thickness is stated, ideally 0.2 mm or thinner",
         "Winding wire temperature class is stated, 180 C or higher for hot climates",
@@ -194,17 +377,30 @@
             "Lamination thickness, by our own measurement"
           ],
           "date": "2026-07-02",
-          "checkedBy": "Assay inspection team",
+          "checkedBy": "Verkod inspection team",
           "documentUrl": null,
           "documents": [
-            { "title": "Supplier email confirming lamination thickness", "received": "2026-07-01", "url": null },
-            { "title": "Copper magnet wire supplier declaration", "received": "2026-07-02", "url": null }
+            {
+              "title": "Supplier email confirming lamination thickness",
+              "received": "2026-07-01",
+              "url": null
+            },
+            {
+              "title": "Copper magnet wire supplier declaration",
+              "received": "2026-07-02",
+              "url": null
+            }
           ],
           "measurements": [],
           "lab": null
         }
       ],
-      "interactsWith": ["magnets", "mounting-base", "lead-wires", "bearing-upper"]
+      "interactsWith": [
+        "magnets",
+        "mounting-base",
+        "lead-wires",
+        "bearing-upper"
+      ]
     },
     {
       "id": "lead-wires",
@@ -217,13 +413,32 @@
       "gradeEvidenceId": null,
       "originCountry": "not-yet-verified",
       "originEvidenceId": null,
-      "layers": ["electrical"],
-      "explode": { "order": 2 },
-      "specs": [
-        { "key": "gauge", "label": "Gauge", "value": 18, "unit": "AWG", "evidenceId": "ev-hm2807-datasheet" },
-        { "key": "lead-length", "label": "Length", "value": 150, "unit": "mm", "evidenceId": "ev-hm2807-sample" }
+      "layers": [
+        "electrical"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "explode": {
+        "order": 2
+      },
+      "specs": [
+        {
+          "key": "gauge",
+          "label": "Gauge",
+          "value": 18,
+          "unit": "AWG",
+          "evidenceId": "ev-hm2807-datasheet"
+        },
+        {
+          "key": "lead-length",
+          "label": "Length",
+          "value": 150,
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-sample"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Gauge suits your peak current; 18 AWG is common up to about 40 A bursts",
         "Insulation is silicone, not PVC",
@@ -231,7 +446,10 @@
         "Strand count is high enough that the wire stays flexible"
       ],
       "evidence": [],
-      "interactsWith": ["stator", "mounting-base"]
+      "interactsWith": [
+        "stator",
+        "mounting-base"
+      ]
     },
     {
       "id": "bearing-lower",
@@ -244,12 +462,26 @@
       "gradeEvidenceId": null,
       "originCountry": "Japan",
       "originEvidenceId": "ev-hm2807-bearing",
-      "layers": ["moving", "structural"],
-      "explode": { "order": 3 },
-      "specs": [
-        { "key": "bearing-size", "label": "Size", "value": "9 x 5 x 3", "unit": "mm", "evidenceId": "ev-hm2807-bearing" }
+      "layers": [
+        "moving",
+        "structural"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "explode": {
+        "order": 3
+      },
+      "specs": [
+        {
+          "key": "bearing-size",
+          "label": "Size",
+          "value": "9 x 5 x 3",
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-bearing"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Bearing brand and size are stated, so you can source replacements",
         "Spin the motor by hand; it should be smooth with no gritty feel",
@@ -269,17 +501,30 @@
             "Bearing life or noise under load"
           ],
           "date": "2026-07-18",
-          "checkedBy": "Assay inspection team",
+          "checkedBy": "Verkod inspection team",
           "documentUrl": null,
           "documents": [],
           "measurements": [
-            { "label": "Outside diameter", "value": "9.00", "unit": "mm", "method": "Micrometer" },
-            { "label": "Width", "value": "3.00", "unit": "mm", "method": "Micrometer" }
+            {
+              "label": "Outside diameter",
+              "value": "9.00",
+              "unit": "mm",
+              "method": "Micrometer"
+            },
+            {
+              "label": "Width",
+              "value": "3.00",
+              "unit": "mm",
+              "method": "Micrometer"
+            }
           ],
           "lab": null
         }
       ],
-      "interactsWith": ["shaft", "mounting-base"]
+      "interactsWith": [
+        "shaft",
+        "mounting-base"
+      ]
     },
     {
       "id": "bearing-upper",
@@ -292,19 +537,36 @@
       "gradeEvidenceId": null,
       "originCountry": "Japan",
       "originEvidenceId": "ev-hm2807-bearing",
-      "layers": ["moving", "structural"],
-      "explode": { "order": 4 },
-      "specs": [
-        { "key": "bearing-size", "label": "Size", "value": "9 x 5 x 3", "unit": "mm", "evidenceId": "ev-hm2807-bearing" }
+      "layers": [
+        "moving",
+        "structural"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "explode": {
+        "order": 4
+      },
+      "specs": [
+        {
+          "key": "bearing-size",
+          "label": "Size",
+          "value": "9 x 5 x 3",
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-bearing"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Same checks as the lower bearing",
         "After a crash, check for play by rocking the bell sideways",
         "Replacement bearings should be the same size and seal type"
       ],
       "evidence": [],
-      "interactsWith": ["shaft", "stator"]
+      "interactsWith": [
+        "shaft",
+        "stator"
+      ]
     },
     {
       "id": "magnets",
@@ -317,13 +579,34 @@
       "gradeEvidenceId": "ev-hm2807-datasheet",
       "originCountry": "China",
       "originEvidenceId": "ev-hm2807-datasheet",
-      "layers": ["moving", "magnetic"],
-      "explode": { "order": 5 },
-      "specs": [
-        { "key": "poles", "label": "Poles", "value": 14, "unit": null, "evidenceId": "ev-hm2807-sample" },
-        { "key": "magnet-grade", "label": "Grade", "value": "N42SH", "unit": null, "evidenceId": "ev-hm2807-datasheet" }
+      "layers": [
+        "moving",
+        "magnetic"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV", "Light inspection drones"],
+      "explode": {
+        "order": 5
+      },
+      "specs": [
+        {
+          "key": "poles",
+          "label": "Poles",
+          "value": 14,
+          "unit": null,
+          "evidenceId": "ev-hm2807-sample"
+        },
+        {
+          "key": "magnet-grade",
+          "label": "Grade",
+          "value": "N42SH",
+          "unit": null,
+          "evidenceId": "ev-hm2807-datasheet"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV",
+        "Light inspection drones"
+      ],
       "buyingChecks": [
         "Magnet grade is documented, including the temperature suffix",
         "Ask for the magnet maker's certificate, not only the motor datasheet",
@@ -331,7 +614,10 @@
         "Check that magnets are bonded, not only pressed in"
       ],
       "evidence": [],
-      "interactsWith": ["bell-housing", "stator"]
+      "interactsWith": [
+        "bell-housing",
+        "stator"
+      ]
     },
     {
       "id": "bell-housing",
@@ -344,19 +630,36 @@
       "gradeEvidenceId": "ev-hm2807-datasheet",
       "originCountry": "India",
       "originEvidenceId": "ev-hm2807-factory",
-      "layers": ["moving", "structural"],
-      "explode": { "order": 6 },
-      "specs": [
-        { "key": "bell-diameter", "label": "Outside diameter", "value": 34.8, "unit": "mm", "evidenceId": "ev-hm2807-sample" }
+      "layers": [
+        "moving",
+        "structural"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "explode": {
+        "order": 6
+      },
+      "specs": [
+        {
+          "key": "bell-diameter",
+          "label": "Outside diameter",
+          "value": 34.8,
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-sample"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Spin the bell and watch the rim for wobble",
         "Check the bell is a single piece or that the top is firmly joined",
         "Vent openings are clean, with no burrs near the windings"
       ],
       "evidence": [],
-      "interactsWith": ["magnets", "shaft"]
+      "interactsWith": [
+        "magnets",
+        "shaft"
+      ]
     },
     {
       "id": "shaft",
@@ -369,20 +672,45 @@
       "gradeEvidenceId": null,
       "originCountry": "not-yet-verified",
       "originEvidenceId": null,
-      "layers": ["moving", "structural"],
-      "explode": { "order": 7 },
-      "specs": [
-        { "key": "shaft-diameter", "label": "Diameter", "value": 5, "unit": "mm", "evidenceId": "ev-hm2807-sample" },
-        { "key": "thread", "label": "Thread", "value": "M5", "unit": null, "evidenceId": "ev-hm2807-datasheet" }
+      "layers": [
+        "moving",
+        "structural"
       ],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "explode": {
+        "order": 7
+      },
+      "specs": [
+        {
+          "key": "shaft-diameter",
+          "label": "Diameter",
+          "value": 5,
+          "unit": "mm",
+          "evidenceId": "ev-hm2807-sample"
+        },
+        {
+          "key": "thread",
+          "label": "Thread",
+          "value": "M5",
+          "unit": null,
+          "evidenceId": "ev-hm2807-datasheet"
+        }
+      ],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Shaft and thread match your propeller hub",
         "Ask whether spare shafts are sold separately",
         "Check the thread direction for each motor position"
       ],
       "evidence": [],
-      "interactsWith": ["bell-housing", "bearing-upper", "bearing-lower", "retaining-clip"]
+      "interactsWith": [
+        "bell-housing",
+        "bearing-upper",
+        "bearing-lower",
+        "retaining-clip"
+      ]
     },
     {
       "id": "retaining-clip",
@@ -395,17 +723,52 @@
       "gradeEvidenceId": null,
       "originCountry": "unknown",
       "originEvidenceId": null,
-      "layers": ["structural"],
-      "explode": { "order": 8 },
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 8
+      },
       "specs": [],
-      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
       "buyingChecks": [
         "Check the clip is seated fully in its groove",
         "Ask for spares with each order",
         "Some motors use a screw instead; check which your servicing tools need"
       ],
       "evidence": [],
-      "interactsWith": ["shaft", "mounting-base"]
+      "interactsWith": [
+        "shaft",
+        "mounting-base"
+      ]
     }
-  ]
+  ],
+  "code": "VK-MOT-2807-1300-A",
+  "supplierPartNumber": "HM-2807-1300",
+  "demand": {
+    "buyers": [
+      "Defence and paramilitary drone programmes",
+      "Agricultural spraying drone makers",
+      "Logistics and heavy-lift drone makers"
+    ],
+    "reason": "Brushless motors are 70 to 80 percent imported in Indian drones. China now requires export licences for drone motors and ESCs rated at 48 V and 3 kW or more, and defence buyers reject drones with Chinese parts. Drone tenders on the government marketplace rose to 355 in 2026 from 190 in 2025.",
+    "sources": [
+      {
+        "title": "Drone Federation India white paper on import dependence, reported by Business Standard, 18 Nov 2026",
+        "url": "https://www.business-standard.com/industry/news/india-drone-industry-indigenisation-supply-chain-china-export-controls-126111800243_1.html"
+      },
+      {
+        "title": "Summary of China's drone export controls, Announcement No. 49",
+        "url": "https://droneintelligence.ai/insights/china-drone-export-controls-announcement-49"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "partsFrom": null
 }

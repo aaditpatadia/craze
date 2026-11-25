@@ -1,6 +1,6 @@
 {
-  "id": "sw-cf1550-fold",
-  "name": "CF1550 folding carbon propeller, 15 x 5.0",
+  "id": "vk-prp-1550-f2",
+  "name": "1550 folding carbon propeller, 15 x 5.0",
   "category": "propellers",
   "supplierId": "sablewood-rotors",
   "placeholder": true,
@@ -9,26 +9,82 @@
   "modelSource": "illustrative",
   "partsNote": null,
   "lastVerified": "2025-09-12",
-  "keywords": ["propeller", "prop", "15 inch", "1550", "15x5", "folding prop", "carbon propeller"],
-  "applications": ["Heavy-lift multirotor", "Fixed-wing VTOL", "Agricultural spraying"],
-  "origin": { "country": "Taiwan", "evidenceId": "ev-cf1550-datasheet" },
+  "keywords": [
+    "propeller",
+    "prop",
+    "15 inch",
+    "1550",
+    "15x5",
+    "folding prop",
+    "carbon propeller"
+  ],
+  "applications": [
+    "Heavy-lift multirotor",
+    "Fixed-wing VTOL",
+    "Agricultural spraying"
+  ],
+  "origin": {
+    "country": "Taiwan",
+    "evidenceId": "ev-cf1550-datasheet"
+  },
   "specs": [
-    { "key": "diameter", "label": "Diameter", "value": 15, "unit": "in", "evidenceId": "ev-cf1550-datasheet" },
-    { "key": "pitch", "label": "Pitch", "value": 5, "unit": "in", "evidenceId": "ev-cf1550-datasheet" },
-    { "key": "mass", "label": "Mass per blade", "value": 17.6, "unit": "g", "evidenceId": "ev-cf1550-sample" },
-    { "key": "blade-count", "label": "Blades", "value": 2, "unit": null, "evidenceId": "ev-cf1550-datasheet" }
+    {
+      "tolerance": "plus or minus 1 mm",
+      "key": "diameter",
+      "label": "Diameter",
+      "value": 15,
+      "unit": "in",
+      "evidenceId": "ev-cf1550-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "pitch",
+      "label": "Pitch",
+      "value": 5,
+      "unit": "in",
+      "evidenceId": "ev-cf1550-datasheet"
+    },
+    {
+      "tolerance": "plus or minus 0.5 g",
+      "key": "mass",
+      "label": "Mass per blade",
+      "value": 17.6,
+      "unit": "g",
+      "evidenceId": "ev-cf1550-sample"
+    },
+    {
+      "tolerance": null,
+      "key": "blade-count",
+      "label": "Blades",
+      "value": 2,
+      "unit": null,
+      "evidenceId": "ev-cf1550-datasheet"
+    }
   ],
   "evidence": [
     {
       "id": "ev-cf1550-datasheet",
       "tier": 1,
       "summary": "Supplier drawing and datasheet received.",
-      "checked": ["Diameter, pitch and hub dimensions as drawn", "Supplier statement that moulding is done in Hsinchu"],
-      "notChecked": ["Carbon prepreg origin", "Factory visit", "Fatigue life"],
+      "checked": [
+        "Diameter, pitch and hub dimensions as drawn",
+        "Supplier statement that moulding is done in Hsinchu"
+      ],
+      "notChecked": [
+        "Carbon prepreg origin",
+        "Factory visit",
+        "Fatigue life"
+      ],
       "date": "2025-08-21",
-      "checkedBy": "Assay inspection team",
+      "checkedBy": "Verkod inspection team",
       "documentUrl": null,
-      "documents": [{ "title": "CF1550 folding propeller drawing and datasheet", "received": "2025-08-21", "url": null }],
+      "documents": [
+        {
+          "title": "CF1550 folding propeller drawing and datasheet",
+          "received": "2025-08-21",
+          "url": null
+        }
+      ],
       "measurements": [],
       "lab": null
     },
@@ -36,16 +92,39 @@
       "id": "ev-cf1550-sample",
       "tier": 2,
       "summary": "One pair weighed and balance-checked.",
-      "checked": ["Mass of each blade", "Static balance of the pair on a magnetic balancer", "Diameter tip to tip"],
-      "notChecked": ["Dynamic balance at speed", "Thrust or efficiency", "Fatigue of the folding pivot"],
+      "checked": [
+        "Mass of each blade",
+        "Static balance of the pair on a magnetic balancer",
+        "Diameter tip to tip"
+      ],
+      "notChecked": [
+        "Dynamic balance at speed",
+        "Thrust or efficiency",
+        "Fatigue of the folding pivot"
+      ],
       "date": "2025-09-12",
-      "checkedBy": "Assay inspection team",
+      "checkedBy": "Verkod inspection team",
       "documentUrl": null,
       "documents": [],
       "measurements": [
-        { "label": "Blade A mass", "value": "17.6", "unit": "g", "method": "Bench scale, 0.1 g resolution" },
-        { "label": "Blade B mass", "value": "17.7", "unit": "g", "method": "Bench scale, 0.1 g resolution" },
-        { "label": "Tip-to-tip diameter", "value": "381", "unit": "mm", "method": "Steel rule, unfolded on a flat plate" }
+        {
+          "label": "Blade A mass",
+          "value": "17.6",
+          "unit": "g",
+          "method": "Bench scale, 0.1 g resolution"
+        },
+        {
+          "label": "Blade B mass",
+          "value": "17.7",
+          "unit": "g",
+          "method": "Bench scale, 0.1 g resolution"
+        },
+        {
+          "label": "Tip-to-tip diameter",
+          "value": "381",
+          "unit": "mm",
+          "method": "Steel rule, unfolded on a flat plate"
+        }
       ],
       "lab": null
     }
@@ -64,12 +143,26 @@
       "gradeEvidenceId": null,
       "originCountry": "Taiwan",
       "originEvidenceId": "ev-cf1550-datasheet",
-      "layers": ["moving", "structural"],
-      "explode": { "order": 2 },
-      "specs": [
-        { "key": "blade-mass", "label": "Mass per blade", "value": 17.6, "unit": "g", "evidenceId": "ev-cf1550-sample" }
+      "layers": [
+        "moving",
+        "structural"
       ],
-      "appliesTo": ["Heavy-lift multirotor", "Fixed-wing VTOL"],
+      "explode": {
+        "order": 2
+      },
+      "specs": [
+        {
+          "key": "blade-mass",
+          "label": "Mass per blade",
+          "value": 17.6,
+          "unit": "g",
+          "evidenceId": "ev-cf1550-sample"
+        }
+      ],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Fixed-wing VTOL"
+      ],
       "buyingChecks": [
         "Buy and replace blades as a matched pair",
         "Ask for the mass tolerance between blades in a pair",
@@ -77,7 +170,11 @@
         "Check rotation direction markings for each motor position"
       ],
       "evidence": [],
-      "interactsWith": ["hub-top", "hub-bottom", "pivot-bolts"]
+      "interactsWith": [
+        "hub-top",
+        "hub-bottom",
+        "pivot-bolts"
+      ]
     },
     {
       "id": "hub-top",
@@ -90,17 +187,27 @@
       "gradeEvidenceId": null,
       "originCountry": "not-yet-verified",
       "originEvidenceId": null,
-      "layers": ["structural"],
-      "explode": { "order": 3 },
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 3
+      },
       "specs": [],
-      "appliesTo": ["Heavy-lift multirotor", "Fixed-wing VTOL"],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Fixed-wing VTOL"
+      ],
       "buyingChecks": [
         "Check the hub matches your motor's mounting pattern",
         "Look for burrs where the blade roots sit",
         "Ask for the tightening torque for the pivot bolts"
       ],
       "evidence": [],
-      "interactsWith": ["blades", "pivot-bolts"]
+      "interactsWith": [
+        "blades",
+        "pivot-bolts"
+      ]
     },
     {
       "id": "pivot-bolts",
@@ -113,17 +220,28 @@
       "gradeEvidenceId": null,
       "originCountry": "unknown",
       "originEvidenceId": null,
-      "layers": ["structural"],
-      "explode": { "order": 4 },
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 4
+      },
       "specs": [],
-      "appliesTo": ["Heavy-lift multirotor", "Fixed-wing VTOL"],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Fixed-wing VTOL"
+      ],
       "buyingChecks": [
         "Ask whether spare bolts and nuts are sold",
         "Check for locking nuts or thread-locker",
         "Inspect for wear marks at each service"
       ],
       "evidence": [],
-      "interactsWith": ["blades", "hub-top", "hub-bottom"]
+      "interactsWith": [
+        "blades",
+        "hub-top",
+        "hub-bottom"
+      ]
     },
     {
       "id": "hub-bottom",
@@ -136,17 +254,28 @@
       "gradeEvidenceId": null,
       "originCountry": "not-yet-verified",
       "originEvidenceId": null,
-      "layers": ["structural"],
-      "explode": { "order": 1 },
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 1
+      },
       "specs": [],
-      "appliesTo": ["Heavy-lift multirotor", "Fixed-wing VTOL"],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Fixed-wing VTOL"
+      ],
       "buyingChecks": [
         "Check the centre bore matches your motor shaft or adapter",
         "Check the bolt pattern matches your motor",
         "Confirm the plate sits flat on the bell"
       ],
       "evidence": [],
-      "interactsWith": ["blades", "bore-adapter", "pivot-bolts"]
+      "interactsWith": [
+        "blades",
+        "bore-adapter",
+        "pivot-bolts"
+      ]
     },
     {
       "id": "bore-adapter",
@@ -159,17 +288,47 @@
       "gradeEvidenceId": null,
       "originCountry": "unknown",
       "originEvidenceId": null,
-      "layers": ["structural"],
-      "explode": { "order": 0 },
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 0
+      },
       "specs": [],
-      "appliesTo": ["Heavy-lift multirotor", "Fixed-wing VTOL"],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Fixed-wing VTOL"
+      ],
       "buyingChecks": [
         "Check the adapter sizes included match your shaft",
         "Check for a snug fit with no play",
         "Ask whether adapters are sold separately"
       ],
       "evidence": [],
-      "interactsWith": ["hub-bottom"]
+      "interactsWith": [
+        "hub-bottom"
+      ]
     }
-  ]
+  ],
+  "code": "VK-PRP-1550-F2-A",
+  "supplierPartNumber": "SW-CF1550",
+  "demand": {
+    "buyers": [
+      "Agricultural spraying drone makers",
+      "Logistics and inspection drone makers",
+      "FPV and training drone makers"
+    ],
+    "reason": "Propellers wear and break, so every fleet reorders them. Defence buyers reject drones with Chinese parts, which includes propellers.",
+    "sources": [
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      },
+      {
+        "title": "Drone Federation India white paper on import dependence, reported by Business Standard, 18 Nov 2026",
+        "url": "https://www.business-standard.com/industry/news/india-drone-industry-indigenisation-supply-chain-china-export-controls-126111800243_1.html"
+      }
+    ]
+  },
+  "partsFrom": null
 }

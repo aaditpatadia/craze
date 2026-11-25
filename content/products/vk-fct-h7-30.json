@@ -1,0 +1,358 @@
+{
+  "id": "vk-fct-h7-30",
+  "name": "H7 flight controller, 30.5 mm",
+  "category": "flight-controllers",
+  "supplierId": "lintel-avionics",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A 30.5 mm flight controller with an H7-class processor, dual IMUs and a barometer. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": null,
+  "lastVerified": "2026-05-20",
+  "keywords": [
+    "flight controller",
+    "fc",
+    "h7",
+    "autopilot",
+    "ardupilot",
+    "px4",
+    "betaflight",
+    "30.5"
+  ],
+  "applications": [
+    "7-inch multirotor",
+    "Inspection drones",
+    "Fixed-wing VTOL"
+  ],
+  "origin": {
+    "country": "Taiwan",
+    "evidenceId": "ev-lafc-sample"
+  },
+  "specs": [
+    {
+      "key": "mounting",
+      "label": "Mounting pattern",
+      "value": "30.5 x 30.5",
+      "unit": "mm",
+      "evidenceId": "ev-lafc-datasheet"
+    },
+    {
+      "key": "max-input-voltage",
+      "label": "Max input voltage",
+      "value": 26,
+      "unit": "V",
+      "evidenceId": "ev-lafc-datasheet"
+    },
+    {
+      "key": "mass",
+      "label": "Mass",
+      "value": 8.4,
+      "unit": "g",
+      "evidenceId": "ev-lafc-sample"
+    },
+    {
+      "key": "imu-count",
+      "label": "IMUs",
+      "value": 2,
+      "unit": null,
+      "evidenceId": "ev-lafc-sample"
+    },
+    {
+      "key": "uarts",
+      "label": "UARTs",
+      "value": 7,
+      "unit": null,
+      "evidenceId": "ev-lafc-datasheet"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-lafc-datasheet",
+      "tier": 1,
+      "summary": "Supplier datasheet, pinout and major-component BOM received.",
+      "checked": [
+        "Pinout and ratings as stated by the supplier",
+        "Major components listed in the supplier BOM"
+      ],
+      "notChecked": [
+        "Firmware compatibility on our bench",
+        "Sensor noise performance"
+      ],
+      "date": "2026-05-02",
+      "checkedBy": "Verkod inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "LA-FC-H7 datasheet and pinout, revision D",
+          "received": "2026-04-18",
+          "url": null
+        },
+        {
+          "title": "Bill of materials for LA-FC-H7 (major components)",
+          "received": "2026-05-02",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    },
+    {
+      "id": "ev-lafc-sample",
+      "tier": 2,
+      "summary": "One sample inspected and component markings compared with the supplier BOM.",
+      "checked": [
+        "Mass",
+        "Markings on the processor, both IMUs and the barometer match the supplier BOM",
+        "Country of assembly label"
+      ],
+      "notChecked": [
+        "Whether the chips are genuine, beyond markings",
+        "Flight performance",
+        "More than one sample"
+      ],
+      "date": "2026-05-08",
+      "checkedBy": "Verkod inspection team",
+      "documentUrl": null,
+      "documents": [],
+      "measurements": [
+        {
+          "label": "Mass",
+          "value": "8.4",
+          "unit": "g",
+          "method": "Bench scale, 0.1 g resolution"
+        },
+        {
+          "label": "BOM line items matched",
+          "value": "4 of 4",
+          "unit": null,
+          "method": "Markings read under magnification"
+        }
+      ],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "parts": [
+    {
+      "id": "pcb",
+      "name": "Circuit board",
+      "role": "Connect every sensor, the processor and the outputs on one board.",
+      "whatItDoes": "A six or eight layer board with a 30.5 mm square mounting pattern. Power regulators, sensors and the processor share it.",
+      "whyItMatters": "Layout decides how much motor noise reaches the sensors. Two boards with the same chips can fly very differently.",
+      "material": "FR-4 glass epoxy, multi-layer",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical",
+        "structural"
+      ],
+      "explode": {
+        "order": 0
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Inspection drones"
+      ],
+      "buyingChecks": [
+        "Ask for the layer count and whether the IMU has its own regulator",
+        "Check the mounting pattern matches your frame",
+        "Ask whether the board is conformal coated"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "processor",
+        "imus"
+      ]
+    },
+    {
+      "id": "processor",
+      "name": "Processor",
+      "role": "Runs the autopilot software and the control loop.",
+      "whatItDoes": "A fast 32-bit processor reads every sensor, works out how the aircraft is moving, and sends a new command to each motor many times a second.",
+      "whyItMatters": "Processor headroom decides which autopilot software you can run and how many features you can enable at once.",
+      "material": "H7-class 32-bit Arm Cortex-M7 microcontroller",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Inspection drones",
+        "Fixed-wing VTOL"
+      ],
+      "buyingChecks": [
+        "Check the board has a supported target in your autopilot software",
+        "Ask how the supplier sources processors, and from which distributor",
+        "Ask whether a processor change would be announced before shipping"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "imus",
+        "barometer"
+      ]
+    },
+    {
+      "id": "imus",
+      "name": "Inertial sensors (IMUs)",
+      "role": "Measure rotation and acceleration so the aircraft knows how it is moving.",
+      "whatItDoes": "Two separate gyroscope and accelerometer chips. Using two lets the autopilot compare them and keep flying if one fails or reads badly.",
+      "whyItMatters": "Sensor noise and vibration isolation set how stable the aircraft is. They are also where remarked or substituted chips most often appear.",
+      "material": "MEMS gyroscope and accelerometer chips",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 2
+      },
+      "specs": [],
+      "appliesTo": [
+        "Inspection drones",
+        "Fixed-wing VTOL"
+      ],
+      "buyingChecks": [
+        "Check the IMU models against your autopilot's supported list",
+        "Ask whether the IMUs are soft-mounted or on the main board",
+        "Ask for markings photos from each batch"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "processor"
+      ]
+    },
+    {
+      "id": "barometer",
+      "name": "Barometer",
+      "role": "Measures air pressure to estimate altitude.",
+      "whatItDoes": "A small pressure sensor that lets the autopilot hold height. It is usually covered with foam to block wind from the propellers.",
+      "whyItMatters": "A noisy or uncovered barometer makes altitude hold drift, which matters for inspection and mapping work.",
+      "material": "MEMS pressure sensor",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "unknown",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 3
+      },
+      "specs": [],
+      "appliesTo": [
+        "Inspection drones",
+        "Fixed-wing VTOL"
+      ],
+      "buyingChecks": [
+        "Check the barometer has a foam cover",
+        "Check the model is supported by your autopilot",
+        "Keep it away from direct propeller wash when mounting"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "processor"
+      ]
+    },
+    {
+      "id": "connectors",
+      "name": "Connectors",
+      "role": "Plug in receivers, GNSS, cameras and ESCs.",
+      "whatItDoes": "Small locking JST-GH connectors along the board edges for each serial port, plus a high-current pad for the ESC harness.",
+      "whyItMatters": "Loose connectors cause more in-flight failures than chips do. Locking connectors cost more and are worth it.",
+      "material": "Nylon housings with tin-plated contacts",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 4
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Inspection drones"
+      ],
+      "buyingChecks": [
+        "Ask whether the connectors are genuine JST-GH or a lookalike",
+        "Check each port's pinout matches your wiring",
+        "Check the ESC connector is rated for your telemetry and current"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "pcb"
+      ]
+    },
+    {
+      "id": "grommets",
+      "name": "Soft-mount grommets",
+      "role": "Isolate the board from frame vibration.",
+      "whatItDoes": "Four rubber grommets that sit in the mounting holes, so the board floats on rubber instead of bolting hard to the frame.",
+      "whyItMatters": "Vibration reaching the IMUs is the most common cause of a drone that drifts or oscillates. Grommet hardness matters.",
+      "material": "Silicone rubber",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Inspection drones"
+      ],
+      "buyingChecks": [
+        "Ask for the grommet Shore hardness",
+        "Check the grommets fit M3 bolts without being crushed",
+        "Ask for spares: grommets harden with age"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "pcb"
+      ]
+    }
+  ],
+  "code": "VK-FCT-H7-30-A",
+  "supplierPartNumber": "LA-FC-H7",
+  "demand": {
+    "buyers": [
+      "Drone makers building for defence and government tenders",
+      "Survey and inspection drone makers"
+    ],
+    "reason": "Flight controllers are 80 to 90 percent imported in Indian drones, and China now licenses autopilot exports. Buyers who must show no Chinese parts need a traceable alternative.",
+    "sources": [
+      {
+        "title": "Drone Federation India white paper on import dependence, reported by Business Standard, 18 Nov 2026",
+        "url": "https://www.business-standard.com/industry/news/india-drone-industry-indigenisation-supply-chain-china-export-controls-126111800243_1.html"
+      },
+      {
+        "title": "Summary of China's drone export controls, Announcement No. 49",
+        "url": "https://droneintelligence.ai/insights/china-drone-export-controls-announcement-49"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "partsFrom": null
+}

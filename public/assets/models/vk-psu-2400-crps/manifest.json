@@ -1,0 +1,563 @@
+{
+  "productId": "vk-psu-2400-crps",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      3.4,
+      2.6,
+      3.4
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "chassis",
+      "name": "Chassis",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            73.5,
+            1,
+            185
+          ],
+          "pos": [
+            0,
+            -20,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "sheet-steel",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            1,
+            40,
+            185
+          ],
+          "pos": [
+            -36.75,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "sheet-steel",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            1,
+            40,
+            185
+          ],
+          "pos": [
+            36.75,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "sheet-steel",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.25,
+      "order": 0,
+      "layers": [
+        "structural"
+      ],
+      "material": "sheet-steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The chassis tray carries everything.",
+      "hotspots": []
+    },
+    {
+      "id": "main-board",
+      "name": "Main board",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            69.5,
+            1.6,
+            175
+          ],
+          "pos": [
+            0,
+            -17,
+            -2
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "pcb",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0,
+      "order": 1,
+      "layers": [
+        "electrical"
+      ],
+      "material": "pcb",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The main board sits on standoffs in the tray.",
+      "hotspots": []
+    },
+    {
+      "id": "magnetics",
+      "name": "Transformer and inductors",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            26,
+            22,
+            26,
+            2
+          ],
+          "pos": [
+            -14,
+            -5.199999999999999,
+            10
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": null
+        },
+        {
+          "type": "torus",
+          "d": [
+            10,
+            4
+          ],
+          "pos": [
+            18,
+            -12,
+            48
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "copper",
+          "repeat": null
+        },
+        {
+          "type": "torus",
+          "d": [
+            8,
+            3.5
+          ],
+          "pos": [
+            18,
+            -12.5,
+            22
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "copper",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.42,
+      "order": 2,
+      "layers": [
+        "magnetic",
+        "electrical"
+      ],
+      "material": "chip",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The magnetics sit mid-board.",
+      "hotspots": []
+    },
+    {
+      "id": "capacitors",
+      "name": "Bulk capacitors",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            9,
+            30
+          ],
+          "pos": [
+            -22,
+            -2,
+            -40
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium",
+          "repeat": {
+            "n": 2,
+            "step": [
+              20,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        -1,
+        1,
+        0
+      ],
+      "distance": 0.5,
+      "order": 3,
+      "layers": [
+        "electrical"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The bulk capacitors stand near the input end.",
+      "hotspots": []
+    },
+    {
+      "id": "power-stage",
+      "name": "Power semiconductors and heatsinks",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            4,
+            18,
+            120
+          ],
+          "pos": [
+            28,
+            -7,
+            -10
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            10,
+            1.2,
+            120
+          ],
+          "pos": [
+            24,
+            2,
+            -10
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": {
+            "n": 1,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "type": "box",
+          "d": [
+            5,
+            6,
+            4
+          ],
+          "pos": [
+            24,
+            -12,
+            -50
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": {
+            "n": 5,
+            "step": [
+              0,
+              0,
+              22
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        1,
+        1,
+        0
+      ],
+      "distance": 0.5,
+      "order": 4,
+      "layers": [
+        "electrical",
+        "thermal"
+      ],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The power devices line the heatsink along one side.",
+      "hotspots": []
+    },
+    {
+      "id": "fan",
+      "name": "Cooling fan",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            38,
+            38,
+            28,
+            3
+          ],
+          "pos": [
+            0,
+            0,
+            -94.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        },
+        {
+          "type": "cyl",
+          "d": [
+            14,
+            29
+          ],
+          "pos": [
+            0,
+            0,
+            -94.5
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "plastic-light",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "distance": 0.4,
+      "order": 5,
+      "layers": [
+        "moving",
+        "thermal"
+      ],
+      "material": "plastic",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The fan sits at the handle end.",
+      "hotspots": []
+    },
+    {
+      "id": "connector",
+      "name": "Card-edge connector",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            50,
+            1.6,
+            12
+          ],
+          "pos": [
+            0,
+            -17,
+            96.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "gold",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "distance": 0.35,
+      "order": 6,
+      "layers": [
+        "electrical"
+      ],
+      "material": "gold",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The connector fingers stick out at the back.",
+      "hotspots": []
+    },
+    {
+      "id": "cover",
+      "name": "Top cover and handle",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            73.5,
+            1,
+            185
+          ],
+          "pos": [
+            0,
+            20,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "sheet-steel",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            30,
+            8,
+            18,
+            3
+          ],
+          "pos": [
+            0,
+            6,
+            -114.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.75,
+      "order": 7,
+      "layers": [
+        "structural"
+      ],
+      "material": "sheet-steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The cover closes over the top.",
+      "hotspots": []
+    }
+  ]
+}

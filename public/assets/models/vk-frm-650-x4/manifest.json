@@ -1,0 +1,400 @@
+{
+  "productId": "vk-frm-650-x4",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      3.4,
+      2.6,
+      3.6
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "centre-plates",
+      "name": "Centre plates",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            190,
+            2,
+            190,
+            24
+          ],
+          "pos": [
+            0,
+            16,
+            0
+          ],
+          "rot": [
+            0,
+            45,
+            0
+          ],
+          "mat": "carbon",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            190,
+            2,
+            190,
+            24
+          ],
+          "pos": [
+            0,
+            -16,
+            0
+          ],
+          "rot": [
+            0,
+            45,
+            0
+          ],
+          "mat": "carbon",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0,
+      "order": 0,
+      "layers": [
+        "structural"
+      ],
+      "material": "carbon",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "Top and bottom plates sandwich the arm joints.",
+      "hotspots": []
+    },
+    {
+      "id": "arm-joints",
+      "name": "Folding arm joints",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            44,
+            28,
+            34,
+            4
+          ],
+          "pos": [
+            70.71,
+            0,
+            70.71
+          ],
+          "rot": [
+            0,
+            -45,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.16,
+      "order": 1,
+      "layers": [
+        "structural",
+        "moving"
+      ],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "Each arm joint sits between the plates.",
+      "hotspots": []
+    },
+    {
+      "id": "arms",
+      "name": "Arms",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            12.5,
+            215
+          ],
+          "pos": [
+            161.22,
+            0,
+            161.22
+          ],
+          "rot": [
+            0,
+            -45,
+            90
+          ],
+          "mat": "carbon",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.1,
+      "order": 2,
+      "layers": [
+        "structural"
+      ],
+      "material": "carbon",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "Four carbon tubes run from the joints to the motor mounts.",
+      "hotspots": []
+    },
+    {
+      "id": "motor-mounts",
+      "name": "Motor mounts",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            24,
+            5
+          ],
+          "pos": [
+            229.81,
+            15,
+            229.81
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        },
+        {
+          "type": "box",
+          "d": [
+            36,
+            18,
+            30,
+            3
+          ],
+          "pos": [
+            224.86,
+            2,
+            224.86
+          ],
+          "rot": [
+            0,
+            -45,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.32,
+      "order": 3,
+      "layers": [
+        "structural"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "A mount clamps onto the end of each arm.",
+      "hotspots": []
+    },
+    {
+      "id": "landing-gear",
+      "name": "Landing gear",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            7,
+            150
+          ],
+          "pos": [
+            -70,
+            -32,
+            -55
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "carbon",
+          "repeat": {
+            "n": 2,
+            "step": [
+              140,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "type": "cyl",
+          "d": [
+            7,
+            150
+          ],
+          "pos": [
+            -70,
+            -32,
+            55
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "carbon",
+          "repeat": {
+            "n": 2,
+            "step": [
+              140,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "type": "cyl",
+          "d": [
+            8,
+            280
+          ],
+          "pos": [
+            -70,
+            -108,
+            0
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "carbon",
+          "repeat": {
+            "n": 2,
+            "step": [
+              140,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.42,
+      "order": 4,
+      "layers": [
+        "structural"
+      ],
+      "material": "carbon",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The landing gear clamps under the bottom plate.",
+      "hotspots": []
+    }
+  ]
+}

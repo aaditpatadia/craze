@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { looksLikeSpam, validateRequest, type RequestInput } from "@/lib/forms";
+import { makeReference } from "@/lib/codes";
 import { clientIp, rateLimited, storeSubmission } from "@/lib/submissions";
 
 export const runtime = "nodejs";
@@ -28,7 +29,7 @@ export async function POST(req: Request) {
     startedAt: Number(body.startedAt),
   };
   // Spam gets the same success response, so bots learn nothing. Nothing is stored.
-  if (looksLikeSpam(input)) return NextResponse.json({ ok: true });
+  if (looksLikeSpam(input)) return NextResponse.json({ ok: true, reference: makeReference("VKQ") });
 
   const errors = validateRequest(input);
   if (Object.keys(errors).length > 0) return NextResponse.json({ ok: false, errors }, { status: 422 });
@@ -37,8 +38,9 @@ export async function POST(req: Request) {
     const { website: _honeypot, startedAt: _started, ...data } = input;
     void _honeypot;
     void _started;
-    const { id } = await storeSubmission({ kind: "request", data });
-    return NextResponse.json({ ok: true, id });
+    const reference = makeReference("VKQ");
+    const { id } = await storeSubmission({ kind: "request", data, reference });
+    return NextResponse.json({ ok: true, id, reference });
   } catch (e) {
     console.error("[api/request] store failed", e);
     return NextResponse.json({ ok: false, error: "We could not save your request. Nothing was sent. Please try again." }, { status: 500 });

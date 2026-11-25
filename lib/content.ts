@@ -10,11 +10,14 @@ import {
   CategorySchema,
   ManifestSchema,
   ProductSchema,
+  SourcingSchema,
   SupplierSchema,
   type Category,
   type Evidence,
   type Manifest,
+  type Part,
   type Product,
+  type Sourcing,
   type Supplier,
   type Tier,
 } from "./schema";
@@ -32,7 +35,24 @@ export type RawContent = {
   suppliers: Supplier[];
   products: Product[];
   manifests: Record<string, Manifest>;
+  sourcing: Sourcing[];
 };
+
+/**
+ * Copies part descriptions from a sibling product. What a part is and does carries over;
+ * every claim about this product's own part (origin, grade, specs, evidence) does not.
+ */
+function inheritParts(source: Product): Part[] {
+  return source.parts.map((p) => ({
+    ...p,
+    grade: null,
+    gradeEvidenceId: null,
+    originCountry: "not-yet-verified",
+    originEvidenceId: null,
+    specs: [],
+    evidence: [],
+  }));
+}
 
 /** Parses everything without filtering. Throws with a readable message on schema errors. */
 export function loadRawContent(): RawContent {
@@ -49,6 +69,17 @@ export function loadRawContent(): RawContent {
       }
       return parsed.data;
     });
+  for (const p of products) {
+    if (!p.partsFrom) continue;
+    const src = products.find((x) => x.id === p.partsFrom);
+    if (!src) throw new Error(`content/products/${p.id}.json: partsFrom "${p.partsFrom}" does not exist`);
+    if (src.partsFrom) throw new Error(`content/products/${p.id}.json: partsFrom must point at a product with its own parts`);
+    // Parts listed on the product itself replace the inherited part with the same id.
+    const own = new Map(p.parts.map((pt) => [pt.id, pt]));
+    p.parts = inheritParts(src).map((pt) => own.get(pt.id) ?? pt);
+  }
+  const sourcingFile = join(CONTENT, "sourcing.json");
+  const sourcing = existsSync(sourcingFile) ? SourcingSchema.array().parse(readJson(sourcingFile)) : [];
   const manifests: Record<string, Manifest> = {};
   if (existsSync(MODELS)) {
     for (const dir of readdirSync(MODELS)) {
@@ -61,7 +92,7 @@ export function loadRawContent(): RawContent {
       manifests[parsed.data.productId] = parsed.data;
     }
   }
-  return { categories, suppliers, products, manifests };
+  return { categories, suppliers, products, manifests, sourcing };
 }
 
 const visible = <T extends { placeholder: boolean }>(items: T[]) =>
@@ -81,6 +112,7 @@ export const getContent = cache(() => {
     suppliers: visible(raw.suppliers),
     products,
     manifests: raw.manifests,
+    sourcing: raw.sourcing,
   };
 });
 
@@ -93,6 +125,8 @@ export const getProduct = (id: string) => getProducts().find((p) => p.id === id)
 export const getProductsInCategory = (id: string) => getProducts().filter((p) => p.category === id);
 export const getSuppliers = () => getContent().suppliers;
 export const getSupplier = (id: string) => getSuppliers().find((s) => s.id === id);
+export const getSourcing = (productId: string) => getContent().sourcing.find((s) => s.productId === productId);
+export const getProductByCode = (code: string) => getProducts().find((p) => p.code === code.trim().toUpperCase());
 export const getManifest = (productId: string): Manifest | undefined => getContent().manifests[productId];
 
 /** Looks an evidence id up on the product and all of its parts. */
@@ -115,6 +149,10 @@ export function highestTier(product: Product): Tier {
 /** Slim, serialisable product record for client components (catalogue, BOM checker). */
 export type CatalogItem = {
   id: string;
+  code: string;
+  /** Other numbers buyers may know this part by, such as the supplier's own part number. */
+  aliases: string[];
+  sector: string;
   name: string;
   category: string;
   categoryName: string;
@@ -137,6 +175,9 @@ export function toCatalogItem(p: Product): CatalogItem {
   const sup = getSupplier(p.supplierId);
   return {
     id: p.id,
+    code: p.code,
+    aliases: p.supplierPartNumber ? [p.supplierPartNumber] : [],
+    sector: cat?.sector ?? "aerial",
     name: p.name,
     category: p.category,
     categoryName: cat?.name ?? p.category,

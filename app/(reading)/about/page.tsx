@@ -6,7 +6,7 @@ import { SITE, USE_PLACEHOLDER_DATA } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "About, what we check and our limits",
-  description: "What we check on drone parts and suppliers, how we check it, and what we cannot check yet.",
+  description: "What we check on drone, robotics and data center parts and suppliers, how we check it, and what we cannot check yet.",
   alternates: { canonical: "/about" },
 };
 
@@ -15,7 +15,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="What we check, how, and our limits"
-        lead={`${SITE.name} lists drone parts with the evidence behind each claim, so engineers can decide what to trust before they buy.`}
+        lead={`${SITE.name} gives every critical drone, robotics and data center part one VK code, with the evidence behind each claim, so engineers can decide what to trust before they buy.`}
       />
       <Container className="pb-24">
         <Prose>

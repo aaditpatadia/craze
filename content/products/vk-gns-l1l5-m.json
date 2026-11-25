@@ -1,0 +1,318 @@
+{
+  "id": "vk-gns-l1l5-m",
+  "code": "VK-GNS-L1L5-M-A",
+  "name": "Dual-band GNSS module with compass, NavIC",
+  "category": "gnss-modules",
+  "supplierId": "lintel-avionics",
+  "supplierPartNumber": "LA-GN5",
+  "placeholder": true,
+  "status": "live",
+  "summary": "An L1 and L5 GNSS receiver with patch antenna and compass in a mast-mounted puck, with NavIC support. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": null,
+  "lastVerified": "2026-11-05",
+  "keywords": [
+    "gnss",
+    "gps",
+    "navic",
+    "irnss",
+    "l1 l5",
+    "dual band",
+    "compass",
+    "gps module"
+  ],
+  "applications": [
+    "Survey drones",
+    "Agricultural drones",
+    "Logistics drones"
+  ],
+  "demand": {
+    "buyers": [
+      "Drone makers building for defence and government tenders",
+      "Survey and mapping drone makers"
+    ],
+    "reason": "GNSS modules are 90 to 95 percent imported in Indian drones, the highest share of any part in the DFI estimate. NavIC support matters to Indian government buyers.",
+    "sources": [
+      {
+        "title": "Drone Federation India white paper on import dependence, reported by Business Standard, 18 Nov 2026",
+        "url": "https://www.business-standard.com/industry/news/india-drone-industry-indigenisation-supply-chain-china-export-controls-126111800243_1.html"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "origin": {
+    "country": "not-yet-verified",
+    "evidenceId": null
+  },
+  "specs": [
+    {
+      "key": "constellations",
+      "label": "Constellations",
+      "value": "GPS, NavIC, Galileo, GLONASS, BeiDou",
+      "unit": null,
+      "evidenceId": "ev-gn5-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "bands",
+      "label": "Bands",
+      "value": "L1 and L5",
+      "unit": null,
+      "evidenceId": "ev-gn5-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "update-rate",
+      "label": "Update rate",
+      "value": 10,
+      "unit": "Hz",
+      "evidenceId": "ev-gn5-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "mass",
+      "label": "Mass with cable",
+      "value": 32,
+      "unit": "g",
+      "evidenceId": "ev-gn5-datasheet",
+      "tolerance": "plus or minus 2 g"
+    },
+    {
+      "key": "diameter",
+      "label": "Housing diameter",
+      "value": 52,
+      "unit": "mm",
+      "evidenceId": "ev-gn5-datasheet",
+      "tolerance": "plus or minus 0.5 mm"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-gn5-datasheet",
+      "tier": 1,
+      "summary": "Supplier documents received and read.",
+      "checked": [
+        "Constellations, bands, update rate and mass as stated by the supplier"
+      ],
+      "notChecked": [
+        "Receiver chip maker and origin",
+        "Accuracy or time to first fix, not measured",
+        "Whether BeiDou can be switched off for buyers who must exclude it"
+      ],
+      "date": "2026-11-05",
+      "checkedBy": "Verkod inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "LA-GN5 datasheet, revision A",
+          "received": "2026-11-05",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "partsFrom": null,
+  "parts": [
+    {
+      "id": "base",
+      "name": "Base housing",
+      "role": "Hold the board and mount the module to the mast.",
+      "whatItDoes": "A moulded plastic base with a screw boss for the GPS mast and a slot for the cable.",
+      "whyItMatters": "The base sets how far the antenna sits from carbon and wiring, which block and distort signals.",
+      "material": "UV-stabilised ABS or PC plastic",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 0
+      },
+      "specs": [],
+      "appliesTo": [
+        "Survey drones",
+        "Agricultural drones"
+      ],
+      "buyingChecks": [
+        "Ask whether the plastic is UV-stabilised",
+        "Check the mast fitting matches your frame",
+        "Ask for the ingress rating of the closed housing"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "board"
+      ]
+    },
+    {
+      "id": "compass",
+      "name": "Compass",
+      "role": "Measure heading from the Earth's magnetic field.",
+      "whatItDoes": "A three-axis magnetometer on the underside of the board, mounted in the module so it sits far from motor and power wiring.",
+      "whyItMatters": "Satellite position gives no heading at hover. A compass that reads motor current instead of north sends the drone the wrong way.",
+      "material": "Silicon magnetometer chip",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "magnetic",
+        "electrical"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [],
+      "appliesTo": [
+        "Survey drones",
+        "Agricultural drones"
+      ],
+      "buyingChecks": [
+        "Ask for the magnetometer part number",
+        "Ask how far the module must sit from power wiring",
+        "Check the board orientation arrow is marked"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "board"
+      ]
+    },
+    {
+      "id": "board",
+      "name": "Receiver board",
+      "role": "Turn satellite signals into position, speed and time.",
+      "whatItDoes": "The board carries the GNSS receiver chip, its crystal, a low-noise amplifier and a backup supply for fast restarts.",
+      "whyItMatters": "The receiver chip decides which constellations and bands are tracked. Dual-band L1 and L5 tracking cuts errors from the ionosphere and from reflections.",
+      "material": "FR-4 board with RF shield can",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 2
+      },
+      "specs": [],
+      "appliesTo": [
+        "Survey drones",
+        "Agricultural drones"
+      ],
+      "buyingChecks": [
+        "Ask for the receiver chip maker and model",
+        "Ask which constellations and bands are tracked, including NavIC",
+        "Ask for update rate and time to first fix, measured outdoors"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "antenna",
+        "compass"
+      ]
+    },
+    {
+      "id": "antenna",
+      "name": "Patch antenna",
+      "role": "Receive satellite signals from the sky.",
+      "whatItDoes": "A square ceramic patch with a silver top layer, tuned to the GNSS bands. It faces up and sits on a ground plane.",
+      "whyItMatters": "Antenna size and tuning matter more than the receiver for weak-signal tracking. A patch tuned for L1 only cannot use L5.",
+      "material": "Ceramic patch with silver electrode",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 3
+      },
+      "specs": [],
+      "appliesTo": [
+        "Survey drones",
+        "Agricultural drones"
+      ],
+      "buyingChecks": [
+        "Ask which bands the antenna is tuned for",
+        "Ask for antenna gain and axial ratio",
+        "Check the patch is not covered by metal or carbon in your build"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "board"
+      ]
+    },
+    {
+      "id": "cover",
+      "name": "Top cover",
+      "role": "Protect the antenna without blocking signals.",
+      "whatItDoes": "A domed radio-transparent cover that clips or screws onto the base.",
+      "whyItMatters": "Paint, metallic finishes or thick walls weaken signals. The cover must stay clear to radio and to sunlight damage.",
+      "material": "Radio-transparent PC or ABS",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 4
+      },
+      "specs": [],
+      "appliesTo": [
+        "Survey drones",
+        "Agricultural drones"
+      ],
+      "buyingChecks": [
+        "Ask whether the cover paint is radio-transparent",
+        "Check the seal between cover and base",
+        "Ask for spare covers"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "base"
+      ]
+    },
+    {
+      "id": "cable",
+      "name": "Cable and connector",
+      "role": "Carry power, serial data and compass data to the flight controller.",
+      "whatItDoes": "A shielded multi-core cable ending in a locking connector that matches the flight controller's GPS port.",
+      "whyItMatters": "Cable faults show up as random position jumps. Shielding and locking connectors avoid most of them.",
+      "material": "Shielded PVC or silicone cable with locking connector",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "Survey drones",
+        "Agricultural drones"
+      ],
+      "buyingChecks": [
+        "Check the connector pinout matches your flight controller",
+        "Ask for cable length options",
+        "Ask whether the cable is shielded"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "board"
+      ]
+    }
+  ]
+}

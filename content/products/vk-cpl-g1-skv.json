@@ -1,0 +1,408 @@
+{
+  "id": "vk-cpl-g1-skv",
+  "code": "VK-CPL-G1-SKV-A",
+  "name": "GPU cold plate, skived copper",
+  "category": "liquid-cooling",
+  "supplierId": "corran-thermal",
+  "supplierPartNumber": "CT-CP1",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A direct-to-chip cold plate with skived copper micro-fins, for GPUs and accelerators up to 1.2 kW. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": null,
+  "lastVerified": "2026-10-14",
+  "keywords": [
+    "cold plate",
+    "liquid cooling",
+    "direct to chip",
+    "dlc",
+    "gpu cooling",
+    "skived fins",
+    "coolant"
+  ],
+  "applications": [
+    "GPU and AI servers",
+    "High-density CPU servers"
+  ],
+  "demand": {
+    "buyers": [
+      "Server assemblers building liquid-cooled racks",
+      "Data center operators moving to direct liquid cooling"
+    ],
+    "reason": "AI and high-performance racks now run hotter than air cooling can handle, so Indian data centers are moving to liquid cooling. The India data center cooling market is forecast to grow several times over by 2035.",
+    "sources": [
+      {
+        "title": "Liquid cooling for India's data centers, Energetica India",
+        "url": "https://www.energetica-india.net/articles/liquid-cooling-powering-indias-next-gen-data-centers"
+      },
+      {
+        "title": "India data center cooling market outlook, Grand View Research",
+        "url": "https://www.grandviewresearch.com/horizon/outlook/data-center-cooling-market/india"
+      },
+      {
+        "title": "JLL India data centre 2026 mid-year report",
+        "url": "https://www.jll.com/en-in/insights/market-dynamics/india-data-centers"
+      }
+    ]
+  },
+  "origin": {
+    "country": "not-yet-verified",
+    "evidenceId": null
+  },
+  "specs": [
+    {
+      "key": "thermal-resistance",
+      "label": "Thermal resistance",
+      "value": 0.02,
+      "unit": "C/W",
+      "evidenceId": "ev-cp1-datasheet",
+      "tolerance": "at most the stated value at 1.5 L/min"
+    },
+    {
+      "key": "max-power",
+      "label": "Rated chip power",
+      "value": 1200,
+      "unit": "W",
+      "evidenceId": "ev-cp1-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "max-pressure",
+      "label": "Max operating pressure",
+      "value": 6,
+      "unit": "bar",
+      "evidenceId": "ev-cp1-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "pressure-drop",
+      "label": "Pressure drop at 1.5 L/min",
+      "value": 0.35,
+      "unit": "bar",
+      "evidenceId": "ev-cp1-sample",
+      "tolerance": null
+    },
+    {
+      "key": "flatness",
+      "label": "Base flatness",
+      "value": 25,
+      "unit": "um",
+      "evidenceId": "ev-cp1-sample",
+      "tolerance": "at most the stated value"
+    },
+    {
+      "key": "mass",
+      "label": "Mass",
+      "value": 610,
+      "unit": "g",
+      "evidenceId": "ev-cp1-sample",
+      "tolerance": "plus or minus 10 g"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-cp1-datasheet",
+      "tier": 1,
+      "summary": "Supplier documents received and read.",
+      "checked": [
+        "Thermal resistance, power rating and pressure rating as stated by the supplier"
+      ],
+      "notChecked": [
+        "Thermal resistance, not measured by us",
+        "Long-term corrosion with your coolant"
+      ],
+      "date": "2026-09-22",
+      "checkedBy": "Verkod inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "CT-CP1 cold plate drawing and pressure test procedure",
+          "received": "2026-09-22",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    },
+    {
+      "id": "ev-cp1-sample",
+      "tier": 2,
+      "summary": "One production sample measured on our bench.",
+      "checked": [
+        "Base flatness, mass and pressure drop on one sample",
+        "Leak test at 6 bar for 10 minutes"
+      ],
+      "notChecked": [
+        "More than one sample, so no batch spread",
+        "Thermal resistance under a real heat load",
+        "Burst pressure"
+      ],
+      "date": "2026-10-20",
+      "checkedBy": "Verkod inspection team",
+      "documentUrl": null,
+      "documents": [],
+      "measurements": [
+        {
+          "label": "Base flatness",
+          "value": "22",
+          "unit": "um",
+          "method": "Dial gauge on a granite plate, nine points"
+        },
+        {
+          "label": "Mass",
+          "value": "608",
+          "unit": "g",
+          "method": "Bench scale, 1 g resolution"
+        },
+        {
+          "label": "Pressure drop at 1.5 L/min",
+          "value": "0.34",
+          "unit": "bar",
+          "method": "Water at 25 C, differential gauge"
+        },
+        {
+          "label": "Leak test",
+          "value": "No pressure loss",
+          "unit": null,
+          "method": "Air at 6 bar, 10 minutes, gauge and soap check"
+        }
+      ],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "partsFrom": null,
+  "parts": [
+    {
+      "id": "tim",
+      "name": "Thermal interface material",
+      "role": "Fill the gap between chip and cold plate.",
+      "whatItDoes": "A thin layer of paste, phase-change pad or liquid metal between the chip lid and the cold plate base.",
+      "whyItMatters": "At a kilowatt per chip, a tenth of a millimetre of the wrong interface can cost more temperature than the whole cold plate.",
+      "material": "Thermal paste or phase-change pad",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "thermal"
+      ],
+      "explode": {
+        "order": 0
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask which interface material is specified and its thermal resistance",
+        "Ask for the mounting pressure the interface needs",
+        "Ask whether the interface is pre-applied"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "base"
+      ]
+    },
+    {
+      "id": "base",
+      "name": "Copper base",
+      "role": "Spread chip heat and carry it into the fins.",
+      "whatItDoes": "A machined copper plate, nickel plated, lapped flat where it meets the chip.",
+      "whyItMatters": "Flatness and copper purity set how evenly heat spreads. A base that bows under clamping leaves hot spots.",
+      "material": "Oxygen-free copper, nickel plated",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "thermal",
+        "structural"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask for the flatness of the contact face in micrometres",
+        "Ask for the copper grade and plating thickness",
+        "Ask for the base thickness under the fins"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "fins",
+        "tim"
+      ]
+    },
+    {
+      "id": "fins",
+      "name": "Skived micro-fins",
+      "role": "Give the coolant a large surface to take heat from.",
+      "whatItDoes": "Rows of very thin fins cut up from the base with a blade, so fins and base are one piece of copper.",
+      "whyItMatters": "Fin pitch trades heat transfer against pressure drop. Finer fins cool better but need cleaner coolant.",
+      "material": "Copper, cut from the base",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "thermal"
+      ],
+      "explode": {
+        "order": 2
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask for fin pitch and height",
+        "Ask for the filter rating the fins need in the coolant loop",
+        "Ask for pressure drop at your flow rate"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "base",
+        "cover"
+      ]
+    },
+    {
+      "id": "seal",
+      "name": "O-ring seal",
+      "role": "Keep coolant inside the cold plate.",
+      "whatItDoes": "A rubber seal in a groove between base and cover.",
+      "whyItMatters": "A leak inside a server is the failure buyers fear most. Seal material must suit the coolant and the temperature.",
+      "material": "EPDM or FKM rubber",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 3
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask for the seal material and its coolant compatibility",
+        "Ask for the pressure test procedure and result",
+        "Ask whether the plate is sealed by O-ring or by brazing"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "cover",
+        "base"
+      ]
+    },
+    {
+      "id": "cover",
+      "name": "Manifold cover",
+      "role": "Guide coolant over the fins.",
+      "whatItDoes": "A machined cover with internal channels that feed coolant into the centre of the fins and collect it at the edges.",
+      "whyItMatters": "Channel design decides whether the hottest part of the chip gets the coldest coolant.",
+      "material": "Nickel-plated copper or stainless steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural",
+        "thermal"
+      ],
+      "explode": {
+        "order": 4
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask for the maximum operating pressure",
+        "Ask for the burst pressure test result",
+        "Ask for the cover material and plating"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "fins",
+        "fittings"
+      ]
+    },
+    {
+      "id": "fittings",
+      "name": "Inlet and outlet fittings",
+      "role": "Connect the cold plate to the coolant loop.",
+      "whatItDoes": "Two threaded brass or stainless fittings for the hoses or quick disconnects from the rack manifold.",
+      "whyItMatters": "Fittings and their threads are where most cold plate leaks start.",
+      "material": "Nickel-plated brass or stainless steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "thermal"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask for the thread standard and sealing method",
+        "Ask which quick disconnects the fittings are tested with",
+        "Check the inlet and outlet are marked"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "cover"
+      ]
+    },
+    {
+      "id": "screws",
+      "name": "Clamp screws and springs",
+      "role": "Press the cold plate onto the chip with the right force.",
+      "whatItDoes": "Spring-loaded captive screws at the corners that set the clamping pressure on the chip.",
+      "whyItMatters": "Too little force leaves an air gap. Too much can crack the chip or warp the board.",
+      "material": "Stainless steel screws and springs",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 6
+      },
+      "specs": [],
+      "appliesTo": [
+        "GPU servers",
+        "CPU servers with direct liquid cooling"
+      ],
+      "buyingChecks": [
+        "Ask for the clamping force and tightening sequence",
+        "Check the screw pattern matches your chip socket",
+        "Ask whether the screws are captive"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "base"
+      ]
+    }
+  ]
+}

@@ -6,10 +6,10 @@ import { Container, SectionHeading } from "@/components/ui/Layout";
 import { SampleDataTag } from "@/components/ui/Chips";
 import { SITE } from "@/lib/config";
 import { getCatalog, getLiveCategories, getManifest, getUpcomingCategories } from "@/lib/content";
-import { TIER_LABEL } from "@/lib/format";
+import { SECTOR_LABEL, TIER_LABEL } from "@/lib/format";
 import { CategoryArt } from "@/components/catalog/CategoryArt";
 
-const HERO_PRODUCT = "hm-2807-1300kv";
+const HERO_PRODUCT = "vk-mot-2807-1300";
 
 const tiers = [
   {
@@ -26,12 +26,42 @@ const tiers = [
   },
 ];
 
+const codeAnatomy = [
+  { label: "Prefix", value: "VK", note: "Verkod" },
+  { label: "Category", value: "MOT", note: "BLDC motor" },
+  { label: "Stator", value: "2807", note: "28 by 7 mm" },
+  { label: "KV", value: "1300", note: "rpm per volt" },
+  { label: "Revision", value: "A", note: "First release" },
+];
+
+const codeRoles = [
+  {
+    title: "Buyers order by it",
+    body: "Paste VK codes, supplier numbers or plain names into the BOM checker, or collect parts in a quote list and send one request.",
+    href: "/bom",
+    link: "Check a BOM",
+  },
+  {
+    title: "Suppliers build to it",
+    body: "Each code has a build sheet: values, acceptance bands, tests, documents and marking. Any qualified maker can quote against it.",
+    href: "/suppliers/join",
+    link: "For suppliers",
+  },
+  {
+    title: "Evidence travels with it",
+    body: "Documents, sample measurements and lab reports are filed under the code, with what was not checked, when and by whom.",
+    href: "/codes",
+    link: "How codes work",
+  },
+];
+
 export default function HomePage() {
   const catalog = getCatalog();
   const live = getLiveCategories();
   const upcoming = getUpcomingCategories();
   const hero = catalog.find((p) => p.id === HERO_PRODUCT);
   const manifest = getManifest(HERO_PRODUCT);
+  const sectors = [...new Set(live.map((c) => c.sector))];
 
   return (
     <>
@@ -39,7 +69,7 @@ export default function HomePage() {
         <Container className="grid grid-cols-1 items-center gap-8 pb-16 pt-14 sm:pt-20 lg:grid-cols-12 lg:pb-24 lg:pt-24">
           <div className="lg:col-span-5">
             <h1 id="hero-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Know exactly what you are buying.
+              One code for every critical part.
             </h1>
             <p className="mt-6 max-w-md text-lg text-fg-muted">{SITE.promise}</p>
             <div className="mt-10 flex flex-wrap gap-3">
@@ -50,6 +80,12 @@ export default function HomePage() {
                 Send your bill of materials
               </LinkButton>
             </div>
+            <p className="mt-8 text-sm text-fg-subtle">
+              Drones, robotics and data centers.{" "}
+              <Link href="/suppliers/join" className="text-fg-muted underline-offset-4 hover:text-fg hover:underline">
+                Make parts? Build to our codes.
+              </Link>
+            </p>
           </div>
           <div className="lg:col-span-7">
             <HeroModel manifest={manifest ?? null} />
@@ -62,6 +98,36 @@ export default function HomePage() {
               </p>
             ) : null}
           </div>
+        </Container>
+      </section>
+
+      <section aria-labelledby="code-title" className="border-t border-line py-20 sm:py-28">
+        <Container>
+          <SectionHeading
+            id="code-title"
+            title="Buyers order by it. Suppliers build to it."
+            lead="Every part we list gets a VK code and a build sheet. The same code is on the quote, the purchase order, the label and the evidence, so nobody has to translate."
+          />
+          <ol className="mt-12 flex flex-wrap items-stretch gap-2" aria-label="Parts of the code VK-MOT-2807-1300-A">
+            {codeAnatomy.map((seg) => (
+              <li key={seg.label} className="min-w-24 rounded-lg border border-line bg-bg-subtle px-4 py-3">
+                <span className="block text-[11px] uppercase tracking-wide text-fg-subtle">{seg.label}</span>
+                <span className="code-text block text-2xl font-semibold">{seg.value}</span>
+                <span className="block text-xs text-fg-muted">{seg.note}</span>
+              </li>
+            ))}
+          </ol>
+          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {codeRoles.map((r) => (
+              <li key={r.title} className="rounded-xl border border-line p-6">
+                <h3 className="font-semibold">{r.title}</h3>
+                <p className="mt-2 text-sm text-fg-muted">{r.body}</p>
+                <Link href={r.href} className="mt-4 inline-block text-sm text-accent hover:underline">
+                  {r.link}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
@@ -96,42 +162,48 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             id="live-title"
-            title="Live now: drone propulsion and structure"
-            lead="Five categories, each with parts you can inspect and request today."
+            title="Live now in three sectors"
+            lead={`${live.length} categories and ${catalog.length} parts, chosen by what buyers are asking for. Every one opens into an exploded 3D view.`}
           />
-          <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {live.map((c) => {
-              const count = catalog.filter((p) => p.category === c.id).length;
-              return (
-                <li key={c.id}>
-                  <Link
-                    href={`/categories/${c.id}`}
-                    className="group flex h-full flex-col rounded-xl border border-line bg-bg-elev p-5 transition-colors duration-300 hover:border-line-strong"
-                  >
-                    <div className="aspect-[12/7]">
-                      <CategoryArt category={c.id} label={c.singular} />
-                    </div>
-                    <h3 className="mt-4 font-semibold">{c.name}</h3>
-                    <p className="mt-1 text-sm text-fg-subtle">{c.summary}</p>
-                    <p className="tabular mt-auto pt-4 text-sm text-fg-muted">
-                      {count === 1 ? "1 part" : `${count} parts`}
-                    </p>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          {sectors.map((sector) => (
+            <div key={sector} className="mt-12">
+              <h3 className="flex items-baseline justify-between gap-4 text-sm font-semibold">
+                {SECTOR_LABEL[sector]}
+                <Link href="/sectors" className="text-xs font-normal text-fg-subtle hover:text-fg">
+                  About this sector
+                </Link>
+              </h3>
+              <ul className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+                {live
+                  .filter((c) => c.sector === sector)
+                  .map((c) => {
+                    const count = catalog.filter((p) => p.category === c.id).length;
+                    return (
+                      <li key={c.id}>
+                        <Link
+                          href={`/categories/${c.id}`}
+                          className="group flex h-full flex-col rounded-xl border border-line bg-bg-elev p-5 transition-colors duration-300 hover:border-line-strong"
+                        >
+                          <div className="aspect-[12/7]">
+                            <CategoryArt category={c.id} label={c.singular} />
+                          </div>
+                          <h4 className="mt-4 font-semibold">{c.name}</h4>
+                          <p className="mt-1 text-sm text-fg-subtle">{c.summary}</p>
+                          <p className="tabular mt-auto pt-4 text-sm text-fg-muted">{count === 1 ? "1 part" : `${count} parts`}</p>
+                        </Link>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          ))}
         </Container>
       </section>
 
       <section aria-labelledby="upcoming-title" className="border-t border-line py-20 sm:py-28">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <SectionHeading
-              id="upcoming-title"
-              title="Coming next"
-              lead="Visible now so you can plan. Not yet open for requests."
-            />
+            <SectionHeading id="upcoming-title" title="Coming next" lead="Visible now so you can plan. Not yet open for requests." />
             <LinkButton href="/upcoming" variant="secondary" className="mt-8">
               Get notified
             </LinkButton>
@@ -147,6 +219,26 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <section aria-labelledby="suppliers-title" className="border-t border-line py-20 sm:py-28">
+        <Container className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="max-w-2xl">
+            <h2 id="suppliers-title" className="text-xl font-semibold tracking-tight sm:text-2xl">
+              Make one of these parts?
+            </h2>
+            <p className="mt-3 text-fg-muted">
+              Quote against the VK code and build sheet. Buyers see your documents and our measurements, not a sales pitch, and your name appears only when you
+              agree.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <LinkButton href="/suppliers/join">Apply as a supplier</LinkButton>
+            <LinkButton href="/codes" variant="secondary">
+              How codes work
+            </LinkButton>
+          </div>
+        </Container>
+      </section>
+
       <section aria-labelledby="limits-title" className="border-t border-line py-20 sm:py-28">
         <Container>
           <div className="max-w-3xl">
@@ -154,10 +246,9 @@ export default function HomePage() {
               What we do not do yet
             </h2>
             <p className="mt-4 text-lg text-fg-muted">
-              We do not certify parts or suppliers, and nothing here replaces your own qualification testing. Most
-              records rest on a single sample, so they say nothing about batch-to-batch spread. We cannot confirm chip
-              authenticity beyond visible markings, and the origin of raw materials such as lamination steel is often
-              unknown to us; when it is, we say so. We have not yet run long-duration or in-flight tests on any part.
+              We do not certify parts or suppliers, and nothing here replaces your own qualification testing. Most records rest on a single sample, so they say
+              nothing about batch-to-batch spread. We cannot confirm chip authenticity beyond visible markings, and the origin of raw materials such as
+              lamination steel is often unknown to us; when it is, we say so. We have not yet run long-duration or in-flight tests on any part.
             </p>
             <Link href="/about" className="mt-6 inline-block text-sm text-accent hover:underline">
               Our full list of limits

@@ -8,6 +8,7 @@ import type { Manifest, ManifestPart } from "@/lib/schema";
 import { createMaterialCache, type MaterialCache } from "./materials";
 import { addOutlines, createOutlineMaterial } from "./outline";
 import { GENERATORS } from "./procedural";
+import { KitPart } from "./procedural/kit";
 import { useViewer, useViewerStoreApi, type ViewerState } from "./store";
 
 /** Assembled models are scaled so their bounding sphere has this radius in world units. */
@@ -280,6 +281,8 @@ function Part({ part, maxOrder, generator, params, shared, interactive, palette 
             <GlbPart url={glbUrl} cache={cache} />
           ) : Proc ? (
             <Proc mat={cache.get} detail={interactive ? detail : "low"} params={params} />
+          ) : part.shapes.length > 0 ? (
+            <KitPart shapes={part.shapes} mat={cache.get} detail={interactive ? detail : "low"} />
           ) : null}
         </group>
         {interactive && hovered && anchor ? (

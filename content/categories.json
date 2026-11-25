@@ -4,14 +4,40 @@
     "name": "BLDC motors",
     "singular": "BLDC motor",
     "status": "live",
-    "family": "Drone propulsion and structure",
+    "family": "Aerial propulsion",
     "order": 1,
     "summary": "Brushless outrunner motors that turn electrical power into propeller thrust.",
     "whyItMatters": "The motor sets how much thrust you get per watt, how hot the system runs and how long it lasts between services.",
     "filters": [
-      { "specKey": "kv", "label": "KV", "unit": "rpm/V" },
-      { "specKey": "stator-diameter", "label": "Stator diameter", "unit": "mm" },
-      { "specKey": "mass", "label": "Mass", "unit": "g" }
+      {
+        "specKey": "kv",
+        "label": "KV",
+        "unit": "rpm/V"
+      },
+      {
+        "specKey": "stator-diameter",
+        "label": "Stator diameter",
+        "unit": "mm"
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "g"
+      }
+    ],
+    "code": "MOT",
+    "sector": "aerial",
+    "acceptance": [
+      "KV within the stated tolerance on every unit, unloaded, at a stated voltage",
+      "Phase resistance measured on every unit, four-wire",
+      "Shaft runout and bearing noise checked by hand on every unit",
+      "Magnet and wire origin declared in writing for the batch"
+    ],
+    "documents": [
+      "Datasheet with KV, resistance, mass and rated cells",
+      "Magnet grade and origin certificate",
+      "Magnet wire class and origin declaration",
+      "Thrust or torque test data for one unit"
     ]
   },
   {
@@ -19,14 +45,40 @@
     "name": "ESCs",
     "singular": "ESC",
     "status": "live",
-    "family": "Drone propulsion and structure",
+    "family": "Aerial propulsion",
     "order": 2,
     "summary": "Electronic speed controllers that switch battery power into the three motor phases.",
     "whyItMatters": "The ESC decides how cleanly and how safely current reaches the motor, and it is a common point of failure under heat.",
     "filters": [
-      { "specKey": "continuous-current", "label": "Continuous current", "unit": "A" },
-      { "specKey": "max-cells", "label": "Max cells", "unit": "S" },
-      { "specKey": "mass", "label": "Mass", "unit": "g" }
+      {
+        "specKey": "continuous-current",
+        "label": "Continuous current",
+        "unit": "A"
+      },
+      {
+        "specKey": "max-cells",
+        "label": "Max cells",
+        "unit": "S"
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "g"
+      }
+    ],
+    "code": "ESC",
+    "sector": "aerial",
+    "acceptance": [
+      "Visual inspection of solder joints and connectors on every unit",
+      "Power-on and function test on every unit, results logged by serial number",
+      "Firmware version recorded and matching the agreed version",
+      "Bill of materials with the origin of every major chip, for the batch"
+    ],
+    "documents": [
+      "Datasheet and block diagram",
+      "Bill of materials with chip makers and origin",
+      "Firmware version and update method",
+      "Test report for one unit"
     ]
   },
   {
@@ -34,13 +86,72 @@
     "name": "Flight controllers",
     "singular": "Flight controller",
     "status": "live",
-    "family": "Drone propulsion and structure",
+    "family": "Aerial avionics",
     "order": 3,
     "summary": "Boards that read the sensors, run the control loop and command each motor.",
     "whyItMatters": "Sensor quality and processor headroom decide how stable the aircraft is and which autopilot software it can run.",
     "filters": [
-      { "specKey": "max-input-voltage", "label": "Max input voltage", "unit": "V" },
-      { "specKey": "mass", "label": "Mass", "unit": "g" }
+      {
+        "specKey": "max-input-voltage",
+        "label": "Max input voltage",
+        "unit": "V"
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "g"
+      }
+    ],
+    "code": "FCT",
+    "sector": "aerial",
+    "acceptance": [
+      "Visual inspection of solder joints and connectors on every unit",
+      "Power-on and function test on every unit, results logged by serial number",
+      "Firmware version recorded and matching the agreed version",
+      "Bill of materials with the origin of every major chip, for the batch"
+    ],
+    "documents": [
+      "Datasheet and block diagram",
+      "Bill of materials with chip makers and origin",
+      "Firmware version and update method",
+      "Test report for one unit"
+    ]
+  },
+  {
+    "id": "gnss-modules",
+    "code": "GNS",
+    "sector": "aerial",
+    "name": "GNSS modules",
+    "singular": "GNSS module",
+    "status": "live",
+    "family": "Aerial avionics",
+    "order": 4,
+    "summary": "Satellite navigation receivers with antenna and compass, including NavIC support.",
+    "whyItMatters": "Position is the one input an autonomous aircraft cannot do without, and most GNSS modules in Indian drones are imported.",
+    "filters": [
+      {
+        "specKey": "constellations",
+        "label": "Constellations",
+        "unit": null
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "g"
+      }
+    ],
+    "acceptance": [
+      "Visual inspection of solder joints and connectors on every unit",
+      "Power-on and function test on every unit, results logged by serial number",
+      "Firmware version recorded and matching the agreed version",
+      "Time to first fix and satellite count logged outdoors on every unit"
+    ],
+    "documents": [
+      "Datasheet and block diagram",
+      "Bill of materials with chip makers and origin",
+      "Firmware version and update method",
+      "Test report for one unit",
+      "Receiver chip maker and supported constellations"
     ]
   },
   {
@@ -48,14 +159,39 @@
     "name": "Propellers",
     "singular": "Propeller",
     "status": "live",
-    "family": "Drone propulsion and structure",
-    "order": 4,
+    "family": "Aerial propulsion",
+    "order": 5,
     "summary": "Fixed and folding propellers matched to motor size and aircraft class.",
     "whyItMatters": "Propeller shape and balance drive efficiency, noise and vibration, which the flight controller then has to filter out.",
     "filters": [
-      { "specKey": "diameter", "label": "Diameter", "unit": "in" },
-      { "specKey": "pitch", "label": "Pitch", "unit": "in" },
-      { "specKey": "mass", "label": "Mass", "unit": "g" }
+      {
+        "specKey": "diameter",
+        "label": "Diameter",
+        "unit": "in"
+      },
+      {
+        "specKey": "pitch",
+        "label": "Pitch",
+        "unit": "in"
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "g"
+      }
+    ],
+    "code": "PRP",
+    "sector": "aerial",
+    "acceptance": [
+      "Diameter, pitch and mass measured on every unit",
+      "Static and dynamic balance on every unit",
+      "Visual check for voids, cracks and edge damage",
+      "Material certificate for the batch"
+    ],
+    "documents": [
+      "Drawing with dimensions and tolerances",
+      "Material certificate",
+      "Mass and balance data"
     ]
   },
   {
@@ -63,13 +199,217 @@
     "name": "Carbon-fibre frames",
     "singular": "Frame",
     "status": "live",
-    "family": "Drone propulsion and structure",
-    "order": 5,
+    "family": "Aerial structure",
+    "order": 6,
     "summary": "Carbon-fibre airframes and arms that hold every other part in place.",
     "whyItMatters": "Frame stiffness changes vibration, and vibration changes everything from sensor noise to motor bearing life.",
     "filters": [
-      { "specKey": "wheelbase", "label": "Wheelbase", "unit": "mm" },
-      { "specKey": "mass", "label": "Mass", "unit": "g" }
+      {
+        "specKey": "wheelbase",
+        "label": "Wheelbase",
+        "unit": "mm"
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "g"
+      }
+    ],
+    "code": "FRM",
+    "sector": "aerial",
+    "acceptance": [
+      "Critical dimensions measured on the first article and on a sample from each batch",
+      "Mass of every unit within the stated tolerance",
+      "Material certificate for the batch",
+      "Visual check for cracks, delamination or burrs"
+    ],
+    "documents": [
+      "Drawing with dimensions and tolerances",
+      "Material certificate",
+      "Mass and balance data"
+    ]
+  },
+  {
+    "id": "robot-actuators",
+    "code": "ACT",
+    "sector": "robotics",
+    "name": "Robot joint actuators",
+    "singular": "Joint actuator",
+    "status": "live",
+    "family": "Robot motion",
+    "order": 7,
+    "summary": "Integrated joints with a frameless motor, strain wave gear, encoder and drive.",
+    "whyItMatters": "Joints decide what a robot arm or humanoid can lift and how precisely, and they share magnets, bearings and windings with drone motors.",
+    "filters": [
+      {
+        "specKey": "rated-torque",
+        "label": "Rated torque",
+        "unit": "Nm"
+      },
+      {
+        "specKey": "ratio",
+        "label": "Gear ratio",
+        "unit": null
+      },
+      {
+        "specKey": "mass",
+        "label": "Mass",
+        "unit": "kg"
+      }
+    ],
+    "acceptance": [
+      "Rated and peak torque measured on the first article",
+      "Backlash and lost motion measured on every unit",
+      "Encoder counts and direction checked on every unit",
+      "Magnet origin declared in writing for the batch"
+    ],
+    "documents": [
+      "Datasheet with torque, speed, ratio and backlash",
+      "Gear maker and origin",
+      "Magnet grade and origin certificate",
+      "Encoder maker and resolution"
+    ]
+  },
+  {
+    "id": "robot-drive-wheels",
+    "code": "WHL",
+    "sector": "robotics",
+    "name": "AGV and AMR drive wheels",
+    "singular": "Drive wheel",
+    "status": "live",
+    "family": "Robot motion",
+    "order": 8,
+    "summary": "Hub motor drive wheels with gearbox, brake and encoder for warehouse and factory robots.",
+    "whyItMatters": "The drive wheel sets payload, speed and duty cycle for a mobile robot, and it is the part that wears first.",
+    "filters": [
+      {
+        "specKey": "wheel-diameter",
+        "label": "Wheel diameter",
+        "unit": "mm"
+      },
+      {
+        "specKey": "rated-load",
+        "label": "Rated load",
+        "unit": "kg"
+      }
+    ],
+    "acceptance": [
+      "No-load speed and current measured on every unit",
+      "Brake holding torque checked on every unit",
+      "Tyre hardness and diameter measured per batch",
+      "Evidence for the stated ingress rating"
+    ],
+    "documents": [
+      "Datasheet with load, speed, torque and duty cycle",
+      "Motor magnet origin declaration",
+      "Brake and encoder datasheets",
+      "Tyre compound datasheet"
+    ]
+  },
+  {
+    "id": "server-fans",
+    "code": "FAN",
+    "sector": "compute",
+    "name": "Server fans",
+    "singular": "Server fan",
+    "status": "live",
+    "family": "Data center cooling",
+    "order": 9,
+    "summary": "High static pressure fans for servers, storage and network switches.",
+    "whyItMatters": "Air-cooled servers fail on heat before anything else, and fans are the moving part that wears out.",
+    "filters": [
+      {
+        "specKey": "frame-size",
+        "label": "Frame size",
+        "unit": "mm"
+      },
+      {
+        "specKey": "max-speed",
+        "label": "Max speed",
+        "unit": "rpm"
+      }
+    ],
+    "acceptance": [
+      "Speed and current at rated voltage measured on every unit",
+      "Tach and PWM signals checked on every unit",
+      "Noise and vibration measured on a sample per batch",
+      "Bearing type and rated life declared for the batch"
+    ],
+    "documents": [
+      "Datasheet with airflow, pressure and power curves",
+      "Bearing type and rated life data",
+      "Motor driver chip maker and origin"
+    ]
+  },
+  {
+    "id": "server-power",
+    "code": "PSU",
+    "sector": "compute",
+    "name": "Server power supplies",
+    "singular": "Power supply",
+    "status": "live",
+    "family": "Data center power",
+    "order": 10,
+    "summary": "Hot-swap CRPS power supplies for servers and AI racks.",
+    "whyItMatters": "A power supply failure takes a server down, and conversion efficiency at this scale is a large share of a data center power bill.",
+    "filters": [
+      {
+        "specKey": "rated-power",
+        "label": "Rated power",
+        "unit": "W"
+      },
+      {
+        "specKey": "efficiency",
+        "label": "Peak efficiency",
+        "unit": "%"
+      }
+    ],
+    "acceptance": [
+      "Output voltage, ripple and efficiency at 20, 50 and 100 percent load on every unit",
+      "Hi-pot test on every unit",
+      "PMBus readout checked on every unit",
+      "Safety certificate covering the exact model"
+    ],
+    "documents": [
+      "Datasheet with efficiency curve and hold-up time",
+      "Safety and EMC certificates for the model",
+      "Bill of materials with origin of power semiconductors",
+      "Firmware version"
+    ]
+  },
+  {
+    "id": "liquid-cooling",
+    "code": "CPL",
+    "sector": "compute",
+    "name": "Liquid cooling",
+    "singular": "Cooling part",
+    "status": "live",
+    "family": "Data center cooling",
+    "order": 11,
+    "summary": "Cold plates and fittings for direct-to-chip liquid cooling of CPUs and GPUs.",
+    "whyItMatters": "AI racks now produce more heat than air can remove, so cold plates are moving from niche to standard.",
+    "filters": [
+      {
+        "specKey": "thermal-resistance",
+        "label": "Thermal resistance",
+        "unit": "C/W"
+      },
+      {
+        "specKey": "max-pressure",
+        "label": "Max pressure",
+        "unit": "bar"
+      }
+    ],
+    "acceptance": [
+      "Pressure or leak test on every unit, results logged by serial number",
+      "Flatness of contact faces measured on the first article and per batch",
+      "Material and plating certificates for the batch",
+      "Cleanliness check: no loose particles in fluid paths"
+    ],
+    "documents": [
+      "Drawing with dimensions and tolerances",
+      "Material and plating certificates",
+      "Pressure drop and thermal resistance data at stated flow"
     ]
   },
   {
@@ -78,10 +418,12 @@
     "singular": "Battery",
     "status": "upcoming",
     "family": "Energy storage",
-    "order": 6,
+    "order": 12,
     "summary": "Lithium-ion and lithium-polymer cells and packs.",
     "whyItMatters": "Cell chemistry and origin carry the largest safety and supply risk in most drone builds.",
-    "filters": []
+    "filters": [],
+    "code": "BAT",
+    "sector": "energy"
   },
   {
     "id": "chips-and-sensors",
@@ -89,10 +431,12 @@
     "singular": "Chip or sensor",
     "status": "upcoming",
     "family": "Electronics",
-    "order": 7,
+    "order": 13,
     "summary": "Processors, IMUs, barometers, GNSS modules and radios.",
     "whyItMatters": "Chips are where counterfeit and remarked parts most often enter a supply chain, and where origin is hardest to trace.",
-    "filters": []
+    "filters": [],
+    "code": "CHP",
+    "sector": "aerial"
   },
   {
     "id": "gimbals-and-cameras",
@@ -100,31 +444,24 @@
     "singular": "Gimbal or camera",
     "status": "upcoming",
     "family": "Imaging",
-    "order": 8,
+    "order": 14,
     "summary": "Stabilised camera payloads and imaging modules.",
     "whyItMatters": "Payloads often carry the most sensitive components, so procurement rules for them are usually the strictest.",
-    "filters": []
-  },
-  {
-    "id": "robot-actuators",
-    "name": "Robot actuators and joints",
-    "singular": "Actuator",
-    "status": "upcoming",
-    "family": "Robotics",
-    "order": 9,
-    "summary": "Integrated motor, gearbox and encoder joints for arms and legged robots.",
-    "whyItMatters": "Actuators share magnets, bearings and windings with drone motors, so the same origin questions apply.",
-    "filters": []
+    "filters": [],
+    "code": "GMB",
+    "sector": "aerial"
   },
   {
     "id": "data-center-power-cooling",
-    "name": "Data center power and cooling",
-    "singular": "Power or cooling unit",
+    "name": "Transformers and switchgear",
+    "singular": "Transformer or switchgear unit",
     "status": "upcoming",
     "family": "Data center infrastructure",
-    "order": 10,
-    "summary": "Transformers, switchgear and liquid and air cooling equipment.",
+    "order": 15,
+    "summary": "Medium-voltage transformers, switchgear and busway for new data center halls.",
     "whyItMatters": "Lead times for transformers and switchgear now set how fast new capacity can be built, so verified alternatives matter.",
-    "filters": []
+    "filters": [],
+    "code": "TRF",
+    "sector": "compute"
   }
 ]

@@ -9,9 +9,10 @@ import { cn } from "@/lib/cn";
 import { Button, LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { BOM_HANDOFF_KEY } from "@/components/bom/BomChecker";
+import { readQuoteText, readQuoteUnits, useQuote } from "@/lib/quote";
 import { Field, Honeypot, describedBy, inputClass } from "./Field";
 
-type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; id?: string } | { state: "error"; message: string };
+type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; reference?: string } | { state: "error"; message: string };
 
 const FIELDS: (keyof RequestInput)[] = ["company", "email", "role", "parts", "quantity", "timeline", "message"];
 
@@ -19,8 +20,9 @@ const FIELDS: (keyof RequestInput)[] = ["company", "email", "role", "parts", "qu
 export function RequestForm() {
   const params = useSearchParams();
   // Rows handed over from the BOM checker. This branch renders only in the browser.
-  const parts = (params.get("from") === "bom" ? takeBomHandoff() : null) ?? params.get("part") ?? "";
-  return <RequestFormInner initialParts={parts} initialQty={params.get("qty") ?? ""} />;
+  const from = params.get("from");
+  const parts = (from === "bom" ? takeBomHandoff() : from === "quote" ? readQuoteText() : null) ?? params.get("part") ?? "";
+  return <RequestFormInner initialParts={parts} initialQty={from === "quote" ? readQuoteUnits() : (params.get("qty") ?? "")} fromQuote={from === "quote"} />;
 }
 
 /** The same form with no prefill. Server-rendered as the Suspense fallback, so nothing shifts. */
@@ -28,7 +30,8 @@ export function RequestFormStatic() {
   return <RequestFormInner initialParts="" initialQty="" />;
 }
 
-function RequestFormInner({ initialParts, initialQty }: { initialParts: string; initialQty: string }) {
+function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { initialParts: string; initialQty: string; fromQuote?: boolean }) {
+  const { clear: clearQuote } = useQuote();
   const ids = useId();
   const [values, setValues] = useState<RequestInput>(() => ({
     company: "",
@@ -76,9 +79,10 @@ function RequestFormInner({ initialParts, initialQty }: { initialParts: string; 
     setStatus({ state: "sending" });
     try {
       const res = await fetch("/api/request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...values, startedAt: startedAt.current }) });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; id?: string; error?: string; errors?: FieldErrors<RequestInput> };
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; reference?: string; error?: string; errors?: FieldErrors<RequestInput> };
       if (res.ok && data.ok) {
-        setStatus({ state: "sent", id: data.id });
+        setStatus({ state: "sent", reference: data.reference });
+        if (fromQuote) clearQuote();
         track("Request submitted", { timeline: values.timeline });
         requestAnimationFrame(() => successRef.current?.focus());
       } else if (data.errors) {
@@ -103,7 +107,11 @@ function RequestFormInner({ initialParts, initialQty }: { initialParts: string; 
           We will reply to {values.email} with what we can source, the evidence tier we hold for each part, and what we would
           still need to check.
         </p>
-        {status.id ? <p className="mt-4 text-xs text-fg-subtle">Reference: {status.id.slice(0, 8)}</p> : null}
+        {status.reference ? (
+          <p className="mt-4 text-sm text-fg-muted">
+            Your reference: <span className="code-text font-medium text-fg">{status.reference}</span>. Quote it in any reply. We use the same VK codes with the supplier.
+          </p>
+        ) : null}
         <div className="mt-6 flex flex-wrap gap-3">
           <LinkButton href="/parts" variant="secondary">
             Back to parts
@@ -126,7 +134,7 @@ function RequestFormInner({ initialParts, initialQty }: { initialParts: string; 
 
   const hints = {
     email: "A company address. We do not quote to personal email.",
-    parts: "Part names, numbers or specs. One per line is easiest.",
+    parts: "VK codes, part names, supplier numbers or specs. One per line is easiest.",
   };
 
   return (

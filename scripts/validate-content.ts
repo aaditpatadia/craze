@@ -134,6 +134,24 @@ for (const p of products) {
   }
 }
 
+// Verkod codes: one code per product, its letters match the category, and the URL id follows the code.
+unique("part code", products.map((p) => p.code));
+unique("supplier code", suppliers.map((s) => s.code));
+unique("category code", categories.map((c) => c.code));
+for (const p of products) {
+  const cat = categories.find((c) => c.id === p.category);
+  const segment = p.code.split("-")[1];
+  if (cat && segment !== cat.code) err(`product ${p.id}: code ${p.code} should start VK-${cat.code}- for category ${cat.id}`);
+  const expectedId = p.code.toLowerCase().replace(/-[a-z]$/, "");
+  if (p.id !== expectedId) err(`product ${p.id}: id should be "${expectedId}" to match code ${p.code}`);
+  if (p.status === "live" && !raw.sourcing.some((s) => s.productId === p.id)) warn(`product ${p.id}: no sourcing record in content/sourcing.json`);
+}
+for (const s of raw.sourcing) {
+  if (!products.some((p) => p.id === s.productId)) err(`sourcing ${s.productId}: no product with this id`);
+  checkDate(`sourcing ${s.productId}`, s.updated);
+  if (s.status !== "searching" && s.candidates.length === 0) err(`sourcing ${s.productId}: status "${s.status}" needs at least one candidate`);
+}
+
 for (const m of Object.values(manifests)) {
   if (!products.some((p) => p.id === m.productId)) err(`manifest ${m.productId}: no product with this id`);
 }

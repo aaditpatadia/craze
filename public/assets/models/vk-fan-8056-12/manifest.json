@@ -1,0 +1,592 @@
+{
+  "productId": "vk-fan-8056-12",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      3,
+      3,
+      3.6
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "frame",
+      "name": "Fan frame",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            38.5,
+            40,
+            56
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            9,
+            56,
+            9,
+            1.5
+          ],
+          "pos": [
+            35.5,
+            0,
+            35.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        },
+        {
+          "type": "box",
+          "d": [
+            80,
+            5,
+            5
+          ],
+          "pos": [
+            0,
+            25.5,
+            37.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        },
+        {
+          "type": "box",
+          "d": [
+            80,
+            5,
+            5
+          ],
+          "pos": [
+            0,
+            -25.5,
+            37.5
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        },
+        {
+          "type": "cyl",
+          "d": [
+            15,
+            4
+          ],
+          "pos": [
+            0,
+            -24,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            24,
+            3,
+            3
+          ],
+          "pos": [
+            26,
+            -24,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": {
+            "n": 4,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              90,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.2,
+      "order": 0,
+      "layers": [
+        "structural"
+      ],
+      "material": "plastic",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The frame carries the motor hub on four struts.",
+      "hotspots": []
+    },
+    {
+      "id": "driver",
+      "name": "Driver board",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            4,
+            13,
+            1.6
+          ],
+          "pos": [
+            0,
+            -20.5,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "pcb",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            3,
+            1,
+            3
+          ],
+          "pos": [
+            8,
+            -19.4,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.42,
+      "order": 1,
+      "layers": [
+        "electrical"
+      ],
+      "material": "pcb",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The driver board sits at the base of the hub.",
+      "hotspots": []
+    },
+    {
+      "id": "stator",
+      "name": "Stator",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            10,
+            14
+          ],
+          "pos": [
+            0,
+            -10,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "silicon-steel",
+          "repeat": null
+        },
+        {
+          "type": "torus",
+          "d": [
+            8,
+            1.8
+          ],
+          "pos": [
+            0,
+            -10,
+            0
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "copper",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.18,
+      "order": 2,
+      "layers": [
+        "electrical",
+        "magnetic"
+      ],
+      "material": "silicon-steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The stator is fixed in the hub.",
+      "hotspots": []
+    },
+    {
+      "id": "bearings",
+      "name": "Ball bearings",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            1.5,
+            4,
+            3
+          ],
+          "pos": [
+            0,
+            -15,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel",
+          "repeat": {
+            "n": 2,
+            "step": [
+              0,
+              10,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.12,
+      "order": 3,
+      "layers": [
+        "moving"
+      ],
+      "material": "steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The bearings sit in the stator tube.",
+      "hotspots": []
+    },
+    {
+      "id": "magnet-ring",
+      "name": "Magnet ring",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            11.5,
+            14,
+            16
+          ],
+          "pos": [
+            0,
+            -8,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "magnet",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.32,
+      "order": 4,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "material": "magnet",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The magnet ring is pressed into the impeller hub.",
+      "hotspots": []
+    },
+    {
+      "id": "impeller",
+      "name": "Impeller",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            16,
+            26
+          ],
+          "pos": [
+            0,
+            -4,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            21,
+            1.6,
+            15,
+            3
+          ],
+          "pos": [
+            26,
+            -4,
+            0
+          ],
+          "rot": [
+            32,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": {
+            "n": 7,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              51.42857142857143,
+              0
+            ]
+          }
+        },
+        {
+          "type": "cyl",
+          "d": [
+            1.5,
+            20
+          ],
+          "pos": [
+            0,
+            -12,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel-polished",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.62,
+      "order": 5,
+      "layers": [
+        "moving"
+      ],
+      "material": "plastic",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The impeller drops over the stator into the frame.",
+      "hotspots": []
+    },
+    {
+      "id": "cable",
+      "name": "Cable and connector",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            1.4,
+            40
+          ],
+          "pos": [
+            42,
+            -22,
+            20
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "silicone",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            10,
+            5,
+            6
+          ],
+          "pos": [
+            64,
+            -22,
+            20
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic-light",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.5,
+      "order": 6,
+      "layers": [
+        "electrical"
+      ],
+      "material": "silicone",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The cable runs out along one strut.",
+      "hotspots": []
+    }
+  ]
+}

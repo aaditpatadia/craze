@@ -85,6 +85,21 @@ const paths = {
       <path d="m13 13 4 4" />
     </>
   ),
+  copy: (
+    <>
+      <rect x="7" y="7" width="9.5" height="9.5" rx="1.5" />
+      <path d="M13 7V4.5A1 1 0 0 0 12 3.5H4.5a1 1 0 0 0-1 1V12a1 1 0 0 0 1 1H7" />
+    </>
+  ),
+  tray: <path d="M3 11.5 5 4.5h10l2 7m-14 0v4h14v-4m-14 0h4l1 2h4l1-2h4" />,
+  factory: <path d="M2.5 16.5v-9l4.5 3v-3l4.5 3v-3l4.5 3v6h-13.5ZM6 13.5h1.5m2.5 0h1.5m2.5 0h1.5" />,
+  printer: (
+    <>
+      <path d="M5.5 7.5v-4h9v4M5.5 14H3.5V8.5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1V14h-2" />
+      <rect x="5.5" y="11.5" width="9" height="5" rx="0.5" />
+    </>
+  ),
+  code: <path d="m7 6-4 4 4 4m6-8 4 4-4 4M11.5 4l-3 12" />,
 } as const;
 
 export type IconName = keyof typeof paths;

@@ -3,14 +3,16 @@
  */
 
 export const SITE = {
-  /** Placeholder brand name. Replace before launch. */
-  name: "Assay Components",
-  shortName: "Assay",
-  promise: "Drone parts you can inspect before you buy, with the evidence behind every claim.",
+  /** Verkod: "verified code". Every part we list carries a VK code that buyers order by and suppliers build to. */
+  name: "Verkod",
+  shortName: "Verkod",
+  promise: "One code for every critical part. Buyers order by it, suppliers build to it, and the evidence travels with it.",
   description:
-    "A catalogue of drone propulsion and structure parts. Inspect each part in 3D, see what every internal component does, where it comes from, and exactly what evidence backs each claim.",
+    "Verkod lists the drone, robotics and data center components buyers need most, each with a VK part code, an exploded 3D view, a build sheet for suppliers and the evidence behind every claim.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en-GB",
+  /** Prefix on every part code. */
+  codePrefix: "VK",
 } as const;
 
 /**
@@ -52,8 +54,9 @@ export const FREE_EMAIL_DOMAINS = [
 
 export const NAV = [
   { href: "/parts", label: "Parts" },
+  { href: "/sectors", label: "Sectors" },
+  { href: "/codes", label: "VK codes" },
   { href: "/bom", label: "BOM checker" },
+  { href: "/suppliers/join", label: "For suppliers" },
   { href: "/methodology", label: "Methodology" },
-  { href: "/upcoming", label: "Upcoming" },
-  { href: "/about", label: "About" },
 ] as const;

@@ -5,6 +5,9 @@ import { loadRawContent } from "../lib/content";
 const { products, categories, suppliers } = loadRawContent();
 const catalog = products.map((p) => ({
   id: p.id,
+  code: p.code,
+  aliases: p.supplierPartNumber ? [p.supplierPartNumber] : [],
+  sector: categories.find((c) => c.id === p.category)?.sector ?? "aerial",
   name: p.name,
   category: p.category,
   categoryName: categories.find((c) => c.id === p.category)?.name ?? "",

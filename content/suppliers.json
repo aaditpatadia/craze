@@ -1,17 +1,38 @@
 [
   {
     "id": "harrow-motion",
+    "code": "VKS-001",
     "name": "Harrow Motion Works",
     "placeholder": true,
     "city": "Coimbatore",
     "country": "India",
     "summary": "Fictional supplier used as sample data. Winds and assembles outrunner motors and machines its own bell housings.",
-    "parts": ["hm-2807-1300kv", "hm-4114-400kv"],
+    "parts": [
+      "vk-mot-2807-1300",
+      "vk-mot-4114-400",
+      "vk-mot-6215-170"
+    ],
     "documentsReceived": [
-      { "title": "HM-2807 datasheet, revision C", "received": "2026-06-30", "url": null },
-      { "title": "HM-4114 datasheet, revision A", "received": "2026-06-30", "url": null },
-      { "title": "Magnet supplier material certificate", "received": "2026-07-02", "url": null },
-      { "title": "Copper magnet wire supplier declaration", "received": "2026-07-02", "url": null }
+      {
+        "title": "HM-2807 datasheet, revision C",
+        "received": "2026-06-30",
+        "url": null
+      },
+      {
+        "title": "HM-4114 datasheet, revision A",
+        "received": "2026-06-30",
+        "url": null
+      },
+      {
+        "title": "Magnet supplier material certificate",
+        "received": "2026-07-02",
+        "url": null
+      },
+      {
+        "title": "Copper magnet wire supplier declaration",
+        "received": "2026-07-02",
+        "url": null
+      }
     ],
     "checked": [
       "Datasheets matched to the part numbers we were sent",
@@ -24,26 +45,61 @@
       "Origin of the stator lamination steel",
       "Sub-supplier audits"
     ],
-    "sampleReceived": { "received": true, "date": "2026-07-14" },
-    "factoryChecked": { "status": "on-site", "date": "2026-08-02", "by": "Assay inspection team" },
-    "leadTimeDays": { "min": 21, "max": 35 },
-    "minOrder": { "quantity": 200, "unit": "motors" },
+    "sampleReceived": {
+      "received": true,
+      "date": "2026-07-14"
+    },
+    "factoryChecked": {
+      "status": "on-site",
+      "date": "2026-08-02",
+      "by": "Verkod inspection team"
+    },
+    "leadTimeDays": {
+      "min": 21,
+      "max": 35
+    },
+    "minOrder": {
+      "quantity": 200,
+      "unit": "motors"
+    },
     "contactRole": "Export sales lead",
     "lastVerified": "2026-08-02"
   },
   {
     "id": "lintel-avionics",
+    "code": "VKS-002",
     "name": "Lintel Avionics",
     "placeholder": true,
     "city": "Taichung",
     "country": "Taiwan",
     "summary": "Fictional supplier used as sample data. Designs and assembles flight controllers and ESCs on contracted SMT lines.",
-    "parts": ["la-esc-45a", "la-esc-80a-hv", "la-fc-h7"],
+    "parts": [
+      "vk-esc-45-6s",
+      "vk-esc-80-14s",
+      "vk-fct-h7-30",
+      "vk-gns-l1l5-m"
+    ],
     "documentsReceived": [
-      { "title": "LA-ESC45 datasheet, revision B", "received": "2026-04-18", "url": null },
-      { "title": "LA-ESC80HV datasheet, revision A", "received": "2026-04-18", "url": null },
-      { "title": "LA-FC-H7 datasheet and pinout, revision D", "received": "2026-04-18", "url": null },
-      { "title": "Bill of materials for LA-FC-H7 (major components)", "received": "2026-05-02", "url": null }
+      {
+        "title": "LA-ESC45 datasheet, revision B",
+        "received": "2026-04-18",
+        "url": null
+      },
+      {
+        "title": "LA-ESC80HV datasheet, revision A",
+        "received": "2026-04-18",
+        "url": null
+      },
+      {
+        "title": "LA-FC-H7 datasheet and pinout, revision D",
+        "received": "2026-04-18",
+        "url": null
+      },
+      {
+        "title": "Bill of materials for LA-FC-H7 (major components)",
+        "received": "2026-05-02",
+        "url": null
+      }
     ],
     "checked": [
       "Datasheets matched to the part numbers we were sent",
@@ -56,24 +112,49 @@
       "Firmware source or build process",
       "LA-ESC80HV sample (not yet received)"
     ],
-    "sampleReceived": { "received": true, "date": "2026-05-06" },
-    "factoryChecked": { "status": "remote", "date": "2026-05-20", "by": "Assay inspection team" },
-    "leadTimeDays": { "min": 28, "max": 42 },
-    "minOrder": { "quantity": 100, "unit": "boards" },
+    "sampleReceived": {
+      "received": true,
+      "date": "2026-05-06"
+    },
+    "factoryChecked": {
+      "status": "remote",
+      "date": "2026-05-20",
+      "by": "Verkod inspection team"
+    },
+    "leadTimeDays": {
+      "min": 28,
+      "max": 42
+    },
+    "minOrder": {
+      "quantity": 100,
+      "unit": "boards"
+    },
     "contactRole": "Business development manager",
     "lastVerified": "2026-05-20"
   },
   {
     "id": "sablewood-rotors",
+    "code": "VKS-003",
     "name": "Sablewood Rotors",
     "placeholder": true,
     "city": "Hsinchu",
     "country": "Taiwan",
     "summary": "Fictional supplier used as sample data. Moulds carbon and glass-filled propellers for multirotor and VTOL aircraft.",
-    "parts": ["sw-cf1550-fold", "sw-5143-tri"],
+    "parts": [
+      "vk-prp-1550-f2",
+      "vk-prp-5143-3"
+    ],
     "documentsReceived": [
-      { "title": "CF1550 folding propeller drawing and datasheet", "received": "2025-08-21", "url": null },
-      { "title": "5143 tri-blade datasheet", "received": "2025-08-21", "url": null }
+      {
+        "title": "CF1550 folding propeller drawing and datasheet",
+        "received": "2025-08-21",
+        "url": null
+      },
+      {
+        "title": "5143 tri-blade datasheet",
+        "received": "2025-08-21",
+        "url": null
+      }
     ],
     "checked": [
       "Datasheets matched to the part numbers we were sent",
@@ -85,24 +166,48 @@
       "Fatigue life of the folding hub",
       "5143 sample (not yet received)"
     ],
-    "sampleReceived": { "received": true, "date": "2025-09-04" },
-    "factoryChecked": { "status": "not-checked", "date": null, "by": null },
-    "leadTimeDays": { "min": 14, "max": 28 },
-    "minOrder": { "quantity": 500, "unit": "pairs" },
+    "sampleReceived": {
+      "received": true,
+      "date": "2025-09-04"
+    },
+    "factoryChecked": {
+      "status": "not-checked",
+      "date": null,
+      "by": null
+    },
+    "leadTimeDays": {
+      "min": 14,
+      "max": 28
+    },
+    "minOrder": {
+      "quantity": 500,
+      "unit": "pairs"
+    },
     "contactRole": "Sales engineer",
     "lastVerified": "2025-09-12"
   },
   {
     "id": "quarry-composites",
+    "code": "VKS-004",
     "name": "Quarry Composite Labs",
     "placeholder": true,
     "city": "Pune",
     "country": "India",
     "summary": "Fictional supplier used as sample data. Cuts carbon-fibre plate and tube into frames for heavy-lift multirotors.",
-    "parts": ["qc-x650-frame"],
+    "parts": [
+      "vk-frm-650-x4"
+    ],
     "documentsReceived": [
-      { "title": "X650 frame drawing set, revision B", "received": "2026-09-09", "url": null },
-      { "title": "Carbon plate supplier datasheet", "received": "2026-09-09", "url": null }
+      {
+        "title": "X650 frame drawing set, revision B",
+        "received": "2026-09-09",
+        "url": null
+      },
+      {
+        "title": "Carbon plate supplier datasheet",
+        "received": "2026-09-09",
+        "url": null
+      }
     ],
     "checked": [
       "Drawings matched to the frame kit we were sent",
@@ -113,11 +218,176 @@
       "Origin of the carbon fibre in the plate",
       "Crash or fatigue behaviour"
     ],
-    "sampleReceived": { "received": true, "date": "2026-09-22" },
-    "factoryChecked": { "status": "not-checked", "date": null, "by": null },
-    "leadTimeDays": { "min": 10, "max": 20 },
-    "minOrder": { "quantity": 20, "unit": "frame kits" },
+    "sampleReceived": {
+      "received": true,
+      "date": "2026-09-22"
+    },
+    "factoryChecked": {
+      "status": "not-checked",
+      "date": null,
+      "by": null
+    },
+    "leadTimeDays": {
+      "min": 10,
+      "max": 20
+    },
+    "minOrder": {
+      "quantity": 20,
+      "unit": "frame kits"
+    },
     "contactRole": "Founder",
+    "lastVerified": "2026-09-30"
+  },
+  {
+    "placeholder": true,
+    "sampleReceived": {
+      "received": false,
+      "date": null
+    },
+    "factoryChecked": {
+      "status": "not-checked",
+      "date": null,
+      "by": null
+    },
+    "contactRole": "Sales engineer",
+    "id": "tarnfield-drives",
+    "code": "VKS-005",
+    "name": "Tarnfield Drives",
+    "city": "Pune",
+    "country": "India",
+    "summary": "Fictional supplier used as sample data. Winds frameless motors and assembles robot joints and AGV drive wheels.",
+    "parts": [
+      "vk-act-80-100",
+      "vk-whl-150-48"
+    ],
+    "documentsReceived": [
+      {
+        "title": "TD-J80 joint actuator datasheet, revision A",
+        "received": "2026-10-06",
+        "url": null
+      },
+      {
+        "title": "TD-W150 drive wheel datasheet, revision B",
+        "received": "2026-10-06",
+        "url": null
+      }
+    ],
+    "checked": [
+      "Datasheets matched to the part numbers we were sent",
+      "Company registration and factory address"
+    ],
+    "notChecked": [
+      "Any sample, none received yet",
+      "The factory, in person or remotely",
+      "Origin of magnets, gears and encoders"
+    ],
+    "leadTimeDays": {
+      "min": 35,
+      "max": 56
+    },
+    "minOrder": {
+      "quantity": 20,
+      "unit": "units"
+    },
+    "lastVerified": "2026-10-06"
+  },
+  {
+    "placeholder": true,
+    "sampleReceived": {
+      "received": true,
+      "date": "2026-10-14"
+    },
+    "factoryChecked": {
+      "status": "not-checked",
+      "date": null,
+      "by": null
+    },
+    "contactRole": "Sales engineer",
+    "id": "corran-thermal",
+    "code": "VKS-006",
+    "name": "Corran Thermal",
+    "city": "Chennai",
+    "country": "India",
+    "summary": "Fictional supplier used as sample data. Machines and brazes cold plates and assembles server fans.",
+    "parts": [
+      "vk-fan-8056-12",
+      "vk-cpl-g1-skv"
+    ],
+    "documentsReceived": [
+      {
+        "title": "CT-8056 fan datasheet with PQ curve",
+        "received": "2026-09-22",
+        "url": null
+      },
+      {
+        "title": "CT-CP1 cold plate drawing and pressure test procedure",
+        "received": "2026-09-22",
+        "url": null
+      }
+    ],
+    "checked": [
+      "Datasheets matched to the part numbers we were sent",
+      "One cold plate sample received and measured"
+    ],
+    "notChecked": [
+      "The factory, in person or remotely",
+      "Fan bearing life claims",
+      "Brazing process controls"
+    ],
+    "leadTimeDays": {
+      "min": 21,
+      "max": 35
+    },
+    "minOrder": {
+      "quantity": 200,
+      "unit": "units"
+    },
+    "lastVerified": "2026-10-14"
+  },
+  {
+    "placeholder": true,
+    "sampleReceived": {
+      "received": false,
+      "date": null
+    },
+    "factoryChecked": {
+      "status": "not-checked",
+      "date": null,
+      "by": null
+    },
+    "contactRole": "Key account manager",
+    "id": "ostra-power",
+    "code": "VKS-007",
+    "name": "Ostra Power Systems",
+    "city": "Bengaluru",
+    "country": "India",
+    "summary": "Fictional supplier used as sample data. Designs and assembles switch-mode power supplies for servers.",
+    "parts": [
+      "vk-psu-2400-crps"
+    ],
+    "documentsReceived": [
+      {
+        "title": "OP-2400C power supply datasheet, revision C",
+        "received": "2026-09-30",
+        "url": null
+      }
+    ],
+    "checked": [
+      "Datasheet matched to the part number we were sent"
+    ],
+    "notChecked": [
+      "Any sample, none received yet",
+      "Safety certificates, not yet received",
+      "The factory, in person or remotely"
+    ],
+    "leadTimeDays": {
+      "min": 42,
+      "max": 70
+    },
+    "minOrder": {
+      "quantity": 50,
+      "unit": "units"
+    },
     "lastVerified": "2026-09-30"
   }
 ]

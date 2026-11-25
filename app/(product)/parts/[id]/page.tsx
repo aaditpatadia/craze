@@ -12,7 +12,9 @@ import { Container, SectionHeading } from "@/components/ui/Layout";
 import { PartDetails } from "@/components/viewer/PartDetails";
 import { Viewer } from "@/components/viewer/Viewer";
 import { SITE } from "@/lib/config";
-import { findEvidence, getCategory, getManifest, getProduct, getProducts, getSupplier, highestTier } from "@/lib/content";
+import { AddToQuote, CodeChip } from "@/components/quote/QuoteControls";
+import { findEvidence, getCategory, getManifest, getProduct, getProducts, getSourcing, getSupplier, highestTier } from "@/lib/content";
+import { SECTOR_LABEL, SOURCING_LABEL } from "@/lib/format";
 import { TIER_LABEL, formatSpecValue, plural } from "@/lib/format";
 import { resolveParts } from "@/lib/viewer-data";
 
@@ -43,6 +45,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const parts = resolveParts(product, manifest);
   const top = highestTier(product);
   const originEv = findEvidence(product, product.origin.evidenceId);
+  const sourcing = getSourcing(product.id);
+  const named = sourcing?.candidates.filter((c) => c.consented) ?? [];
+  const unnamed = (sourcing?.candidates.length ?? 0) - named.length;
 
   // Structured data: facts only. No ratings, no offers, no prices.
   const jsonLd = {
@@ -50,7 +55,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     "@type": "Product",
     name: product.name,
     description: product.summary,
-    sku: product.id,
+    sku: product.code,
+    mpn: product.code,
     category: category.name,
     url: `${SITE.url}/parts/${product.id}`,
     ...(supplier ? { manufacturer: { "@type": "Organization", name: supplier.name } } : {}),
@@ -65,7 +71,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     })),
   };
 
-  const requestHref = `/request?part=${encodeURIComponent(product.name)}`;
+  const requestHref = `/request?part=${encodeURIComponent(`${product.code} ${product.name}`)}`;
 
   return (
     <>
@@ -101,6 +107,18 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 </Link>
               ) : null}
             </div>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <CodeChip code={product.code} />
+              <span className="text-xs text-fg-subtle">
+                {SECTOR_LABEL[category.sector]}
+                {product.supplierPartNumber ? (
+                  <>
+                    {" "}
+                    · Supplier&apos;s own number: <span className="code-text">{product.supplierPartNumber}</span>
+                  </>
+                ) : null}
+              </span>
+            </div>
             <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{product.name}</h1>
             <p className="mt-4 max-w-2xl text-lg text-fg-muted">{product.summary}</p>
             <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -111,8 +129,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
           <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
             <LinkButton href={requestHref}>Request this part</LinkButton>
-            <LinkButton href="/bom" variant="secondary">
-              Check your BOM
+            <AddToQuote code={product.code} id={product.id} name={product.name} />
+            <LinkButton href={`/sheets/${product.id}`} variant="ghost">
+              <Icon name="document" size={16} /> Build sheet
             </LinkButton>
           </div>
         </div>
@@ -195,6 +214,86 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 <Chip key={a}>{a}</Chip>
               ))}
             </div>
+          </div>
+        </Container>
+      </section>
+
+      <section aria-labelledby="demand-title" className="border-t border-line py-16">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <SectionHeading id="demand-title" title="Why we list this part" lead="We list parts that buyers are asking for. Each reason links to its source." />
+          </div>
+          <div className="lg:col-span-8">
+            <p className="text-base text-fg">{product.demand.reason}</p>
+            <div className="mt-5 flex flex-wrap gap-1.5">
+              <span className="mr-1 text-sm text-fg-subtle">Bought by:</span>
+              {product.demand.buyers.map((b) => (
+                <Chip key={b}>{b}</Chip>
+              ))}
+            </div>
+            <ul className="mt-6 space-y-2 border-t border-line pt-5 text-sm">
+              {product.demand.sources.map((src) => (
+                <li key={src.url}>
+                  <a href={src.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-2 text-fg-muted hover:text-fg">
+                    <Icon name="external" size={14} className="mt-0.5 shrink-0" />
+                    {src.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      <section aria-labelledby="sourcing-title" className="border-t border-line py-16">
+        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <SectionHeading
+              id="sourcing-title"
+              title="Sourcing"
+              lead="Every supplier builds to the same VK code and build sheet, so the part you order is the part you get, whoever makes it."
+            />
+          </div>
+          <div className="lg:col-span-8">
+            <dl className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-3">
+              <div className="rounded-xl border border-line p-4">
+                <dt className="text-fg-subtle">Status</dt>
+                <dd className="mt-1 font-medium">{sourcing ? SOURCING_LABEL[sourcing.status] : "Not started"}</dd>
+              </div>
+              <div className="rounded-xl border border-line p-4">
+                <dt className="text-fg-subtle">Makers identified</dt>
+                <dd className="tabular mt-1 font-medium">{sourcing?.candidates.length ?? 0}</dd>
+              </div>
+              <div className="rounded-xl border border-line p-4">
+                <dt className="text-fg-subtle">Build to</dt>
+                <dd className="mt-1 font-medium">
+                  <Link href={`/sheets/${product.id}`} className="code-text text-accent hover:underline">
+                    {product.code}
+                  </Link>
+                </dd>
+              </div>
+            </dl>
+            {named.length ? (
+              <ul className="mt-6 divide-y divide-line border-y border-line text-sm">
+                {named.map((c) => (
+                  <li key={c.name} className="py-3">
+                    <span className="font-medium">{c.name}</span>
+                    {c.city ? <span className="text-fg-subtle">, {c.city}</span> : null}
+                    <p className="mt-1 text-fg-muted">{c.basis}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            <p className="mt-6 text-sm text-fg-muted">
+              {unnamed > 0
+                ? `${unnamed === 1 ? "One maker is" : `${unnamed} makers are`} being approached. We publish a maker's name only after they agree, and we never repeat their claims as our own.`
+                : "We are still looking for makers of this part. Buyers can request it now: we source to the build sheet."}
+            </p>
+            <p className="mt-4">
+              <Link href={`/suppliers/join?part=${encodeURIComponent(product.code)}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-accent hover:underline">
+                <Icon name="factory" size={16} /> Make this part? Apply as a supplier
+              </Link>
+            </p>
           </div>
         </Container>
       </section>
@@ -285,7 +384,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="flex flex-wrap items-center gap-2 font-semibold">
-                    {supplier.name} <SampleDataTag show={supplier.placeholder} />
+                    {supplier.name} <span className="code-text text-xs font-normal text-fg-subtle">{supplier.code}</span>
+                    <SampleDataTag show={supplier.placeholder} />
                   </p>
                   <p className="mt-1 text-sm text-fg-subtle">
                     {supplier.city}, {supplier.country}
@@ -335,9 +435,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
           <div className="flex flex-wrap gap-3">
             <LinkButton href={requestHref}>Request this part</LinkButton>
-            <LinkButton href="/bom" variant="secondary">
-              Check your BOM
-            </LinkButton>
+            <AddToQuote code={product.code} id={product.id} name={product.name} />
           </div>
         </Container>
       </section>

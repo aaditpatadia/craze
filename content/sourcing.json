@@ -1,0 +1,242 @@
+[
+  {
+    "productId": "vk-mot-2807-1300",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims motors from FPV to heavy-lift class, with ESCs and propellers, and no Chinese parts. The claim still faces defence validation."
+      },
+      {
+        "name": "Flameback Tech",
+        "city": null,
+        "url": "https://www.flamebacktech.com/",
+        "consented": false,
+        "basis": "Lists motors from 2415 to 6220 size and ESCs up to 12S, ISO 9001. Says engineered in India, not made in India."
+      }
+    ]
+  },
+  {
+    "productId": "vk-mot-4114-400",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims motors from FPV to heavy-lift class, with ESCs and propellers, and no Chinese parts. The claim still faces defence validation."
+      },
+      {
+        "name": "Flameback Tech",
+        "city": null,
+        "url": "https://www.flamebacktech.com/",
+        "consented": false,
+        "basis": "Lists motors from 2415 to 6220 size and ESCs up to 12S, ISO 9001. Says engineered in India, not made in India."
+      }
+    ]
+  },
+  {
+    "productId": "vk-mot-6215-170",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims motors from FPV to heavy-lift class, with ESCs and propellers, and no Chinese parts. The claim still faces defence validation."
+      },
+      {
+        "name": "Flameback Tech",
+        "city": null,
+        "url": "https://www.flamebacktech.com/",
+        "consented": false,
+        "basis": "Lists motors from 2415 to 6220 size and ESCs up to 12S, ISO 9001. Says engineered in India, not made in India."
+      },
+      {
+        "name": "Bharath Components",
+        "city": null,
+        "url": "https://bharathcomponents.com/buy-bldc-motor/",
+        "consented": false,
+        "basis": "Lists 150 to 180 KV heavy agricultural motors for 23 to 24 inch propellers and claims they are fully indigenised."
+      }
+    ]
+  },
+  {
+    "productId": "vk-esc-45-6s",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims ESCs as part of a full propulsion stack."
+      },
+      {
+        "name": "Flameback Tech",
+        "city": null,
+        "url": "https://www.flamebacktech.com/",
+        "consented": false,
+        "basis": "Lists ESCs up to 12S."
+      }
+    ]
+  },
+  {
+    "productId": "vk-esc-80-14s",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims ESCs as part of a full propulsion stack, up to heavy-lift class."
+      }
+    ]
+  },
+  {
+    "productId": "vk-fct-h7-30",
+    "status": "searching",
+    "updated": "2026-11-25",
+    "candidates": []
+  },
+  {
+    "productId": "vk-gns-l1l5-m",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Elena Geo Systems",
+        "city": null,
+        "url": "https://www.elenageo.com/drone/3",
+        "basis": "Lists a drone navigation unit that uses NavIC signals.",
+        "consented": false
+      },
+      {
+        "name": "Teravolt",
+        "city": null,
+        "url": "https://www.teravolt.in/post/navic-importance-indian-drones-aeronav",
+        "basis": "Describes an AeroNav GNSS series with NavIC for Indian drones.",
+        "consented": false
+      },
+      {
+        "name": "HCRobo",
+        "city": null,
+        "url": "https://www.hcrobo.com/gps-navic/",
+        "basis": "Lists the HCR-523 dual-band GNSS module with NavIC and compass.",
+        "consented": false
+      }
+    ]
+  },
+  {
+    "productId": "vk-prp-1550-f2",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims propellers as part of a full propulsion stack."
+      }
+    ]
+  },
+  {
+    "productId": "vk-prp-5143-3",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Vector Technics",
+        "city": "Hyderabad",
+        "url": "https://defencestandard.com/vector-technics-claims-indias-first-fully-integrated-drone-propulsion-stack/",
+        "consented": false,
+        "basis": "Claims propellers from FPV class upward."
+      }
+    ]
+  },
+  {
+    "productId": "vk-frm-650-x4",
+    "status": "searching",
+    "updated": "2026-11-25",
+    "candidates": []
+  },
+  {
+    "productId": "vk-act-80-100",
+    "status": "searching",
+    "updated": "2026-11-25",
+    "candidates": []
+  },
+  {
+    "productId": "vk-whl-150-48",
+    "status": "searching",
+    "updated": "2026-11-25",
+    "candidates": []
+  },
+  {
+    "productId": "vk-fan-8056-12",
+    "status": "searching",
+    "updated": "2026-11-25",
+    "candidates": []
+  },
+  {
+    "productId": "vk-psu-2400-crps",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Velankani Group",
+        "city": null,
+        "url": "https://www.velankanigroup.com/server-power-supply",
+        "basis": "Lists CRPS server power supplies from 800 W to 2600 W.",
+        "consented": false
+      },
+      {
+        "name": "Delta Electronics India",
+        "city": null,
+        "url": "https://deltaelectronicsindia.com/en-IN/products/Server-Power/ALL/",
+        "basis": "Lists server power supplies from 300 W upward.",
+        "consented": false
+      }
+    ]
+  },
+  {
+    "productId": "vk-cpl-g1-skv",
+    "status": "candidates",
+    "updated": "2026-11-25",
+    "candidates": [
+      {
+        "name": "Schneider Electric India",
+        "city": null,
+        "url": "https://www.se.com/in/en/product-category/7200-data-center-cooling/",
+        "basis": "Lists chip-level cold plates, in-rack manifolds and hose kits. Where they are made is not stated.",
+        "consented": false
+      },
+      {
+        "name": "Stulz India",
+        "city": null,
+        "url": "https://www.stulz.com/en-in/solutions/liquid-cooling-1/",
+        "basis": "Describes cold plate liquid cooling for CPUs and GPUs. Where cold plates are made is not stated.",
+        "consented": false
+      },
+      {
+        "name": "Shri Saila",
+        "city": "Mumbai",
+        "url": "https://www.shrisaila.com/data-center-liquid-cooling.php",
+        "basis": "Lists data center liquid cooling systems and CDUs. Cold plates are not confirmed.",
+        "consented": false
+      }
+    ]
+  }
+]

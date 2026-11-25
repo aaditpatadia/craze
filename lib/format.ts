@@ -26,6 +26,7 @@ export const LAYER_LABEL = {
   electrical: "Electrical",
   magnetic: "Magnetic",
   structural: "Structural",
+  thermal: "Thermal",
 } as const;
 
 export function originLabel(country: string): string {
@@ -61,3 +62,18 @@ export function formatSpecValue(value: number | string, unit: string | null): st
 export function plural(n: number, one: string, many = `${one}s`): string {
   return `${n} ${n === 1 ? one : many}`;
 }
+
+export const SECTOR_LABEL: Record<string, string> = {
+  aerial: "Drones and aerial systems",
+  robotics: "Robotics",
+  compute: "Data centers",
+  energy: "Energy storage",
+};
+
+export const SOURCING_LABEL: Record<string, string> = {
+  searching: "Looking for makers",
+  candidates: "Makers identified",
+  contacted: "In talks with makers",
+  "sample-requested": "Sample requested",
+  qualified: "Qualified maker in place",
+};
