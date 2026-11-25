@@ -1,0 +1,258 @@
+{
+  "productId": "hm-2807-1300kv",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": {
+    "generator": "bldc-outrunner",
+    "params": {
+      "statorDiameter": 28,
+      "statorHeight": 7,
+      "slots": 12,
+      "poles": 14,
+      "shaftDiameter": 5
+    }
+  },
+  "camera": {
+    "position": [
+      3.1,
+      2,
+      4
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "mounting-base",
+      "name": "Mounting base",
+      "glb": null,
+      "procedural": "base",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.45,
+      "order": 0,
+      "layers": [
+        "structural"
+      ],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The mounting base holds everything and bolts to the frame arm."
+    },
+    {
+      "id": "stator",
+      "name": "Stator",
+      "glb": null,
+      "procedural": "stator",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0,
+      "order": 1,
+      "layers": [
+        "magnetic",
+        "electrical"
+      ],
+      "material": "silicon-steel",
+      "parent": "mounting-base",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The wound stator is pressed onto the base's centre tube.",
+      "hotspots": [
+        {
+          "id": "laminations",
+          "label": "Laminations",
+          "text": "Stack of thin insulated steel sheets. Thinner sheets waste less power as heat. Stated as 0.2 mm by the supplier.",
+          "position": [
+            0,
+            0,
+            14.2
+          ]
+        },
+        {
+          "id": "windings",
+          "label": "Windings",
+          "text": "Enamelled copper wound around each of the 12 teeth, connected as three phases.",
+          "position": [
+            7.1,
+            4.8,
+            7.1
+          ]
+        },
+        {
+          "id": "tooth-tips",
+          "label": "Tooth tips",
+          "text": "The wide ends of each tooth spread the field across the magnets and keep the windings in place.",
+          "position": [
+            -13.6,
+            0,
+            3.6
+          ]
+        },
+        {
+          "id": "insulation",
+          "label": "Slot insulation",
+          "text": "A coating between core and copper. Scratches here can short a winding to the core.",
+          "position": [
+            -6,
+            -4.4,
+            -6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lead-wires",
+      "name": "Phase lead wires",
+      "glb": null,
+      "procedural": "leads",
+      "axis": [
+        1,
+        -0.35,
+        0
+      ],
+      "distance": 0.38,
+      "order": 2,
+      "layers": [
+        "electrical"
+      ],
+      "material": "silicone",
+      "parent": "stator",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The three phase leads are routed out through the base."
+    },
+    {
+      "id": "bearing-lower",
+      "name": "Lower bearing",
+      "glb": null,
+      "procedural": "bearing-lower",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.18,
+      "order": 3,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "steel",
+      "parent": "mounting-base",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The lower bearing is seated in the centre tube."
+    },
+    {
+      "id": "bearing-upper",
+      "name": "Upper bearing",
+      "glb": null,
+      "procedural": "bearing-upper",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.18,
+      "order": 4,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "steel",
+      "parent": "mounting-base",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The upper bearing is seated from the top."
+    },
+    {
+      "id": "magnets",
+      "name": "Rotor magnets",
+      "glb": null,
+      "procedural": "magnets",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.42,
+      "order": 5,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "material": "magnet",
+      "parent": "bell-housing",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The magnet ring surrounds the stator. In production it is bonded inside the bell first."
+    },
+    {
+      "id": "bell-housing",
+      "name": "Bell housing",
+      "glb": null,
+      "procedural": "bell",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.7,
+      "order": 6,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The bell closes over the magnets and the stator."
+    },
+    {
+      "id": "shaft",
+      "name": "Shaft",
+      "glb": null,
+      "procedural": "shaft",
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 1.05,
+      "order": 7,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "steel-polished",
+      "parent": "bell-housing",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The shaft runs through the bell and both bearings."
+    },
+    {
+      "id": "retaining-clip",
+      "name": "Retaining clip",
+      "glb": null,
+      "procedural": "clip",
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.75,
+      "order": 8,
+      "layers": [
+        "structural"
+      ],
+      "material": "steel-dark",
+      "parent": "shaft",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The retaining clip locks the shaft under the base."
+    }
+  ]
+}

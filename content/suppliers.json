@@ -1,0 +1,123 @@
+[
+  {
+    "id": "harrow-motion",
+    "name": "Harrow Motion Works",
+    "placeholder": true,
+    "city": "Coimbatore",
+    "country": "India",
+    "summary": "Fictional supplier used as sample data. Winds and assembles outrunner motors and machines its own bell housings.",
+    "parts": ["hm-2807-1300kv", "hm-4114-400kv"],
+    "documentsReceived": [
+      { "title": "HM-2807 datasheet, revision C", "received": "2026-06-30", "url": null },
+      { "title": "HM-4114 datasheet, revision A", "received": "2026-06-30", "url": null },
+      { "title": "Magnet supplier material certificate", "received": "2026-07-02", "url": null },
+      { "title": "Copper magnet wire supplier declaration", "received": "2026-07-02", "url": null }
+    ],
+    "checked": [
+      "Datasheets matched to the part numbers we were sent",
+      "One HM-2807 sample measured on our bench",
+      "Final assembly and winding seen on site"
+    ],
+    "notChecked": [
+      "Financial health of the business",
+      "Batch-to-batch consistency across production runs",
+      "Origin of the stator lamination steel",
+      "Sub-supplier audits"
+    ],
+    "sampleReceived": { "received": true, "date": "2026-07-14" },
+    "factoryChecked": { "status": "on-site", "date": "2026-08-02", "by": "Assay inspection team" },
+    "leadTimeDays": { "min": 21, "max": 35 },
+    "minOrder": { "quantity": 200, "unit": "motors" },
+    "contactRole": "Export sales lead",
+    "lastVerified": "2026-08-02"
+  },
+  {
+    "id": "lintel-avionics",
+    "name": "Lintel Avionics",
+    "placeholder": true,
+    "city": "Taichung",
+    "country": "Taiwan",
+    "summary": "Fictional supplier used as sample data. Designs and assembles flight controllers and ESCs on contracted SMT lines.",
+    "parts": ["la-esc-45a", "la-esc-80a-hv", "la-fc-h7"],
+    "documentsReceived": [
+      { "title": "LA-ESC45 datasheet, revision B", "received": "2026-04-18", "url": null },
+      { "title": "LA-ESC80HV datasheet, revision A", "received": "2026-04-18", "url": null },
+      { "title": "LA-FC-H7 datasheet and pinout, revision D", "received": "2026-04-18", "url": null },
+      { "title": "Bill of materials for LA-FC-H7 (major components)", "received": "2026-05-02", "url": null }
+    ],
+    "checked": [
+      "Datasheets matched to the part numbers we were sent",
+      "Major component markings on one LA-FC-H7 and one LA-ESC45 sample",
+      "Assembly line seen over a recorded video walkthrough"
+    ],
+    "notChecked": [
+      "Authenticity of chips beyond visible markings",
+      "The contracted SMT line in person",
+      "Firmware source or build process",
+      "LA-ESC80HV sample (not yet received)"
+    ],
+    "sampleReceived": { "received": true, "date": "2026-05-06" },
+    "factoryChecked": { "status": "remote", "date": "2026-05-20", "by": "Assay inspection team" },
+    "leadTimeDays": { "min": 28, "max": 42 },
+    "minOrder": { "quantity": 100, "unit": "boards" },
+    "contactRole": "Business development manager",
+    "lastVerified": "2026-05-20"
+  },
+  {
+    "id": "sablewood-rotors",
+    "name": "Sablewood Rotors",
+    "placeholder": true,
+    "city": "Hsinchu",
+    "country": "Taiwan",
+    "summary": "Fictional supplier used as sample data. Moulds carbon and glass-filled propellers for multirotor and VTOL aircraft.",
+    "parts": ["sw-cf1550-fold", "sw-5143-tri"],
+    "documentsReceived": [
+      { "title": "CF1550 folding propeller drawing and datasheet", "received": "2025-08-21", "url": null },
+      { "title": "5143 tri-blade datasheet", "received": "2025-08-21", "url": null }
+    ],
+    "checked": [
+      "Datasheets matched to the part numbers we were sent",
+      "One CF1550 pair weighed and balance-checked on our bench"
+    ],
+    "notChecked": [
+      "Carbon prepreg origin",
+      "Factory, in person or remotely",
+      "Fatigue life of the folding hub",
+      "5143 sample (not yet received)"
+    ],
+    "sampleReceived": { "received": true, "date": "2025-09-04" },
+    "factoryChecked": { "status": "not-checked", "date": null, "by": null },
+    "leadTimeDays": { "min": 14, "max": 28 },
+    "minOrder": { "quantity": 500, "unit": "pairs" },
+    "contactRole": "Sales engineer",
+    "lastVerified": "2025-09-12"
+  },
+  {
+    "id": "quarry-composites",
+    "name": "Quarry Composite Labs",
+    "placeholder": true,
+    "city": "Pune",
+    "country": "India",
+    "summary": "Fictional supplier used as sample data. Cuts carbon-fibre plate and tube into frames for heavy-lift multirotors.",
+    "parts": ["qc-x650-frame"],
+    "documentsReceived": [
+      { "title": "X650 frame drawing set, revision B", "received": "2026-09-09", "url": null },
+      { "title": "Carbon plate supplier datasheet", "received": "2026-09-09", "url": null }
+    ],
+    "checked": [
+      "Drawings matched to the frame kit we were sent",
+      "One X650 kit measured and assembled on our bench"
+    ],
+    "notChecked": [
+      "Factory, in person or remotely",
+      "Origin of the carbon fibre in the plate",
+      "Crash or fatigue behaviour"
+    ],
+    "sampleReceived": { "received": true, "date": "2026-09-22" },
+    "factoryChecked": { "status": "not-checked", "date": null, "by": null },
+    "leadTimeDays": { "min": 10, "max": 20 },
+    "minOrder": { "quantity": 20, "unit": "frame kits" },
+    "contactRole": "Founder",
+    "lastVerified": "2026-09-30"
+  }
+]

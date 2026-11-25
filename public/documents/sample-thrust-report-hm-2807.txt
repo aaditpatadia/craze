@@ -1,0 +1,17 @@
+SAMPLE DATA. NOT A REAL REPORT.
+
+This file is a placeholder that stands in for a third-party lab report.
+The lab named in the catalogue ("Northfield Test House") is fictional.
+No test described here took place.
+
+When real evidence arrives, replace this file with the lab's original PDF
+and update documentUrl in content/products/hm-2807-1300kv.json.
+
+Placeholder fields
+  Report number:   NTH-0820
+  Item:            HM-2807 1300KV outrunner motor, one unit
+  Propeller:       7 x 4 two-blade
+  Supply:          25.2 V bench supply
+  Peak thrust:     1840 g
+  Peak current:    41.6 A
+  Not tested:      other propellers, other voltages, long-duration heat, flight

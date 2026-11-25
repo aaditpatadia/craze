@@ -1,0 +1,126 @@
+{
+  "id": "la-esc-45a",
+  "name": "LA-ESC45 single ESC, 45 A",
+  "category": "escs",
+  "supplierId": "lintel-avionics",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A single-motor 45 A ESC for 3S to 6S, sized for 7-inch builds. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": null,
+  "partsNote": null,
+  "lastVerified": "2026-05-20",
+  "keywords": ["esc", "45a", "speed controller", "6s esc", "single esc", "dshot"],
+  "applications": ["7-inch multirotor", "Long-range FPV"],
+  "origin": { "country": "Taiwan", "evidenceId": "ev-laesc45-sample" },
+  "specs": [
+    { "key": "continuous-current", "label": "Continuous current", "value": 45, "unit": "A", "evidenceId": "ev-laesc45-datasheet" },
+    { "key": "burst-current", "label": "Burst current, 10 s", "value": 55, "unit": "A", "evidenceId": "ev-laesc45-datasheet" },
+    { "key": "max-cells", "label": "Max cells", "value": 6, "unit": "S", "evidenceId": "ev-laesc45-datasheet" },
+    { "key": "mass", "label": "Mass without leads", "value": 9.8, "unit": "g", "evidenceId": "ev-laesc45-sample" },
+    { "key": "protocol", "label": "Input protocol", "value": "DShot600, PWM", "unit": null, "evidenceId": "ev-laesc45-datasheet" }
+  ],
+  "evidence": [
+    {
+      "id": "ev-laesc45-datasheet",
+      "tier": 1,
+      "summary": "Supplier datasheet received.",
+      "checked": ["Rated current, cell range and protocols as stated by the supplier"],
+      "notChecked": ["Current rating under our own load test", "Thermal behaviour", "Firmware version history"],
+      "date": "2026-04-18",
+      "checkedBy": "Assay inspection team",
+      "documentUrl": null,
+      "documents": [{ "title": "LA-ESC45 datasheet, revision B", "received": "2026-04-18", "url": null }],
+      "measurements": [],
+      "lab": null
+    },
+    {
+      "id": "ev-laesc45-sample",
+      "tier": 2,
+      "summary": "One sample inspected and component markings read.",
+      "checked": ["Mass", "Markings on the MOSFETs, gate driver and MCU", "Country of assembly label on the board"],
+      "notChecked": ["Whether the chips are genuine, beyond markings", "Current handling", "More than one sample"],
+      "date": "2026-05-08",
+      "checkedBy": "Assay inspection team",
+      "documentUrl": null,
+      "documents": [],
+      "measurements": [
+        { "label": "Mass without leads", "value": "9.8", "unit": "g", "method": "Bench scale, 0.1 g resolution" },
+        { "label": "MOSFET count", "value": "6", "unit": null, "method": "Counted under magnification" }
+      ],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "parts": [
+    {
+      "id": "mosfets",
+      "name": "Power MOSFETs",
+      "role": "Switch battery current into each motor phase.",
+      "whatItDoes": "Six transistors arranged as three half bridges. They switch on and off thousands of times a second to build the rotating field the motor needs.",
+      "whyItMatters": "Their on-resistance sets how much heat the ESC makes. Lower resistance runs cooler and survives longer bursts.",
+      "material": "Silicon power MOSFETs in surface-mount packages",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": ["electrical"],
+      "explode": { "order": 0 },
+      "specs": [],
+      "appliesTo": ["7-inch multirotor"],
+      "buyingChecks": [
+        "Ask for the MOSFET part number and its datasheet",
+        "Check the voltage rating leaves headroom over a full 6S pack",
+        "Ask how heat leaves the board: copper pour, heatsink or both"
+      ],
+      "evidence": [],
+      "interactsWith": ["gate-driver"]
+    },
+    {
+      "id": "gate-driver",
+      "name": "Gate driver",
+      "role": "Turns the controller's logic signals into strong pulses that switch the MOSFETs.",
+      "whatItDoes": "The MCU's outputs are too weak to switch large transistors quickly. The gate driver boosts them so the MOSFETs spend as little time as possible half on, where they waste power.",
+      "whyItMatters": "A slow or marginal gate driver makes the MOSFETs run hot and can cause failures that look random.",
+      "material": "Integrated circuit",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "unknown",
+      "originEvidenceId": null,
+      "layers": ["electrical"],
+      "explode": { "order": 1 },
+      "specs": [],
+      "appliesTo": ["7-inch multirotor"],
+      "buyingChecks": [
+        "Ask for the gate driver part number",
+        "Check it is rated for the full pack voltage",
+        "Ask if the same driver is used across production batches"
+      ],
+      "evidence": [],
+      "interactsWith": ["mosfets", "mcu"]
+    },
+    {
+      "id": "mcu",
+      "name": "Microcontroller",
+      "role": "Runs the ESC firmware and decides when to switch each phase.",
+      "whatItDoes": "A small 32-bit processor reads the throttle command from the flight controller and senses the motor position, then times the switching of each phase.",
+      "whyItMatters": "The processor decides which firmware the ESC can run, which affects smoothness, telemetry and how the ESC reacts to a stalled motor.",
+      "material": "32-bit Arm Cortex-M class microcontroller",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": ["electrical"],
+      "explode": { "order": 2 },
+      "specs": [],
+      "appliesTo": ["7-inch multirotor", "Long-range FPV"],
+      "buyingChecks": [
+        "Ask which firmware ships and whether it can be updated",
+        "Check the processor family against your firmware choice",
+        "Ask for the firmware version on each batch"
+      ],
+      "evidence": [],
+      "interactsWith": ["gate-driver"]
+    }
+  ]
+}

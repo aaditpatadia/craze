@@ -1,0 +1,83 @@
+{
+  "productId": "sw-cf1550-fold",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": {
+    "generator": "folding-prop",
+    "params": { "diameter": 381, "hubDiameter": 40, "bladeCount": 2 }
+  },
+  "camera": { "position": [1.6, 2.6, 3.4], "target": [0, 0, 0] },
+  "parts": [
+    {
+      "id": "bore-adapter",
+      "name": "Bore adapter",
+      "glb": null,
+      "procedural": "adapter",
+      "axis": [0, -1, 0],
+      "distance": 0.26,
+      "order": 0,
+      "layers": ["structural"],
+      "material": "aluminium",
+      "parent": "hub-bottom",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The bore adapter centres the hub on the motor shaft."
+    },
+    {
+      "id": "hub-bottom",
+      "name": "Lower hub plate",
+      "glb": null,
+      "procedural": "hub-bottom",
+      "axis": [0, -1, 0],
+      "distance": 0.14,
+      "order": 1,
+      "layers": ["structural"],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The lower hub plate seats on the motor."
+    },
+    {
+      "id": "blades",
+      "name": "Blade pair",
+      "glb": null,
+      "procedural": "blades",
+      "axis": [0, 1, 0],
+      "distance": 0.08,
+      "order": 2,
+      "layers": ["moving", "structural"],
+      "material": "carbon",
+      "parent": "hub-bottom",
+      "modelSource": "illustrative",
+      "assemblyCaption": "Both blade roots sit on the lower plate."
+    },
+    {
+      "id": "hub-top",
+      "name": "Upper hub plate",
+      "glb": null,
+      "procedural": "hub-top",
+      "axis": [0, 1, 0],
+      "distance": 0.18,
+      "order": 3,
+      "layers": ["structural"],
+      "material": "aluminium-dark",
+      "parent": "hub-bottom",
+      "modelSource": "illustrative",
+      "assemblyCaption": "The upper plate clamps the blade roots."
+    },
+    {
+      "id": "pivot-bolts",
+      "name": "Pivot bolts",
+      "glb": null,
+      "procedural": "bolts",
+      "axis": [0, 1, 0],
+      "distance": 0.3,
+      "order": 4,
+      "layers": ["structural"],
+      "material": "steel-dark",
+      "parent": "hub-top",
+      "modelSource": "illustrative",
+      "assemblyCaption": "Pivot bolts pass through both plates and each blade root."
+    }
+  ]
+}

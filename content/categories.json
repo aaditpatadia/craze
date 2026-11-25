@@ -1,0 +1,130 @@
+[
+  {
+    "id": "bldc-motors",
+    "name": "BLDC motors",
+    "singular": "BLDC motor",
+    "status": "live",
+    "family": "Drone propulsion and structure",
+    "order": 1,
+    "summary": "Brushless outrunner motors that turn electrical power into propeller thrust.",
+    "whyItMatters": "The motor sets how much thrust you get per watt, how hot the system runs and how long it lasts between services.",
+    "filters": [
+      { "specKey": "kv", "label": "KV", "unit": "rpm/V" },
+      { "specKey": "stator-diameter", "label": "Stator diameter", "unit": "mm" },
+      { "specKey": "mass", "label": "Mass", "unit": "g" }
+    ]
+  },
+  {
+    "id": "escs",
+    "name": "ESCs",
+    "singular": "ESC",
+    "status": "live",
+    "family": "Drone propulsion and structure",
+    "order": 2,
+    "summary": "Electronic speed controllers that switch battery power into the three motor phases.",
+    "whyItMatters": "The ESC decides how cleanly and how safely current reaches the motor, and it is a common point of failure under heat.",
+    "filters": [
+      { "specKey": "continuous-current", "label": "Continuous current", "unit": "A" },
+      { "specKey": "max-cells", "label": "Max cells", "unit": "S" },
+      { "specKey": "mass", "label": "Mass", "unit": "g" }
+    ]
+  },
+  {
+    "id": "flight-controllers",
+    "name": "Flight controllers",
+    "singular": "Flight controller",
+    "status": "live",
+    "family": "Drone propulsion and structure",
+    "order": 3,
+    "summary": "Boards that read the sensors, run the control loop and command each motor.",
+    "whyItMatters": "Sensor quality and processor headroom decide how stable the aircraft is and which autopilot software it can run.",
+    "filters": [
+      { "specKey": "max-input-voltage", "label": "Max input voltage", "unit": "V" },
+      { "specKey": "mass", "label": "Mass", "unit": "g" }
+    ]
+  },
+  {
+    "id": "propellers",
+    "name": "Propellers",
+    "singular": "Propeller",
+    "status": "live",
+    "family": "Drone propulsion and structure",
+    "order": 4,
+    "summary": "Fixed and folding propellers matched to motor size and aircraft class.",
+    "whyItMatters": "Propeller shape and balance drive efficiency, noise and vibration, which the flight controller then has to filter out.",
+    "filters": [
+      { "specKey": "diameter", "label": "Diameter", "unit": "in" },
+      { "specKey": "pitch", "label": "Pitch", "unit": "in" },
+      { "specKey": "mass", "label": "Mass", "unit": "g" }
+    ]
+  },
+  {
+    "id": "frames",
+    "name": "Carbon-fibre frames",
+    "singular": "Frame",
+    "status": "live",
+    "family": "Drone propulsion and structure",
+    "order": 5,
+    "summary": "Carbon-fibre airframes and arms that hold every other part in place.",
+    "whyItMatters": "Frame stiffness changes vibration, and vibration changes everything from sensor noise to motor bearing life.",
+    "filters": [
+      { "specKey": "wheelbase", "label": "Wheelbase", "unit": "mm" },
+      { "specKey": "mass", "label": "Mass", "unit": "g" }
+    ]
+  },
+  {
+    "id": "batteries",
+    "name": "Batteries and cells",
+    "singular": "Battery",
+    "status": "upcoming",
+    "family": "Energy storage",
+    "order": 6,
+    "summary": "Lithium-ion and lithium-polymer cells and packs.",
+    "whyItMatters": "Cell chemistry and origin carry the largest safety and supply risk in most drone builds.",
+    "filters": []
+  },
+  {
+    "id": "chips-and-sensors",
+    "name": "Chips and sensors",
+    "singular": "Chip or sensor",
+    "status": "upcoming",
+    "family": "Electronics",
+    "order": 7,
+    "summary": "Processors, IMUs, barometers, GNSS modules and radios.",
+    "whyItMatters": "Chips are where counterfeit and remarked parts most often enter a supply chain, and where origin is hardest to trace.",
+    "filters": []
+  },
+  {
+    "id": "gimbals-and-cameras",
+    "name": "Gimbals and cameras",
+    "singular": "Gimbal or camera",
+    "status": "upcoming",
+    "family": "Imaging",
+    "order": 8,
+    "summary": "Stabilised camera payloads and imaging modules.",
+    "whyItMatters": "Payloads often carry the most sensitive components, so procurement rules for them are usually the strictest.",
+    "filters": []
+  },
+  {
+    "id": "robot-actuators",
+    "name": "Robot actuators and joints",
+    "singular": "Actuator",
+    "status": "upcoming",
+    "family": "Robotics",
+    "order": 9,
+    "summary": "Integrated motor, gearbox and encoder joints for arms and legged robots.",
+    "whyItMatters": "Actuators share magnets, bearings and windings with drone motors, so the same origin questions apply.",
+    "filters": []
+  },
+  {
+    "id": "data-center-power-cooling",
+    "name": "Data center power and cooling",
+    "singular": "Power or cooling unit",
+    "status": "upcoming",
+    "family": "Data center infrastructure",
+    "order": 10,
+    "summary": "Transformers, switchgear and liquid and air cooling equipment.",
+    "whyItMatters": "Lead times for transformers and switchgear now set how fast new capacity can be built, so verified alternatives matter.",
+    "filters": []
+  }
+]
