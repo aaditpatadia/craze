@@ -178,10 +178,10 @@ const ART: Record<string, () => React.ReactElement> = {
   "liquid-cooling": ColdPlate,
 };
 
-export function CategoryArt({ category, label }: { category: string; label: string }) {
+export function CategoryArt({ category, label, className = "h-full w-full text-fg-subtle" }: { category: string; label: string; className?: string }) {
   const Art = ART[category];
   return (
-    <svg viewBox="0 0 240 140" className="h-full w-full text-fg-subtle" role="img" aria-label={`Schematic drawing of a ${label}, not a photo of this product`}>
+    <svg viewBox="0 0 240 140" className={className} role="img" aria-label={`Schematic drawing of a ${label}, not a photo of this product`}>
       {Art ? <Art /> : <rect x="80" y="40" width="80" height="60" rx="8" fill="none" stroke="currentColor" />}
     </svg>
   );

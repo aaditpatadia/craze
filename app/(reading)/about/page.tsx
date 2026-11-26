@@ -63,6 +63,9 @@ export default function AboutPage() {
           <LinkButton href="/request" variant="secondary">
             Send a request
           </LinkButton>
+          <LinkButton href="/brief/buyers" variant="secondary">
+            Buyer brief (PDF)
+          </LinkButton>
         </div>
       </Container>
     </>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { SupplierForm, SupplierFormStatic } from "@/components/forms/SupplierForm";
+import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
 import { getCatalog, getLiveCategories } from "@/lib/content";
@@ -40,7 +41,11 @@ export default function SupplierJoinPage() {
         eyebrow={<span>For suppliers</span>}
         title="Build to the code. Show your evidence."
         lead="We list the parts buyers need most. If you make one of them, quote against its TM code and build sheet. Buyers see what you can prove."
-      />
+      >
+        <LinkButton href="/brief/suppliers" variant="secondary">
+          <Icon name="download" size={16} /> Supplier brief (PDF)
+        </LinkButton>
+      </PageHeader>
 
       <Container className="pb-16">
         <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">

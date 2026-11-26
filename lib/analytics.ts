@@ -10,7 +10,8 @@ export type AnalyticsEvent =
   | "Notify submitted"
   | "Supplier applied"
   | "Code copied"
-  | "Quote add";
+  | "Quote add"
+  | "Document downloaded";
 
 type Plausible = (event: string, options?: { props?: Record<string, string | number | boolean> }) => void;
 

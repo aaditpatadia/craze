@@ -9,6 +9,7 @@ import { cn } from "@/lib/cn";
 import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { QuoteBadge } from "@/components/quote/QuoteControls";
+import { TimuleLogo } from "@/components/brand/Logo";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function SiteHeader() {
@@ -43,8 +44,8 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:px-10">
-        <Link href="/" className="-ml-2 flex min-h-11 items-center whitespace-nowrap rounded-md px-2 text-[15px] font-semibold tracking-tight">
-          {SITE.name}
+        <Link href="/" aria-label={`${SITE.name} home`} className="-ml-2 flex min-h-11 items-center whitespace-nowrap rounded-md px-2 text-[14px]">
+          <TimuleLogo size={22} />
         </Link>
         <nav aria-label="Main" className="ml-4 hidden lg:block">
           <ul className="flex items-center gap-1">

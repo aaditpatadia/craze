@@ -160,6 +160,9 @@ export function matchRows(rows: BomRow[], catalog: CatalogItem[]): BomMatch[] {
   });
 }
 
+/** sessionStorage key the BOM checker uses to hand results to the blueprint report. */
+export const BOM_REPORT_KEY = "timule.bom.report";
+
 const csvCell = (v: string | number | null) => {
   const s = v === null ? "" : String(v);
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -184,7 +187,16 @@ export function matchesToCsv(matches: BomMatch[], siteUrl: string): string {
       .map(csvCell)
       .join(","),
   );
-  return [head.join(","), ...lines].join("\r\n");
+  const matched = matches.filter((m) => m.item).length;
+  const brand = [
+    ["TIMULE BOM CHECK"],
+    ["One code for every critical part. Order by the TM code."],
+    ["Checked", new Date().toISOString().slice(0, 10)],
+    ["Rows matched", `${matched} of ${matches.length}`],
+    ["Contact", siteUrl.replace(/^https?:\/\//, "")],
+    [],
+  ].map((r) => r.map(csvCell).join(","));
+  return [...brand, head.join(","), ...lines, "", csvCell("Matches are suggestions until confirmed in a Timule quotation.")].join("\r\n");
 }
 
 export const SAMPLE_BOM = `part,quantity,spec

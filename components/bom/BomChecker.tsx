@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useId, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
-import { SAMPLE_BOM, matchRows, matchesToCsv, parseDelimited, toBomRows, type BomMatch } from "@/lib/bom";
+import { SAMPLE_BOM, matchRows, matchesToCsv, parseDelimited, toBomRows, type BomMatch, BOM_REPORT_KEY } from "@/lib/bom";
 import type { CatalogItem } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
@@ -67,9 +67,19 @@ export function BomChecker({ catalog, siteUrl }: { catalog: CatalogItem[]; siteU
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "bom-check.csv";
+    a.download = `Timule BOM check ${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const openReport = () => {
+    if (!matches) return;
+    try {
+      sessionStorage.setItem(BOM_REPORT_KEY, JSON.stringify(matches));
+    } catch {
+      return;
+    }
+    router.push("/bom/report");
   };
 
   const sendAsRequest = () => {
@@ -184,6 +194,9 @@ export function BomChecker({ catalog, siteUrl }: { catalog: CatalogItem[]; siteU
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
+              <Button variant="secondary" onClick={openReport}>
+                <Icon name="printer" size={16} /> Blueprint report (PDF)
+              </Button>
               <Button variant="secondary" onClick={download}>
                 <Icon name="download" size={16} /> Export CSV
               </Button>

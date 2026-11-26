@@ -77,6 +77,9 @@ export function QuoteList() {
           <button type="button" onClick={quote.clear} className="min-h-11 rounded-full px-4 text-sm text-fg-subtle hover:bg-bg-subtle hover:text-fg">
             Clear list
           </button>
+          <LinkButton href="/quote/print" variant="secondary">
+            <Icon name="printer" size={16} /> Download PDF
+          </LinkButton>
           <LinkButton href="/request?from=quote">Send as one request</LinkButton>
         </div>
       </div>

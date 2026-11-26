@@ -20,6 +20,25 @@ export const SITE = {
 } as const;
 
 /**
+ * The business behind the site, printed on every document. Fill these in as registrations come through.
+ * While gstin is null, invoices print as proforma invoices: a tax invoice needs a GSTIN.
+ */
+export const COMPANY = {
+  tradeName: "Timule",
+  legalName: process.env.NEXT_PUBLIC_LEGAL_NAME ?? "Timule",
+  /** Registered address lines. Empty until the company is registered. */
+  address: [] as string[],
+  /** State of registration, for GST place of supply. */
+  state: process.env.NEXT_PUBLIC_COMPANY_STATE ?? "",
+  gstin: process.env.NEXT_PUBLIC_GSTIN ?? null,
+  pan: process.env.NEXT_PUBLIC_PAN ?? null,
+  dpiit: process.env.NEXT_PUBLIC_DPIIT ?? null,
+  phone: process.env.NEXT_PUBLIC_COMPANY_PHONE ?? null,
+  /** Bank account for payment. Null prints "Bank details sent separately". */
+  bank: null as null | { name: string; account: string; ifsc: string; branch: string },
+} as const;
+
+/**
  * When true, records marked `placeholder: true` in /content are shown, each with a
  * visible "Sample data" tag. When false, placeholder records are removed from every
  * page, so sample data can never appear untagged.

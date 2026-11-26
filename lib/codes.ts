@@ -5,6 +5,8 @@
  *   TMS-001                supplier code
  *   TMQ-261126-7KQ4        quote or sourcing request reference
  *   TMA-261126-M2XD        supplier application reference
+ *   TMP-261126-4HZ8        purchase order we send to a supplier
+ *   TMI-261126-Q7NB        invoice we send to a buyer
  */
 
 export type CodeCategory = { code: string; id: string; name: string; sector: string };
@@ -73,7 +75,7 @@ export const codeToId = (code: string) => code.toLowerCase().replace(/-[a-z]$/, 
 const ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 
 /** Short human-readable reference, for example TMQ-261126-7KQ4. No 0, O, 1, I or L. */
-export function makeReference(prefix: "TMQ" | "TMA", now = new Date()): string {
+export function makeReference(prefix: "TMQ" | "TMA" | "TMP" | "TMI", now = new Date()): string {
   const d = now.toISOString().slice(2, 10).replace(/-/g, "");
   const bytes = new Uint8Array(4);
   crypto.getRandomValues(bytes);

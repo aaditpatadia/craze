@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TimuleLogo } from "@/components/brand/Logo";
 import { SITE, USE_PLACEHOLDER_DATA } from "@/lib/config";
 
 const groups = [
@@ -23,13 +24,17 @@ const groups = [
     links: [
       { href: "/methodology", label: "Methodology" },
       { href: "/about", label: "About and limits" },
+      { href: "/codes/register", label: "Code register (PDF)" },
+      { href: "/brief/buyers", label: "Buyer brief (PDF)" },
+      { href: "/brief/suppliers", label: "Supplier brief (PDF)" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { href: "/legal/terms", label: "Terms" },
+      { href: "/legal/terms", label: "Buyer terms" },
       { href: "/legal/privacy", label: "Privacy" },
+      { href: "/legal/supplier-terms", label: "Supplier terms" },
     ],
   },
 ];
@@ -39,7 +44,7 @@ export function SiteFooter() {
     <footer className="border-t border-line bg-bg-subtle text-sm">
       <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-12 lg:px-10">
         <div className="col-span-2 md:col-span-4">
-          <p className="font-semibold">{SITE.name}</p>
+          <TimuleLogo size={20} className="inline-flex items-center gap-2 text-[13px]" />
           <p className="mt-2 max-w-xs text-fg-subtle">
             Every claim on this site shows its evidence tier, the date it was checked and what was not checked.
           </p>

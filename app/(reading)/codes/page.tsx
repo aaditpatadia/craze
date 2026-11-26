@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CodeDecoder } from "@/components/codes/CodeDecoder";
+import { LinkButton } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
 import { getCategories, getProducts, getSuppliers, getSupplier } from "@/lib/content";
 import { SECTOR_LABEL } from "@/lib/format";
@@ -18,6 +20,8 @@ const references = [
   { code: "TMS-001", what: "Supplier code", body: "Each supplier we work with. It stays the same if the company changes its name." },
   { code: "TMQ-261126-7KQ4", what: "Request reference", body: "Issued when a buyer sends a request. Date first, then four characters that cannot be confused, such as no 0 and O." },
   { code: "TMA-261126-M2XD", what: "Supplier application", body: "Issued when a maker applies to build a part." },
+  { code: "TMP-261126-4HZ8", what: "Purchase order", body: "Our order to a supplier. Printed on the supplier's labels, invoice and delivery note." },
+  { code: "TMI-261126-Q7NB", what: "Invoice", body: "Our invoice to a buyer, quoting the buyer's order and the TM codes delivered." },
 ];
 
 const rules = [
@@ -25,7 +29,7 @@ const rules = [
   "Spec segments are the numbers an engineer already uses: stator size and KV for a motor, current and cells for an ESC.",
   "Any change that affects fit, function or a declared origin moves the revision letter. A is the first release.",
   "Codes are never reused. A withdrawn code stays withdrawn.",
-  "We cross-reference every supplier's own part number, so a buyer can paste either into the BOM checker.",
+  "Each supplier's own part number is kept on our file and mapped to the TM code. Buyers and labels only ever carry the TM code.",
 ];
 
 export default function CodesPage() {
@@ -41,7 +45,11 @@ export default function CodesPage() {
       <PageHeader
         title="One code for every part"
         lead="Buyers order by the TM code. Suppliers build to the sheet behind it. The evidence travels with the code, so everyone in the chain means the same part."
-      />
+      >
+        <LinkButton href="/codes/register" variant="secondary">
+          <Icon name="download" size={16} /> Download the code register (PDF)
+        </LinkButton>
+      </PageHeader>
       <Container className="grid grid-cols-1 gap-14 pb-16 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <CodeDecoder categories={codeCats} parts={parts} />
