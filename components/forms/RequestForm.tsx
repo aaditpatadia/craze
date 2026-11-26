@@ -133,7 +133,7 @@ function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { ini
   });
 
   const hints = {
-    email: "A company address. We do not quote to personal email.",
+    email: "Work or personal, for example Gmail. We reply here with the quote.",
     parts: "TM codes, part names, supplier numbers or specs. One per line is easiest.",
   };
 
@@ -148,7 +148,7 @@ function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { ini
           <input {...ctl("role")} autoComplete="organization-title" className={cn(inputClass, "h-12 border-line")} />
         </Field>
       </div>
-      <Field id={f("email")} label="Work email" hint={hints.email} error={err("email")}>
+      <Field id={f("email")} label="Email" hint={hints.email} error={err("email")}>
         <input {...ctl("email", hints.email)} type="email" autoComplete="email" inputMode="email" className={cn(inputClass, "h-12 border-line")} />
       </Field>
       <Field id={f("parts")} label="Parts needed" hint={hints.parts} error={err("parts")}>

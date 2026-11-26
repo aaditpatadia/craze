@@ -2,7 +2,6 @@
  * Form validation shared by the browser and the API routes. Plain TypeScript, so the
  * client bundle stays small; the server runs exactly the same rules.
  */
-import { FREE_EMAIL_DOMAINS } from "./config";
 
 export const TIMELINES = ["Within 2 weeks", "Within 1 month", "1 to 3 months", "More than 3 months", "Exploring options"] as const;
 
@@ -26,15 +25,10 @@ export type FieldErrors<T> = Partial<Record<keyof T, string>>;
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export function emailDomain(email: string) {
-  return email.split("@")[1]?.toLowerCase().trim() ?? "";
-}
-
 export function validateRequest(v: RequestInput): FieldErrors<RequestInput> {
   const e: FieldErrors<RequestInput> = {};
   if (v.company.trim().length < 2) e.company = "Enter your company name.";
   if (!EMAIL.test(v.email.trim())) e.email = "Enter an email address, like name@company.com.";
-  else if (FREE_EMAIL_DOMAINS.includes(emailDomain(v.email))) e.email = "Use your work email. We only quote to company addresses.";
   if (v.role.trim().length < 2) e.role = "Enter your role, for example procurement lead.";
   if (v.parts.trim().length < 3) e.parts = "Tell us which parts you need.";
   if (!/^\s*\d[\d,\s]*\s*$/.test(v.quantity) || Number(v.quantity.replace(/[^\d]/g, "")) < 1) e.quantity = "Enter a quantity, for example 200.";
@@ -81,7 +75,6 @@ export function validateSupplier(v: SupplierInput): FieldErrors<SupplierInput> {
   const e: FieldErrors<SupplierInput> = {};
   if (v.company.trim().length < 2) e.company = "Enter your company name.";
   if (!EMAIL.test(v.email.trim())) e.email = "Enter an email address, like name@company.com.";
-  else if (FREE_EMAIL_DOMAINS.includes(emailDomain(v.email))) e.email = "Use your company email.";
   if (v.city.trim().length < 2) e.city = "Enter the city where the parts are made.";
   if (v.role.trim().length < 2) e.role = "Enter your role.";
   if (v.parts.trim().length < 3) e.parts = "List the TM codes or kinds of part you can build.";

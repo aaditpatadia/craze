@@ -31,7 +31,7 @@ const DOCS = {
         </p>
         <h2>What this site does today</h2>
         <ul>
-          <li>The request form collects your company, work email, role and the parts you need, to reply to your request.</li>
+          <li>The request form collects your company, email, role and the parts you need, to reply to your request.</li>
           <li>The notify form collects an email address, to tell you when a category opens.</li>
           <li>The BOM checker runs in your browser. Files you check are not uploaded unless you send them as a request.</li>
           <li>The supplier form collects your company, contact details and the parts you can make, to reply to your application.</li>

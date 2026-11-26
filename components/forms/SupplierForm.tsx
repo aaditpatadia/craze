@@ -128,7 +128,7 @@ function SupplierFormInner({ initialParts }: { initialParts: string }) {
   }
 
   const hints = {
-    email: "A company address, so we know who we are talking to.",
+    email: "Company or personal email, for example Gmail.",
     parts: "TM codes from this site, or the kinds of part you make. One per line.",
     capacity: "Per month, for the parts above. A range is fine.",
   };
@@ -145,7 +145,7 @@ function SupplierFormInner({ initialParts }: { initialParts: string }) {
         </Field>
       </div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <Field id={f("email")} label="Company email" hint={hints.email} error={err("email")}>
+        <Field id={f("email")} label="Email" hint={hints.email} error={err("email")}>
           <input {...ctl("email", hints.email)} type="email" autoComplete="email" inputMode="email" className={cn(inputClass, "h-12 border-line")} />
         </Field>
         <Field id={f("role")} label="Your role" error={err("role")}>
