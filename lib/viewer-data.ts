@@ -1,11 +1,11 @@
-import type { Evidence, Manifest, Part, Product, Tier } from "./schema";
+import type { Evidence, Manifest, Part, Product, ShownTier, Tier } from "./schema";
 
 /** A part with its evidence resolved, ready to hand to client components. */
 export type ResolvedPart = Part & {
   relatedEvidence: Evidence[];
   originTier: Tier | null;
   gradeTier: Tier | null;
-  specTiers: Record<string, Tier>;
+  specTiers: Record<string, ShownTier>;
   hotspots: { id: string; label: string; text: string }[];
   inModel: boolean;
 };
@@ -29,7 +29,7 @@ export function resolveParts(product: Product, manifest: Manifest | undefined): 
         relatedEvidence: [...related.values()],
         originTier: find(part.originEvidenceId)?.tier ?? null,
         gradeTier: find(part.gradeEvidenceId)?.tier ?? null,
-        specTiers: Object.fromEntries(part.specs.map((s) => [s.key, find(s.evidenceId)?.tier ?? 1])),
+        specTiers: Object.fromEntries(part.specs.map((s) => [s.key, find(s.evidenceId)?.tier ?? 0])),
         hotspots: mp?.hotspots.map(({ id, label, text }) => ({ id, label, text })) ?? [],
         inModel: !!mp,
       };

@@ -1,7 +1,7 @@
 {
   "productId": "tm-mot-6215-170",
   "modelSource": "illustrative",
-  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "disclaimer": "Simplified illustration, not a manufacturing drawing",
   "assembledGlb": null,
   "procedural": {
     "generator": "bldc-outrunner",

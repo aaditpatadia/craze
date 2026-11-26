@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 import { USE_PLACEHOLDER_DATA } from "@/lib/config";
 import { MODEL_SOURCE_LABEL, TIER_LABEL, TIER_SHORT, formatDate, isOriginKnown, isStale, originLabel } from "@/lib/format";
 import { ILLUSTRATIVE_DISCLAIMER } from "@/lib/constants";
-import type { ModelSource, Tier } from "@/lib/schema";
+import type { ModelSource, ShownTier } from "@/lib/schema";
 import { Icon, TierGlyph } from "./Icon";
 
 const chip =
@@ -17,7 +17,7 @@ export function Chip({ children, className, title }: { children: React.ReactNode
 }
 
 /** Evidence tier chip. Never a generic "verified" badge: always the tier name. */
-export function TierChip({ tier, prefix, compact = false }: { tier: Tier; prefix?: string; compact?: boolean }) {
+export function TierChip({ tier, prefix, compact = false }: { tier: ShownTier; prefix?: string; compact?: boolean }) {
   return (
     <span className={cn(chip, "border-line text-fg")} title={`${TIER_SHORT[tier]}: ${TIER_LABEL[tier]}`}>
       <TierGlyph tier={tier} />
@@ -30,7 +30,7 @@ export function TierChip({ tier, prefix, compact = false }: { tier: Tier; prefix
 }
 
 /** Origin chip. Unknown and not-yet-verified are shown as plainly as a known country. */
-export function OriginChip({ country, tier }: { country: string; tier?: Tier | null }) {
+export function OriginChip({ country, tier }: { country: string; tier?: ShownTier | null }) {
   const known = isOriginKnown(country);
   return (
     <span

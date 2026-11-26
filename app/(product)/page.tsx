@@ -37,7 +37,7 @@ const codeAnatomy = [
 const codeRoles = [
   {
     title: "Buyers order by it",
-    body: "Paste TM codes, supplier numbers or plain names into the BOM checker, or collect parts in a quote list and send one request.",
+    body: "Paste TM codes or plain part names into the BOM checker, or collect parts in a quote list and send one request.",
     href: "/bom",
     link: "Check a BOM",
   },
@@ -136,7 +136,7 @@ export default function HomePage() {
           <SectionHeading
             id="tiers-title"
             title="Three evidence tiers, never a vague badge"
-            lead="Every claim on this site carries one of three tiers. Each tier says what was checked, what was not, when, and by whom."
+            lead="Every claim on this site carries one of three tiers, or says plainly that it is not yet verified. Each tier says what was checked, what was not, when, and by whom."
           />
           <ol className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
             {tiers.map((t) => (
@@ -226,8 +226,7 @@ export default function HomePage() {
               Make one of these parts?
             </h2>
             <p className="mt-3 text-fg-muted">
-              Quote against the TM code and build sheet. Buyers see your documents and our measurements, not a sales pitch, and buyers see your supplier code,
-              not your name.
+              Quote against the TM code and build sheet. Buyers see your documents and our measurements under your supplier code, never your name.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

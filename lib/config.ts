@@ -39,11 +39,11 @@ export const COMPANY = {
 } as const;
 
 /**
- * When true, records marked `placeholder: true` in /content are shown, each with a
- * visible "Sample data" tag. When false, placeholder records are removed from every
- * page, so sample data can never appear untagged.
+ * When true, records marked `placeholder: true` in /content are shown with a "Sample data" tag.
+ * When false, sample suppliers are removed and sample parts keep only what Timule defines:
+ * code, target specs, parts, build sheet and model. No fictional evidence or origin is shown.
  */
-export const USE_PLACEHOLDER_DATA = true;
+export const USE_PLACEHOLDER_DATA = false;
 
 /** Evidence and supplier records older than this are marked stale. */
 export const STALE_AFTER_MONTHS = 12;

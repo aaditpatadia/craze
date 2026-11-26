@@ -6,6 +6,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { cache } from "react";
 import { USE_PLACEHOLDER_DATA } from "./config";
+import { ORIGIN_NOT_VERIFIED } from "./constants";
 import {
   CategorySchema,
   ManifestSchema,
@@ -19,7 +20,7 @@ import {
   type Product,
   type Sourcing,
   type Supplier,
-  type Tier,
+  type ShownTier,
 } from "./schema";
 
 const ROOT = process.cwd();
@@ -98,9 +99,40 @@ export function loadRawContent(): RawContent {
 const visible = <T extends { placeholder: boolean }>(items: T[]) =>
   USE_PLACEHOLDER_DATA ? items : items.filter((i) => !i.placeholder);
 
+/**
+ * With sample data off, a sample product keeps what Timule itself defines (code, specs as
+ * targets, parts, build sheet, model) and loses everything that came from the fictional
+ * supplier: the supplier link, evidence records, lab reports, photos and origin claims.
+ */
+function asSpecOnly(p: Product): Product {
+  if (USE_PLACEHOLDER_DATA || !p.placeholder) return p;
+  const unclaimed = <S extends { evidenceId: string }>(s: S) => ({ ...s, evidenceId: "" });
+  return {
+    ...p,
+    placeholder: false,
+    supplierId: "",
+    supplierPartNumber: null,
+    summary: p.summary.replace(/\s*Sample data:[^.]*\./g, "").trim(),
+    origin: { country: ORIGIN_NOT_VERIFIED, evidenceId: null },
+    specs: p.specs.map(unclaimed),
+    evidence: [],
+    photos: [],
+    photoSpin: null,
+    parts: p.parts.map((pt) => ({
+      ...pt,
+      originCountry: ORIGIN_NOT_VERIFIED,
+      originEvidenceId: null,
+      gradeEvidenceId: null,
+      specs: pt.specs.map(unclaimed),
+      evidence: [],
+    })),
+  };
+}
+
 export const getContent = cache(() => {
   const raw = loadRawContent();
-  const products = visible(raw.products)
+  const products = raw.products
+    .map(asSpecOnly)
     .filter((p) => raw.categories.some((c) => c.id === p.category))
     .map((p) => {
       // The manifest describes the model actually shown, so it wins.
@@ -145,8 +177,8 @@ export function allEvidence(product: Product): Evidence[] {
   return [...product.evidence, ...product.parts.flatMap((p) => p.evidence)];
 }
 
-export function highestTier(product: Product): Tier {
-  return allEvidence(product).reduce<Tier>((max, e) => (e.tier > max ? e.tier : max), 1);
+export function highestTier(product: Product): ShownTier {
+  return allEvidence(product).reduce<ShownTier>((max, e) => (e.tier > max ? e.tier : max), 0);
 }
 
 /** Slim, serialisable product record for client components (catalogue, BOM checker). */
@@ -162,10 +194,10 @@ export type CatalogItem = {
   summary: string;
   placeholder: boolean;
   modelSource: Product["modelSource"];
-  specs: { key: string; label: string; value: number | string; unit: string | null; tier: Tier }[];
+  specs: { key: string; label: string; value: number | string; unit: string | null; tier: ShownTier }[];
   originCountry: string;
-  originTier: Tier | null;
-  highestTier: Tier;
+  originTier: ShownTier | null;
+  highestTier: ShownTier;
   keywords: string[];
   lastVerified: string;
   partCount: number;
@@ -181,11 +213,11 @@ export function toCatalogItem(p: Product): CatalogItem {
     name: p.name,
     category: p.category,
     categoryName: cat?.name ?? p.category,
-    supplierCode: sup?.code ?? "Supplier not listed",
+    supplierCode: sup?.code ?? "Maker being qualified",
     summary: p.summary,
     placeholder: p.placeholder,
     modelSource: p.modelSource,
-    specs: p.specs.map((s) => ({ key: s.key, label: s.label, value: s.value, unit: s.unit, tier: findEvidence(p, s.evidenceId)?.tier ?? 1 })),
+    specs: p.specs.map((s) => ({ key: s.key, label: s.label, value: s.value, unit: s.unit, tier: findEvidence(p, s.evidenceId)?.tier ?? 0 })),
     originCountry: p.origin.country,
     originTier: findEvidence(p, p.origin.evidenceId)?.tier ?? null,
     highestTier: highestTier(p),

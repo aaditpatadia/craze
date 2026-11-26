@@ -23,6 +23,8 @@ export const OriginSchema = z.string().min(2);
 
 export const TierSchema = z.union([z.literal(1), z.literal(2), z.literal(3)]);
 export type Tier = z.infer<typeof TierSchema>;
+/** A tier as shown to people: 0 means nothing has been checked yet. */
+export type ShownTier = Tier | 0;
 
 export const DocumentSchema = z.object({
   title: z.string().min(1),

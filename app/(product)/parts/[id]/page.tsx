@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <div className="mt-5 flex flex-wrap items-center gap-2">
               <TierChip tier={top} prefix="Highest evidence:" />
               <OriginChip country={product.origin.country} tier={originEv?.tier ?? null} />
-              <LastVerified date={product.lastVerified} />
+              <LastVerified date={product.lastVerified} label={top === 0 ? "Spec issued" : undefined} />
             </div>
           </div>
           <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
@@ -183,7 +183,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               <tbody>
                 {product.specs.map((s) => {
                   const ev = findEvidence(product, s.evidenceId);
-                  const tier = ev?.tier ?? 1;
+                  const tier = ev?.tier ?? 0;
                   return (
                     <tr key={s.key} className="border-b border-line/70">
                       <th scope="row" className="py-3 pr-4 font-normal text-fg-muted">

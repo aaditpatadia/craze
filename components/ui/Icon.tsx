@@ -127,7 +127,7 @@ export function Icon({ name, size = 20, title, ...rest }: { name: IconName; size
 }
 
 /** Signal-style glyph for evidence tiers: filled bars equal the tier. No colour needed. */
-export function TierGlyph({ tier, size = 14 }: { tier: 1 | 2 | 3; size?: number }) {
+export function TierGlyph({ tier, size = 14 }: { tier: 0 | 1 | 2 | 3; size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 14 14" aria-hidden="true" focusable="false">
       {[0, 1, 2].map((i) => (

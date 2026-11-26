@@ -1,14 +1,16 @@
 import { STALE_AFTER_MONTHS } from "./config";
 import { ORIGIN_NOT_VERIFIED, ORIGIN_UNKNOWN } from "./constants";
-import type { Tier, ModelSource } from "./schema";
+import type { ModelSource, ShownTier } from "./schema";
 
-export const TIER_LABEL: Record<Tier, string> = {
+export const TIER_LABEL: Record<ShownTier, string> = {
+  0: "Not yet verified",
   1: "Documents received",
   2: "Sample inspected",
   3: "Independently tested",
 };
 
-export const TIER_SHORT: Record<Tier, string> = {
+export const TIER_SHORT: Record<ShownTier, string> = {
+  0: "Unverified",
   1: "Tier 1",
   2: "Tier 2",
   3: "Tier 3",

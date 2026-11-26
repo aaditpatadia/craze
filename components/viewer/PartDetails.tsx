@@ -87,7 +87,7 @@ export function PartDetails({
             <caption className="sr-only">Key specs for {part.name}</caption>
             <tbody>
               {part.specs.map((s) => {
-                const tier = part.specTiers[s.key] ?? 1;
+                const tier = part.specTiers[s.key] ?? 0;
                 return (
                   <tr key={s.key} className="border-b border-line/60 last:border-0">
                     <th scope="row" className="py-2 pr-3 font-normal text-fg-subtle">

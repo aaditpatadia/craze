@@ -46,7 +46,7 @@ export function SiteFooter() {
         <div className="col-span-2 md:col-span-4">
           <TimuleLogo size={20} className="inline-flex items-center gap-2 text-[13px]" />
           <p className="mt-2 max-w-xs text-fg-subtle">
-            Every claim on this site shows its evidence tier, the date it was checked and what was not checked.
+            Every figure on this site shows its evidence tier, or says it is not yet verified.
           </p>
           <p className="mt-4">
             <a href={`mailto:${SITE.contactEmail}`} className="inline-flex min-h-9 items-center text-fg-muted underline-offset-4 hover:text-fg hover:underline">
@@ -74,7 +74,7 @@ export function SiteFooter() {
           <p>
             {USE_PLACEHOLDER_DATA
               ? "This site shows sample data. Suppliers, labs and figures are fictional."
-              : "Figures are as stated by suppliers unless marked otherwise."}
+              : "Figures are Timule target specifications until an evidence record shows they were checked."}
           </p>
           <p>
             {SITE.name} {new Date().getFullYear()}
