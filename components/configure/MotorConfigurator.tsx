@@ -33,7 +33,6 @@ import {
   patternLabel,
   toParams,
   type MotorConfig,
-  type Option,
   type Pattern,
   type Use,
 } from "@/lib/motor-config";
@@ -41,66 +40,8 @@ import { useQuote } from "@/lib/quote";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/ui/Icon";
+import { Area, Choice, Label, Note, Options, off, on, pill } from "./ui";
 import { KvDiagram, Ladder, LeadsDiagram, PatternDiagram, ShaftDiagram, StatorDiagram, TempScale } from "./MotorDiagrams";
-
-const pill =
-  "inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent";
-const on = "border-fg bg-fg text-bg";
-const off = "border-line text-fg-muted hover:border-line-strong hover:text-fg";
-
-function Choice<T extends string | number>({ value, current, onPick, children, title }: { value: T; current: T; onPick: (v: T) => void; children: React.ReactNode; title?: string }) {
-  const active = value === current;
-  return (
-    <button type="button" aria-pressed={active} title={title} onClick={() => onPick(value)} className={cn(pill, active ? on : off)}>
-      {active ? <Icon name="check" size={14} /> : null}
-      {children}
-    </button>
-  );
-}
-
-function Options({ list, current, onPick }: { list: Option[]; current: string; onPick: (v: string) => void }) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {list.map((x) => (
-        <Choice key={x.id} value={x.id} current={current} onPick={onPick} title={x.note}>
-          {x.label}
-        </Choice>
-      ))}
-    </div>
-  );
-}
-
-function Note({ list, current }: { list: Option[]; current: string }) {
-  const n = list.find((x) => x.id === current)?.note;
-  return n ? <p className="mt-3 text-sm text-fg-muted">{n}</p> : null;
-}
-
-/** One configurator area: options on the left, what they mean on the right. */
-function Area({ n, title, lead, children, drawing, meaning }: { n: string; title: string; lead: string; children: React.ReactNode; drawing: React.ReactNode; meaning: React.ReactNode }) {
-  return (
-    <section className="grid grid-cols-1 gap-6 border-t border-line py-10 lg:grid-cols-12" aria-labelledby={`area-${n}`}>
-      <div className="lg:col-span-7">
-        <p className="code-text text-xs text-accent">{n}</p>
-        <h2 id={`area-${n}`} className="mt-1 text-lg font-semibold tracking-tight">
-          {title}
-        </h2>
-        <p className="mt-1 max-w-xl text-sm text-fg-subtle">{lead}</p>
-        <div className="mt-5 space-y-5">{children}</div>
-      </div>
-      <aside className="lg:col-span-5" aria-label={`What ${title.toLowerCase()} means`}>
-        <div className="rounded-xl border border-line bg-bg-subtle p-4 text-fg">
-          <p className="text-xs font-medium uppercase tracking-wide text-fg-subtle">What this means</p>
-          <div className="mt-3 text-fg">{drawing}</div>
-          <div className="mt-3 text-sm text-fg-muted">{meaning}</div>
-        </div>
-      </aside>
-    </section>
-  );
-}
-
-function Label({ children }: { children: React.ReactNode }) {
-  return <p className="mb-2 text-sm font-medium">{children}</p>;
-}
 
 const sameP = (a: Pattern, b: Pattern) => patternCode(a) === patternCode(b);
 

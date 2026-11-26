@@ -35,6 +35,23 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
+/** Opens the configurator preset to this part, for motors, ESCs and propellers. */
+function configureLink(code: string): string | null {
+  const mot = code.match(/^TM-MOT-(\d{4,5})-(\d+)-[A-Z]$/);
+  if (mot) return `/configure/motor?f=${mot[1]}&kv=${mot[2]}`;
+  const esc = code.match(/^TM-ESC-(\d+)(X4)?-(\d+)S-[A-Z]$/);
+  if (esc) {
+    const s = Number(esc[3]);
+    const cells = s <= 6 ? 6 : s <= 12 ? 12 : s <= 14 ? 14 : 24;
+    return `/configure/esc?amps=${esc[1]}&layout=${esc[2] ? 4 : 1}&cells=${cells}`;
+  }
+  const PROPS: Record<string, string> = {
+    "TM-PRP-1550-F2-A": "dia=15&pitch=5&style=FOLD&blades=2",
+    "TM-PRP-5143-3-A": "dia=5.1&pitch=4.3&style=FIX&blades=3",
+  };
+  return PROPS[code] ? `/configure/propeller?${PROPS[code]}` : null;
+}
+
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const product = getProduct(id);
@@ -44,7 +61,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const manifest = getManifest(product.id);
   const parts = resolveParts(product, manifest);
   const top = highestTier(product);
-  const motorFrame = product.code.match(/^TM-MOT-(\d{4,5})-(\d+)-[A-Z]$/);
+  const configureHref = configureLink(product.code);
   const originEv = findEvidence(product, product.origin.evidenceId);
   const sourcing = getSourcing(product.id);
   const makers = sourcing?.candidates.length ?? 0;
@@ -127,9 +144,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <LinkButton href={`/sheets/${product.id}`} variant="ghost">
               <Icon name="document" size={16} /> Build sheet
             </LinkButton>
-            {motorFrame ? (
-              <LinkButton href={`/configure/motor?f=${motorFrame[1]}&kv=${motorFrame[2]}`} variant="ghost">
-                <Icon name="code" size={16} /> Configure this motor
+            {configureHref ? (
+              <LinkButton href={configureHref} variant="ghost">
+                <Icon name="code" size={16} /> Configure this part
               </LinkButton>
             ) : null}
           </div>

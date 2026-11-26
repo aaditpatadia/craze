@@ -31,7 +31,19 @@ export default function ConfigureMotorPage() {
         }
         title="Configure a motor, down to the last bolt"
         lead={`${FRAMES.length} standard frames and ${kvCount} windings. Choose every detail that matters to your airframe, see what each choice means beside it, and get one code and build string the maker follows exactly.`}
-      />
+      >
+        <p className="text-sm text-fg-subtle">
+          Also configure an{" "}
+          <Link href="/configure/esc" className="text-accent hover:underline">
+            ESC
+          </Link>{" "}
+          or a{" "}
+          <Link href="/configure/propeller" className="text-accent hover:underline">
+            propeller
+          </Link>
+          .
+        </p>
+      </PageHeader>
       <Container className="pb-24">
         <MotorConfigurator />
       </Container>

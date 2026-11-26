@@ -8,6 +8,12 @@ import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader } from "@/components/ui/Layout";
 import { getCatalog, getCategories, getCategory, getLiveCategories } from "@/lib/content";
 
+const CONFIGURE: Record<string, { href: string; label: string }> = {
+  "bldc-motors": { href: "/configure/motor", label: "Configure a motor" },
+  escs: { href: "/configure/esc", label: "Configure an ESC" },
+  propellers: { href: "/configure/propeller", label: "Configure a propeller" },
+};
+
 export function generateStaticParams() {
   return getCategories().map((c) => ({ id: c.id }));
 }
@@ -54,9 +60,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ id: s
           </>
         }
       >
-        {category.id === "bldc-motors" ? (
-          <LinkButton href="/configure/motor">
-            <Icon name="code" size={16} /> Configure a motor
+        {CONFIGURE[category.id] ? (
+          <LinkButton href={CONFIGURE[category.id]!.href}>
+            <Icon name="code" size={16} /> {CONFIGURE[category.id]!.label}
           </LinkButton>
         ) : null}
       </PageHeader>

@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 const REFS = [
   ["TM-MOT-2807-1300-A", "Part code: prefix, category, spec segments, revision"],
   ["TM-MOT-2807-1300.03", "Part line: one internal part on a build sheet"],
+  ["TM-ESC-40X4-6S-A", "ESC: continuous amps, X4 for a 4-in-1 board, top battery cells"],
+  ["TM-PRP-2480-F2-A", "Propeller: diameter, pitch in tenths, F for folding, blade count"],
   ["TMS-001", "Supplier code. Buyers see this, never the maker's name"],
   ["TMQ-261126-7KQ4", "Request or quotation"],
   ["TMA-261126-M2XD", "Supplier application"],

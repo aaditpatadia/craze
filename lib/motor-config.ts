@@ -1,3 +1,6 @@
+import { EVIDENCE, ORIGIN, o, type Option } from "./config-options";
+export { EVIDENCE, ORIGIN };
+export type { Option };
 /**
  * BLDC motor configurator: standard frames and every option a buyer can specify.
  * Frames are industry-standard stator sizes with the KV windings Indian makers offer
@@ -64,8 +67,7 @@ export const frameDims = (size: string) => {
   return { d, h };
 };
 
-export type Option = { id: string; label: string; note?: string };
-const o = (id: string, label: string, note?: string): Option => ({ id, label, note });
+
 
 export const CELLS = [o("4S", "4S", "14.8 V nominal"), o("6S", "6S", "22.2 V nominal"), o("12S", "12S", "44.4 V nominal"), o("14S", "14S", "51.8 V nominal"), o("24S", "24S", "88.8 V nominal")];
 export const CELL_VOLTS: Record<string, number> = { "4S": 14.8, "6S": 22.2, "12S": 44.4, "14S": 51.8, "24S": 88.8 };
@@ -113,17 +115,6 @@ export const CONNECTORS = [o("BARE", "Bare tinned ends"), o("MR30", "MR30"), o("
 export const BALANCE = [
   o("G6.3", "Standard (G6.3)", "Normal balancing. Fine for most airframes."),
   o("G2.5", "Fine (G2.5)", "Tighter balance. Less vibration for cameras and long life."),
-];
-export const ORIGIN = [
-  o("O0", "No requirement"),
-  o("O1", "Assembled in India", "Final assembly and test in India. Parts may be imported."),
-  o("O2", "Made in India, key parts declared", "Stator, winding and bell made in India. Magnet and wire makers named in writing."),
-  o("O3", "China-free, documented", "No Chinese magnets, wire, bearings or electronics, with documents to the raw material."),
-];
-export const EVIDENCE = [
-  o("T1", "Tier 1: documents", "Datasheet and origin declarations matched to the code."),
-  o("T2", "Tier 2: sample inspected", "We measure a sample from your batch against the spec."),
-  o("T3", "Tier 3: lab tested", "An outside lab tests a sample and we attach the report."),
 ];
 
 export type MotorConfig = {
