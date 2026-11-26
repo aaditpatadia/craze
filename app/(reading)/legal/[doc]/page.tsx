@@ -55,7 +55,7 @@ const DOCS = {
         {DRAFT}
         <h2>Applying and qualifying</h2>
         <ul>
-          <li>Applying (TMA reference) is free and commits you to nothing.</li>
+          <li>Applying (TMA reference) is free and commits you to nothing. We only consider applications with at least one current certificate or registration, with a copy attached.</li>
           <li>We qualify a supplier for a TM code from documents, a sample and, where needed, a site visit. Qualified suppliers get a TMS supplier code.</li>
           <li>Buyers see your TMS code and the evidence recorded against it, never your company name. We do not publish your documents.</li>
         </ul>
@@ -95,7 +95,7 @@ const DOCS = {
         <h2>What we collect and why</h2>
         <ul>
           <li>The request form collects your company, email, role and the parts you need, to reply to your request.</li>
-          <li>The supplier form collects your company, contact details and the parts you can make, to reply to your application.</li>
+          <li>The supplier form collects your company, contact details, the parts you can make and copies of your certificates, to qualify you as a supplier. Uploaded certificates are stored with Vercel Blob at a long random address and are not linked from the site.</li>
           <li>The notify form collects an email address, to tell you when a category opens.</li>
           <li>The BOM checker and quote list run in your browser. Nothing is sent until you submit a request.</li>
           <li>Form submissions reach us by email through Formspree, a form processing service.</li>

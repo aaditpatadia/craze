@@ -56,20 +56,59 @@ export const ORIGIN_KNOWLEDGE = [
   "No, not yet",
 ] as const;
 
+/** Certifications a supplier can tick. At least one is required to apply. */
+export const CERTIFICATIONS = [
+  "ISO 9001",
+  "AS9100",
+  "IATF 16949",
+  "ISO 14001",
+  "ISO 45001",
+  "ISO 13485",
+  "IPC-A-610 / J-STD-001",
+  "BIS",
+  "CE / RoHS",
+  "Udyam (MSME) registration",
+  "Other",
+] as const;
+
+/** Certificate uploads: PDF or image, up to 10 MB each, up to 6 files. */
+export const CERT_FILE = {
+  types: ["application/pdf", "image/jpeg", "image/png", "image/webp"],
+  accept: ".pdf,.jpg,.jpeg,.png,.webp",
+  maxBytes: 10 * 1024 * 1024,
+  maxFiles: 6,
+} as const;
+
+export type UploadedFile = { name: string; url: string };
+
 export type SupplierInput = {
   company: string;
   email: string;
   city: string;
   role: string;
-  /** TM codes or categories the maker can build. */
+  /** Category ids the maker builds, from the catalogue list. */
+  categories: string[];
+  /** Company website or online catalogue, if it lists their products. */
+  siteUrl: string;
+  /** Optional: TM codes or specific parts. */
   parts: string;
   capacity: string;
   origin: string;
-  certifications: string;
+  /** Ticked certifications. At least one. */
+  certifications: string[];
+  /** Names of any certification not in the list. */
+  certificationsOther: string;
+  /** Certificates uploaded to our storage. */
+  certificateFiles: UploadedFile[];
+  /** Or a shared link (Drive, Dropbox, website) to the certificates. */
+  certificateLink: string;
   message: string;
   website: string;
   startedAt: number;
 };
+
+const URL_RE = /^(https?:\/\/)?[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i;
+const BLOB_HOST = /^https:\/\/[a-z0-9-]+\.(public|private)\.blob\.vercel-storage\.com\//i;
 
 export function validateSupplier(v: SupplierInput): FieldErrors<SupplierInput> {
   const e: FieldErrors<SupplierInput> = {};
@@ -77,11 +116,21 @@ export function validateSupplier(v: SupplierInput): FieldErrors<SupplierInput> {
   if (!EMAIL.test(v.email.trim())) e.email = "Enter an email address, like name@company.com.";
   if (v.city.trim().length < 2) e.city = "Enter the city where the parts are made.";
   if (v.role.trim().length < 2) e.role = "Enter your role.";
-  if (v.parts.trim().length < 3) e.parts = "List the TM codes or kinds of part you can build.";
+  const site = v.siteUrl.trim();
+  if (site && !URL_RE.test(site)) e.siteUrl = "Enter a web address, like yourcompany.in/products.";
+  if (v.categories.length === 0 && !site) e.categories = "Tick the kinds of part you make, or give the web page that lists them.";
   if (v.capacity.trim().length < 1) e.capacity = "Give a rough monthly capacity, for example 2,000 units.";
   if (!(ORIGIN_KNOWLEDGE as readonly string[]).includes(v.origin)) e.origin = "Choose one.";
+  if (v.certifications.length === 0) e.certifications = "Tick at least one certification or registration you hold.";
+  else if (v.certifications.some((c) => !(CERTIFICATIONS as readonly string[]).includes(c))) e.certifications = "Choose from the list.";
+  else if (v.certifications.includes("Other") && v.certificationsOther.trim().length < 2) e.certificationsOther = "Name the other certification.";
+  const link = v.certificateLink.trim();
+  if (link && !URL_RE.test(link)) e.certificateLink = "Enter a link, like drive.google.com/...";
+  if (v.certificateFiles.length > CERT_FILE.maxFiles) e.certificateFiles = `Upload up to ${CERT_FILE.maxFiles} files.`;
+  else if (v.certificateFiles.some((f) => !BLOB_HOST.test(f.url))) e.certificateFiles = "Upload the certificates again.";
+  else if (v.certificateFiles.length === 0 && !link) e.certificateFiles = "Upload your certificates, or paste a link to them.";
   if (v.parts.length > 4000) e.parts = "Keep this under 4,000 characters.";
   if (v.message.length > 4000) e.message = "Keep this under 4,000 characters.";
-  if (v.certifications.length > 1000) e.certifications = "Keep this under 1,000 characters.";
+  if (v.certificationsOther.length > 300) e.certificationsOther = "Keep this under 300 characters.";
   return e;
 }

@@ -200,6 +200,7 @@
   transform: rotate(-2deg);
 }
 .bp-drawing { color: var(--bp-ink); }
+.bp-render { background-color: var(--bp-ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .bp-drawing svg { width: 100%; height: auto; }
 
 .bp-input {

@@ -5,7 +5,7 @@ import { SupplierForm, SupplierFormStatic } from "@/components/forms/SupplierFor
 import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
-import { getCatalog, getLiveCategories } from "@/lib/content";
+import { getCatalog, getCategories, getLiveCategories } from "@/lib/content";
 import { SECTOR_LABEL } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ const why = [
 ];
 
 const steps = [
-  "Apply with the TM codes you can build.",
+  "Apply: tick what you make or give your website, and attach your certificates.",
   "We send the build sheets and the documents we need first.",
   "You send datasheets and origin declarations. We record them as Tier 1 evidence.",
   "You send a sample. We measure it against the sheet: Tier 2.",
@@ -33,6 +33,9 @@ const steps = [
 export default function SupplierJoinPage() {
   const categories = getLiveCategories();
   const catalog = getCatalog();
+  const formCategories = getCategories().map((c) => ({ id: c.id, name: c.name, sector: c.sector, live: c.status === "live" }));
+  // Certificate uploads switch on when a Vercel Blob store is connected to the project.
+  const uploads = !!process.env.BLOB_READ_WRITE_TOKEN;
   const sectors = [...new Set(categories.map((c) => c.sector))];
 
   return (
@@ -64,8 +67,8 @@ export default function SupplierJoinPage() {
           <div className="lg:col-span-7">
             <SectionHeading id="apply-title" title="Apply to build a part" />
             <div className="mt-8">
-              <Suspense fallback={<SupplierFormStatic />}>
-                <SupplierForm />
+              <Suspense fallback={<SupplierFormStatic categories={formCategories} uploads={uploads} />}>
+                <SupplierForm categories={formCategories} uploads={uploads} />
               </Suspense>
             </div>
           </div>

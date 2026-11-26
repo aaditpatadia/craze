@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlueprintDocument, BlueprintSheet, BpField, BpSection } from "@/components/blueprint/Sheet";
 import { BpToolbar } from "@/components/blueprint/Toolbar";
+import { BlueprintViews } from "@/components/blueprint/BlueprintViews";
 import { CategoryArt } from "@/components/catalog/CategoryArt";
 import { SITE } from "@/lib/config";
-import { findEvidence, getCategory, getProduct, getProducts, getSupplier } from "@/lib/content";
+import { findEvidence, getCategory, getManifest, getProduct, getProducts, getSupplier } from "@/lib/content";
 import { LAYER_LABEL, SECTOR_LABEL, TIER_LABEL, formatDate, formatSpecValue } from "@/lib/format";
 
 export function generateStaticParams() {
@@ -43,6 +44,8 @@ export default async function BuildSheetPage({ params }: { params: Promise<{ id:
   const category = getCategory(product.category)!;
   const supplier = getSupplier(product.supplierId);
   const revision = product.code.slice(-1);
+  const manifest = getManifest(product.id);
+  const host = SITE.url.replace(/^https?:\/\//, "");
   const base = product.code.replace(/-[A-Z]$/, "");
   const parts = [...product.parts].sort((a, b) => a.explode.order - b.explode.order);
   const n = (i: number) => String(i).padStart(2, "0");
@@ -63,32 +66,39 @@ export default async function BuildSheetPage({ params }: { params: Promise<{ id:
           { label: "Sheet date", value: formatDate(product.lastVerified) },
           { label: "Current supplier", value: supplier?.code ?? "Open", mono: true },
           { label: "Sector", value: SECTOR_LABEL[category.sector] },
-          { label: "Drawing", value: "Schematic, not to scale" },
+          { label: "Drawing", value: manifest ? "From model, not to scale" : "Schematic, not to scale" },
           { label: "Issued by", value: "Timule" },
         ]}
       >
-        <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-[1.2fr_1fr]">
-          <div>
-            <p className="bp-dim">{product.summary}</p>
-            <div className="bp-fields mt-5 grid-cols-2">
-              <BpField label="Order by" mono>
-                {product.code}
-              </BpField>
-              <BpField label="Part lines" mono>
-                {parts.length ? `${base}.01 to .${n(parts.length)}` : "One-piece part"}
-              </BpField>
-              <BpField label="Build sheet online">{`${SITE.url.replace(/^https?:\/\//, "")}/sheets/${product.id}`}</BpField>
-              <BpField label="Part page">{`${SITE.url.replace(/^https?:\/\//, "")}/parts/${product.id}`}</BpField>
-            </div>
+        <div className="mt-4">
+          <p className="bp-dim max-w-[165mm]">{product.summary}</p>
+          <div className="bp-fields mt-4 grid-cols-2 sm:grid-cols-4">
+            <BpField label="Order by" mono>
+              {product.code}
+            </BpField>
+            <BpField label="Part lines" mono>
+              {parts.length ? `${base}.01 to .${n(parts.length)}` : "One-piece part"}
+            </BpField>
+            <BpField label="Build sheet online">{`${host}/sheets/${product.id}`}</BpField>
+            <BpField label="Part page">{`${host}/parts/${product.id}`}</BpField>
           </div>
-          <figure className="bp-box bp-drawing">
-            <CategoryArt category={category.id} label={category.singular} className="w-full" />
-            <figcaption className="bp-faint mt-1 flex justify-between text-[6.5pt] tracking-[0.12em]">
-              <span>VIEW A · SCHEMATIC</span>
-              <span className="bp-mono">{base}</span>
-            </figcaption>
-          </figure>
         </div>
+
+        <BpSection n="00" title="How the finished part looks">
+          <div className="mt-2">
+            {manifest ? (
+              <BlueprintViews manifest={manifest} code={product.code} />
+            ) : (
+              <figure className="bp-box bp-drawing">
+                <CategoryArt category={category.id} label={category.singular} className="w-full" />
+                <figcaption className="bp-faint mt-1 text-[6.5pt] tracking-[0.12em]">VIEW A · SCHEMATIC</figcaption>
+              </figure>
+            )}
+          </div>
+          <p className="bp-faint mt-2 text-[7pt]">
+            Drawn from the simplified model on the part page, not to scale. Shows the assembled part from four sides and every internal part separated along its axis. Values in section 01 govern.
+          </p>
+        </BpSection>
 
         <BpSection n={n(s++)} title="Requirements">
           <p className="bp-dim mt-2">Build to these values. Where no band is given, state your tolerance in the quote and we agree it before the first order.</p>
