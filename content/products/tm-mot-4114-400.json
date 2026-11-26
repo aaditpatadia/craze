@@ -1,0 +1,212 @@
+{
+  "id": "tm-mot-4114-400",
+  "name": "4114 400KV heavy-lift motor",
+  "category": "bldc-motors",
+  "supplierId": "harrow-motion",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A 41 by 14 mm stator outrunner for 15 to 18-inch propellers on 6S to 12S. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": "Part descriptions follow the same outrunner layout as the 2807. Origin and grade are listed for this motor only where we hold evidence.",
+  "lastVerified": "2026-07-02",
+  "keywords": [
+    "4114",
+    "400kv",
+    "heavy lift",
+    "outrunner",
+    "bldc",
+    "brushless motor",
+    "15 inch",
+    "12s"
+  ],
+  "applications": [
+    "Heavy-lift multirotor",
+    "Agricultural spraying",
+    "Fixed-wing VTOL lift motors"
+  ],
+  "origin": {
+    "country": "India",
+    "evidenceId": "ev-hm4114-datasheet"
+  },
+  "specs": [
+    {
+      "tolerance": "plus or minus 5 percent",
+      "key": "kv",
+      "label": "KV",
+      "value": 400,
+      "unit": "rpm/V",
+      "evidenceId": "ev-hm4114-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "stator-diameter",
+      "label": "Stator diameter",
+      "value": 41,
+      "unit": "mm",
+      "evidenceId": "ev-hm4114-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "stator-height",
+      "label": "Stator height",
+      "value": 14,
+      "unit": "mm",
+      "evidenceId": "ev-hm4114-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "configuration",
+      "label": "Configuration",
+      "value": "24N22P",
+      "unit": null,
+      "evidenceId": "ev-hm4114-datasheet"
+    },
+    {
+      "tolerance": "plus or minus 4 g",
+      "key": "mass",
+      "label": "Mass with leads",
+      "value": 152,
+      "unit": "g",
+      "evidenceId": "ev-hm4114-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "max-cells",
+      "label": "Rated cells",
+      "value": 12,
+      "unit": "S",
+      "evidenceId": "ev-hm4114-datasheet"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-hm4114-datasheet",
+      "tier": 1,
+      "summary": "Supplier datasheet received. No sample inspected yet.",
+      "checked": [
+        "Datasheet figures as stated by the supplier",
+        "Supplier statement that final assembly is in Coimbatore"
+      ],
+      "notChecked": [
+        "Any physical sample",
+        "Any figure by our own measurement",
+        "Magnet grade or material origin"
+      ],
+      "date": "2026-07-02",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "Supplier datasheet, revision A",
+          "received": "2026-06-30",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "parts": [
+    {
+      "id": "stator",
+      "name": "Stator",
+      "role": "The fixed electromagnet that pushes the rotor around.",
+      "whatItDoes": "A stack of steel laminations with 24 wound teeth. Switching current through the windings makes each tooth a magnet in turn and pulls the rotor around.",
+      "whyItMatters": "On a heavy-lift motor the stator carries high current for long periods, so lamination losses and wire temperature class decide how long it lasts.",
+      "material": "Laminated silicon steel core with enamelled copper windings",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "unknown",
+      "originEvidenceId": null,
+      "layers": [
+        "magnetic",
+        "electrical"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [
+        {
+          "key": "slots",
+          "label": "Slots",
+          "value": 24,
+          "unit": null,
+          "evidenceId": "ev-hm4114-datasheet"
+        }
+      ],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Agricultural spraying"
+      ],
+      "buyingChecks": [
+        "Lamination thickness is stated",
+        "Winding wire temperature class is 180 C or higher",
+        "Ask for a thermal test at your hover current"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "magnets"
+      ]
+    },
+    {
+      "id": "magnets",
+      "name": "Rotor magnets",
+      "role": "Twenty-two permanent magnets bonded inside the bell.",
+      "whatItDoes": "Alternating north and south magnets that the stator field pulls on to turn the bell and propeller.",
+      "whyItMatters": "Heavy-lift motors run hot at hover, so the magnet temperature rating matters more than on small motors.",
+      "material": "Sintered NdFeB",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "Heavy-lift multirotor",
+        "Agricultural spraying"
+      ],
+      "buyingChecks": [
+        "Magnet grade and temperature suffix are documented",
+        "Ask for the magnet maker's certificate",
+        "Check the coating for chips"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator"
+      ]
+    }
+  ],
+  "code": "TM-MOT-4114-400-A",
+  "supplierPartNumber": "HM-4114-400",
+  "demand": {
+    "buyers": [
+      "Defence and paramilitary drone programmes",
+      "Agricultural spraying drone makers",
+      "Logistics and heavy-lift drone makers"
+    ],
+    "reason": "Brushless motors are 70 to 80 percent imported in Indian drones. China now requires export licences for drone motors and ESCs rated at 48 V and 3 kW or more, and defence buyers reject drones with Chinese parts. Drone tenders on the government marketplace rose to 355 in 2026 from 190 in 2025.",
+    "sources": [
+      {
+        "title": "Drone Federation India white paper on import dependence, reported by Business Standard, 18 Nov 2026",
+        "url": "https://www.business-standard.com/industry/news/india-drone-industry-indigenisation-supply-chain-china-export-controls-126111800243_1.html"
+      },
+      {
+        "title": "Summary of China's drone export controls, Announcement No. 49",
+        "url": "https://droneintelligence.ai/insights/china-drone-export-controls-announcement-49"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "partsFrom": "tm-mot-2807-1300"
+}

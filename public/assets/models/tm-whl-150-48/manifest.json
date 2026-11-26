@@ -1,0 +1,429 @@
+{
+  "productId": "tm-whl-150-48",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      3.4,
+      1.6,
+      4
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "stator",
+      "name": "Hub motor stator",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            14,
+            40,
+            34
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "silicon-steel",
+          "repeat": null
+        },
+        {
+          "type": "cyl",
+          "d": [
+            10,
+            150
+          ],
+          "pos": [
+            -20,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "steel-polished",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0,
+      "order": 0,
+      "layers": [
+        "electrical",
+        "magnetic",
+        "structural"
+      ],
+      "material": "silicon-steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The stator is fixed to the axle at the centre of the wheel.",
+      "hotspots": []
+    },
+    {
+      "id": "rotor",
+      "name": "Magnet ring",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            41,
+            46,
+            34
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "magnet",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.18,
+      "order": 1,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "material": "magnet",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The magnet ring surrounds the stator.",
+      "hotspots": []
+    },
+    {
+      "id": "rim",
+      "name": "Wheel rim",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            46,
+            58,
+            46
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "aluminium",
+          "repeat": null
+        },
+        {
+          "type": "tube",
+          "d": [
+            10,
+            46,
+            4
+          ],
+          "pos": [
+            21,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "aluminium",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.38,
+      "order": 2,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The rim closes around the magnet ring.",
+      "hotspots": []
+    },
+    {
+      "id": "tyre",
+      "name": "Tyre",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            58,
+            75,
+            46
+          ],
+          "pos": [
+            0,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "rubber",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "distance": 0.6,
+      "order": 3,
+      "layers": [
+        "structural"
+      ],
+      "material": "rubber",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The tyre is bonded to the rim.",
+      "hotspots": []
+    },
+    {
+      "id": "gearbox",
+      "name": "Planetary gearbox",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            34,
+            22
+          ],
+          "pos": [
+            -35,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "aluminium-dark",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "distance": 0.32,
+      "order": 4,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The gearbox sits beside the hub on the axle.",
+      "hotspots": []
+    },
+    {
+      "id": "brake",
+      "name": "Holding brake",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            28,
+            14
+          ],
+          "pos": [
+            -54,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "steel-dark",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "distance": 0.55,
+      "order": 5,
+      "layers": [
+        "electrical",
+        "structural"
+      ],
+      "material": "steel-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The brake sits outboard of the gearbox.",
+      "hotspots": []
+    },
+    {
+      "id": "encoder",
+      "name": "Encoder",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            16,
+            10
+          ],
+          "pos": [
+            -66,
+            0,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            90
+          ],
+          "mat": "plastic",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "distance": 0.78,
+      "order": 6,
+      "layers": [
+        "electrical"
+      ],
+      "material": "plastic",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The encoder caps the end of the drive.",
+      "hotspots": []
+    },
+    {
+      "id": "bracket",
+      "name": "Mounting bracket",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "box",
+          "d": [
+            18,
+            30,
+            70,
+            3
+          ],
+          "pos": [
+            -42,
+            88,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "sheet-steel",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            60,
+            8,
+            70,
+            3
+          ],
+          "pos": [
+            -25,
+            106,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "sheet-steel",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.7,
+      "order": 7,
+      "layers": [
+        "structural"
+      ],
+      "material": "sheet-steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The bracket holds the axle from above.",
+      "hotspots": []
+    }
+  ]
+}

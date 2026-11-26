@@ -23,7 +23,7 @@ export function ProductCard({ item, singular }: { item: CatalogItem; singular: s
       <div className="flex flex-1 flex-col p-5">
         <p className="flex items-center justify-between gap-3 text-xs text-fg-subtle">
           <span className="code-text font-medium text-fg-muted">{item.code}</span>
-          <span className="truncate">{item.supplierName}</span>
+          <span className="code-text truncate">{item.supplierCode}</span>
         </p>
         <h3 className="mt-1 text-base font-semibold leading-snug">
           <Link href={`/parts/${item.id}`} className="outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:outline-2 focus-visible:after:outline-accent">

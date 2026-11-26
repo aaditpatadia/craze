@@ -122,10 +122,10 @@ export const PhotoSpinSchema = z.object({
 });
 
 /**
- * Verkod part number: VK, a three letter category code, one or more spec segments
+ * Timule part number: TM, a three letter category code, one or more spec segments
  * and a revision letter. Buyers order by it and suppliers build to it.
  */
-export const PART_CODE = /^VK-[A-Z]{3}(?:-[A-Z0-9]+)+-[A-Z]$/;
+export const PART_CODE = /^TM-[A-Z]{3}(?:-[A-Z0-9]+)+-[A-Z]$/;
 
 export const SourceSchema = z.object({ title: z.string().min(1), url: z.url() });
 
@@ -140,7 +140,7 @@ export type Demand = z.infer<typeof DemandSchema>;
 
 export const ProductSchema = z.object({
   id,
-  code: z.string().regex(PART_CODE, "part codes look like VK-MOT-2807-1300-A"),
+  code: z.string().regex(PART_CODE, "part codes look like TM-MOT-2807-1300-A"),
   name: z.string().min(1),
   category: id,
   supplierId: id,
@@ -173,7 +173,7 @@ export type Sector = z.infer<typeof SectorSchema>;
 
 export const CategorySchema = z.object({
   id,
-  /** The three letters after VK- in every part code of this category. */
+  /** The three letters after TM- in every part code of this category. */
   code: z.string().regex(/^[A-Z]{3}$/),
   sector: SectorSchema,
   name: z.string().min(1),
@@ -195,8 +195,8 @@ export type Category = z.infer<typeof CategorySchema>;
 
 export const SupplierSchema = z.object({
   id,
-  /** Verkod supplier code, printed on purchase orders. */
-  code: z.string().regex(/^VKS-\d{3}$/),
+  /** Timule supplier code, printed on purchase orders. */
+  code: z.string().regex(/^TMS-\d{3}$/),
   name: z.string().min(1),
   placeholder: z.boolean(),
   city: z.string().min(1),
@@ -301,7 +301,7 @@ export type Manifest = z.infer<typeof ManifestSchema>;
 
 /**
  * Where we are in finding a maker for each listed part. Real company names live here,
- * and are shown on the site only once that company has agreed (consented: true).
+ * and are never shown to buyers: the site lists makers by TMS code only. consented records whether the maker agreed to work with us.
  */
 export const SourcingStatusSchema = z.enum(["searching", "candidates", "contacted", "sample-requested", "qualified"]);
 export type SourcingStatus = z.infer<typeof SourcingStatusSchema>;

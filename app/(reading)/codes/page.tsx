@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CodeDecoder } from "@/components/codes/CodeDecoder";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
-import { getCategories, getProducts, getSuppliers } from "@/lib/content";
+import { getCategories, getProducts, getSuppliers, getSupplier } from "@/lib/content";
 import { SECTOR_LABEL } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: "VK codes: one number for every part",
+  title: "TM codes: one number for every part",
   description:
-    "How Verkod part codes work. Buyers order by the VK code, suppliers build to the sheet behind it, and the evidence follows the code from quote to delivery.",
+    "How Timule part codes work. Buyers order by the TM code, suppliers build to the sheet behind it, and the evidence follows the code from quote to delivery.",
   alternates: { canonical: "/codes" },
 };
 
 const references = [
-  { code: "VK-MOT-2807-1300-A", what: "Part code", body: "What is bought and built. Printed on the label, the quote, the purchase order and the delivery note." },
-  { code: "VK-MOT-2807-1300.03", what: "Part line", body: "One internal part on the build sheet, so a supplier and a buyer can point at the same magnet or bearing." },
-  { code: "VKS-001", what: "Supplier code", body: "Each supplier we work with. It stays the same if the company changes its name." },
-  { code: "VKQ-261126-7KQ4", what: "Request reference", body: "Issued when a buyer sends a request. Date first, then four characters that cannot be confused, such as no 0 and O." },
-  { code: "VKA-261126-M2XD", what: "Supplier application", body: "Issued when a maker applies to build a part." },
+  { code: "TM-MOT-2807-1300-A", what: "Part code", body: "What is bought and built. Printed on the label, the quote, the purchase order and the delivery note." },
+  { code: "TM-MOT-2807-1300.03", what: "Part line", body: "One internal part on the build sheet, so a supplier and a buyer can point at the same magnet or bearing." },
+  { code: "TMS-001", what: "Supplier code", body: "Each supplier we work with. It stays the same if the company changes its name." },
+  { code: "TMQ-261126-7KQ4", what: "Request reference", body: "Issued when a buyer sends a request. Date first, then four characters that cannot be confused, such as no 0 and O." },
+  { code: "TMA-261126-M2XD", what: "Supplier application", body: "Issued when a maker applies to build a part." },
 ];
 
 const rules = [
@@ -40,7 +40,7 @@ export default function CodesPage() {
     <>
       <PageHeader
         title="One code for every part"
-        lead="Buyers order by the VK code. Suppliers build to the sheet behind it. The evidence travels with the code, so everyone in the chain means the same part."
+        lead="Buyers order by the TM code. Suppliers build to the sheet behind it. The evidence travels with the code, so everyone in the chain means the same part."
       />
       <Container className="grid grid-cols-1 gap-14 pb-16 lg:grid-cols-12">
         <div className="lg:col-span-7">
@@ -76,7 +76,7 @@ export default function CodesPage() {
 
       <section aria-labelledby="cats-title" className="border-t border-line py-16">
         <Container>
-          <SectionHeading id="cats-title" title="Category codes" lead="Three letters after VK. Upcoming categories already have theirs." />
+          <SectionHeading id="cats-title" title="Category codes" lead="Three letters after TM. Upcoming categories already have theirs." />
           <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2">
             {sectors.map((s) => (
               <div key={s}>
@@ -109,17 +109,17 @@ export default function CodesPage() {
           <SectionHeading id="all-title" title="All issued part codes" lead={`${products.length} codes issued, across ${suppliers.length} suppliers.`} />
           <div className="mt-8 overflow-x-auto">
             <table className="w-full min-w-[560px] text-left text-sm">
-              <caption className="sr-only">All issued VK part codes</caption>
+              <caption className="sr-only">All issued TM part codes</caption>
               <thead>
                 <tr className="border-b border-line text-xs text-fg-subtle">
                   <th scope="col" className="py-2 pr-4 font-medium">
-                    VK code
+                    TM code
                   </th>
                   <th scope="col" className="py-2 pr-4 font-medium">
                     Part
                   </th>
                   <th scope="col" className="py-2 font-medium">
-                    Supplier&apos;s own number
+                    Supplier
                   </th>
                 </tr>
               </thead>
@@ -132,7 +132,7 @@ export default function CodesPage() {
                       </Link>
                     </td>
                     <td className="py-3 pr-4 text-fg-muted">{p.name}</td>
-                    <td className="code-text py-3 text-fg-subtle">{p.supplierPartNumber ?? "None"}</td>
+                    <td className="code-text py-3 text-fg-subtle">{getSupplier(p.supplierId)?.code ?? "Open"}</td>
                   </tr>
                 ))}
               </tbody>

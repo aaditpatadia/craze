@@ -22,15 +22,15 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!p) return {};
   return {
     title: `Build sheet ${p.code}`,
-    description: `What a supplier must build, document and pass for ${p.name}, under Verkod code ${p.code}.`,
+    description: `What a supplier must build, document and pass for ${p.name}, under Timule code ${p.code}.`,
     alternates: { canonical: `/sheets/${p.id}` },
   };
 }
 
 const MARKING = [
-  "Label every unit, or the smallest pack for parts too small to mark, with the VK code including revision.",
+  "Label every unit, or the smallest pack for parts too small to mark, with the TM code including revision.",
   "Add a batch number and, for electronic and rotating parts, a unit serial number.",
-  "Put the VK code, quantity and batch on every carton and on the delivery note.",
+  "Put the TM code, quantity and batch on every carton and on the delivery note.",
   "Keep the supplier's own part number on the label as a cross-reference if you use one.",
 ];
 
@@ -68,7 +68,7 @@ export default async function BuildSheetPage({ params }: { params: Promise<{ id:
           </div>
           <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 text-sm sm:grid-cols-4">
             <div>
-              <dt className="text-fg-subtle">VK code</dt>
+              <dt className="text-fg-subtle">TM code</dt>
               <dd className="mt-1">
                 <CodeChip code={product.code} size="sm" />
               </dd>
@@ -96,16 +96,12 @@ export default async function BuildSheetPage({ params }: { params: Promise<{ id:
               <dd className="mt-1 font-medium">
                 {supplier ? (
                   <>
-                    {supplier.name} <span className="code-text text-fg-subtle">{supplier.code}</span>
+                    <span className="code-text">{supplier.code}</span>
                   </>
                 ) : (
                   "Open"
                 )}
               </dd>
-            </div>
-            <div>
-              <dt className="text-fg-subtle">Supplier&apos;s own number</dt>
-              <dd className="code-text mt-1 font-medium">{product.supplierPartNumber ?? "None"}</dd>
             </div>
             <div>
               <dt className="text-fg-subtle">Model</dt>

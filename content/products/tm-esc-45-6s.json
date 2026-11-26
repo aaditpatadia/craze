@@ -1,0 +1,412 @@
+{
+  "id": "tm-esc-45-6s",
+  "name": "45 A single ESC, 6S",
+  "category": "escs",
+  "supplierId": "lintel-avionics",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A single-motor 45 A ESC for 3S to 6S, sized for 7-inch builds. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": null,
+  "lastVerified": "2026-05-20",
+  "keywords": [
+    "esc",
+    "45a",
+    "speed controller",
+    "6s esc",
+    "single esc",
+    "dshot"
+  ],
+  "applications": [
+    "7-inch multirotor",
+    "Long-range FPV"
+  ],
+  "origin": {
+    "country": "Taiwan",
+    "evidenceId": "ev-laesc45-sample"
+  },
+  "specs": [
+    {
+      "tolerance": null,
+      "key": "continuous-current",
+      "label": "Continuous current",
+      "value": 45,
+      "unit": "A",
+      "evidenceId": "ev-laesc45-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "burst-current",
+      "label": "Burst current, 10 s",
+      "value": 55,
+      "unit": "A",
+      "evidenceId": "ev-laesc45-datasheet"
+    },
+    {
+      "tolerance": null,
+      "key": "max-cells",
+      "label": "Max cells",
+      "value": 6,
+      "unit": "S",
+      "evidenceId": "ev-laesc45-datasheet"
+    },
+    {
+      "tolerance": "plus or minus 0.5 g",
+      "key": "mass",
+      "label": "Mass without leads",
+      "value": 9.8,
+      "unit": "g",
+      "evidenceId": "ev-laesc45-sample"
+    },
+    {
+      "tolerance": null,
+      "key": "protocol",
+      "label": "Input protocol",
+      "value": "DShot600, PWM",
+      "unit": null,
+      "evidenceId": "ev-laesc45-datasheet"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-laesc45-datasheet",
+      "tier": 1,
+      "summary": "Supplier datasheet received.",
+      "checked": [
+        "Rated current, cell range and protocols as stated by the supplier"
+      ],
+      "notChecked": [
+        "Current rating under our own load test",
+        "Thermal behaviour",
+        "Firmware version history"
+      ],
+      "date": "2026-04-18",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "Supplier datasheet, revision B",
+          "received": "2026-04-18",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    },
+    {
+      "id": "ev-laesc45-sample",
+      "tier": 2,
+      "summary": "One sample inspected and component markings read.",
+      "checked": [
+        "Mass",
+        "Markings on the MOSFETs, gate driver and MCU",
+        "Country of assembly label on the board"
+      ],
+      "notChecked": [
+        "Whether the chips are genuine, beyond markings",
+        "Current handling",
+        "More than one sample"
+      ],
+      "date": "2026-05-08",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [],
+      "measurements": [
+        {
+          "label": "Mass without leads",
+          "value": "9.8",
+          "unit": "g",
+          "method": "Bench scale, 0.1 g resolution"
+        },
+        {
+          "label": "MOSFET count",
+          "value": "6",
+          "unit": null,
+          "method": "Counted under magnification"
+        }
+      ],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "parts": [
+    {
+      "id": "pcb",
+      "name": "Circuit board",
+      "role": "Carry the power stage, driver and controller, and spread their heat.",
+      "whatItDoes": "A multi-layer board with thick copper planes. The battery current flows through the planes, so they double as the main heat path.",
+      "whyItMatters": "Copper weight and layer count decide how much current the board can carry before it overheats. Thin copper is the most common cost cut.",
+      "material": "FR-4 glass epoxy with heavy copper layers",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical",
+        "structural"
+      ],
+      "explode": {
+        "order": 0
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Light inspection drones"
+      ],
+      "buyingChecks": [
+        "Ask for the copper weight of the outer and inner layers",
+        "Ask for the board maker and its UL file number",
+        "Check the board is conformal coated if the drone flies in dust or spray"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "mosfets",
+        "mcu"
+      ]
+    },
+    {
+      "id": "mosfets",
+      "name": "Power MOSFETs",
+      "role": "Switch battery current into each motor phase.",
+      "whatItDoes": "Six transistors arranged as three half bridges. They switch on and off thousands of times a second to build the rotating field the motor needs.",
+      "whyItMatters": "Their on-resistance sets how much heat the ESC makes. Lower resistance runs cooler and survives longer bursts.",
+      "material": "Silicon power MOSFETs in surface-mount packages",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor"
+      ],
+      "buyingChecks": [
+        "Ask for the MOSFET part number and its datasheet",
+        "Check the voltage rating leaves headroom over a full 6S pack",
+        "Ask how heat leaves the board: copper pour, heatsink or both"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "gate-driver",
+        "heatsink"
+      ]
+    },
+    {
+      "id": "gate-driver",
+      "name": "Gate driver",
+      "role": "Turns the controller's logic signals into strong pulses that switch the MOSFETs.",
+      "whatItDoes": "The MCU's outputs are too weak to switch large transistors quickly. The gate driver boosts them so the MOSFETs spend as little time as possible half on, where they waste power.",
+      "whyItMatters": "A slow or marginal gate driver makes the MOSFETs run hot and can cause failures that look random.",
+      "material": "Integrated circuit",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "unknown",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 2
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor"
+      ],
+      "buyingChecks": [
+        "Ask for the gate driver part number",
+        "Check it is rated for the full pack voltage",
+        "Ask if the same driver is used across production batches"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "mosfets",
+        "mcu"
+      ]
+    },
+    {
+      "id": "mcu",
+      "name": "Microcontroller",
+      "role": "Runs the ESC firmware and decides when to switch each phase.",
+      "whatItDoes": "A small 32-bit processor reads the throttle command from the flight controller and senses the motor position, then times the switching of each phase.",
+      "whyItMatters": "The processor decides which firmware the ESC can run, which affects smoothness, telemetry and how the ESC reacts to a stalled motor.",
+      "material": "32-bit Arm Cortex-M class microcontroller",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 3
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor",
+        "Long-range FPV"
+      ],
+      "buyingChecks": [
+        "Ask which firmware ships and whether it can be updated",
+        "Check the processor family against your firmware choice",
+        "Ask for the firmware version on each batch"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "gate-driver"
+      ]
+    },
+    {
+      "id": "capacitor",
+      "name": "Input capacitor",
+      "role": "Absorb voltage spikes on the battery leads.",
+      "whatItDoes": "A low-impedance electrolytic capacitor soldered across the battery input. It supplies the sharp bursts of current the MOSFETs draw and soaks up the spikes they cause.",
+      "whyItMatters": "An undersized or fake capacitor lets voltage spikes reach the MOSFETs, which is a leading cause of ESC failure on long battery leads.",
+      "material": "Aluminium electrolytic capacitor",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 4
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor"
+      ],
+      "buyingChecks": [
+        "Ask for the capacitor maker, voltage and ESR rating",
+        "Check the voltage rating is at least 1.25 times full battery voltage",
+        "Ask whether extra capacitance is needed for leads longer than 15 cm"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "power-leads"
+      ]
+    },
+    {
+      "id": "power-leads",
+      "name": "Power and phase leads",
+      "role": "Bring battery current in and send three phases out to the motor.",
+      "whatItDoes": "Two thick battery leads at one end and three phase leads at the other, in silicone-insulated stranded copper.",
+      "whyItMatters": "Wire gauge sets voltage drop and heat. Leads that are too thin for the current get hot at the solder joint, where they also fail.",
+      "material": "Tinned stranded copper with silicone insulation",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor"
+      ],
+      "buyingChecks": [
+        "Ask for the wire gauge and strand count",
+        "Check the insulation is silicone rated to at least 150 C",
+        "Pull-test one lead at the solder pad on a sample"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "pcb",
+        "capacitor"
+      ]
+    },
+    {
+      "id": "thermal-pad",
+      "name": "Thermal pad",
+      "role": "Carry heat from the MOSFETs into the heatsink.",
+      "whatItDoes": "A soft, electrically insulating pad pressed between the MOSFET tops and the heatsink. It fills the air gaps that would otherwise block heat.",
+      "whyItMatters": "A missing or thin pad can double MOSFET temperature. It is cheap to leave out and invisible once the heatsink is on.",
+      "material": "Silicone thermal pad with ceramic filler",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "thermal"
+      ],
+      "explode": {
+        "order": 6
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor"
+      ],
+      "buyingChecks": [
+        "Ask for the pad's thermal conductivity in W/mK",
+        "Check the pad covers every MOSFET on a sample",
+        "Ask for the breakdown voltage of the pad"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "mosfets",
+        "heatsink"
+      ]
+    },
+    {
+      "id": "heatsink",
+      "name": "Heatsink",
+      "role": "Move MOSFET heat into the air.",
+      "whatItDoes": "A finned aluminium block clamped over the MOSFETs. Air from the propeller wash flows between the fins.",
+      "whyItMatters": "At high current the heatsink decides whether the ESC can hold its rated current for minutes or only seconds.",
+      "material": "Anodised aluminium alloy",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "thermal",
+        "structural"
+      ],
+      "explode": {
+        "order": 7
+      },
+      "specs": [],
+      "appliesTo": [
+        "7-inch multirotor"
+      ],
+      "buyingChecks": [
+        "Ask for the rated current with and without the heatsink",
+        "Check the fins face the airflow in your mounting position",
+        "Ask for the alloy and anodising spec"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "thermal-pad"
+      ]
+    }
+  ],
+  "code": "TM-ESC-45-6S-A",
+  "supplierPartNumber": "LA-ESC45",
+  "demand": {
+    "buyers": [
+      "Defence and paramilitary drone programmes",
+      "Agricultural and logistics drone makers"
+    ],
+    "reason": "Every brushless motor needs a speed controller. China's export licensing covers ESCs rated at 48 V and 3 kW or more, the same band as heavy-lift motors, and defence buyers reject drones with Chinese parts.",
+    "sources": [
+      {
+        "title": "Summary of China's drone export controls, Announcement No. 49",
+        "url": "https://droneintelligence.ai/insights/china-drone-export-controls-announcement-49"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "partsFrom": null
+}

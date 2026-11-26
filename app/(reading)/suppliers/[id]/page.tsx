@@ -5,22 +5,22 @@ import { LinkButton } from "@/components/ui/Button";
 import { LastVerified, OriginChip, SampleDataTag, TierChip } from "@/components/ui/Chips";
 import { Icon } from "@/components/ui/Icon";
 import { Container, SectionHeading } from "@/components/ui/Layout";
-import { getProduct, getSupplier, getSuppliers, highestTier, findEvidence } from "@/lib/content";
+import { getProduct, getSupplierBySlug, getSuppliers, highestTier, findEvidence, supplierSlug } from "@/lib/content";
 import { formatDate, isStale } from "@/lib/format";
 
 export function generateStaticParams() {
-  return getSuppliers().map((s) => ({ id: s.id }));
+  return getSuppliers().map((s) => ({ id: supplierSlug(s) }));
 }
 export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const s = getSupplier(id);
+  const s = getSupplierBySlug(id);
   if (!s) return {};
   return {
-    title: `${s.name}, supplier profile`,
-    description: `What we have checked about ${s.name} in ${s.city}, and what we have not.`,
-    alternates: { canonical: `/suppliers/${s.id}` },
+    title: `Supplier ${s.code}`,
+    description: `What we have checked about supplier ${s.code}, and what we have not.`,
+    alternates: { canonical: `/suppliers/${supplierSlug(s)}` },
   };
 }
 
@@ -38,7 +38,7 @@ function StatusRow({ label, ok, children }: { label: string; ok: boolean; childr
 
 export default async function SupplierPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const s = getSupplier(id);
+  const s = getSupplierBySlug(id);
   if (!s) notFound();
   const products = s.parts.map((pid) => getProduct(pid)).filter((p) => !!p);
   const stale = isStale(s.lastVerified);
@@ -50,9 +50,12 @@ export default async function SupplierPage({ params }: { params: Promise<{ id: s
           <span>Supplier profile</span>
           <SampleDataTag show={s.placeholder} />
         </p>
-        <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{s.name}</h1>
+        <h1 className="code-text mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{s.code}</h1>
         <p className="mt-2 flex items-center gap-1.5 text-fg-muted">
-          <Icon name="pin" size={16} /> {s.city}, {s.country}
+          <Icon name="pin" size={16} /> {s.country}
+        </p>
+        <p className="mt-2 max-w-2xl text-sm text-fg-subtle">
+          We list makers by code. You order from us under the TM code, we hold the maker to the build sheet, and we answer for the part.
         </p>
         <p className="mt-4 max-w-2xl text-lg text-fg-muted">{s.summary}</p>
         <div className="mt-5">
@@ -186,7 +189,7 @@ export default async function SupplierPage({ params }: { params: Promise<{ id: s
       </section>
 
       <Container className="border-t border-line py-14">
-        <LinkButton href={`/request?part=${encodeURIComponent(`Parts from ${s.name}`)}`}>Request parts from this supplier</LinkButton>
+        <LinkButton href={`/request?part=${encodeURIComponent(`Parts from supplier ${s.code}`)}`}>Request parts from this supplier</LinkButton>
       </Container>
     </>
   );

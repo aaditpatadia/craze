@@ -14,7 +14,7 @@ const FIELDS: (keyof SupplierInput)[] = ["company", "email", "city", "role", "pa
 
 type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; reference?: string } | { state: "error"; message: string };
 
-/** Prefills ?part= with a VK code. Wrap in Suspense with SupplierFormStatic as fallback. */
+/** Prefills ?part= with a TM code. Wrap in Suspense with SupplierFormStatic as fallback. */
 export function SupplierForm() {
   const params = useSearchParams();
   return <SupplierFormInner initialParts={params.get("part") ?? ""} />;
@@ -120,7 +120,7 @@ function SupplierFormInner({ initialParts }: { initialParts: string }) {
         ) : null}
         <div className="mt-6">
           <LinkButton href="/codes" variant="secondary">
-            See all VK codes
+            See all TM codes
           </LinkButton>
         </div>
       </div>
@@ -129,7 +129,7 @@ function SupplierFormInner({ initialParts }: { initialParts: string }) {
 
   const hints = {
     email: "A company address, so we know who we are talking to.",
-    parts: "VK codes from this site, or the kinds of part you make. One per line.",
+    parts: "TM codes from this site, or the kinds of part you make. One per line.",
     capacity: "Per month, for the parts above. A range is fine.",
   };
 
@@ -188,7 +188,7 @@ function SupplierFormInner({ initialParts }: { initialParts: string }) {
 
       <div className="flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p id={`${ids}-privacy`} className="max-w-sm text-xs text-fg-subtle">
-          We use these details only to reply. We never publish a supplier&apos;s name without their agreement. See the{" "}
+          We use these details only to reply. Buyers see suppliers by code, never by name. See the{" "}
           <Link href="/legal/privacy" className="underline">
             privacy notice
           </Link>

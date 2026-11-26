@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     startedAt: Number(body.startedAt),
   };
   // Spam gets the same success response, so bots learn nothing. Nothing is stored.
-  if (looksLikeSpam(input)) return NextResponse.json({ ok: true, reference: makeReference("VKQ") });
+  if (looksLikeSpam(input)) return NextResponse.json({ ok: true, reference: makeReference("TMQ") });
 
   const errors = validateRequest(input);
   if (Object.keys(errors).length > 0) return NextResponse.json({ ok: false, errors }, { status: 422 });
@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     const { website: _honeypot, startedAt: _started, ...data } = input;
     void _honeypot;
     void _started;
-    const reference = makeReference("VKQ");
+    const reference = makeReference("TMQ");
     const { id } = await storeSubmission({ kind: "request", data, reference });
     return NextResponse.json({ ok: true, id, reference });
   } catch (e) {

@@ -9,7 +9,7 @@ import { getCatalog, getLiveCategories, getManifest, getUpcomingCategories } fro
 import { SECTOR_LABEL, TIER_LABEL } from "@/lib/format";
 import { CategoryArt } from "@/components/catalog/CategoryArt";
 
-const HERO_PRODUCT = "vk-mot-2807-1300";
+const HERO_PRODUCT = "tm-mot-2807-1300";
 
 const tiers = [
   {
@@ -27,7 +27,7 @@ const tiers = [
 ];
 
 const codeAnatomy = [
-  { label: "Prefix", value: "VK", note: "Verkod" },
+  { label: "Prefix", value: "TM", note: "Timule" },
   { label: "Category", value: "MOT", note: "BLDC motor" },
   { label: "Stator", value: "2807", note: "28 by 7 mm" },
   { label: "KV", value: "1300", note: "rpm per volt" },
@@ -37,7 +37,7 @@ const codeAnatomy = [
 const codeRoles = [
   {
     title: "Buyers order by it",
-    body: "Paste VK codes, supplier numbers or plain names into the BOM checker, or collect parts in a quote list and send one request.",
+    body: "Paste TM codes, supplier numbers or plain names into the BOM checker, or collect parts in a quote list and send one request.",
     href: "/bom",
     link: "Check a BOM",
   },
@@ -106,9 +106,9 @@ export default function HomePage() {
           <SectionHeading
             id="code-title"
             title="Buyers order by it. Suppliers build to it."
-            lead="Every part we list gets a VK code and a build sheet. The same code is on the quote, the purchase order, the label and the evidence, so nobody has to translate."
+            lead="Every part we list gets a TM code and a build sheet. The same code is on the quote, the purchase order, the label and the evidence, so nobody has to translate."
           />
-          <ol className="mt-12 flex flex-wrap items-stretch gap-2" aria-label="Parts of the code VK-MOT-2807-1300-A">
+          <ol className="mt-12 flex flex-wrap items-stretch gap-2" aria-label="Parts of the code TM-MOT-2807-1300-A">
             {codeAnatomy.map((seg) => (
               <li key={seg.label} className="min-w-24 rounded-lg border border-line bg-bg-subtle px-4 py-3">
                 <span className="block text-[11px] uppercase tracking-wide text-fg-subtle">{seg.label}</span>
@@ -226,8 +226,8 @@ export default function HomePage() {
               Make one of these parts?
             </h2>
             <p className="mt-3 text-fg-muted">
-              Quote against the VK code and build sheet. Buyers see your documents and our measurements, not a sales pitch, and your name appears only when you
-              agree.
+              Quote against the TM code and build sheet. Buyers see your documents and our measurements, not a sales pitch, and buyers see your supplier code,
+              not your name.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

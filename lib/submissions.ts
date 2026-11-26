@@ -23,7 +23,7 @@ export async function storeSubmission(s: Submission): Promise<{ id: string }> {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.SUBMISSIONS_EMAIL_TO;
   if (key && to) {
-    const from = process.env.SUBMISSIONS_EMAIL_FROM ?? "Verkod <onboarding@resend.dev>";
+    const from = process.env.SUBMISSIONS_EMAIL_FROM ?? "Timule <onboarding@resend.dev>";
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },

@@ -230,7 +230,7 @@ export function BomChecker({ catalog, siteUrl }: { catalog: CatalogItem[]; siteU
                           </Link>
                           <span className="mt-1 flex flex-wrap items-center gap-2 text-xs text-fg-subtle">
                             {m.confidence === "strong" ? "Strong match" : "Possible match, please confirm"}
-                            <span>{m.item.supplierName}</span>
+                            <span className="code-text">{m.item.supplierCode}</span>
                             <SampleDataTag show={m.item.placeholder} />
                           </span>
                         </td>

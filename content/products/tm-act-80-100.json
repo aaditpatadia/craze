@@ -1,0 +1,513 @@
+{
+  "id": "tm-act-80-100",
+  "code": "TM-ACT-80-100-A",
+  "name": "80 mm robot joint actuator, 100:1",
+  "category": "robot-actuators",
+  "supplierId": "tarnfield-drives",
+  "supplierPartNumber": "TD-J80",
+  "placeholder": true,
+  "status": "live",
+  "summary": "An integrated joint with a frameless motor, strain wave gear, dual encoders and an EtherCAT driver, for arm shoulders and humanoid hips. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": null,
+  "lastVerified": "2026-10-06",
+  "keywords": [
+    "robot joint",
+    "actuator",
+    "harmonic drive",
+    "strain wave",
+    "frameless motor",
+    "humanoid",
+    "cobot joint",
+    "ethercat"
+  ],
+  "applications": [
+    "Collaborative robot arms",
+    "Humanoid hips and shoulders",
+    "Legged robots"
+  ],
+  "demand": {
+    "buyers": [
+      "Robot arm and cobot makers",
+      "Humanoid and legged robot developers",
+      "Automation integrators"
+    ],
+    "reason": "India installed a record number of industrial robots in 2024, and makers are automating to meet export quality demands. Many humanoid developers buy tested joint modules instead of building their own, and joints in the 50 to 150 Nm class are the largest share in 2026.",
+    "sources": [
+      {
+        "title": "India's robot boom, Association for Advancing Automation",
+        "url": "https://www.automate.org/robotics/industry-insights/indias-robot-boom-why-low-labor-costs-are-no-longer-enough-to-keep-factories-manual"
+      },
+      {
+        "title": "Humanoid robots in 2026 for Indian industry, citing IFR installation figures",
+        "url": "https://aopl.tech/blog/humanoid-robots-in-2026-whats-real-for-indian-industry"
+      },
+      {
+        "title": "Global humanoid robot actuators market assessment 2026 to 2036",
+        "url": "https://finance.yahoo.com/technology/articles/global-humanoid-robot-actuators-market-145900646.html"
+      }
+    ]
+  },
+  "origin": {
+    "country": "not-yet-verified",
+    "evidenceId": null
+  },
+  "specs": [
+    {
+      "key": "rated-torque",
+      "label": "Rated torque",
+      "value": 62,
+      "unit": "Nm",
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": "at least the stated value"
+    },
+    {
+      "key": "peak-torque",
+      "label": "Peak torque",
+      "value": 120,
+      "unit": "Nm",
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "ratio",
+      "label": "Gear ratio",
+      "value": "100:1",
+      "unit": null,
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "rated-speed",
+      "label": "Rated output speed",
+      "value": 30,
+      "unit": "rpm",
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "backlash",
+      "label": "Backlash",
+      "value": 20,
+      "unit": "arcsec",
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": "at most the stated value"
+    },
+    {
+      "key": "mass",
+      "label": "Mass",
+      "value": 1.35,
+      "unit": "kg",
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": "plus or minus 0.05 kg"
+    },
+    {
+      "key": "bus",
+      "label": "Bus",
+      "value": "EtherCAT, CAN FD",
+      "unit": null,
+      "evidenceId": "ev-j80-datasheet",
+      "tolerance": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-j80-datasheet",
+      "tier": 1,
+      "summary": "Supplier documents received and read.",
+      "checked": [
+        "Torque, ratio, speed, backlash and mass as stated by the supplier"
+      ],
+      "notChecked": [
+        "Any measurement, no sample received yet",
+        "Who makes the strain wave gear",
+        "Where the magnets are made",
+        "Encoder accuracy"
+      ],
+      "date": "2026-10-06",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "Supplier joint actuator datasheet, revision A",
+          "received": "2026-10-06",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "partsFrom": null,
+  "parts": [
+    {
+      "id": "rear-cover",
+      "name": "Rear cover",
+      "role": "Close the back of the joint and carry the cable gland.",
+      "whatItDoes": "An aluminium cap that seals the electronics end and holds the power and bus cable entry.",
+      "whyItMatters": "The cable entry is where joints let in dust and fluid. A good gland keeps the encoder clean.",
+      "material": "Aluminium alloy",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 10
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the ingress rating of the closed joint",
+        "Check the cable gland suits your cable diameter",
+        "Ask whether the cover can be removed without breaking a seal"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "driver"
+      ]
+    },
+    {
+      "id": "driver",
+      "name": "Motor driver board",
+      "role": "Turn bus commands into motor currents.",
+      "whatItDoes": "A round board with the power stage, current sensors and a processor that runs the field-oriented control loop and talks over EtherCAT or CAN.",
+      "whyItMatters": "The driver decides how smooth and quiet the joint is at low speed, and it is where most of the heat outside the motor is made.",
+      "material": "FR-4 board with power MOSFETs and processor",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 9
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask which bus is supported: EtherCAT, CAN or both",
+        "Ask for the control loop rate",
+        "Ask for the processor and MOSFET makers and origin"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "encoder",
+        "stator"
+      ]
+    },
+    {
+      "id": "encoder",
+      "name": "Encoder",
+      "role": "Measure the joint angle precisely.",
+      "whatItDoes": "A code disc on the motor shaft read by a sensor head. Many joints add a second encoder on the output to see through gear wind-up.",
+      "whyItMatters": "Encoder resolution and accuracy set how precisely the robot can position its tool or foot.",
+      "material": "Glass or metal code disc with optical or magnetic read head",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 8
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the encoder resolution in bits and its accuracy",
+        "Ask whether there is an output-side encoder",
+        "Ask for the encoder maker and origin"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "driver",
+        "rotor"
+      ]
+    },
+    {
+      "id": "stator",
+      "name": "Frameless stator",
+      "role": "Make the rotating magnetic field that drives the joint.",
+      "whatItDoes": "A wound steel lamination stack bonded inside the housing. Frameless means it has no case or bearings of its own.",
+      "whyItMatters": "Winding quality and lamination thickness set torque per amp and heat. The stator is the joint's main heat source.",
+      "material": "Silicon steel laminations with copper windings",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical",
+        "magnetic",
+        "structural"
+      ],
+      "explode": {
+        "order": 2
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for torque constant and winding resistance",
+        "Ask for lamination thickness and steel grade",
+        "Ask for the insulation class of the windings"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "rotor",
+        "housing"
+      ]
+    },
+    {
+      "id": "rotor",
+      "name": "Magnet rotor",
+      "role": "Carry the magnets that the stator field pulls around.",
+      "whatItDoes": "A steel hub with rare-earth magnets bonded on its outside, running inside the stator with a small air gap.",
+      "whyItMatters": "Magnet grade and temperature rating set torque and how hot the joint can run. Magnet origin is often undocumented.",
+      "material": "Steel hub with neodymium magnets",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "explode": {
+        "order": 3
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the magnet grade and maximum temperature",
+        "Ask in writing where the magnets are made",
+        "Ask how the magnets are retained at speed"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator",
+        "wave-generator"
+      ]
+    },
+    {
+      "id": "wave-generator",
+      "name": "Wave generator",
+      "role": "Flex the gear spline in a rotating wave.",
+      "whatItDoes": "An elliptical cam with a thin flexible ball bearing on it, driven by the motor rotor. It pushes the flexspline into an oval that turns with the motor.",
+      "whyItMatters": "The bearing on the cam carries every gear load. It is the life-limiting part of the gear.",
+      "material": "Hardened steel cam with thin-section ball bearing",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving"
+      ],
+      "explode": {
+        "order": 4
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the rated life of the wave generator bearing",
+        "Ask for the lubricant and relube interval",
+        "Ask whether the gear set is from a named gear maker"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "rotor",
+        "flexspline"
+      ]
+    },
+    {
+      "id": "flexspline",
+      "name": "Flexspline",
+      "role": "Carry the output and mesh with the ring gear.",
+      "whatItDoes": "A thin steel cup with fine teeth around its rim. The wave generator flexes it so its teeth engage the ring gear two places at a time.",
+      "whyItMatters": "This is the gear's reduction: two teeth fewer than the ring gear gives ratios like 100 to 1 with almost no backlash. Fatigue of the cup limits peak torque.",
+      "material": "High-strength alloy steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for repeated peak torque and momentary peak torque ratings",
+        "Ask for backlash and lost motion in arc-seconds",
+        "Ask for the steel grade and heat treatment"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "wave-generator",
+        "circular-spline"
+      ]
+    },
+    {
+      "id": "circular-spline",
+      "name": "Circular spline",
+      "role": "Hold the fixed ring of teeth the flexspline walks around.",
+      "whatItDoes": "A rigid steel ring with internal teeth, bolted to the housing.",
+      "whyItMatters": "Ring accuracy sets how smooth the output is. Poor ring teeth show up as torque ripple at the tool.",
+      "material": "Alloy steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 6
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the gear accuracy grade",
+        "Check the ring is pinned as well as bolted",
+        "Ask whether ring and flexspline come as a matched set"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "flexspline",
+        "housing"
+      ]
+    },
+    {
+      "id": "output-bearing",
+      "name": "Cross-roller bearing",
+      "role": "Carry the load on the output, in every direction.",
+      "whatItDoes": "A bearing with rollers set at alternating right angles, so one bearing takes radial, axial and tilting loads.",
+      "whyItMatters": "The output bearing decides how much bending load the joint can take before it deflects or wears.",
+      "material": "Bearing steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "explode": {
+        "order": 7
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the rated tilting moment",
+        "Ask for the bearing maker",
+        "Ask for the preload setting"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "output-flange"
+      ]
+    },
+    {
+      "id": "output-flange",
+      "name": "Output flange",
+      "role": "Bolt the next link of the robot to the joint.",
+      "whatItDoes": "A machined plate on the front of the joint with a bolt circle and dowel holes for the next arm link.",
+      "whyItMatters": "Flange flatness and the dowel fit decide how accurately the next link is located.",
+      "material": "Aluminium or steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "explode": {
+        "order": 11
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Check the bolt circle and dowel pattern against your link",
+        "Ask for flatness of the flange face",
+        "Ask for the maximum bolt torque"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "output-bearing"
+      ]
+    },
+    {
+      "id": "housing",
+      "name": "Housing",
+      "role": "Hold everything in line and carry heat out of the stator.",
+      "whatItDoes": "A machined aluminium tube that the stator is bonded into and the ring gear bolts to. Its outside is the joint's cooling surface.",
+      "whyItMatters": "Housing stiffness keeps the gear in line under load. Its thermal path decides how long the joint can hold rated torque.",
+      "material": "Machined aluminium alloy",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural",
+        "thermal"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [],
+      "appliesTo": [
+        "Robot arms",
+        "Humanoid and legged robots"
+      ],
+      "buyingChecks": [
+        "Ask for the continuous torque rating and the housing temperature at that rating",
+        "Ask for the alloy and surface finish",
+        "Check the mounting pattern against your structure"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator",
+        "circular-spline"
+      ]
+    }
+  ]
+}

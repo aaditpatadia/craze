@@ -13,7 +13,7 @@ import { PartDetails } from "@/components/viewer/PartDetails";
 import { Viewer } from "@/components/viewer/Viewer";
 import { SITE } from "@/lib/config";
 import { AddToQuote, CodeChip } from "@/components/quote/QuoteControls";
-import { findEvidence, getCategory, getManifest, getProduct, getProducts, getSourcing, getSupplier, highestTier } from "@/lib/content";
+import { findEvidence, getCategory, getManifest, getProduct, getProducts, getSourcing, getSupplier, highestTier, supplierSlug } from "@/lib/content";
 import { SECTOR_LABEL, SOURCING_LABEL } from "@/lib/format";
 import { TIER_LABEL, formatSpecValue, plural } from "@/lib/format";
 import { resolveParts } from "@/lib/viewer-data";
@@ -46,8 +46,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const top = highestTier(product);
   const originEv = findEvidence(product, product.origin.evidenceId);
   const sourcing = getSourcing(product.id);
-  const named = sourcing?.candidates.filter((c) => c.consented) ?? [];
-  const unnamed = (sourcing?.candidates.length ?? 0) - named.length;
+  const makers = sourcing?.candidates.length ?? 0;
 
   // Structured data: facts only. No ratings, no offers, no prices.
   const jsonLd = {
@@ -59,7 +58,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     mpn: product.code,
     category: category.name,
     url: `${SITE.url}/parts/${product.id}`,
-    ...(supplier ? { manufacturer: { "@type": "Organization", name: supplier.name } } : {}),
+    brand: { "@type": "Brand", name: SITE.name },
     ...(product.origin.country !== "unknown" && product.origin.country !== "not-yet-verified"
       ? { countryOfAssembly: product.origin.country }
       : {}),
@@ -102,8 +101,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <div className="flex flex-wrap items-center gap-2">
               <SampleDataTag show={product.placeholder} />
               {supplier ? (
-                <Link href={`/suppliers/${supplier.id}`} className="text-sm text-fg-subtle hover:text-fg">
-                  {supplier.name}, {supplier.city}
+                <Link href={`/suppliers/${supplierSlug(supplier)}`} className="text-sm text-fg-subtle hover:text-fg">
+                  Supplier <span className="code-text">{supplier.code}</span>, {supplier.country}
                 </Link>
               ) : null}
             </div>
@@ -111,12 +110,6 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               <CodeChip code={product.code} />
               <span className="text-xs text-fg-subtle">
                 {SECTOR_LABEL[category.sector]}
-                {product.supplierPartNumber ? (
-                  <>
-                    {" "}
-                    · Supplier&apos;s own number: <span className="code-text">{product.supplierPartNumber}</span>
-                  </>
-                ) : null}
               </span>
             </div>
             <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{product.name}</h1>
@@ -251,7 +244,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <SectionHeading
               id="sourcing-title"
               title="Sourcing"
-              lead="Every supplier builds to the same VK code and build sheet, so the part you order is the part you get, whoever makes it."
+              lead="Every supplier builds to the same TM code and build sheet, so the part you order is the part you get, whoever makes it."
             />
           </div>
           <div className="lg:col-span-8">
@@ -273,20 +266,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
                 </dd>
               </div>
             </dl>
-            {named.length ? (
-              <ul className="mt-6 divide-y divide-line border-y border-line text-sm">
-                {named.map((c) => (
-                  <li key={c.name} className="py-3">
-                    <span className="font-medium">{c.name}</span>
-                    {c.city ? <span className="text-fg-subtle">, {c.city}</span> : null}
-                    <p className="mt-1 text-fg-muted">{c.basis}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
             <p className="mt-6 text-sm text-fg-muted">
-              {unnamed > 0
-                ? `${unnamed === 1 ? "One maker is" : `${unnamed} makers are`} being approached. We publish a maker's name only after they agree, and we never repeat their claims as our own.`
+              {makers > 0
+                ? `${makers === 1 ? "One maker is" : `${makers} makers are`} being qualified. You buy from ${SITE.name} under the TM code, and every maker is listed by its TMS code, so a change of maker never changes your drawings or paperwork.`
                 : "We are still looking for makers of this part. Buyers can request it now: we source to the build sheet."}
             </p>
             <p className="mt-4">
@@ -384,14 +366,14 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="flex flex-wrap items-center gap-2 font-semibold">
-                    {supplier.name} <span className="code-text text-xs font-normal text-fg-subtle">{supplier.code}</span>
+                    <span className="code-text">{supplier.code}</span>
                     <SampleDataTag show={supplier.placeholder} />
                   </p>
                   <p className="mt-1 text-sm text-fg-subtle">
-                    {supplier.city}, {supplier.country}
+                    Ships from {supplier.country}. You order from {SITE.name}, not from the maker.
                   </p>
                 </div>
-                <LinkButton href={`/suppliers/${supplier.id}`} variant="secondary">
+                <LinkButton href={`/suppliers/${supplierSlug(supplier)}`} variant="secondary">
                   Supplier profile
                 </LinkButton>
               </div>

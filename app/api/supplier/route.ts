@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     website: str(body.website),
     startedAt: Number(body.startedAt),
   };
-  if (looksLikeSpam(input)) return NextResponse.json({ ok: true, reference: makeReference("VKA") });
+  if (looksLikeSpam(input)) return NextResponse.json({ ok: true, reference: makeReference("TMA") });
 
   const errors = validateSupplier(input);
   if (Object.keys(errors).length > 0) return NextResponse.json({ ok: false, errors }, { status: 422 });
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     const { website: _h, startedAt: _s, ...data } = input;
     void _h;
     void _s;
-    const reference = makeReference("VKA");
+    const reference = makeReference("TMA");
     await storeSubmission({ kind: "supplier", data, reference });
     return NextResponse.json({ ok: true, reference });
   } catch (e) {

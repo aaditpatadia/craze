@@ -1,0 +1,17 @@
+SAMPLE DATA. NOT A REAL REPORT.
+
+This file is a placeholder that stands in for a third-party lab report.
+The lab named in the catalogue ("Northfield Test House") is fictional.
+No test described here took place.
+
+When real evidence arrives, replace this file with the lab's original PDF
+and update documentUrl in content/products/tm-mot-2807-1300.json.
+
+Placeholder fields
+  Report number:   NTH-0820
+  Item:            TM-MOT-2807-1300-A outrunner motor, one unit
+  Propeller:       7 x 4 two-blade
+  Supply:          25.2 V bench supply
+  Peak thrust:     1840 g
+  Peak current:    41.6 A
+  Not tested:      other propellers, other voltages, long-duration heat, flight

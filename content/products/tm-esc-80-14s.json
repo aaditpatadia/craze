@@ -1,0 +1,109 @@
+{
+  "id": "tm-esc-80-14s",
+  "name": "80 A high-voltage ESC, 14S",
+  "category": "escs",
+  "supplierId": "lintel-avionics",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A single-motor 80 A ESC for 6S to 14S heavy-lift aircraft. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": "We have not received a sample. The parts shown are the standard layout for this class, copied from the 45 A ESC, and are not confirmed for this unit.",
+  "lastVerified": "2026-04-18",
+  "keywords": [
+    "esc",
+    "80a",
+    "hv esc",
+    "12s esc",
+    "14s",
+    "heavy lift esc",
+    "speed controller"
+  ],
+  "applications": [
+    "Heavy-lift multirotor",
+    "Agricultural spraying"
+  ],
+  "origin": {
+    "country": "not-yet-verified",
+    "evidenceId": null
+  },
+  "specs": [
+    {
+      "key": "continuous-current",
+      "label": "Continuous current",
+      "value": 80,
+      "unit": "A",
+      "evidenceId": "ev-laesc80-datasheet"
+    },
+    {
+      "key": "max-cells",
+      "label": "Max cells",
+      "value": 14,
+      "unit": "S",
+      "evidenceId": "ev-laesc80-datasheet"
+    },
+    {
+      "key": "mass",
+      "label": "Mass",
+      "value": 88,
+      "unit": "g",
+      "evidenceId": "ev-laesc80-datasheet"
+    },
+    {
+      "key": "protocol",
+      "label": "Input protocol",
+      "value": "PWM, CAN",
+      "unit": null,
+      "evidenceId": "ev-laesc80-datasheet"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-laesc80-datasheet",
+      "tier": 1,
+      "summary": "Supplier datasheet received. No sample yet.",
+      "checked": [
+        "Figures as stated on the supplier datasheet"
+      ],
+      "notChecked": [
+        "Any physical sample",
+        "Any figure by our own measurement",
+        "Country of assembly"
+      ],
+      "date": "2026-04-18",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "Supplier datasheet, revision A",
+          "received": "2026-04-18",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "parts": [],
+  "code": "TM-ESC-80-14S-A",
+  "supplierPartNumber": "LA-ESC80HV",
+  "demand": {
+    "buyers": [
+      "Defence and paramilitary drone programmes",
+      "Agricultural and logistics drone makers"
+    ],
+    "reason": "Every brushless motor needs a speed controller. China's export licensing covers ESCs rated at 48 V and 3 kW or more, the same band as heavy-lift motors, and defence buyers reject drones with Chinese parts.",
+    "sources": [
+      {
+        "title": "Summary of China's drone export controls, Announcement No. 49",
+        "url": "https://droneintelligence.ai/insights/china-drone-export-controls-announcement-49"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "partsFrom": "tm-esc-45-6s"
+}

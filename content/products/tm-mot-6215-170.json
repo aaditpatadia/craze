@@ -1,0 +1,150 @@
+{
+  "id": "tm-mot-6215-170",
+  "code": "TM-MOT-6215-170-A",
+  "name": "6215 170KV heavy-lift motor",
+  "category": "bldc-motors",
+  "supplierId": "harrow-motion",
+  "supplierPartNumber": "HM-6215-170",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A 62 by 15 mm stator outrunner for 22 to 24 inch propellers on 12S to 14S: the class used on spraying and logistics drones. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": "Part descriptions follow the same outrunner layout as the 2807. No claim about this motor's own parts is made until a sample arrives.",
+  "lastVerified": "2026-11-12",
+  "keywords": [
+    "6215",
+    "170kv",
+    "heavy lift motor",
+    "agri drone motor",
+    "spraying drone motor",
+    "12s",
+    "14s",
+    "24 inch"
+  ],
+  "applications": [
+    "Agricultural spraying drones",
+    "Logistics drones",
+    "Heavy-lift multirotors"
+  ],
+  "demand": {
+    "buyers": [
+      "Defence and paramilitary drone programmes",
+      "Agricultural spraying drone makers",
+      "Logistics and heavy-lift drone makers"
+    ],
+    "reason": "Brushless motors are 70 to 80 percent imported in Indian drones. China now requires export licences for drone motors and ESCs rated at 48 V and 3 kW or more, and defence buyers reject drones with Chinese parts. Drone tenders on the government marketplace rose to 355 in 2026 from 190 in 2025.",
+    "sources": [
+      {
+        "title": "Drone Federation India white paper on import dependence, reported by Business Standard, 18 Nov 2026",
+        "url": "https://www.business-standard.com/industry/news/india-drone-industry-indigenisation-supply-chain-china-export-controls-126111800243_1.html"
+      },
+      {
+        "title": "Summary of China's drone export controls, Announcement No. 49",
+        "url": "https://droneintelligence.ai/insights/china-drone-export-controls-announcement-49"
+      },
+      {
+        "title": "Army drone procurement and the ban on Chinese parts, Rediff and Business Standard, 23 Nov 2026",
+        "url": "https://m.rediff.com/news/report/army-buying-chinese-drone-parts-despite-ban/20261123.htm"
+      }
+    ]
+  },
+  "origin": {
+    "country": "not-yet-verified",
+    "evidenceId": null
+  },
+  "specs": [
+    {
+      "key": "kv",
+      "label": "KV",
+      "value": 170,
+      "unit": "rpm/V",
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": "plus or minus 5 percent"
+    },
+    {
+      "key": "stator-diameter",
+      "label": "Stator diameter",
+      "value": 62,
+      "unit": "mm",
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "stator-height",
+      "label": "Stator height",
+      "value": 15,
+      "unit": "mm",
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "configuration",
+      "label": "Configuration",
+      "value": "24N28P",
+      "unit": null,
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "mass",
+      "label": "Mass with leads",
+      "value": 395,
+      "unit": "g",
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": "plus or minus 8 g"
+    },
+    {
+      "key": "max-cells",
+      "label": "Rated cells",
+      "value": 14,
+      "unit": "S",
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "shaft-diameter",
+      "label": "Shaft diameter",
+      "value": 6,
+      "unit": "mm",
+      "evidenceId": "ev-6215-datasheet",
+      "tolerance": "plus 0, minus 0.01 mm"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-6215-datasheet",
+      "tier": 1,
+      "summary": "Supplier documents received and read.",
+      "checked": [
+        "KV, stator size, rated voltage and mass as stated by the supplier",
+        "Magnet grade as stated, without origin"
+      ],
+      "notChecked": [
+        "Any measurement, no sample received yet",
+        "Where the magnets are made",
+        "Thrust or temperature figures"
+      ],
+      "date": "2026-11-12",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "Supplier datasheet, revision A",
+          "received": "2026-11-12",
+          "url": null
+        },
+        {
+          "title": "Magnet supplier grade statement (origin not stated)",
+          "received": "2026-11-12",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "partsFrom": "tm-mot-2807-1300",
+  "parts": []
+}

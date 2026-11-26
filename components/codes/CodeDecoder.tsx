@@ -10,14 +10,14 @@ type KnownPart = { code: string; id: string; name: string };
 
 export function CodeDecoder({ categories, parts }: { categories: CodeCategory[]; parts: KnownPart[] }) {
   const ids = useId();
-  const [value, setValue] = useState(parts[0]?.code ?? "VK-MOT-2807-1300-A");
+  const [value, setValue] = useState(parts[0]?.code ?? "TM-MOT-2807-1300-A");
   const d = decodeCode(value, categories);
   const match = d.ok ? parts.find((p) => p.code === d.code || p.code.replace(/-[A-Z]$/, "") === d.code.replace(/-[A-Z]$/, "")) : undefined;
 
   return (
     <div className="rounded-xl border border-line p-6 sm:p-8">
       <label htmlFor={`${ids}-in`} className="text-sm font-medium">
-        Decode a VK code
+        Decode a TM code
       </label>
       <input
         id={`${ids}-in`}
@@ -35,7 +35,7 @@ export function CodeDecoder({ categories, parts }: { categories: CodeCategory[];
         ) : (
           <>
             <ol className="flex flex-wrap items-stretch gap-2">
-              <Segment label="Prefix" value={d.prefix} note="Verkod" />
+              <Segment label="Prefix" value={d.prefix} note="Timule" />
               <Segment label="Category" value={d.categoryCode} note={d.category?.name ?? "Not a category yet"} warn={!d.category} />
               {d.specs.map((s, i) => (
                 <Segment key={`${s}-${i}`} label={`Spec ${i + 1}`} value={s} />

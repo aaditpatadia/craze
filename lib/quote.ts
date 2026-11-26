@@ -8,8 +8,8 @@ import { useSyncExternalStore } from "react";
 
 export type QuoteLine = { code: string; id: string; name: string; quantity: number };
 
-const KEY = "verkod.quote.v1";
-const EVENT = "verkod-quote-change";
+const KEY = "timule.quote.v1";
+const EVENT = "timule-quote-change";
 const EMPTY: QuoteLine[] = [];
 
 let cache: { raw: string | null; lines: QuoteLine[] } = { raw: null, lines: EMPTY };

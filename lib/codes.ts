@@ -1,10 +1,10 @@
 /**
- * Verkod numbering. Zod-free so client components can import it.
+ * Timule numbering. Zod-free so client components can import it.
  *
- *   VK-MOT-2807-1300-A     part code: prefix, category, spec segments, revision
- *   VKS-001                supplier code
- *   VKQ-261126-7KQ4        quote or sourcing request reference
- *   VKA-261126-M2XD        supplier application reference
+ *   TM-MOT-2807-1300-A     part code: prefix, category, spec segments, revision
+ *   TMS-001                supplier code
+ *   TMQ-261126-7KQ4        quote or sourcing request reference
+ *   TMA-261126-M2XD        supplier application reference
  */
 
 export type CodeCategory = { code: string; id: string; name: string; sector: string };
@@ -35,13 +35,13 @@ export const SPEC_HINTS: Record<string, string> = {
   CPL: "Generation, then fin type: SKV for skived copper",
 };
 
-/** Normalises what people type: lower case, spaces, missing hyphens after VK. */
+/** Normalises what people type: lower case, spaces, missing hyphens after TM. */
 export function normaliseCode(raw: string): string {
   return raw
     .trim()
     .toUpperCase()
     .replace(/\s+/g, "-")
-    .replace(/^VK(?=[A-Z]{3})/, "VK-")
+    .replace(/^TM(?=[A-Z]{3})/, "TM-")
     .replace(/-+/g, "-");
 }
 
@@ -49,8 +49,8 @@ export function decodeCode(raw: string, categories: CodeCategory[]): DecodedCode
   const code = normaliseCode(raw);
   if (!code) return { ok: false, reason: "Type a code to decode it." };
   const parts = code.split("-");
-  if (parts[0] !== "VK") return { ok: false, reason: "Verkod part codes start with VK." };
-  if (!parts[1] || !/^[A-Z]{3}$/.test(parts[1])) return { ok: false, reason: "After VK comes a three letter category code, for example MOT." };
+  if (parts[0] !== "TM") return { ok: false, reason: "Timule part codes start with TM." };
+  if (!parts[1] || !/^[A-Z]{3}$/.test(parts[1])) return { ok: false, reason: "After TM comes a three letter category code, for example MOT." };
   const category = categories.find((c) => c.code === parts[1]) ?? null;
   const rest = parts.slice(2);
   if (rest.length === 0) return { ok: false, reason: "The code needs spec segments after the category, for example 2807-1300." };
@@ -59,7 +59,7 @@ export function decodeCode(raw: string, categories: CodeCategory[]): DecodedCode
   return {
     ok: true,
     code: hasRevision ? code : `${code}-A`,
-    prefix: "VK",
+    prefix: "TM",
     category,
     categoryCode: parts[1],
     specs: hasRevision ? rest.slice(0, -1) : rest,
@@ -72,8 +72,8 @@ export const codeToId = (code: string) => code.toLowerCase().replace(/-[a-z]$/, 
 
 const ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 
-/** Short human-readable reference, for example VKQ-261126-7KQ4. No 0, O, 1, I or L. */
-export function makeReference(prefix: "VKQ" | "VKA", now = new Date()): string {
+/** Short human-readable reference, for example TMQ-261126-7KQ4. No 0, O, 1, I or L. */
+export function makeReference(prefix: "TMQ" | "TMA", now = new Date()): string {
   const d = now.toISOString().slice(2, 10).replace(/-/g, "");
   const bytes = new Uint8Array(4);
   crypto.getRandomValues(bytes);

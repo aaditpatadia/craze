@@ -7,7 +7,7 @@ import { SECTOR_LABEL } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Sectors: drones, robotics and data centers",
-  description: "The components Verkod lists for drones, robots and data centers, chosen by what buyers need and cannot easily source.",
+  description: "The components Timule lists for drones, robots and data centers, chosen by what buyers need and cannot easily source.",
   alternates: { canonical: "/sectors" },
 };
 
@@ -27,7 +27,7 @@ export default function SectorsPage() {
     <>
       <PageHeader
         title="Three sectors, one way of buying"
-        lead="Whatever the part, it has a VK code, an exploded view, a build sheet and the evidence behind every claim."
+        lead="Whatever the part, it has a TM code, an exploded view, a build sheet and the evidence behind every claim."
       />
       {sectors.map((s) => {
         const cats = categories.filter((c) => c.sector === s);
@@ -66,7 +66,7 @@ export default function SectorsPage() {
                         </div>
                         <h3 className="mt-4 flex items-baseline justify-between gap-3 font-semibold">
                           {c.name}
-                          <span className="code-text text-xs font-normal text-fg-subtle">VK-{c.code}</span>
+                          <span className="code-text text-xs font-normal text-fg-subtle">TM-{c.code}</span>
                         </h3>
                         <p className="mt-1 text-sm text-fg-subtle">{c.summary}</p>
                         <p className="tabular mt-auto pt-4 text-sm text-fg-muted">{count === 1 ? "1 part" : `${count} parts`}</p>

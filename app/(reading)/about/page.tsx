@@ -15,7 +15,7 @@ export default function AboutPage() {
     <>
       <PageHeader
         title="What we check, how, and our limits"
-        lead={`${SITE.name} gives every critical drone, robotics and data center part one VK code, with the evidence behind each claim, so engineers can decide what to trust before they buy.`}
+        lead={`${SITE.name} gives every critical drone, robotics and data center part one TM code, with the evidence behind each claim, so engineers can decide what to trust before they buy.`}
       />
       <Container className="pb-24">
         <Prose>

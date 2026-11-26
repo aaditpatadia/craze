@@ -67,7 +67,7 @@ export type SupplierInput = {
   email: string;
   city: string;
   role: string;
-  /** VK codes or categories the maker can build. */
+  /** TM codes or categories the maker can build. */
   parts: string;
   capacity: string;
   origin: string;
@@ -84,7 +84,7 @@ export function validateSupplier(v: SupplierInput): FieldErrors<SupplierInput> {
   else if (FREE_EMAIL_DOMAINS.includes(emailDomain(v.email))) e.email = "Use your company email.";
   if (v.city.trim().length < 2) e.city = "Enter the city where the parts are made.";
   if (v.role.trim().length < 2) e.role = "Enter your role.";
-  if (v.parts.trim().length < 3) e.parts = "List the VK codes or kinds of part you can build.";
+  if (v.parts.trim().length < 3) e.parts = "List the TM codes or kinds of part you can build.";
   if (v.capacity.trim().length < 1) e.capacity = "Give a rough monthly capacity, for example 2,000 units.";
   if (!(ORIGIN_KNOWLEDGE as readonly string[]).includes(v.origin)) e.origin = "Choose one.";
   if (v.parts.length > 4000) e.parts = "Keep this under 4,000 characters.";

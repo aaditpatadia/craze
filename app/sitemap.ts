@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/config";
-import { getCategories, getProducts, getSuppliers } from "@/lib/content";
+import { getCategories, getProducts, getSuppliers, supplierSlug } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const u = (p: string) => `${SITE.url}${p}`;
@@ -12,6 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .map((c) => ({ url: u(`/categories/${c.id}`) })),
     ...getProducts().map((p) => ({ url: u(`/parts/${p.id}`), lastModified: p.lastVerified })),
     ...getProducts().map((p) => ({ url: u(`/sheets/${p.id}`), lastModified: p.lastVerified })),
-    ...getSuppliers().map((s) => ({ url: u(`/suppliers/${s.id}`), lastModified: s.lastVerified })),
+    ...getSuppliers().map((s) => ({ url: u(`/suppliers/${supplierSlug(s)}`), lastModified: s.lastVerified })),
   ];
 }

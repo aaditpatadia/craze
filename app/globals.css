@@ -255,7 +255,7 @@ a {
   }
 }
 
-/* VK codes: monospaced, never broken across lines. */
+/* TM codes: monospaced, never broken across lines. */
 .code-text {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
   font-variant-numeric: tabular-nums;

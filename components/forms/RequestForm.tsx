@@ -109,7 +109,7 @@ function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { ini
         </p>
         {status.reference ? (
           <p className="mt-4 text-sm text-fg-muted">
-            Your reference: <span className="code-text font-medium text-fg">{status.reference}</span>. Quote it in any reply. We use the same VK codes with the supplier.
+            Your reference: <span className="code-text font-medium text-fg">{status.reference}</span>. Quote it in any reply. We use the same TM codes with the supplier.
           </p>
         ) : null}
         <div className="mt-6 flex flex-wrap gap-3">
@@ -134,7 +134,7 @@ function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { ini
 
   const hints = {
     email: "A company address. We do not quote to personal email.",
-    parts: "VK codes, part names, supplier numbers or specs. One per line is easiest.",
+    parts: "TM codes, part names, supplier numbers or specs. One per line is easiest.",
   };
 
   return (

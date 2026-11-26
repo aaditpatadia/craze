@@ -72,8 +72,8 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
     () =>
       inCategory.filter((i) => {
         if (query) {
-          const hay = [i.name, i.code, ...i.aliases, ...i.keywords, i.categoryName].join(" ").toLowerCase();
-          const codes = [i.code, ...i.aliases].map((c) => c.toLowerCase().replace(/[^a-z0-9]/g, ""));
+          const hay = [i.name, i.code, ...i.keywords, i.categoryName].join(" ").toLowerCase();
+          const codes = [i.code].map((c) => c.toLowerCase().replace(/[^a-z0-9]/g, ""));
           const words = query.split(/\s+/).filter(Boolean);
           const byCode = queryCode.length >= 3 && codes.some((c) => c.includes(queryCode));
           if (!byCode && !words.every((w) => hay.includes(w))) return false;
@@ -126,7 +126,7 @@ export function Catalog({ items, categories, fixedCategory }: Props) {
               <input
                 id={`${ids}-q`}
                 type="search"
-                placeholder="Name, VK code or supplier number"
+                placeholder="Name or TM code"
                 defaultValue={params.get("q") ?? ""}
                 onChange={(e) => {
                   const v = e.target.value;

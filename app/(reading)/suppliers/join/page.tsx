@@ -8,25 +8,25 @@ import { getCatalog, getLiveCategories } from "@/lib/content";
 import { SECTOR_LABEL } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: "For suppliers: build to a VK code",
+  title: "For suppliers: build to a TM code",
   description:
-    "Make drone, robotics or data center parts? Build to a Verkod code and sheet. Buyers see your evidence, not a sales pitch, and your name only appears once you agree.",
+    "Make drone, robotics or data center parts? Build to a Timule code and sheet. Buyers see your evidence, not a sales pitch, and you are listed by your supplier code, never by name.",
   alternates: { canonical: "/suppliers/join" },
 };
 
 const why = [
-  { icon: "code" as const, title: "One code, one sheet", body: "Every part has a VK code and a build sheet: values, acceptance bands, tests and documents. You quote against something exact." },
+  { icon: "code" as const, title: "One code, one sheet", body: "Every part has a TM code and a build sheet: values, acceptance bands, tests and documents. You quote against something exact." },
   { icon: "document" as const, title: "Evidence instead of a pitch", body: "Your documents, our sample measurements and outside lab reports are shown to buyers as they are, with what was not checked." },
   { icon: "cube" as const, title: "Your part, explained", body: "Each listing carries an exploded 3D view and a plain description of every internal part, so buyers understand what they are paying for." },
   { icon: "pin" as const, title: "Origin is an asset", body: "Defence and government buyers must show where parts come from. A maker who documents origin wins those orders." },
 ];
 
 const steps = [
-  "Apply with the VK codes you can build.",
+  "Apply with the TM codes you can build.",
   "We send the build sheets and the documents we need first.",
   "You send datasheets and origin declarations. We record them as Tier 1 evidence.",
   "You send a sample. We measure it against the sheet: Tier 2.",
-  "When you agree, your name and evidence appear on the part page. Buyers order by the VK code and we send you the order under the same code.",
+  "Your evidence appears on the part page under your TMS supplier code, not your name. Buyers order from us by the TM code and we send you the order under the same code.",
 ];
 
 export default function SupplierJoinPage() {
@@ -39,7 +39,7 @@ export default function SupplierJoinPage() {
       <PageHeader
         eyebrow={<span>For suppliers</span>}
         title="Build to the code. Show your evidence."
-        lead="We list the parts buyers need most. If you make one of them, quote against its VK code and build sheet. Buyers see what you can prove."
+        lead="We list the parts buyers need most. If you make one of them, quote against its TM code and build sheet. Buyers see what you can prove."
       />
 
       <Container className="pb-16">
@@ -76,7 +76,7 @@ export default function SupplierJoinPage() {
             </ol>
             <p className="mt-8 flex gap-2 text-sm text-fg-subtle">
               <Icon name="info" size={16} className="mt-0.5 shrink-0" />
-              Applying is free and commits you to nothing. We never publish your name, claims or documents without your agreement.
+              Applying is free and commits you to nothing. Buyers never see your name, and we never publish your claims or documents without your agreement.
             </p>
           </aside>
         </Container>

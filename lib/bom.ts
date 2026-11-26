@@ -118,12 +118,12 @@ function itemTokens(item: CatalogItem): Set<string> {
 
 const normCode = (v: string) => v.toUpperCase().replace(/[^A-Z0-9]/g, "");
 
-/** Exact hits on a VK code (with or without the revision letter) or a supplier's own part number. */
+/** Exact hits on a TM code, with or without the revision letter. */
 function exactMatch(row: BomRow, catalog: CatalogItem[]): CatalogItem | undefined {
   const cells = [row.part, row.spec].map(normCode).filter((c) => c.length >= 5);
   if (!cells.length) return undefined;
   return catalog.find((item) => {
-    const keys = [item.code, item.code.replace(/-[A-Z]$/, ""), ...item.aliases].map(normCode);
+    const keys = [item.code, item.code.replace(/-[A-Z]$/, "")].map(normCode);
     return cells.some((c) => keys.includes(c));
   });
 }
@@ -166,7 +166,7 @@ const csvCell = (v: string | number | null) => {
 };
 
 export function matchesToCsv(matches: BomMatch[], siteUrl: string): string {
-  const head = ["Line", "Your part", "Quantity", "Your spec", "Status", "VK code", "Matched part", "Supplier", "Origin", "Highest evidence", "Link"];
+  const head = ["Line", "Your part", "Quantity", "Your spec", "Status", "TM code", "Matched part", "Supplier", "Origin", "Highest evidence", "Link"];
   const lines = matches.map((m) =>
     [
       m.row.line,
@@ -176,7 +176,7 @@ export function matchesToCsv(matches: BomMatch[], siteUrl: string): string {
       m.item ? (m.confidence === "strong" ? "Strong match" : "Possible match, please confirm") : "No match yet",
       m.item?.code ?? "",
       m.item?.name ?? "",
-      m.item?.supplierName ?? "",
+      m.item?.supplierCode ?? "",
       m.item ? originLabel(m.item.originCountry) : "",
       m.item ? `Tier ${m.item.highestTier}: ${TIER_LABEL[m.item.highestTier]}` : "",
       m.item ? `${siteUrl}/parts/${m.item.id}` : "",
@@ -195,5 +195,5 @@ H7 flight controller,2,dual IMU
 650mm quad frame,2,folding arms
 5000mAh 6S LiPo battery,4,
 GNSS module,2,dual band
-VK-FAN-8056-12,40,
-HM-4114-400,8,`;
+TM-FAN-8056-12,40,
+TM-MOT-4114-400,8,`;

@@ -1,0 +1,369 @@
+{
+  "id": "tm-fan-8056-12",
+  "code": "TM-FAN-8056-12-A",
+  "name": "80 x 56 mm server fan, 12 V",
+  "category": "server-fans",
+  "supplierId": "corran-thermal",
+  "supplierPartNumber": "CT-8056",
+  "placeholder": true,
+  "status": "live",
+  "summary": "A high static pressure 80 mm fan for 2U servers and storage, with PWM control and tach output. Sample data: the supplier and every figure here are fictional.",
+  "modelSource": "illustrative",
+  "partsNote": null,
+  "lastVerified": "2026-10-14",
+  "keywords": [
+    "server fan",
+    "8056",
+    "80mm fan",
+    "pwm fan",
+    "2u fan",
+    "high static pressure"
+  ],
+  "applications": [
+    "2U servers",
+    "Storage arrays",
+    "Network switches"
+  ],
+  "demand": {
+    "buyers": [
+      "Server and storage assemblers",
+      "Data center operators replacing failed fans",
+      "Network equipment makers"
+    ],
+    "reason": "India's data center capacity is set to triple from 1.6 GW in mid-2026 to 6 GW by 2029, and the India data center cooling market is forecast to grow several times over by 2035. Fans are the moving part in air-cooled servers that wears out.",
+    "sources": [
+      {
+        "title": "JLL India data centre 2026 mid-year report",
+        "url": "https://www.jll.com/en-in/insights/market-dynamics/india-data-centers"
+      },
+      {
+        "title": "India data center cooling market outlook, Grand View Research",
+        "url": "https://www.grandviewresearch.com/horizon/outlook/data-center-cooling-market/india"
+      }
+    ]
+  },
+  "origin": {
+    "country": "not-yet-verified",
+    "evidenceId": null
+  },
+  "specs": [
+    {
+      "key": "frame-size",
+      "label": "Frame size",
+      "value": "80 x 80 x 56",
+      "unit": "mm",
+      "evidenceId": "ev-8056-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "max-speed",
+      "label": "Max speed",
+      "value": 16000,
+      "unit": "rpm",
+      "evidenceId": "ev-8056-datasheet",
+      "tolerance": "plus or minus 10 percent"
+    },
+    {
+      "key": "airflow",
+      "label": "Max airflow",
+      "value": 135,
+      "unit": "CFM",
+      "evidenceId": "ev-8056-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "static-pressure",
+      "label": "Max static pressure",
+      "value": 2.8,
+      "unit": "inH2O",
+      "evidenceId": "ev-8056-datasheet",
+      "tolerance": null
+    },
+    {
+      "key": "rated-current",
+      "label": "Rated current",
+      "value": 3.2,
+      "unit": "A",
+      "evidenceId": "ev-8056-datasheet",
+      "tolerance": "at most the stated value"
+    },
+    {
+      "key": "bearing",
+      "label": "Bearing",
+      "value": "Dual ball",
+      "unit": null,
+      "evidenceId": "ev-8056-datasheet",
+      "tolerance": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-8056-datasheet",
+      "tier": 1,
+      "summary": "Supplier documents received and read.",
+      "checked": [
+        "Speed, airflow, pressure, current and bearing type as stated by the supplier"
+      ],
+      "notChecked": [
+        "Any measurement, no sample received yet",
+        "Bearing rated life",
+        "Driver chip and magnet origin"
+      ],
+      "date": "2026-10-14",
+      "checkedBy": "Timule inspection team",
+      "documentUrl": null,
+      "documents": [
+        {
+          "title": "Supplier fan datasheet with PQ curve",
+          "received": "2026-10-14",
+          "url": null
+        }
+      ],
+      "measurements": [],
+      "lab": null
+    }
+  ],
+  "photos": [],
+  "photoSpin": null,
+  "partsFrom": null,
+  "parts": [
+    {
+      "id": "frame",
+      "name": "Fan frame",
+      "role": "Hold the motor and shape the airflow.",
+      "whatItDoes": "A square moulded frame with a round venturi, four mounting corners and struts that carry the motor hub.",
+      "whyItMatters": "Venturi shape and blade clearance decide how much pressure the fan can build against dense heatsinks.",
+      "material": "Glass-filled PBT or PC plastic",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "structural"
+      ],
+      "explode": {
+        "order": 0
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Ask for the plastic and its flammability rating",
+        "Check the mounting holes and frame depth against your chassis",
+        "Ask for the tip clearance"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator"
+      ]
+    },
+    {
+      "id": "driver",
+      "name": "Driver board",
+      "role": "Run the motor and report its speed.",
+      "whatItDoes": "A small ring board in the hub with the motor driver chip and the Hall sensor. It reads the PWM speed signal and sends back a tach pulse.",
+      "whyItMatters": "The driver sets how the fan behaves when a signal is lost and whether it restarts after a stall. Both matter for server uptime.",
+      "material": "FR-4 board with driver IC",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 1
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Ask what speed the fan runs at with no PWM signal",
+        "Ask for locked-rotor protection and restart behaviour",
+        "Ask for the driver chip maker and origin"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator",
+        "cable"
+      ]
+    },
+    {
+      "id": "stator",
+      "name": "Stator",
+      "role": "Make the field that spins the impeller.",
+      "whatItDoes": "A small wound steel stator on a bearing tube in the hub. The impeller's magnet ring turns around it.",
+      "whyItMatters": "Winding and steel quality set power draw. At thousands of fans per hall, a watt each adds up.",
+      "material": "Silicon steel with copper windings",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical",
+        "magnetic"
+      ],
+      "explode": {
+        "order": 2
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Ask for current at rated speed",
+        "Ask for the winding insulation class",
+        "Ask for efficiency at the operating point"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "magnet-ring",
+        "bearings"
+      ]
+    },
+    {
+      "id": "bearings",
+      "name": "Ball bearings",
+      "role": "Carry the spinning impeller.",
+      "whatItDoes": "Two small ball bearings in the stator tube that the impeller shaft runs in.",
+      "whyItMatters": "Bearing life usually sets fan life. Sleeve bearings cost less and fail sooner in hot servers.",
+      "material": "Bearing steel",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving"
+      ],
+      "explode": {
+        "order": 3
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Ask for the bearing type: dual ball or sleeve",
+        "Ask for rated life at 40 C and at 70 C",
+        "Ask for the bearing maker"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator",
+        "impeller"
+      ]
+    },
+    {
+      "id": "magnet-ring",
+      "name": "Magnet ring",
+      "role": "Turn with the impeller around the stator.",
+      "whatItDoes": "A bonded magnet ring inside the impeller hub.",
+      "whyItMatters": "A weak or cracked ring lowers torque, so the fan cannot hold speed against back pressure.",
+      "material": "Bonded ferrite or neodymium in a steel cup",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "explode": {
+        "order": 4
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Ask for the magnet material",
+        "Ask for the magnet origin",
+        "Check the ring is retained, not only glued"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "stator",
+        "impeller"
+      ]
+    },
+    {
+      "id": "impeller",
+      "name": "Impeller",
+      "role": "Push air through the server.",
+      "whatItDoes": "A moulded hub with seven swept blades and a steel shaft. It spins at up to 16,000 rpm.",
+      "whyItMatters": "Blade shape trades airflow, pressure and noise. Balance sets vibration, which harms nearby hard drives.",
+      "material": "Glass-filled PBT with steel shaft",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "moving"
+      ],
+      "explode": {
+        "order": 5
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Ask for the PQ curve at your operating speed",
+        "Ask for balance grade",
+        "Ask for the blade material and its temperature rating"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "magnet-ring",
+        "bearings"
+      ]
+    },
+    {
+      "id": "cable",
+      "name": "Cable and connector",
+      "role": "Bring power and PWM in, send the tach signal out.",
+      "whatItDoes": "A four-wire lead for 12 V, ground, PWM and tach, ending in a keyed connector.",
+      "whyItMatters": "Pinouts vary between server makers. A wrong pinout is the most common reason a replacement fan does not work.",
+      "material": "PVC-insulated wire with nylon connector",
+      "grade": null,
+      "gradeEvidenceId": null,
+      "originCountry": "not-yet-verified",
+      "originEvidenceId": null,
+      "layers": [
+        "electrical"
+      ],
+      "explode": {
+        "order": 6
+      },
+      "specs": [],
+      "appliesTo": [
+        "1U and 2U servers",
+        "Storage arrays",
+        "Network switches"
+      ],
+      "buyingChecks": [
+        "Check the pinout against your board",
+        "Ask for cable length options",
+        "Ask whether a hot-swap carrier is available"
+      ],
+      "evidence": [],
+      "interactsWith": [
+        "driver"
+      ]
+    }
+  ]
+}

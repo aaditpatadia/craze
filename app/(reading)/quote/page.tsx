@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  "You send the list. We reply with a VKQ reference.",
-  "We send each VK code and its build sheet to the makers we work with.",
+  "You send the list. We reply with a TMQ reference.",
+  "We send each TM code and its build sheet to the makers we work with.",
   "For each part we can source, you get a price and lead time, with the evidence tier we hold and what is not yet checked.",
 ];
 

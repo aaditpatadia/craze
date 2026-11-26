@@ -12,7 +12,7 @@ import { Icon } from "@/components/ui/Icon";
 const noop = () => () => {};
 const useHydrated = () => useSyncExternalStore(noop, () => true, () => false);
 
-/** A VK code with a copy button. The code is the thing buyers and suppliers both quote. */
+/** A TM code with a copy button. The code is the thing buyers and suppliers both quote. */
 export function CodeChip({ code, size = "md", className }: { code: string; size?: "sm" | "md"; className?: string }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {

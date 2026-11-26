@@ -5,7 +5,7 @@ import { getCatalog, getLiveCategories } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "All parts",
-  description: "Drone, robotics and data center components, each with a VK code, an exploded 3D view, its evidence tier and origin.",
+  description: "Drone, robotics and data center components, each with a TM code, an exploded 3D view, its evidence tier and origin.",
   alternates: { canonical: "/parts" },
 };
 

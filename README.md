@@ -37,7 +37,7 @@ marked `"placeholder": true` and shown with a visible "Sample data" tag, plus a 
 banner. Set `USE_PLACEHOLDER_DATA = false` in `lib/config.ts` to remove every placeholder
 record from the site. Pages then show their empty states.
 
-The brand name "Verkod" is set in `lib/config.ts`. The legal pages are
+The brand name "Timule" is set in `lib/config.ts`. The legal pages are
 placeholders and must be replaced before launch.
 
 ## How to add a category

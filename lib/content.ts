@@ -125,6 +125,9 @@ export const getProduct = (id: string) => getProducts().find((p) => p.id === id)
 export const getProductsInCategory = (id: string) => getProducts().filter((p) => p.category === id);
 export const getSuppliers = () => getContent().suppliers;
 export const getSupplier = (id: string) => getSuppliers().find((s) => s.id === id);
+/** Public URL segment for a supplier: its TMS code in lower case. Buyers never see the maker name. */
+export const supplierSlug = (s: { code: string }) => s.code.toLowerCase();
+export const getSupplierBySlug = (slug: string) => getSuppliers().find((s) => supplierSlug(s) === slug.toLowerCase());
 export const getSourcing = (productId: string) => getContent().sourcing.find((s) => s.productId === productId);
 export const getProductByCode = (code: string) => getProducts().find((p) => p.code === code.trim().toUpperCase());
 export const getManifest = (productId: string): Manifest | undefined => getContent().manifests[productId];
@@ -150,14 +153,12 @@ export function highestTier(product: Product): Tier {
 export type CatalogItem = {
   id: string;
   code: string;
-  /** Other numbers buyers may know this part by, such as the supplier's own part number. */
-  aliases: string[];
   sector: string;
   name: string;
   category: string;
   categoryName: string;
-  supplierId: string;
-  supplierName: string;
+  /** TMS code. Buyers never see the maker's name. */
+  supplierCode: string;
   summary: string;
   placeholder: boolean;
   modelSource: Product["modelSource"];
@@ -176,13 +177,11 @@ export function toCatalogItem(p: Product): CatalogItem {
   return {
     id: p.id,
     code: p.code,
-    aliases: p.supplierPartNumber ? [p.supplierPartNumber] : [],
     sector: cat?.sector ?? "aerial",
     name: p.name,
     category: p.category,
     categoryName: cat?.name ?? p.category,
-    supplierId: p.supplierId,
-    supplierName: sup?.name ?? "Supplier not listed",
+    supplierCode: sup?.code ?? "Supplier not listed",
     summary: p.summary,
     placeholder: p.placeholder,
     modelSource: p.modelSource,

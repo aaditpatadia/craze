@@ -1,6 +1,6 @@
 [
   {
-    "productId": "vk-mot-2807-1300",
+    "productId": "tm-mot-2807-1300",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "productId": "vk-mot-4114-400",
+    "productId": "tm-mot-4114-400",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "productId": "vk-mot-6215-170",
+    "productId": "tm-mot-6215-170",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -70,7 +70,7 @@
     ]
   },
   {
-    "productId": "vk-esc-45-6s",
+    "productId": "tm-esc-45-6s",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -91,7 +91,7 @@
     ]
   },
   {
-    "productId": "vk-esc-80-14s",
+    "productId": "tm-esc-80-14s",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -105,13 +105,13 @@
     ]
   },
   {
-    "productId": "vk-fct-h7-30",
+    "productId": "tm-fct-h7-30",
     "status": "searching",
     "updated": "2026-11-25",
     "candidates": []
   },
   {
-    "productId": "vk-gns-l1l5-m",
+    "productId": "tm-gns-l1l5-m",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -139,7 +139,7 @@
     ]
   },
   {
-    "productId": "vk-prp-1550-f2",
+    "productId": "tm-prp-1550-f2",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -153,7 +153,7 @@
     ]
   },
   {
-    "productId": "vk-prp-5143-3",
+    "productId": "tm-prp-5143-3",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -167,31 +167,31 @@
     ]
   },
   {
-    "productId": "vk-frm-650-x4",
+    "productId": "tm-frm-650-x4",
     "status": "searching",
     "updated": "2026-11-25",
     "candidates": []
   },
   {
-    "productId": "vk-act-80-100",
+    "productId": "tm-act-80-100",
     "status": "searching",
     "updated": "2026-11-25",
     "candidates": []
   },
   {
-    "productId": "vk-whl-150-48",
+    "productId": "tm-whl-150-48",
     "status": "searching",
     "updated": "2026-11-25",
     "candidates": []
   },
   {
-    "productId": "vk-fan-8056-12",
+    "productId": "tm-fan-8056-12",
     "status": "searching",
     "updated": "2026-11-25",
     "candidates": []
   },
   {
-    "productId": "vk-psu-2400-crps",
+    "productId": "tm-psu-2400-crps",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [
@@ -212,7 +212,7 @@
     ]
   },
   {
-    "productId": "vk-cpl-g1-skv",
+    "productId": "tm-cpl-g1-skv",
     "status": "candidates",
     "updated": "2026-11-25",
     "candidates": [

@@ -1,0 +1,735 @@
+{
+  "productId": "tm-act-80-100",
+  "modelSource": "illustrative",
+  "disclaimer": "Simplified illustration, not the supplier's exact design",
+  "assembledGlb": null,
+  "procedural": null,
+  "camera": {
+    "position": [
+      3.6,
+      1.8,
+      3.8
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "parts": [
+    {
+      "id": "rear-cover",
+      "name": "Rear cover",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            40,
+            3
+          ],
+          "pos": [
+            0,
+            -37,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium-dark",
+          "repeat": null
+        },
+        {
+          "type": "cyl",
+          "d": [
+            6,
+            8
+          ],
+          "pos": [
+            0,
+            -42,
+            14
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "plastic",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 1.1,
+      "order": 10,
+      "layers": [
+        "structural"
+      ],
+      "material": "aluminium-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The rear cover closes the electronics end.",
+      "hotspots": []
+    },
+    {
+      "id": "driver",
+      "name": "Motor driver board",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            34,
+            1.6
+          ],
+          "pos": [
+            0,
+            -31,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "pcb",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            5,
+            1,
+            6
+          ],
+          "pos": [
+            -14,
+            -29.7,
+            -8
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": {
+            "n": 3,
+            "step": [
+              7,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "type": "box",
+          "d": [
+            9,
+            1.2,
+            9
+          ],
+          "pos": [
+            12,
+            -29.6,
+            8
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.85,
+      "order": 9,
+      "layers": [
+        "electrical"
+      ],
+      "material": "pcb",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The driver board sits behind the encoder.",
+      "hotspots": []
+    },
+    {
+      "id": "encoder",
+      "name": "Encoder",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            18,
+            1
+          ],
+          "pos": [
+            0,
+            -25,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "glass",
+          "repeat": null
+        },
+        {
+          "type": "box",
+          "d": [
+            8,
+            3,
+            6
+          ],
+          "pos": [
+            0,
+            -22.5,
+            22
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "chip",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.6,
+      "order": 8,
+      "layers": [
+        "electrical"
+      ],
+      "material": "glass",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The encoder disc turns with the motor rotor.",
+      "hotspots": []
+    },
+    {
+      "id": "stator",
+      "name": "Frameless stator",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            22,
+            33,
+            20
+          ],
+          "pos": [
+            0,
+            -8,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "silicon-steel",
+          "repeat": null
+        },
+        {
+          "type": "torus",
+          "d": [
+            27.5,
+            2.6
+          ],
+          "pos": [
+            0,
+            2.5,
+            0
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "copper",
+          "repeat": null
+        },
+        {
+          "type": "torus",
+          "d": [
+            27.5,
+            2.6
+          ],
+          "pos": [
+            0,
+            -18.5,
+            0
+          ],
+          "rot": [
+            90,
+            0,
+            0
+          ],
+          "mat": "copper",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "distance": 0.32,
+      "order": 2,
+      "layers": [
+        "electrical",
+        "magnetic",
+        "structural"
+      ],
+      "material": "silicon-steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The stator sits inside the housing around the rotor.",
+      "hotspots": []
+    },
+    {
+      "id": "rotor",
+      "name": "Magnet rotor",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            10,
+            21.4,
+            20
+          ],
+          "pos": [
+            0,
+            -8,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "magnet",
+          "repeat": null
+        },
+        {
+          "type": "tube",
+          "d": [
+            6,
+            10,
+            28
+          ],
+          "pos": [
+            0,
+            -8,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.12,
+      "order": 3,
+      "layers": [
+        "moving",
+        "magnetic"
+      ],
+      "material": "magnet",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The rotor runs inside the stator.",
+      "hotspots": []
+    },
+    {
+      "id": "wave-generator",
+      "name": "Wave generator",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            19,
+            7
+          ],
+          "pos": [
+            0,
+            10,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel-dark",
+          "repeat": null
+        },
+        {
+          "type": "tube",
+          "d": [
+            19,
+            21,
+            6
+          ],
+          "pos": [
+            0,
+            10,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.3,
+      "order": 4,
+      "layers": [
+        "moving"
+      ],
+      "material": "steel-dark",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The wave generator sits on the motor rotor.",
+      "hotspots": []
+    },
+    {
+      "id": "flexspline",
+      "name": "Flexspline",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            21.5,
+            23,
+            18
+          ],
+          "pos": [
+            0,
+            13,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel-polished",
+          "repeat": null
+        },
+        {
+          "type": "cyl",
+          "d": [
+            23,
+            1.5
+          ],
+          "pos": [
+            0,
+            22.2,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel-polished",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.5,
+      "order": 5,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "steel-polished",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The flexspline cup fits over the wave generator.",
+      "hotspots": []
+    },
+    {
+      "id": "circular-spline",
+      "name": "Circular spline",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            23.2,
+            31,
+            10
+          ],
+          "pos": [
+            0,
+            19,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.72,
+      "order": 6,
+      "layers": [
+        "structural"
+      ],
+      "material": "steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The circular spline bolts to the housing around the flexspline.",
+      "hotspots": []
+    },
+    {
+      "id": "output-bearing",
+      "name": "Cross-roller bearing",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            31,
+            39,
+            9
+          ],
+          "pos": [
+            0,
+            29,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel",
+          "repeat": null
+        },
+        {
+          "type": "tube",
+          "d": [
+            34.5,
+            35.5,
+            9.4
+          ],
+          "pos": [
+            0,
+            29,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel-dark",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 0.95,
+      "order": 7,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "steel",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The output bearing sits at the front of the joint.",
+      "hotspots": []
+    },
+    {
+      "id": "output-flange",
+      "name": "Output flange",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "cyl",
+          "d": [
+            30,
+            5
+          ],
+          "pos": [
+            0,
+            36,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium",
+          "repeat": null
+        },
+        {
+          "type": "cyl",
+          "d": [
+            1.6,
+            5.4
+          ],
+          "pos": [
+            22,
+            36,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "steel-dark",
+          "repeat": {
+            "n": 8,
+            "step": [
+              0,
+              0,
+              0
+            ],
+            "turn": [
+              0,
+              45,
+              0
+            ]
+          }
+        }
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "distance": 1.2,
+      "order": 11,
+      "layers": [
+        "moving",
+        "structural"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The output flange is the face the next link bolts to.",
+      "hotspots": []
+    },
+    {
+      "id": "housing",
+      "name": "Housing",
+      "glb": null,
+      "procedural": null,
+      "shapes": [
+        {
+          "type": "tube",
+          "d": [
+            36,
+            40,
+            64
+          ],
+          "pos": [
+            0,
+            -3,
+            0
+          ],
+          "rot": [
+            0,
+            0,
+            0
+          ],
+          "mat": "aluminium",
+          "repeat": null
+        }
+      ],
+      "axis": [
+        -1,
+        0,
+        0.15
+      ],
+      "distance": 1.45,
+      "order": 1,
+      "layers": [
+        "structural",
+        "thermal"
+      ],
+      "material": "aluminium",
+      "parent": null,
+      "modelSource": "illustrative",
+      "assemblyCaption": "The housing holds the stator and the gear.",
+      "hotspots": []
+    }
+  ]
+}
