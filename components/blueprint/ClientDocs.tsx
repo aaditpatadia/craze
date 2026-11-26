@@ -67,9 +67,7 @@ export function QuotePrint() {
                     <td className="bp-mono whitespace-nowrap font-semibold">{l.code}</td>
                     <td>{l.name}</td>
                     <td className="num">{l.quantity}</td>
-                    <td className="bp-dim">
-                      {host}/sheets/{l.id}
-                    </td>
+                    <td className="bp-dim">{l.href ? "Configured: see spec sheet" : `${host}/sheets/${l.id}`}</td>
                   </tr>
                 ))
               ) : (

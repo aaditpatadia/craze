@@ -44,6 +44,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const manifest = getManifest(product.id);
   const parts = resolveParts(product, manifest);
   const top = highestTier(product);
+  const motorFrame = product.code.match(/^TM-MOT-(\d{4,5})-(\d+)-[A-Z]$/);
   const originEv = findEvidence(product, product.origin.evidenceId);
   const sourcing = getSourcing(product.id);
   const makers = sourcing?.candidates.length ?? 0;
@@ -126,6 +127,11 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <LinkButton href={`/sheets/${product.id}`} variant="ghost">
               <Icon name="document" size={16} /> Build sheet
             </LinkButton>
+            {motorFrame ? (
+              <LinkButton href={`/configure/motor?f=${motorFrame[1]}&kv=${motorFrame[2]}`} variant="ghost">
+                <Icon name="code" size={16} /> Configure this motor
+              </LinkButton>
+            ) : null}
           </div>
         </div>
       </Container>

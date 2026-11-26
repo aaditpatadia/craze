@@ -40,10 +40,10 @@ export function QuoteList() {
         {quote.lines.map((l) => (
           <li key={l.code} className="grid grid-cols-1 items-center gap-3 py-4 sm:grid-cols-12">
             <div className="sm:col-span-7">
-              <Link href={`/parts/${l.id}`} className="font-medium hover:text-accent">
+              <Link href={l.href ?? `/parts/${l.id}`} className="font-medium hover:text-accent">
                 {l.name}
               </Link>
-              <p className="code-text mt-0.5 text-xs text-fg-subtle">{l.code}</p>
+              <p className="code-text mt-0.5 break-all text-xs text-fg-subtle">{l.code}</p>
             </div>
             <label className="flex items-center gap-2 text-sm text-fg-subtle sm:col-span-3">
               Quantity

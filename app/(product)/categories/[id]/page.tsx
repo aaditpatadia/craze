@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Catalog } from "@/components/catalog/Catalog";
+import { MotorFrames } from "@/components/configure/MotorFrames";
+import { LinkButton } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader } from "@/components/ui/Layout";
 import { getCatalog, getCategories, getCategory, getLiveCategories } from "@/lib/content";
 
@@ -50,9 +53,16 @@ export default async function CategoryPage({ params }: { params: Promise<{ id: s
             {category.summary} <span className="text-fg-subtle">{category.whyItMatters}</span>
           </>
         }
-      />
+      >
+        {category.id === "bldc-motors" ? (
+          <LinkButton href="/configure/motor">
+            <Icon name="code" size={16} /> Configure a motor
+          </LinkButton>
+        ) : null}
+      </PageHeader>
       <Container className="pb-24">
-          <Catalog items={items} categories={categories} fixedCategory={category.id} />
+        <Catalog items={items} categories={categories} fixedCategory={category.id} />
+        {category.id === "bldc-motors" ? <MotorFrames /> : null}
       </Container>
     </>
   );

@@ -6,7 +6,14 @@
  */
 import { useSyncExternalStore } from "react";
 
-export type QuoteLine = { code: string; id: string; name: string; quantity: number };
+export type QuoteLine = {
+  code: string;
+  id: string;
+  name: string;
+  quantity: number;
+  /** Where the line opens: a configured part links back to its configuration. */
+  href?: string;
+};
 
 const KEY = "timule.quote.v1";
 const EVENT = "timule-quote-change";

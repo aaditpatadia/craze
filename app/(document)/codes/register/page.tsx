@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { BlueprintDocument, BlueprintSheet, BpSection } from "@/components/blueprint/Sheet";
 import { BpToolbar } from "@/components/blueprint/Toolbar";
 import { getCategories, getProducts, getSupplier, getSuppliers } from "@/lib/content";
+import { FRAMES, frameDims } from "@/lib/motor-config";
 import { SECTOR_LABEL, formatDate } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -107,6 +108,35 @@ export default function CodeRegisterPage() {
                   <td className="bp-dim whitespace-nowrap">{formatDate(p.lastVerified)}</td>
                 </tr>
               ))}
+            </tbody>
+          </table>
+        </BpSection>
+
+        <BpSection n="04" title="Standard motor frames">
+          <p className="bp-dim mt-2">Every frame and winding can be ordered by its code and configured at /configure/motor.</p>
+          <table className="bp-table">
+            <thead>
+              <tr>
+                <th>Frame</th>
+                <th>Stator</th>
+                <th>TM codes</th>
+                <th>Propellers</th>
+              </tr>
+            </thead>
+            <tbody>
+              {FRAMES.map((f) => {
+                const { d, h } = frameDims(f.size);
+                return (
+                  <tr key={f.size}>
+                    <td className="bp-mono font-semibold">{f.size}</td>
+                    <td className="bp-dim whitespace-nowrap">
+                      {d} × {h} mm
+                    </td>
+                    <td className="bp-mono text-[7.5pt]">{f.kvs.map((k) => `TM-MOT-${f.size}-${k.kv}-A`).join("  ")}</td>
+                    <td className="bp-dim">{f.props}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </BpSection>
