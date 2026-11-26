@@ -34,9 +34,13 @@ const DOCS = {
           <li>The request form collects your company, work email, role and the parts you need, to reply to your request.</li>
           <li>The notify form collects an email address, to tell you when a category opens.</li>
           <li>The BOM checker runs in your browser. Files you check are not uploaded unless you send them as a request.</li>
+          <li>The supplier form collects your company, contact details and the parts you can make, to reply to your application.</li>
+          <li>Form submissions are delivered to us by email through Formspree, a form processing service.</li>
           <li>Analytics, when enabled, are cookie-free and record page views and a few anonymous events.</li>
         </ul>
-        <p>Questions about your data: contact {SITE.name} through the request form.</p>
+        <p>
+          Questions about your data: write to <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+        </p>
       </>
     ),
   },

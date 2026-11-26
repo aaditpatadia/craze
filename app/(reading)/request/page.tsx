@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { RequestForm, RequestFormStatic } from "@/components/forms/RequestForm";
 import { Container, PageHeader } from "@/components/ui/Layout";
 import { Icon } from "@/components/ui/Icon";
+import { SITE } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Send a sourcing request",
@@ -38,6 +39,13 @@ export default function RequestPage() {
           </ol>
           <p className="mt-8 flex gap-2 text-sm text-fg-subtle">
             <Icon name="info" size={16} className="mt-0.5 shrink-0" />A request is not an order and commits you to nothing.
+          </p>
+          <p className="mt-4 text-sm text-fg-subtle">
+            Prefer email? Write to{" "}
+            <a href={`mailto:${SITE.contactEmail}`} className="text-fg-muted underline underline-offset-4 hover:text-fg">
+              {SITE.contactEmail}
+            </a>
+            .
           </p>
         </aside>
       </Container>

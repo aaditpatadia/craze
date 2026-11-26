@@ -1,11 +1,14 @@
 /**
  * Where form submissions go. Server only.
- * - If RESEND_API_KEY and SUBMISSIONS_EMAIL_TO are set, each submission is emailed via Resend.
+ * - By default each submission is posted to the Formspree form in SITE.formEndpoint,
+ *   which emails it to SITE.contactEmail. Set FORMSPREE_ENDPOINT="off" to skip it.
+ * - Else, if RESEND_API_KEY and SUBMISSIONS_EMAIL_TO are set, each submission is emailed via Resend.
  * - Otherwise it is appended to a JSON Lines file: .data/submissions.jsonl locally, or
  *   /tmp on Vercel (temporary storage, fine for previews, not for production).
  */
 import { appendFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
+import { SITE } from "@/lib/config";
 
 export type Submission = { kind: "request" | "notify" | "supplier"; data: Record<string, unknown>; reference?: string };
 
@@ -20,6 +23,24 @@ const dir = process.env.VERCEL ? "/tmp" : join(process.cwd(), ".data");
 export async function storeSubmission(s: Submission): Promise<{ id: string }> {
   const id = crypto.randomUUID();
   const record = { id, receivedAt: new Date().toISOString(), ...s };
+  if (SITE.formEndpoint && SITE.formEndpoint !== "off") {
+    const fields = Object.fromEntries(
+      Object.entries(s.data).map(([k, v]) => [k, typeof v === "string" ? v : JSON.stringify(v)]),
+    );
+    const res = await fetch(SITE.formEndpoint, {
+      method: "POST",
+      headers: { Accept: "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({
+        _subject: SUBJECT[s.kind](s),
+        form: s.kind,
+        reference: s.reference ?? id,
+        ...fields,
+        ...(typeof s.data.email === "string" ? { _replyto: s.data.email } : {}),
+      }),
+    });
+    if (!res.ok) throw new Error(`Formspree responded ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    return { id };
+  }
   const key = process.env.RESEND_API_KEY;
   const to = process.env.SUBMISSIONS_EMAIL_TO;
   if (key && to) {

@@ -15,6 +15,7 @@ const groups = [
     links: [
       { href: "/bom", label: "BOM checker" },
       { href: "/request", label: "Send a request" },
+      { href: "/suppliers/join", label: "For suppliers" },
     ],
   },
   {
@@ -41,6 +42,11 @@ export function SiteFooter() {
           <p className="font-semibold">{SITE.name}</p>
           <p className="mt-2 max-w-xs text-fg-subtle">
             Every claim on this site shows its evidence tier, the date it was checked and what was not checked.
+          </p>
+          <p className="mt-4">
+            <a href={`mailto:${SITE.contactEmail}`} className="inline-flex min-h-9 items-center text-fg-muted underline-offset-4 hover:text-fg hover:underline">
+              {SITE.contactEmail}
+            </a>
           </p>
         </div>
         {groups.map((g) => (

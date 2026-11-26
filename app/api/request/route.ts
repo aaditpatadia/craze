@@ -1,3 +1,4 @@
+import { SITE } from "@/lib/config";
 import { NextResponse } from "next/server";
 import { looksLikeSpam, validateRequest, type RequestInput } from "@/lib/forms";
 import { makeReference } from "@/lib/codes";
@@ -43,6 +44,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, id, reference });
   } catch (e) {
     console.error("[api/request] store failed", e);
-    return NextResponse.json({ ok: false, error: "We could not save your request. Nothing was sent. Please try again." }, { status: 500 });
+    return NextResponse.json({ ok: false, error: `We could not save your request. Nothing was sent. Please try again, or email ${SITE.contactEmail}.` }, { status: 500 });
   }
 }

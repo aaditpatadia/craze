@@ -1,3 +1,4 @@
+import { SITE } from "@/lib/config";
 import { NextResponse } from "next/server";
 import { looksLikeSpam, validateNotify, type NotifyInput } from "@/lib/forms";
 import { clientIp, rateLimited, storeSubmission } from "@/lib/submissions";
@@ -28,6 +29,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("[api/notify] store failed", e);
-    return NextResponse.json({ ok: false, error: "We could not save that. Please try again." }, { status: 500 });
+    return NextResponse.json({ ok: false, error: `We could not save that. Please try again, or email ${SITE.contactEmail}.` }, { status: 500 });
   }
 }
