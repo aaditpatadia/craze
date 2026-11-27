@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import type { Redirect } from "next/dist/lib/load-custom-routes";
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -45,15 +46,16 @@ const SUPPLIER_IDS: Record<string, string> = {
 };
 
 const nextConfig: NextConfig = {
-  async redirects() {
-    return Object.entries(RENAMED_PARTS).map(([from, to]) => ({
-      source: `/parts/${from}`,
-      destination: `/parts/${to}`,
-      permanent: true,
-    })).concat(
-      Object.entries(RENAMED_PARTS).filter(([from]) => from.startsWith("vk-")).map(([from, to]) => ({ source: `/sheets/${from}`, destination: `/sheets/${to}`, permanent: true })),
-      Object.entries(SUPPLIER_IDS).map(([from, to]) => ({ source: `/suppliers/${from}`, destination: `/suppliers/${to}`, permanent: true })),
-    );
+  async redirects(): Promise<Redirect[]> {
+    return [
+      ...Object.entries(RENAMED_PARTS).map(([from, to]) => ({ source: `/parts/${from}`, destination: `/parts/${to}`, permanent: true })),
+      ...Object.entries(RENAMED_PARTS)
+        .filter(([from]) => from.startsWith("vk-"))
+        .map(([from, to]) => ({ source: `/sheets/${from}`, destination: `/sheets/${to}`, permanent: true })),
+      ...Object.entries(SUPPLIER_IDS).map(([from, to]) => ({ source: `/suppliers/${from}`, destination: `/suppliers/${to}`, permanent: true })),
+      // The site moved from the Vercel address to timule.com: old links land on the same page there.
+      { source: "/:path*", has: [{ type: "host", value: "craze-five.vercel.app" }], destination: "https://timule.com/:path*", permanent: true },
+    ];
   },
   reactStrictMode: true,
   poweredByHeader: false,

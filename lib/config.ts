@@ -9,9 +9,8 @@ export const SITE = {
   promise: "One code for every critical part. Buyers order by it, suppliers build to it, and the evidence travels with it.",
   description:
     "Timule lists the drone, robotics and data center components buyers need most, each with a TM part code, an exploded 3D view, a build sheet for suppliers and the evidence behind every claim.",
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
+  /** timule.com on Vercel (production and previews, so links in shared documents always work), localhost in development. */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NEXT_PUBLIC_VERCEL_ENV ? "https://timule.com" : "http://localhost:3000"),
   locale: "en-GB",
   /** Prefix on every part code. */
   codePrefix: "TM",
