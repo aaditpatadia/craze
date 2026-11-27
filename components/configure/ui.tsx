@@ -157,7 +157,7 @@ export function ConfigBar({ out }: { out: ConfigOut }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
           <p className="code-text text-base font-semibold">{out.code}</p>
-          <p className="code-text truncate text-xs text-fg-subtle" title={out.build}>
+          <p className="code-text whitespace-normal break-words text-xs text-fg-subtle sm:truncate" title={out.build}>
             {out.build}
           </p>
         </div>

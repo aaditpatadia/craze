@@ -244,7 +244,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             <div className="mt-5 flex flex-wrap gap-1.5">
               <span className="mr-1 text-sm text-fg-subtle">Bought by:</span>
               {product.demand.buyers.map((b) => (
-                <Chip key={b}>{b}</Chip>
+                <Chip key={b} className="h-auto min-h-7 max-w-full whitespace-normal py-1 text-left">
+                  {b}
+                </Chip>
               ))}
             </div>
             <ul className="mt-6 space-y-2 border-t border-line pt-5 text-sm">

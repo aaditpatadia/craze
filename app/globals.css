@@ -255,10 +255,13 @@ a {
   }
 }
 
-/* TM codes: monospaced, never broken across lines. */
-.code-text {
-  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+/* TM codes: monospaced and kept on one line by default. In the components layer so a
+   utility such as whitespace-normal can let a long file name or build string wrap. */
+@layer components {
+  .code-text {
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
 }

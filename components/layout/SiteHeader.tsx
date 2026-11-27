@@ -47,7 +47,7 @@ export function SiteHeader() {
         <Link href="/" aria-label={`${SITE.name} home`} className="-ml-2 flex min-h-11 items-center whitespace-nowrap rounded-md px-2 text-[14px]">
           <TimuleLogo size={22} />
         </Link>
-        <nav aria-label="Main" className="ml-4 hidden lg:block">
+        <nav aria-label="Main" className="ml-4 hidden xl:block">
           <ul className="flex items-center gap-1">
             {NAV.map((item) => (
               <li key={item.href}>
@@ -76,7 +76,7 @@ export function SiteHeader() {
           <button
             ref={menuButton}
             type="button"
-            className="inline-flex size-11 items-center justify-center rounded-full text-fg hover:bg-bg-subtle lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-full text-fg hover:bg-bg-subtle xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -95,7 +95,7 @@ export function SiteHeader() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-line lg:hidden"
+            className="overflow-hidden border-t border-line xl:hidden"
           >
             <ul className="flex flex-col px-4 py-2">
               {[...NAV, { href: "/request", label: "Send your BOM" }].map((item) => (

@@ -21,9 +21,9 @@ export function ProductCard({ item, singular }: { item: CatalogItem; singular: s
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <p className="flex items-center justify-between gap-3 text-xs text-fg-subtle">
+        <p className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-fg-subtle">
           <span className="code-text font-medium text-fg-muted">{item.code}</span>
-          <span className="code-text truncate">{item.supplierCode}</span>
+          <span className="code-text whitespace-normal text-right">{item.supplierCode}</span>
         </p>
         <h3 className="mt-1 text-base font-semibold leading-snug">
           <Link href={`/parts/${item.id}`} className="outline-none after:absolute after:inset-0 after:rounded-xl focus-visible:after:outline-2 focus-visible:after:outline-accent">
@@ -33,8 +33,8 @@ export function ProductCard({ item, singular }: { item: CatalogItem; singular: s
         <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-line pt-4">
           {keySpecs.map((s) => (
             <div key={s.key} className="min-w-0">
-              <dt className="truncate text-xs text-fg-subtle">{s.label}</dt>
-              <dd className="tabular mt-0.5 truncate text-sm font-medium">{formatSpecValue(s.value, s.unit)}</dd>
+              <dt className="text-xs leading-tight text-fg-subtle">{s.label}</dt>
+              <dd className="tabular mt-0.5 break-words text-sm font-medium">{formatSpecValue(s.value, s.unit)}</dd>
             </div>
           ))}
         </dl>
