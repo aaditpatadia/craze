@@ -11,3 +11,10 @@ public/draco
 .vercel
 .playwright-mcp
 
+
+# Private outreach lists, not for the public repo
+/outreach
+
+
+# Private keys, never committed
+/.secrets

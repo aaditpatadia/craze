@@ -325,8 +325,8 @@ function Make() {
             <details className="mt-3">
               <summary className="cursor-pointer text-xs text-fg-subtle">Timule staff: seal this record</summary>
               <div className="mt-2 flex gap-2">
-                <input type="password" autoComplete="off" className={input} placeholder="Issuing key" value={key} onChange={(e) => setKey(e.target.value)} aria-label="Issuing key" />
-                <Button variant="secondary" onClick={doSeal} disabled={!key}>
+                <input type="password" autoComplete="off" className={input} placeholder="Issuing key, or sign in first" value={key} onChange={(e) => setKey(e.target.value)} aria-label="Issuing key" />
+                <Button variant="secondary" onClick={doSeal}>
                   Seal
                 </Button>
               </div>

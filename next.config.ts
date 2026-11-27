@@ -1,12 +1,46 @@
 import type { NextConfig } from "next";
 import type { Redirect } from "next/dist/lib/load-custom-routes";
 
+const isDev = process.env.NODE_ENV !== "production";
+
+/**
+ * Content Security Policy: which sources the browser may load. Scripts only from this site (and
+ * Plausible analytics); no plugins; no framing by other sites; forms post only to this site.
+ * 'unsafe-inline' is needed for Next.js's inline bootstrap scripts and the theme script;
+ * 'wasm-unsafe-eval' lets the 3D viewer decode compressed models. Uploads go to Vercel Blob.
+ */
+const csp = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ""} https://plausible.io`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self' data:",
+  "connect-src 'self' https://plausible.io https://vercel.com https://*.vercel-storage.com" + (isDev ? " ws: http://localhost:*" : ""),
+  "worker-src 'self' blob:",
+  "media-src 'self' blob:",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "frame-src 'none'",
+  ...(isDev ? [] : ["upgrade-insecure-requests"]),
+].join("; ");
+
 const securityHeaders = [
+  { key: "Content-Security-Policy", value: csp },
+  // HTTPS only, for two years, including subdomains.
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Frame-Options", value: "DENY" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+  { key: "Cross-Origin-Resource-Policy", value: "same-site" },
+  { key: "X-DNS-Prefetch-Control", value: "on" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" },
 ];
+
+/** Founder pages, sign-in and the API are never cached by browsers or shared caches. */
+const noStore = [{ key: "Cache-Control", value: "private, no-store, max-age=0" }];
 
 /** Part ids before the move to Timule codes (first the maker ids, then the VK ids). Old links keep working. */
 const RENAMED_PARTS: Record<string, string> = {
@@ -59,10 +93,14 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: true,
   poweredByHeader: false,
+  // No source maps in the browser in production: our code stays ours.
+  productionBrowserSourceMaps: false,
   images: { formats: ["image/avif", "image/webp"] },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
+      { source: "/api/:path*", headers: noStore },
+      { source: "/(admin|desk|login)", headers: [...noStore, { key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       {
         source: "/assets/models/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],

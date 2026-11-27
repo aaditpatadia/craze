@@ -3,23 +3,19 @@ import { NextResponse } from "next/server";
 import { makeReference } from "@/lib/codes";
 import { getCategory } from "@/lib/content";
 import { looksLikeSpam, validateSupplier, type SupplierInput } from "@/lib/forms";
-import { clientIp, rateLimited, storeSubmission } from "@/lib/submissions";
+import { storeSubmission } from "@/lib/submissions";
+import { guard, readJson, text } from "@/lib/security";
 
 export const runtime = "nodejs";
 
-const str = (v: unknown) => (typeof v === "string" ? v : "");
+const str = (v: unknown) => text(v, 4000);
 
 export async function POST(req: Request) {
-  if (rateLimited(clientIp(req))) {
-    return NextResponse.json({ ok: false, error: "Too many requests. Please wait a minute and try again." }, { status: 429 });
-  }
-  let body: Record<string, unknown>;
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ ok: false, error: "The application could not be read." }, { status: 400 });
-  }
-  const strs = (v: unknown, max = 20) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string").slice(0, max) : []);
+  const blocked = guard(req, { key: "supplier", limit: 5 });
+  if (blocked) return blocked;
+  const body = await readJson(req);
+  if (!body) return NextResponse.json({ ok: false, error: "The application could not be read." }, { status: 400 });
+  const strs = (v: unknown, max = 20) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === "string").slice(0, max).map((x) => text(x, 120)) : []);
   const files = Array.isArray(body.certificateFiles)
     ? body.certificateFiles
         .filter((x): x is { name: unknown; url: unknown } => !!x && typeof x === "object")
@@ -27,21 +23,21 @@ export async function POST(req: Request) {
         .slice(0, 10)
     : [];
   const input: SupplierInput = {
-    company: str(body.company),
-    email: str(body.email),
-    city: str(body.city),
-    role: str(body.role),
+    company: text(body.company, 200),
+    email: text(body.email, 254),
+    city: text(body.city, 120),
+    role: text(body.role, 200),
     categories: strs(body.categories, 40),
-    siteUrl: str(body.siteUrl),
+    siteUrl: text(body.siteUrl, 500),
     parts: str(body.parts),
-    capacity: str(body.capacity),
-    origin: str(body.origin),
+    capacity: text(body.capacity, 300),
+    origin: text(body.origin, 300),
     certifications: strs(body.certifications),
-    certificationsOther: str(body.certificationsOther),
+    certificationsOther: text(body.certificationsOther, 300),
     certificateFiles: files,
-    certificateLink: str(body.certificateLink),
+    certificateLink: text(body.certificateLink, 500),
     message: str(body.message),
-    website: str(body.website),
+    website: text(body.website, 200),
     startedAt: Number(body.startedAt),
   };
   if (looksLikeSpam(input)) return NextResponse.json({ ok: true, reference: makeReference("TMA") });

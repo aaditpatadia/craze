@@ -20,10 +20,17 @@ const groups = [
     ],
   },
   {
+    title: "Company",
+    links: [
+      { href: "/about", label: "About us" },
+      { href: "/investors", label: "Investors" },
+      { href: "/tools", label: "Engineering tools" },
+    ],
+  },
+  {
     title: "How we work",
     links: [
       { href: "/methodology", label: "Methodology" },
-      { href: "/about", label: "About and limits" },
       { href: "/codes/register", label: "Code register (PDF)" },
       { href: "/brief/buyers", label: "Buyer brief (PDF)" },
       { href: "/brief/suppliers", label: "Supplier brief (PDF)" },
@@ -42,8 +49,8 @@ const groups = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-bg-subtle text-sm">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-12 lg:px-10">
-        <div className="col-span-2 md:col-span-4">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-10 xl:grid-cols-12 lg:px-10">
+        <div className="col-span-2 md:col-span-10 xl:col-span-2">
           <TimuleLogo size={20} className="inline-flex items-center gap-2 text-[13px]" />
           <p className="mt-2 max-w-xs text-fg-subtle">
             Every figure on this site shows its evidence tier, or says it is not yet verified.
@@ -55,7 +62,7 @@ export function SiteFooter() {
           </p>
         </div>
         {groups.map((g) => (
-          <nav key={g.title} aria-label={g.title} className="md:col-span-2">
+          <nav key={g.title} aria-label={g.title} className="md:col-span-2 xl:col-span-2">
             <h2 className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{g.title}</h2>
             <ul className="mt-3 space-y-1">
               {g.links.map((l) => (

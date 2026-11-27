@@ -1,24 +1,20 @@
 import { SITE } from "@/lib/config";
 import { NextResponse } from "next/server";
 import { looksLikeSpam, validateNotify, type NotifyInput } from "@/lib/forms";
-import { clientIp, rateLimited, storeSubmission } from "@/lib/submissions";
+import { storeSubmission } from "@/lib/submissions";
+import { guard, readJson, text } from "@/lib/security";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
-  if (rateLimited(clientIp(req), 10)) {
-    return NextResponse.json({ ok: false, error: "Too many requests. Please wait a minute and try again." }, { status: 429 });
-  }
-  let body: Record<string, unknown>;
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ ok: false, error: "The request could not be read." }, { status: 400 });
-  }
+  const blocked = guard(req, { key: "notify", limit: 10, maxBytes: 4096 });
+  if (blocked) return blocked;
+  const body = await readJson(req, 4096);
+  if (!body) return NextResponse.json({ ok: false, error: "The request could not be read." }, { status: 400 });
   const input: NotifyInput = {
-    email: typeof body.email === "string" ? body.email : "",
-    category: typeof body.category === "string" ? body.category.slice(0, 80) : "",
-    website: typeof body.website === "string" ? body.website : "",
+    email: text(body.email, 254),
+    category: text(body.category, 80),
+    website: text(body.website, 200),
     startedAt: Number(body.startedAt),
   };
   if (looksLikeSpam(input)) return NextResponse.json({ ok: true });

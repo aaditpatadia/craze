@@ -1,7 +1,8 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { canonical, validRecord, type FwRecord } from "@/lib/firmware";
-import { clientIp, rateLimited } from "@/lib/submissions";
+import { isSignedIn } from "@/lib/auth";
+import { guard, readJson } from "@/lib/security";
 
 export const runtime = "nodejs";
 
@@ -21,13 +22,10 @@ const same = (a: string, b: string) => {
 };
 
 export async function POST(request: Request) {
-  if (rateLimited(`firmware:${clientIp(request)}`, 30)) return NextResponse.json({ error: "Too many requests. Please wait a minute." }, { status: 429 });
-  let body: { action?: string; record?: unknown; seal?: string; key?: string };
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "The request could not be read." }, { status: 400 });
-  }
+  const blocked = guard(request, { key: "firmware", limit: 20, maxBytes: 16 * 1024 });
+  if (blocked) return blocked;
+  const body = (await readJson(request, 16 * 1024)) as { action?: string; record?: unknown; seal?: string; key?: string } | null;
+  if (!body) return NextResponse.json({ error: "The request could not be read." }, { status: 400 });
   if (!validRecord(body.record)) return NextResponse.json({ error: "That is not a complete firmware record." }, { status: 400 });
   const k = secret();
   if (body.action === "verify") {
@@ -36,7 +34,12 @@ export async function POST(request: Request) {
   }
   if (body.action === "seal") {
     if (!k) return NextResponse.json({ error: "Sealing is not set up on this site yet." }, { status: 503 });
-    if (typeof body.key !== "string" || !same(body.key, k)) return NextResponse.json({ error: "That issuing key is not right." }, { status: 403 });
+    // A signed-in founder seals without typing the key; anyone else must give it.
+    const allowed = (await isSignedIn(request)) || (typeof body.key === "string" && same(body.key, k));
+    if (!allowed) {
+      await new Promise((r) => setTimeout(r, 400));
+      return NextResponse.json({ error: "Sign in as a founder, or give the issuing key." }, { status: 403 });
+    }
     return NextResponse.json({ seal: seal(body.record, k) });
   }
   return NextResponse.json({ error: "Unknown action." }, { status: 400 });

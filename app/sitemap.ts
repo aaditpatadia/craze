@@ -4,7 +4,7 @@ import { getCategories, getProducts, getSuppliers, supplierSlug } from "@/lib/co
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const u = (p: string) => `${SITE.url}${p}`;
-  const fixed = ["", "/parts", "/sectors", "/codes", "/bom", "/request", "/suppliers/join", "/methodology", "/about", "/upcoming", "/codes/register", "/configure", "/configure/motor", "/configure/esc", "/configure/propeller", "/tools", "/tools/content", "/tools/sizing", "/tools/files", "/tools/firmware", "/brief/buyers", "/brief/suppliers"].map((p) => ({ url: u(p) }));
+  const fixed = ["", "/investors", "/parts", "/sectors", "/codes", "/bom", "/request", "/suppliers/join", "/methodology", "/about", "/upcoming", "/codes/register", "/configure", "/configure/motor", "/configure/esc", "/configure/propeller", "/tools", "/tools/content", "/tools/sizing", "/tools/files", "/tools/firmware", "/brief/buyers", "/brief/suppliers"].map((p) => ({ url: u(p) }));
   return [
     ...fixed,
     ...getCategories()

@@ -2,31 +2,26 @@ import { SITE } from "@/lib/config";
 import { NextResponse } from "next/server";
 import { looksLikeSpam, validateRequest, type RequestInput } from "@/lib/forms";
 import { makeReference } from "@/lib/codes";
-import { clientIp, rateLimited, storeSubmission } from "@/lib/submissions";
+import { storeSubmission } from "@/lib/submissions";
+import { guard, readJson, text } from "@/lib/security";
 
 export const runtime = "nodejs";
 
-const str = (v: unknown) => (typeof v === "string" ? v : "");
 
 export async function POST(req: Request) {
-  if (rateLimited(clientIp(req))) {
-    return NextResponse.json({ ok: false, error: "Too many requests. Please wait a minute and try again." }, { status: 429 });
-  }
-  let body: Record<string, unknown>;
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ ok: false, error: "The request could not be read." }, { status: 400 });
-  }
+  const blocked = guard(req, { key: "request", limit: 5 });
+  if (blocked) return blocked;
+  const body = await readJson(req);
+  if (!body) return NextResponse.json({ ok: false, error: "The request could not be read." }, { status: 400 });
   const input: RequestInput = {
-    company: str(body.company),
-    email: str(body.email),
-    role: str(body.role),
-    parts: str(body.parts),
-    quantity: str(body.quantity),
-    timeline: str(body.timeline),
-    message: str(body.message),
-    website: str(body.website),
+    company: text(body.company, 200),
+    email: text(body.email, 254),
+    role: text(body.role, 200),
+    parts: text(body.parts, 8000),
+    quantity: text(body.quantity, 200),
+    timeline: text(body.timeline, 200),
+    message: text(body.message, 4000),
+    website: text(body.website, 200),
     startedAt: Number(body.startedAt),
   };
   // Spam gets the same success response, so bots learn nothing. Nothing is stored.

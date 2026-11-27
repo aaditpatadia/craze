@@ -8,7 +8,7 @@ export const SITE = {
   shortName: "Timule",
   promise: "One code for every critical part. Buyers order by it, suppliers build to it, and the evidence travels with it.",
   description:
-    "Timule lists the drone, robotics and data center components buyers need most, each with a TM part code, an exploded 3D view, a build sheet for suppliers and the evidence behind every claim.",
+    "Timule supplies Indian-made drone components, BLDC motors, ESCs and propellers, under one TM part code and one invoice, with proof of origin and checks on every batch. Free tools: indigenous content calculator, propulsion sizing, CAD files and firmware records.",
   /** timule.com on Vercel (production and previews, so links in shared documents always work), localhost in development. */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NEXT_PUBLIC_VERCEL_ENV ? "https://timule.com" : "http://localhost:3000"),
   locale: "en-GB",

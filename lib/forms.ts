@@ -45,6 +45,17 @@ export function validateNotify(v: NotifyInput): FieldErrors<NotifyInput> {
   return e;
 }
 
+export type InvestorInput = { name: string; email: string; firm: string; interest: string; message: string; website: string; startedAt: number };
+
+export function validateInvestor(v: InvestorInput): FieldErrors<InvestorInput> {
+  const e: FieldErrors<InvestorInput> = {};
+  if (v.name.trim().length < 2) e.name = "Enter your name.";
+  if (!EMAIL.test(v.email.trim())) e.email = "Enter an email address.";
+  if (v.firm.trim().length < 2) e.firm = "Enter your firm, or 'Angel'.";
+  if (v.message.length > 3000) e.message = "Keep this under 3,000 characters.";
+  return e;
+}
+
 /** Bots fill hidden fields and submit within moments of page load. */
 export function looksLikeSpam(v: { website: string; startedAt: number }, now = Date.now()) {
   return v.website.trim() !== "" || !Number.isFinite(v.startedAt) || now - v.startedAt < 2500;
