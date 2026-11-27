@@ -33,7 +33,7 @@ function read(): QuoteLine[] {
   let lines: QuoteLine[] = EMPTY;
   try {
     const parsed = raw ? (JSON.parse(raw) as QuoteLine[]) : [];
-    lines = Array.isArray(parsed) ? parsed.filter((l) => l && typeof l.code === "string" && l.quantity > 0) : [];
+    lines = Array.isArray(parsed) ? parsed.filter((l) => l && typeof l.code === "string" && !l.code.includes("…") && l.quantity > 0) : [];
   } catch {
     lines = EMPTY;
   }

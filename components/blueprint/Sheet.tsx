@@ -153,3 +153,16 @@ export function BlueprintDocument({ toolbar, children }: { toolbar: React.ReactN
     </div>
   );
 }
+
+/** A TM code cell. A configured part's build string goes on its own wrapping line under the code. */
+export function BpCode({ code, empty = "None" }: { code: string; empty?: string }) {
+  if (!code) return <span className="bp-faint">{empty}</span>;
+  const [head, ...rest] = code.split(" / ");
+  const build = rest.join(" / ");
+  return (
+    <>
+      <span className="bp-mono block whitespace-nowrap font-semibold">{head}</span>
+      {build ? <span className="bp-mono bp-dim mt-0.5 block max-w-[78mm] break-words text-[6.6pt] leading-snug">{build}</span> : null}
+    </>
+  );
+}

@@ -31,7 +31,7 @@ export function Downloads({ title = "Engineer downloads", lead, items, className
                 <Icon name={done === d.file ? "check" : "download"} size={16} className="text-accent" /> {d.label}
               </span>
               <span className="mt-1 text-xs text-fg-subtle">{d.note}</span>
-              <span className="code-text mt-2 break-all text-[11px] text-fg-subtle">{d.file}</span>
+              <span className="code-text mt-auto block w-full whitespace-normal break-all pt-2 text-[11px] text-fg-subtle">{d.file}</span>
             </button>
           </li>
         ))}

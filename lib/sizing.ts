@@ -67,6 +67,8 @@ export function airDensity(altitude: number, temp: number) {
 
 const fm = (dIn: number) => (dIn >= 20 ? 0.72 : dIn >= 15 ? 0.68 : dIn >= 9 ? 0.62 : 0.56);
 
+export const propFor = (maxProp: number) => DIAMETERS.filter((d) => d <= maxProp).at(-1) ?? DIAMETERS[0]!;
+
 export const batteryKg = (i: Pick<SizingInput, "cells" | "capacity" | "chem">) => (i.cells * CHEM[i.chem].nominal * (i.capacity / 1000)) / CHEM[i.chem].whPerKg;
 
 /** Hover only: used for the flight-time curve, where the battery weight changes. */
@@ -74,8 +76,9 @@ function hover(i: SizingInput, capacity: number) {
   const rho = airDensity(i.altitude, i.temp);
   const mass = i.dry + i.payload + batteryKg({ ...i, capacity });
   const T = (mass * G) / i.rotors;
-  const A = Math.PI * Math.pow((i.maxProp * 0.0254) / 2, 2);
-  const P = (Math.pow(T, 1.5) / Math.sqrt(2 * rho * A) / fm(i.maxProp) / ETA_HOVER) * (i.coax ? COAX_POWER : 1);
+  const prop = propFor(i.maxProp);
+  const A = Math.PI * Math.pow((prop * 0.0254) / 2, 2);
+  const P = (Math.pow(T, 1.5) / Math.sqrt(2 * rho * A) / fm(prop) / ETA_HOVER) * (i.coax ? COAX_POWER : 1);
   const V = i.cells * CHEM[i.chem].nominal;
   const I = (P * i.rotors + i.avionics) / V;
   const minutes = ((capacity / 1000) * CHEM[i.chem].usable * 60) / I;
@@ -143,12 +146,15 @@ export type Warning = { level: "warn" | "stop"; text: string };
 
 export type SizingResult = ReturnType<typeof size>;
 
-export function size(i: SizingInput) {
+/** Optional fixed parts: the engineer already has a motor or ESC and wants figures for it. */
+export type SizingFixed = { motor?: { size: string; kv: number }; esc?: Partial<EscConfig> };
+
+export function size(i: SizingInput, fixed: SizingFixed = {}) {
   const h = hover(i, i.capacity);
-  const prop = DIAMETERS.filter((d) => d <= i.maxProp).at(-1) ?? DIAMETERS[0]!;
+  const prop = propFor(i.maxProp);
   const D = prop * 0.0254;
   const Tmax = h.T * i.twr;
-  const Pmax = (Math.pow(Tmax, 1.5) / Math.sqrt(2 * h.rho * h.A) / (fm(i.maxProp) * 0.92) / ETA_MAX) * (i.coax ? COAX_POWER : 1);
+  const Pmax = (Math.pow(Tmax, 1.5) / Math.sqrt(2 * h.rho * h.A) / (fm(prop) * 0.92) / ETA_MAX) * (i.coax ? COAX_POWER : 1);
   const Vsag = i.cells * CHEM[i.chem].empty * 1.03;
   const Ihover = h.P / h.V;
   const Ipeak = Pmax / Vsag;
@@ -156,7 +162,7 @@ export function size(i: SizingInput) {
   const rpmMax = 60 * Math.sqrt(Tmax / (CT * h.rho * Math.pow(D, 4)));
   const kvNeed = rpmMax / (Vsag * 0.82);
   const motors = pickMotor(prop, i.cells, kvNeed);
-  const motor = motors[0]!;
+  const motor = fixed.motor ? { ...fixed.motor, cells: `${i.cells}S`, kvOff: (fixed.motor.kv - kvNeed) / kvNeed, standard: true } : motors[0]!;
 
   // Thrust actually available with the chosen winding, and the hover throttle that gives.
   const rpmAvail = motor.kv * Vsag * 0.82;
@@ -186,6 +192,7 @@ export function size(i: SizingInput) {
     hover: Math.round(Ihover),
     peak: Math.round(Ipeak),
     qty: i.rotors,
+    ...fixed.esc,
   };
 
   const propCfg: PropConfig = { ...propDefaults(prop), rpm: Math.round(rpmMax / 100) * 100, qty: i.rotors };
@@ -200,6 +207,7 @@ export function size(i: SizingInput) {
   else if (tip.mach > 0.6) warnings.push({ level: "warn", text: `Tip speed is Mach ${tip.mach} at full power: noisy. Fine for short climbs.` });
   if (cRate > CHEM[i.chem].maxC) warnings.push({ level: "stop", text: `Peak draw is ${cRate.toFixed(1)}C, above the ${CHEM[i.chem].maxC}C a ${CHEM[i.chem].label} pack usually handles. Use a bigger pack or LiPo.` });
   if (i.rotors === 4 && i.payload > 5) warnings.push({ level: "warn", text: "A quadcopter cannot survive a motor failure. With this payload, six or eight rotors give you a way down." });
+  if (fixed.motor && Math.abs(motor.kvOff) > 0.25) warnings.push({ level: "warn", text: `Your motor is ${motor.kv} KV; about ${Math.round(kvNeed)} KV suits this propeller and battery. Expect ${motor.kvOff > 0 ? "high current and a low hover throttle" : "too little top-end thrust"}.` });
   if (!motor.standard) warnings.push({ level: "warn", text: `No standard winding is close to ${Math.round(kvNeed)} KV for this propeller and battery, so the motor is a custom winding. Makers do this; allow extra lead time.` });
   if (h.rho < 1.1) warnings.push({ level: "warn", text: `Air at ${i.altitude} m and ${i.temp} °C is ${Math.round((1 - h.rho / 1.225) * 100)}% thinner than sea level. Every figure here already allows for it; datasheet thrust does not.` });
 

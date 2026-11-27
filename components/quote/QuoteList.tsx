@@ -43,7 +43,7 @@ export function QuoteList() {
               <Link href={l.href ?? `/parts/${l.id}`} className="font-medium hover:text-accent">
                 {l.name}
               </Link>
-              <p className="code-text mt-0.5 break-all text-xs text-fg-subtle">{l.code}</p>
+              <p className="code-text mt-0.5 whitespace-normal break-all text-xs text-fg-subtle">{l.code}</p>
             </div>
             <label className="flex items-center gap-2 text-sm text-fg-subtle sm:col-span-3">
               Quantity

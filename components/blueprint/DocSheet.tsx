@@ -1,4 +1,4 @@
-import { BlueprintSheet, BpField, BpSection } from "./Sheet";
+import { BlueprintSheet, BpCode, BpField, BpSection } from "./Sheet";
 import { COMPANY, SITE } from "@/lib/config";
 import { DOC_KIND, computeTotals, docTitle, lineAmount, money, rupeesInWords, type DocDraft } from "@/lib/documents";
 import { formatDate } from "@/lib/format";
@@ -87,7 +87,9 @@ export function DocSheet({ draft }: { draft: DocDraft }) {
               draft.lines.map((l, i) => (
                 <tr key={`${l.code}-${i}`}>
                   <td className="bp-faint bp-mono">{String(i + 1).padStart(2, "0")}</td>
-                  <td className="bp-mono whitespace-nowrap font-semibold">{l.code || "None"}</td>
+                  <td>
+                    <BpCode code={l.code} />
+                  </td>
                   <td>{l.description}</td>
                   <td className="bp-mono">{l.hsn}</td>
                   <td className="num">

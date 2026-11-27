@@ -12,7 +12,7 @@ import type { CatalogItem } from "./content";
 import { matchRows } from "./bom";
 import { CELL_VOLTS, FRAMES } from "./motor-config";
 import { CONT_AMPS } from "./esc-config";
-import { DIAMETERS } from "./prop-config";
+import { DIAMETERS, propCode, propDefaults, propToParams } from "./prop-config";
 
 export type Origin = "IN" | "PART" | "IMP" | "UNK";
 export const ORIGIN_LABEL: Record<Origin, string> = {
@@ -147,7 +147,7 @@ export function suggestReplacement(row: Pick<IcRow, "part" | "group" | "qty">, c
     const size = t.match(/\b(\d{4,5})\b/)?.[1];
     const kv = Number(t.match(/(\d{2,4})\s*kv/i)?.[1]);
     const frame = FRAMES.find((f) => f.size === size);
-    if (!frame) return { code: "TM-MOT-…", name: "Motor to your frame and KV", href: "/configure/motor", source: "configured" };
+    if (!frame) return null;
     const best = Number.isFinite(kv) && kv > 0 ? frame.kvs.reduce((a, b) => (Math.abs(b.kv - kv) < Math.abs(a.kv - kv) ? b : a)) : frame.kvs[0]!;
     const useKv = Number.isFinite(kv) && kv > 0 ? kv : best.kv;
     const cells = best.cells.includes("12") ? "12S" : "6S";
@@ -169,7 +169,8 @@ export function suggestReplacement(row: Pick<IcRow, "part" | "group" | "qty">, c
   }
   const d = Number(t.match(/(\d{1,2}(?:\.\d)?)\s*(?:"|in\b|inch)/i)?.[1] ?? t.match(/\b(\d{1,2})\s*[x×]\s*\d/)?.[1]);
   const dia = Number.isFinite(d) ? DIAMETERS.reduce((x, y) => (Math.abs(y - d) < Math.abs(x - d) ? y : x)) : 24;
-  return { code: `TM-PRP-${dia}…`, name: `${dia} in propeller`, href: `/configure/propeller?dia=${dia}&origin=O3&qty=${row.qty}`, source: "configured" };
+  const pc = { ...propDefaults(dia), origin: "O3", qty: row.qty };
+  return { code: propCode(pc), name: `${dia} × ${pc.pitch} in propeller`, href: `/configure/propeller?${propToParams(pc)}`, source: "configured" };
 }
 
 /** Indian share Timule commits to for a replacement: O2 or O3 origin, declared to the material. */

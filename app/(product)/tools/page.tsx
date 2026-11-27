@@ -19,13 +19,13 @@ const TOOLS = [
   {
     href: "/tools/sizing",
     title: "Propulsion sizing",
-    body: "Weight, rotors, propeller, battery and where you fly. Get a matched motor, ESC and propeller, hover time, currents and warnings, corrected for Indian heat and altitude.",
+    body: "Starting from scratch? Enter weight, rotors, propeller, battery and where you fly. Get the motor, ESC and propeller to buy, with hover time, currents and warnings, corrected for Indian heat and altitude.",
     who: "Design engineers",
   },
   {
-    href: "/tools/sizing#downloads",
+    href: "/tools/files",
     title: "CAD and flight-controller files",
-    body: "STL envelopes and 1:1 DXF drilling drawings for every configured part, plus ArduPilot and PX4 starting parameters from your sizing.",
+    body: "Already know your parts? Pick one or paste its TM code for STL envelopes and 1:1 DXF drilling drawings. Describe your aircraft for ArduPilot and PX4 starting parameters.",
     who: "Mechanical and firmware engineers",
   },
   {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BlueprintDocument, BlueprintSheet, BpSection } from "./Sheet";
+import { BlueprintDocument, BlueprintSheet, BpCode, BpSection } from "./Sheet";
 import { BpToolbar } from "./Toolbar";
 import { BOM_REPORT_KEY, type BomMatch } from "@/lib/bom";
 import { SITE } from "@/lib/config";
@@ -56,7 +56,7 @@ export function QuotePrint() {
                 <th>TM code</th>
                 <th>Part</th>
                 <th className="num">Quantity</th>
-                <th>Build sheet</th>
+                <th className="pl-5">Build sheet</th>
               </tr>
             </thead>
             <tbody>
@@ -64,10 +64,12 @@ export function QuotePrint() {
                 quote.lines.map((l, i) => (
                   <tr key={l.code}>
                     <td className="bp-mono bp-faint">{String(i + 1).padStart(2, "0")}</td>
-                    <td className="bp-mono whitespace-nowrap font-semibold">{l.code}</td>
+                    <td>
+                      <BpCode code={l.code} />
+                    </td>
                     <td>{l.name}</td>
                     <td className="num">{l.quantity}</td>
-                    <td className="bp-dim">{l.href ? "Configured: see spec sheet" : `${host}/sheets/${l.id}`}</td>
+                    <td className="bp-dim break-all pl-5">{l.href ? "Configured: see spec sheet" : `${host}/sheets/${l.id}`}</td>
                   </tr>
                 ))
               ) : (

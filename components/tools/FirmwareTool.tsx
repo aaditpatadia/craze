@@ -146,7 +146,7 @@ function Check({ record, seal, sealState }: { record: FwRecord | null; seal: str
             <p className="mt-2 text-xs text-fg-subtle">
               {hash.name} · {hash.bytes.toLocaleString("en-IN")} bytes
             </p>
-            <p className="code-text mt-1 break-all text-xs">SHA-256 {hash.sha}</p>
+            <p className="code-text mt-1 whitespace-normal break-all text-xs">SHA-256 {hash.sha}</p>
           </div>
         ) : null}
       </div>
@@ -188,7 +188,7 @@ export function RecordCard({ record: r, seal, sealState }: { record: FwRecord; s
           </div>
         ))}
       </dl>
-      <p className="code-text mt-3 break-all text-xs text-fg-subtle">SHA-256 {r.sha256}</p>
+      <p className="code-text mt-3 whitespace-normal break-all text-xs text-fg-subtle">SHA-256 {r.sha256}</p>
       {flags.length ? (
         <ul className="mt-4 space-y-1.5 text-sm text-fg-muted">
           {flags.map((f) => (
