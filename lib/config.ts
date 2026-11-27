@@ -57,6 +57,5 @@ export const NAV = [
   { href: "/sectors", label: "Sectors" },
   { href: "/codes", label: "TM codes" },
   { href: "/bom", label: "BOM checker" },
-  { href: "/suppliers/join", label: "For suppliers" },
   { href: "/methodology", label: "Methodology" },
 ] as const;
