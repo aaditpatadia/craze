@@ -41,6 +41,8 @@ import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { Icon } from "@/components/ui/Icon";
 import { Area, Choice, Label, Note, Options, off, on, pill } from "./ui";
+import { Downloads } from "@/components/tools/Downloads";
+import { motorDxf, motorEnvelope, motorStl } from "@/lib/downloads";
 import { KvDiagram, Ladder, LeadsDiagram, PatternDiagram, ShaftDiagram, StatorDiagram, TempScale } from "./MotorDiagrams";
 
 const sameP = (a: Pattern, b: Pattern) => patternCode(a) === patternCode(b);
@@ -441,6 +443,14 @@ export function MotorConfigurator() {
           </dl>
         </aside>
       </section>
+      <Downloads
+        className="mt-2"
+        lead={`Generated from this configuration. Envelope about ø${motorEnvelope(c).od} × ${motorEnvelope(c).body} mm, typical of the ${c.size} class: the build sheet has the maker's exact drawing.`}
+        items={[
+          { label: "3D envelope", note: "STL for space claims and clearance in CAD", file: `${code} envelope.stl`, mime: "model/stl", make: () => motorStl(c) },
+          { label: "Drilling drawing", note: "DXF, 1:1 mm: base and propeller bolt patterns", file: `${code} drilling.dxf`, mime: "application/dxf", make: () => motorDxf(c, code) },
+        ]}
+      />
     </div>
   );
 }

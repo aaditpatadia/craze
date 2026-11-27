@@ -52,6 +52,7 @@ export const STALE_AFTER_MONTHS = 12;
 export const NAV = [
   { href: "/parts", label: "Parts" },
   { href: "/configure", label: "Configure" },
+  { href: "/tools", label: "Tools" },
   { href: "/sectors", label: "Sectors" },
   { href: "/codes", label: "TM codes" },
   { href: "/bom", label: "BOM checker" },

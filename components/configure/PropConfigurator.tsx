@@ -26,6 +26,8 @@ import {
 import { cn } from "@/lib/cn";
 import { Ladder, PatternDiagram } from "./MotorDiagrams";
 import { BoreDiagram, MaterialBars, PitchDiagram, PropTopView, TipSpeed } from "./PropDiagrams";
+import { Downloads } from "@/components/tools/Downloads";
+import { propDxf } from "@/lib/downloads";
 import { Area, Choice, ConfigBar, Label, Note, NumberChoices, NumberField, Options, Summary, off, on, pill, useLinkedConfig, type ConfigOut } from "./ui";
 
 export function propOut(c: PropConfig): ConfigOut {
@@ -217,6 +219,11 @@ export function PropConfigurator() {
         </div>
       </Area>
 
+      <Downloads
+        className="my-6"
+        lead="Generated from this configuration, for the frame layout."
+        items={[{ label: "Disc and hub drawing", note: "DXF, 1:1 mm: disc, 10% tip clearance, hub holes or bore", file: `${out.code} disc.dxf`, mime: "application/dxf", make: () => propDxf(c, out.code) }]}
+      />
       <Summary
         n="07"
         unit="Propellers"

@@ -29,6 +29,8 @@ import {
 import { EVIDENCE, ORIGIN, labelOf } from "@/lib/config-options";
 import { Ladder } from "./MotorDiagrams";
 import { BoardDiagram, LoadBars, PowerFlow, SignalDiagram } from "./EscDiagrams";
+import { Downloads } from "@/components/tools/Downloads";
+import { escDxf, escStl } from "@/lib/downloads";
 import { Area, ConfigBar, Label, Note, NumberChoices, NumberField, Options, Summary, useLinkedConfig, type ConfigOut } from "./ui";
 
 export function escOut(c: EscConfig): ConfigOut {
@@ -223,6 +225,14 @@ export function EscConfigurator() {
         </div>
       </Area>
 
+      <Downloads
+        className="my-6"
+        lead="Generated from this configuration. Envelope sizes are typical of the class: the build sheet has the maker's exact drawing."
+        items={[
+          { label: "3D envelope", note: "STL box with the board's outside size", file: `${out.code} envelope.stl`, mime: "model/stl", make: () => escStl(c, out.code) },
+          { label: "Outline drawing", note: "DXF, 1:1 mm, with stack holes for 4-in-1 boards", file: `${out.code} outline.dxf`, mime: "application/dxf", make: () => escDxf(c, out.code) },
+        ]}
+      />
       <Summary
         n="07"
         unit={c.layout === "4" ? "Boards" : "ESCs"}
