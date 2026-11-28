@@ -38,7 +38,7 @@ const BELIEFS = [
   {
     n: "05",
     title: "Tested batch to batch, top grade only",
-    body: "Every batch is tested against the bands on the part's build sheet before it ships. Parts outside any band are rejected, not sold cheaper. You receive only parts that passed every check.",
+    body: "From our first order, every batch will be tested against the bands on the part's build sheet before it ships. Parts outside any band are rejected, not sold cheaper. You will receive only parts that passed every check.",
   },
 ];
 
@@ -173,7 +173,7 @@ export default function AboutPage() {
           <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-7">
             {[
               ["One seller", "You buy from Timule, on one invoice, whoever builds the part."],
-              ["Tested batch to batch", "Every batch tested against the build sheet before it ships, only top-grade parts released, with origin declarations and outside lab tests where it matters."],
+              ["Tested batch to batch", "From the first order, every batch tested against the build sheet before it ships, only top-grade parts released, with origin declarations and outside lab tests where it matters."],
               ["A backup maker", "The code stays the same if a maker fails. Your design and paperwork do not change."],
               ["One supplier, many sectors", "Drone propulsion, robot joints and drive wheels, server fans, power supplies and liquid cooling, all on the same code system."],
               ["Tools engineers use", "Content calculator, propulsion sizing, CAD and flight-controller files, and firmware records, free on this site."],

@@ -17,7 +17,7 @@ export default function PartsPage() {
     <>
       <PageHeader
         title="All parts"
-        lead="Critical components for drones, robots and data centers, made in India. Every listing shows the highest evidence tier we hold and where the part is made, and every batch is tested before it reaches you. Filter by sector or by what matters to your build."
+        lead="Critical components for drones, robots and data centers, made in India. Every listing shows the highest evidence tier we hold and where the part is made, and every batch will be tested before it reaches you. Filter by sector or by what matters to your build."
       />
       <Container className="pb-8">
         <BatchTestingStrip />

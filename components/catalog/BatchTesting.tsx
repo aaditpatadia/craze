@@ -3,9 +3,9 @@ import { Icon } from "@/components/ui/Icon";
 import { Container, SectionHeading } from "@/components/ui/Layout";
 
 /** How every order batch is tested before it ships. One source for the wording used across the site. */
-export const BATCH_TITLE = "Tested batch to batch. Only parts that pass every grade ship.";
+export const BATCH_TITLE = "Our rule: every batch tested. Only parts that pass every grade ship.";
 export const BATCH_LINE =
-  "Every batch is tested against the acceptance bands on the part's build sheet before it leaves us. Anything outside the bands is rejected, so you receive only top-grade parts.";
+  "From our first order, every batch is tested against the acceptance bands on the part's build sheet before it leaves us. Anything outside the bands is rejected, so you receive only top-grade parts. No batch has shipped yet: each test will appear in the live verification log the day it is done.";
 
 const STEPS = [
   {
@@ -57,8 +57,8 @@ export function BatchTestingStrip() {
     <p className="flex items-start gap-3 rounded-xl border border-line bg-bg-subtle px-4 py-3 text-sm text-fg-muted">
       <Icon name="check" size={18} className="mt-0.5 shrink-0 text-accent" />
       <span>
-        <span className="font-medium text-fg">Batch-to-batch tested.</span> Every batch is checked against the part&apos;s build sheet before it ships, and only
-        top-grade parts that pass every band reach you.{" "}
+        <span className="font-medium text-fg">Batch-to-batch tested, from the first order.</span> Every batch will be checked against the part&apos;s build sheet
+        before it ships, and only top-grade parts that pass every band will reach you.{" "}
         <Link href="/methodology#batch" className="text-accent hover:underline">
           How we test
         </Link>

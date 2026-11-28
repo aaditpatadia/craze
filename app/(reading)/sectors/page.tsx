@@ -29,7 +29,7 @@ export default function SectorsPage() {
     <>
       <PageHeader
         title="Three sectors, one way of buying"
-        lead="Timule is not only a drone supplier. We supply the critical components inside drones, robots and data centers, made in India. Whatever the part, it has a TM code, an exploded view, a build sheet and the evidence behind every claim, and every batch is tested before it ships."
+        lead="Timule is not only a drone supplier. We supply the critical components inside drones, robots and data centers, made in India. Whatever the part, it has a TM code, an exploded view, a build sheet and the evidence behind every claim, and every batch will be tested before it ships."
       />
       {sectors.map((s) => {
         const cats = categories.filter((c) => c.sector === s);

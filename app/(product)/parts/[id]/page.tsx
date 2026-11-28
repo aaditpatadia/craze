@@ -28,12 +28,21 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const p = getProduct(id);
   if (!p) return {};
+  const description = partDescription(p.summary, p.code, getCategory(p.category)?.name);
   return {
     title: p.name,
-    description: p.summary,
+    description,
     alternates: { canonical: `/parts/${p.id}` },
-    openGraph: { title: p.name, description: p.summary, type: "website" },
+    openGraph: { title: p.name, description, type: "website" },
   };
+}
+
+/** Search description: the summary, topped up to a useful length with the code and what Timule supplies. */
+function partDescription(summary: string, code: string, category?: string): string {
+  const base = summary.trim().replace(/\.?$/, ".");
+  if (base.length >= 140) return base;
+  const extra = ` ${code}: ${category ? `${category.toLowerCase()} ` : ""}sourced from qualified Indian makers, with a build sheet, evidence tier and origin record. Request a quote or reserve it from Timule.`;
+  return (base + extra).slice(0, 300);
 }
 
 /** Opens the configurator preset to this part, for motors, ESCs and propellers. */
