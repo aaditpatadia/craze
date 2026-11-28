@@ -167,7 +167,8 @@ export type ReserveInput = {
 export function parseReserveItems(s: string): { code: string; qty: number }[] {
   return s
     .split(/\n|;/)
-    .map((l) => l.trim())
+    // "1300x10" or "1300×10": split the quantity off the code.
+    .map((l) => l.trim().replace(/(\d)\s*[x×*]\s*(\d)/gi, "$1 x $2"))
     .filter(Boolean)
     .map((l) => {
       const code = (l.toUpperCase().match(/TM-[A-Z]{3}(?:-[A-Z0-9]+)+/)?.[0] ?? "").replace(/-A$/, "");
