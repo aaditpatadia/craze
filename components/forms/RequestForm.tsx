@@ -12,7 +12,7 @@ import { BOM_HANDOFF_KEY } from "@/components/bom/BomChecker";
 import { readQuoteText, readQuoteUnits, useQuote } from "@/lib/quote";
 import { Field, Honeypot, describedBy, inputClass } from "./Field";
 
-type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; reference?: string } | { state: "error"; message: string };
+type Status = { state: "idle" } | { state: "sending" } | { state: "sent"; reference?: string; track?: string | null } | { state: "error"; message: string };
 
 const FIELDS: (keyof RequestInput)[] = ["company", "email", "role", "parts", "quantity", "timeline", "message"];
 
@@ -79,9 +79,9 @@ function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { ini
     setStatus({ state: "sending" });
     try {
       const res = await fetch("/api/request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...values, startedAt: startedAt.current }) });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; reference?: string; error?: string; errors?: FieldErrors<RequestInput> };
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; reference?: string; track?: string | null; error?: string; errors?: FieldErrors<RequestInput> };
       if (res.ok && data.ok) {
-        setStatus({ state: "sent", reference: data.reference });
+        setStatus({ state: "sent", reference: data.reference, track: data.track });
         if (fromQuote) clearQuote();
         track("Request submitted", { timeline: values.timeline });
         requestAnimationFrame(() => successRef.current?.focus());
@@ -110,6 +110,15 @@ function RequestFormInner({ initialParts, initialQty, fromQuote = false }: { ini
         {status.reference ? (
           <p className="mt-4 text-sm text-fg-muted">
             Your reference: <span className="code-text font-medium text-fg">{status.reference}</span>. Quote it in any reply. We use the same TM codes with the supplier.
+          </p>
+        ) : null}
+        {status.track ? (
+          <p className="mt-3 text-sm text-fg-muted">
+            Follow it from received to delivered on your private tracking page:{" "}
+            <Link href={status.track} className="text-accent hover:underline">
+              track this request
+            </Link>
+            . Bookmark it: anyone with the link can see its status.
           </p>
         ) : null}
         <div className="mt-6 flex flex-wrap gap-3">

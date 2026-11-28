@@ -75,7 +75,7 @@ export const codeToId = (code: string) => code.toLowerCase().replace(/-[a-z]$/, 
 const ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
 
 /** Short human-readable reference, for example TMQ-261126-7KQ4. No 0, O, 1, I or L. */
-export function makeReference(prefix: "TMQ" | "TMA" | "TMP" | "TMI", now = new Date()): string {
+export function makeReference(prefix: "TMQ" | "TMA" | "TMP" | "TMI" | "TMR", now = new Date()): string {
   const d = now.toISOString().slice(2, 10).replace(/-/g, "");
   const bytes = new Uint8Array(4);
   crypto.getRandomValues(bytes);

@@ -4,6 +4,9 @@ import { InvestorForm } from "@/components/forms/InvestorForm";
 import { Container } from "@/components/ui/Layout";
 import { Icon } from "@/components/ui/Icon";
 import { FOUNDERS } from "@/lib/team";
+import { evidenceStats, getCases, getChecks, traction } from "@/lib/metrics";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "For investors: the trusted supply layer for Indian drones, robots and data centers",
@@ -33,7 +36,9 @@ const WHY_NOW = [
 ];
 
 const LIVE = [
-  { href: "/tools/content", title: "Indigenous content calculator", body: "Paste a drone's parts list: see how Indian it is and what to replace." },
+  { href: "/evidence", title: "Live evidence status", body: "Every part's evidence tier and every check we log, counted from real records." },
+  { href: "/reserve", title: "Reserve a part", body: "Buyers send a letter of intent against TM codes and track it from received to delivered." },
+  { href: "/tools/content", title: "Content calculator and tender dossier", body: "Paste a parts list: see how Indian it is, what to replace, and print the origin dossier for a tender." },
   { href: "/tools/sizing", title: "Propulsion sizing", body: "Weight in, matched motor, ESC and propeller out, corrected for Indian heat." },
   { href: "/sectors", title: "Three sectors, one catalogue", body: "Drone propulsion and avionics, robot joints and drive wheels, server fans, power supplies and liquid cooling." },
   { href: "/configure/motor", title: "Motor configurator", body: "28 frames, every option drawn, one TM code and build string." },
@@ -49,12 +54,23 @@ const MODEL = [
 ];
 
 const NEXT = [
-  ["Now", "Product live at timule.com. First 25 Indian drone makers identified and outreach starting."],
+  ["Now", "Product live at timule.com, with a public evidence log, letters of intent and buyer tracking built in. First 25 Indian drone makers identified and outreach starting. First three core motors going to measured samples."],
   ["90 days", "Letters of intent from the first buyers. First maker qualified to our Tier 2 checks. GST and DPIIT registration. iDEX application."],
   ["12 months", "Repeat orders on the top motor, ESC and propeller codes. Stock of the fastest movers. First robotics and data center buyers on actuators, server fans and power supplies."],
 ];
 
-export default function InvestorsPage() {
+export default async function InvestorsPage() {
+  const [cases, checks] = await Promise.all([getCases(), getChecks()]);
+  const t = traction(cases);
+  const e = evidenceStats(checks);
+  const live = [
+    ["Sourcing requests", t.requests],
+    ["Letters of intent", t.lois],
+    ["Units reserved", t.unitsReserved],
+    ["Orders", t.ordered],
+    ["Checks logged", e.checks],
+    ["Batches tested", e.batches],
+  ].filter(([, v]) => Number(v) > 0) as [string, number][];
   return (
     <>
       <Container as="header" className="pb-16 pt-14 sm:pt-24">
@@ -127,6 +143,28 @@ export default function InvestorsPage() {
           ))}
         </ul>
       </Container>
+
+      {live.length ? (
+        <section className="border-t border-line bg-bg-subtle" aria-labelledby="traction">
+          <Container className="py-16">
+            <h2 id="traction" className="text-2xl font-semibold tracking-tight">
+              Traction, counted live
+            </h2>
+            <p className="mt-2 max-w-2xl text-fg-muted">Counted from the requests, letters of intent and checks on this site. Nothing typed in by hand.</p>
+            <ul className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+              {live.map(([k, v]) => (
+                <li key={k} className="rounded-xl border border-line bg-bg p-5">
+                  <p className="tabular text-3xl font-semibold tracking-tight">{v.toLocaleString("en-IN")}</p>
+                  <p className="mt-1 text-sm text-fg-muted">{k}</p>
+                </li>
+              ))}
+            </ul>
+            <Link href="/evidence" className="mt-6 inline-block text-sm text-accent hover:underline">
+              See the evidence status and verification log
+            </Link>
+          </Container>
+        </section>
+      ) : null}
 
       <section className="border-t border-line" aria-labelledby="model">
         <Container className="grid grid-cols-1 gap-10 py-20 lg:grid-cols-12">

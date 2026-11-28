@@ -41,6 +41,11 @@ export function BatchTesting({ className = "border-t border-line py-20 sm:py-28"
             </li>
           ))}
         </ol>
+        <p className="mt-8 text-sm">
+          <Link href="/evidence#log" className="text-accent hover:underline">
+            See every check in the live verification log
+          </Link>
+        </p>
       </Container>
     </section>
   );

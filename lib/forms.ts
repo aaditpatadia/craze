@@ -145,3 +145,51 @@ export function validateSupplier(v: SupplierInput): FieldErrors<SupplierInput> {
   if (v.certificationsOther.length > 300) e.certificationsOther = "Keep this under 300 characters.";
   return e;
 }
+
+export const SECTORS = ["Drones", "Robotics", "Data centers", "Other"] as const;
+
+export type ReserveInput = {
+  items: string;
+  timeline: string;
+  targetPrice: string;
+  company: string;
+  name: string;
+  email: string;
+  phone: string;
+  sector: string;
+  notes: string;
+  agree: boolean;
+  website: string;
+  startedAt: number;
+};
+
+/** "TM-MOT-2807-1300 x 200" lines into codes and quantities. */
+export function parseReserveItems(s: string): { code: string; qty: number }[] {
+  return s
+    .split(/\n|;/)
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .map((l) => {
+      const code = (l.toUpperCase().match(/TM-[A-Z]{3}(?:-[A-Z0-9]+)+/)?.[0] ?? "").replace(/-A$/, "");
+      const rest = l.toUpperCase().replace(/TM-[A-Z]{3}(?:-[A-Z0-9]+)+/, "");
+      const qty = Number(rest.match(/\d[\d,]*/)?.[0]?.replace(/,/g, "") ?? 0);
+      return { code, qty };
+    })
+    .filter((i) => i.code);
+}
+
+export function validateReserve(v: ReserveInput): FieldErrors<ReserveInput> {
+  const e: FieldErrors<ReserveInput> = {};
+  const items = parseReserveItems(v.items);
+  if (!items.length) e.items = "Add at least one TM code with a quantity, like TM-MOT-2807-1300 x 200.";
+  else if (items.some((i) => i.qty < 1)) e.items = "Give a quantity for every code, like TM-MOT-2807-1300 x 200.";
+  else if (items.length > 30) e.items = "Up to 30 codes per letter.";
+  if (!(TIMELINES as readonly string[]).includes(v.timeline)) e.timeline = "Choose a timeline.";
+  if (v.company.trim().length < 2) e.company = "Enter your company name.";
+  if (v.name.trim().length < 2) e.name = "Enter your name.";
+  if (!EMAIL.test(v.email.trim())) e.email = "Enter an email address.";
+  if (!(SECTORS as readonly string[]).includes(v.sector)) e.sector = "Choose a sector.";
+  if (!v.agree) e.agree = "Confirm that this is a non-binding letter of intent.";
+  if (v.notes.length > 3000) e.notes = "Keep this under 3,000 characters.";
+  return e;
+}

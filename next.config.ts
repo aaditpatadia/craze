@@ -101,6 +101,7 @@ const nextConfig: NextConfig = {
       { source: "/:path*", headers: securityHeaders },
       { source: "/api/:path*", headers: noStore },
       { source: "/(admin|desk|login)", headers: [...noStore, { key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+      { source: "/(desk|track)/:path*", headers: [...noStore, { key: "X-Robots-Tag", value: "noindex, nofollow" }] },
       {
         source: "/assets/models/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],

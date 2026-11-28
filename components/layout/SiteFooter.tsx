@@ -16,6 +16,7 @@ const groups = [
     links: [
       { href: "/bom", label: "BOM checker" },
       { href: "/request", label: "Send a request" },
+      { href: "/reserve", label: "Reserve a part" },
       { href: "/suppliers/join", label: "For suppliers" },
     ],
   },
@@ -30,6 +31,7 @@ const groups = [
   {
     title: "How we work",
     links: [
+      { href: "/evidence", label: "Evidence status" },
       { href: "/methodology", label: "Methodology" },
       { href: "/codes/register", label: "Code register (PDF)" },
       { href: "/brief/buyers", label: "Buyer brief (PDF)" },

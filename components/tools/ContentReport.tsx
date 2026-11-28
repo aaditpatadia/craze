@@ -34,7 +34,7 @@ export function ContentReport() {
     <BlueprintDocument toolbar={<BpToolbar back={{ href: "/tools/content", label: "Content calculator" }} fileName={`${number} Timule indigenous content`} />}>
       <BlueprintSheet
         kind="Indigenous content"
-        title="Indigenous content calculation"
+        title="Indigenous content and origin dossier"
         number={number}
         status="Planning estimate"
         fields={[
@@ -131,7 +131,67 @@ export function ContentReport() {
                 <li>Indian shares are as entered. Each must be backed by the vendor&apos;s declaration; Timule parts carry one to the critical material.</li>
               </ul>
             </BpSection>
+            <BpSection n="05" title="Origin dossier: what to attach">
+              <p className="bp-dim mt-1 text-[8pt]">
+                Attach one document per line to the tender or scheme claim. Tick each as it is held. Critical parts need the origin of the critical material, not only of the
+                finished part.
+              </p>
+              <table className="bp-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Part</th>
+                    <th>Document needed</th>
+                    <th className="pl-4">Held</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rows.map((r, i) => {
+                    const rep = reps.get(r.id);
+                    const critical = CRITICAL.includes(r.group);
+                    const doc =
+                      r.replace && rep
+                        ? `Timule origin dossier for ${rep.code}: maker declaration, material origin, batch test record`
+                        : r.origin === "IMP"
+                          ? "Import invoice and bill of entry (counts as 0% Indian)"
+                          : r.origin === "UNK"
+                            ? "Written origin declaration from the vendor (missing: counted as imported)"
+                            : `Vendor declaration of origin and Indian content at ${r.share}%${critical ? ", with origin of magnets, wire or chips" : ""}`;
+                    return (
+                      <tr key={r.id}>
+                        <td className="bp-mono bp-faint">{String(i + 1).padStart(2, "0")}</td>
+                        <td>
+                          {r.part}
+                          {critical ? <span className="bp-faint"> · critical</span> : null}
+                        </td>
+                        <td className="bp-dim">{doc}</td>
+                        <td className="bp-mono pl-4">☐</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </BpSection>
+            <BpSection n="06" title="Declaration by the bidder">
+              <div className="bp-box mt-2 text-[8.5pt]">
+                <p>
+                  We declare that the indigenous content stated in this document, {res.score}% by cost, is calculated from the costs and vendor declarations listed in sections 03
+                  and 05, and that each declaration will be produced on request.
+                </p>
+                <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-5">
+                  {["Tender or scheme reference", "Company", "Name", "Designation", "Signature", "Date"].map((l) => (
+                    <p key={l} className="border-b border-current pb-1">
+                      <span className="bp-faint text-[7pt] uppercase tracking-wide">{l}</span>
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </BpSection>
             <p className="bp-faint mt-6 text-[7pt]">
+              Timule supplies the origin dossier and batch test record for every Timule part on this sheet. Timule does not certify indigenous content: the bidder declares it,
+              and the buying authority decides.
+            </p>
+            <p className="bp-faint mt-2 text-[7pt]">
               Calculated at {host}/tools/content. Method: the Indian share of each line&apos;s cost over the total cost, as in the cost-based approach of DAP 2020. A planning estimate,
               not a certificate: the tender or scheme document sets the exact rule, and the buyer&apos;s auditor decides.
             </p>

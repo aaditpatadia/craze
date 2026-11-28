@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CategoryArt } from "@/components/catalog/CategoryArt";
 import { EvidenceList } from "@/components/evidence/EvidenceRecord";
+import { RecentChecks } from "@/components/evidence/RecentChecks";
 import { PhotoGallery } from "@/components/product/PhotoGallery";
 import { PhotoSpin } from "@/components/product/PhotoSpin";
 import { LinkButton } from "@/components/ui/Button";
@@ -140,6 +141,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
           <div className="flex flex-wrap gap-3 lg:col-span-4 lg:justify-end">
             <LinkButton href={requestHref}>Request this part</LinkButton>
+            <LinkButton href={`/reserve?code=${encodeURIComponent(product.code)}`} variant="secondary">
+              Reserve this code
+            </LinkButton>
             <AddToQuote code={product.code} id={product.id} name={product.name} />
             <LinkButton href={`/sheets/${product.id}`} variant="ghost">
               <Icon name="document" size={16} /> Build sheet
@@ -317,8 +321,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
               How evidence tiers work
             </Link>
           </div>
-          <div className="lg:col-span-8">
+          <div className="space-y-6 lg:col-span-8">
             <EvidenceList items={product.evidence} />
+            <RecentChecks code={product.code} />
           </div>
         </Container>
       </section>

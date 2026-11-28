@@ -4,6 +4,7 @@ import { looksLikeSpam, validateRequest, type RequestInput } from "@/lib/forms";
 import { makeReference } from "@/lib/codes";
 import { storeSubmission } from "@/lib/submissions";
 import { guard, readJson, text } from "@/lib/security";
+import { openCase } from "@/lib/cases";
 
 export const runtime = "nodejs";
 
@@ -35,8 +36,22 @@ export async function POST(req: Request) {
     void _honeypot;
     void _started;
     const reference = makeReference("TMQ");
-    const { id } = await storeSubmission({ kind: "request", data, reference });
-    return NextResponse.json({ ok: true, id, reference });
+    // Open a tracked case first, so the emailed copy can carry the tracking link. A store failure never blocks the request.
+    let track: string | null = null;
+    try {
+      const c = await openCase({
+        ref: reference,
+        kind: "request",
+        summary: data.parts,
+        timeline: data.timeline,
+        contact: { company: data.company, email: data.email, role: data.role },
+      });
+      track = `/track/${c.id}`;
+    } catch (e) {
+      console.error("[api/request] case store failed", e);
+    }
+    const { id } = await storeSubmission({ kind: "request", data: { ...data, ...(track ? { track: `${SITE.url}${track}` } : {}) }, reference });
+    return NextResponse.json({ ok: true, id, reference, track });
   } catch (e) {
     console.error("[api/request] store failed", e);
     return NextResponse.json({ ok: false, error: `We could not save your request. Nothing was sent. Please try again, or email ${SITE.contactEmail}.` }, { status: 500 });

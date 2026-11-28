@@ -40,6 +40,11 @@ ${getProducts()
   .map((p) => `- [${p.code}: ${p.name}](${u(`/parts/${p.id}`)})`)
   .join("\n")}
 
+## Proof and buying
+- [Evidence status and verification log](${u("/evidence")}): live counts of parts by evidence tier, samples measured, batches tested and lab reports, with every logged check.
+- [Reserve a part](${u("/reserve")}): send a non-binding letter of intent against TM codes and track it from received to delivered.
+- [Tender origin dossier](${u("/tools/content")}): the content calculator prints an origin dossier with the documents to attach and a bidder declaration.
+
 ## Company
 - [About Timule and the founders](${u("/about")}): ${FOUNDERS.map((f) => `${f.name} (${f.role}, ${f.focus.toLowerCase()})`).join("; ")}.
 - [For investors](${u("/investors")})

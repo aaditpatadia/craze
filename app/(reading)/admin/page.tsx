@@ -9,6 +9,7 @@ export const metadata: Metadata = { title: "Founder desk", robots: { index: fals
 export const dynamic = "force-dynamic";
 
 const LINKS = [
+  { href: "/desk/pipeline", title: "Pipeline", body: "Requests, letters of intent, demand by code, and logging checks to the public evidence page." },
   { href: "/desk", title: "Documents", body: "Quotations, purchase orders and invoices on Timule blueprints." },
   { href: "/tools/firmware?make", title: "Seal a firmware record", body: "Check a maker's record, then seal it. Signed in, no key needed." },
   { href: "/codes/register", title: "Code register", body: "Every TM code, as a PDF." },

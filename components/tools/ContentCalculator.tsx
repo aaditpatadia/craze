@@ -237,7 +237,7 @@ export function ContentCalculator({ catalog }: { catalog: CatalogItem[] }) {
                   </Button>
                 ) : null}
                 <Button variant="secondary" onClick={report}>
-                  <Icon name="printer" size={16} /> Blueprint report (PDF)
+                  <Icon name="printer" size={16} /> Tender origin dossier (PDF)
                 </Button>
                 <Button onClick={addAll} disabled={!rows.some((r) => r.replace)}>
                   <Icon name={added ? "check" : "plus"} size={16} /> {added ? "Added to quote list" : "Add replacements to quote"}
