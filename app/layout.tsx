@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     "Indian electronic components supplier",
     "critical components India",
     "Indian drone components",
+    "batch tested components India",
     "robot actuator India",
     "robot joint actuator manufacturer India",
     "AGV drive wheel India",

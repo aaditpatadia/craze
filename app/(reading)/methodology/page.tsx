@@ -87,6 +87,29 @@ export default function MethodologyPage() {
             </li>
           </ul>
 
+          <h2 id="batch" className="scroll-mt-24">Batch-to-batch testing</h2>
+          <p>
+            Evidence records describe a part. Batch testing is what happens to every order before it ships, so that each delivery is as good as the part we
+            described:
+          </p>
+          <ul>
+            <li>
+              <strong>Every unit.</strong> The checks on the build sheet that apply to every unit, such as KV and phase resistance for a motor or a power-on and
+              function test for an ESC, logged by serial number.
+            </li>
+            <li>
+              <strong>Every batch.</strong> Samples from each batch are measured and compared with the previous batch, so drift between batches is caught
+              before dispatch.
+            </li>
+            <li>
+              <strong>Graded against the code.</strong> A part ships only if it falls inside every acceptance band on its TM code. Anything outside is rejected
+              and returned to the maker, never sold as a lower grade.
+            </li>
+            <li>
+              <strong>Recorded.</strong> The batch number, test results and origin declarations go with the delivery and are filed under the code.
+            </li>
+          </ul>
+
           <h2>Specs</h2>
           <p>
             Each spec value points at the evidence behind it. A value from a datasheet shows tier 1, even if we later measured

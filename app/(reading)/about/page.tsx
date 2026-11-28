@@ -35,11 +35,16 @@ const BELIEFS = [
     title: "Indian, and able to show it",
     body: "Saying a part is Indian is easy. Showing where the magnets, wire and chips came from is the work. That is the work we do.",
   },
+  {
+    n: "05",
+    title: "Tested batch to batch, top grade only",
+    body: "Every batch is tested against the bands on the part's build sheet before it ships. Parts outside any band are rejected, not sold cheaper. You receive only parts that passed every check.",
+  },
 ];
 
 const LIMITS = [
   "We do not certify parts or suppliers. Nothing here replaces your own qualification testing.",
-  "Most sample checks are on a single unit, so they say nothing about spread across a batch.",
+  "The evidence on a listing often rests on a single qualification sample. Spread between batches is covered by our batch testing on orders, not by the listing.",
   "We cannot confirm that a chip is genuine beyond its visible markings.",
   "Raw material origin, such as magnet alloy or carbon fibre, is sometimes unknown to us. When it is, we say so.",
   "Lead times and minimum orders are as the maker states them until a real order proves them.",
@@ -168,7 +173,7 @@ export default function AboutPage() {
           <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-7">
             {[
               ["One seller", "You buy from Timule, on one invoice, whoever builds the part."],
-              ["Proof on every batch", "Origin declarations to the material, our own measurements, and outside lab tests where it matters."],
+              ["Tested batch to batch", "Every batch tested against the build sheet before it ships, only top-grade parts released, with origin declarations and outside lab tests where it matters."],
               ["A backup maker", "The code stays the same if a maker fails. Your design and paperwork do not change."],
               ["One supplier, many sectors", "Drone propulsion, robot joints and drive wheels, server fans, power supplies and liquid cooling, all on the same code system."],
               ["Tools engineers use", "Content calculator, propulsion sizing, CAD and flight-controller files, and firmware records, free on this site."],

@@ -156,7 +156,7 @@ export default function InvestorsPage() {
           </div>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
             {[
-              ["Evidence, batch by batch", "Origin declarations to the material and our own test data. It grows with every order and no directory has it."],
+              ["Evidence, batch by batch", "Every batch tested and graded before it ships, with origin declarations to the material. The test data grows with every order and no directory has it."],
               ["The code system", "Once a TM code is on a buyer's drawings and purchase orders, switching costs them a requalification."],
               ["Two-sided trust", "Buyers trust one accountable seller; makers get orders without chasing dozens of small customers."],
               ["Engineers' tools", "The calculators and files put Timule parts into designs before procurement starts."],

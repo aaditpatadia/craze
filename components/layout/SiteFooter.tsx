@@ -53,7 +53,7 @@ export function SiteFooter() {
         <div className="col-span-2 md:col-span-10 xl:col-span-2">
           <TimuleLogo size={20} className="inline-flex items-center gap-2 text-[13px]" />
           <p className="mt-2 max-w-xs text-fg-subtle">
-            Every figure on this site shows its evidence tier, or says it is not yet verified.
+            Indian components for drones, robots and data centers. Every batch tested, only top-grade parts shipped, and every figure shows its evidence tier.
           </p>
           <p className="mt-4">
             <a href={`mailto:${SITE.contactEmail}`} className="inline-flex min-h-9 items-center text-fg-muted underline-offset-4 hover:text-fg hover:underline">

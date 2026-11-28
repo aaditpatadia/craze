@@ -6,6 +6,7 @@ import { MotorFrames } from "@/components/configure/MotorFrames";
 import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader } from "@/components/ui/Layout";
+import { BatchTestingStrip } from "@/components/catalog/BatchTesting";
 import { getCatalog, getCategories, getCategory, getLiveCategories } from "@/lib/content";
 
 const CONFIGURE: Record<string, { href: string; label: string }> = {
@@ -66,6 +67,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ id: s
           </LinkButton>
         ) : null}
       </PageHeader>
+      <Container className="pb-8">
+        <BatchTestingStrip />
+      </Container>
       <Container className="pb-24">
         <Catalog items={items} categories={categories} fixedCategory={category.id} />
         {category.id === "bldc-motors" ? <MotorFrames /> : null}

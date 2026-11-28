@@ -16,7 +16,7 @@ export function GET() {
 
 Timule is not only a drone parts supplier: it is a supply layer for critical components across drones, robotics and data centers.
 
-Timule is based in India. It sources from qualified Indian manufacturers, checks batches (documents, its own measurements, outside lab tests), and sells under its own TM code so a buyer has one accountable seller and a backup maker. Makers are identified by TMS supplier codes, not names.
+Timule is based in India. It sources from qualified Indian manufacturers, tests every batch before it ships against the acceptance bands on the part's build sheet, releasing only parts that pass every band (top grade only; the rest are rejected), backed by documents, its own measurements and outside lab tests, and sells under its own TM code so a buyer has one accountable seller and a backup maker. Makers are identified by TMS supplier codes, not names.
 
 ## Sectors
 - [Drones, robotics and data centers](${u("/sectors")})

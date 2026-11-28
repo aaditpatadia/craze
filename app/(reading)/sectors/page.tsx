@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CategoryArt } from "@/components/catalog/CategoryArt";
+import { BatchTesting } from "@/components/catalog/BatchTesting";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
 import { getCatalog, getCategories } from "@/lib/content";
 import { SECTOR_LABEL } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: "Sectors: drones, robotics and data centers",
-  description: "The components Timule lists for drones, robots and data centers, chosen by what buyers need and cannot easily source.",
+  title: "Sectors: Indian components for drones, robotics and data centers",
+  description: "Timule supplies Indian-made critical components across three sectors: propulsion and avionics for drones, joint actuators and drive wheels for robots, and cooling and power for data centers. One code system, one invoice, and every batch tested before it ships.",
+  keywords: ["drone components India", "robot actuator India", "AGV drive wheel India", "server fan India", "server power supply India", "data center liquid cooling India", "batch tested components"],
   alternates: { canonical: "/sectors" },
 };
 
 const PITCH: Record<string, string> = {
-  aerial: "Propulsion, avionics and structure for defence, agricultural and logistics drones. The parts where import dependence is highest and buyers must prove origin.",
-  robotics: "Joints and drive wheels for robot arms, humanoids and warehouse robots. They share magnets, bearings and windings with drone motors, and the same origin questions.",
-  compute: "Cooling and power parts for India's data center build-out. Air and liquid cooling, and the power supplies inside every server.",
-  energy: "Cells and packs. Listed as upcoming while we qualify suppliers.",
+  aerial: "Motors, ESCs, propellers, flight controllers, GNSS and frames for defence, agricultural and logistics drones. The sector where import dependence is highest and buyers must now prove origin.",
+  robotics: "Joint actuators and drive wheels for robot arms, humanoids, AGVs and warehouse robots. Built from the same magnets, bearings and windings as drone motors, and facing the same origin questions.",
+  compute: "Server fans, server power supplies and liquid cooling for India's data center build-out. The parts that keep every rack cool and powered, sourced in India instead of imported.",
+  energy: "Battery cells and packs. Listed as upcoming while we qualify Indian makers to the same batch-testing standard.",
 };
 
 export default function SectorsPage() {
@@ -27,7 +29,7 @@ export default function SectorsPage() {
     <>
       <PageHeader
         title="Three sectors, one way of buying"
-        lead="Whatever the part, it has a TM code, an exploded view, a build sheet and the evidence behind every claim."
+        lead="Timule is not only a drone supplier. We supply the critical components inside drones, robots and data centers, made in India. Whatever the part, it has a TM code, an exploded view, a build sheet and the evidence behind every claim, and every batch is tested before it ships."
       />
       {sectors.map((s) => {
         const cats = categories.filter((c) => c.sector === s);
@@ -79,6 +81,7 @@ export default function SectorsPage() {
           </section>
         );
       })}
+      <BatchTesting />
     </>
   );
 }

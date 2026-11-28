@@ -8,6 +8,7 @@ import { SITE } from "@/lib/config";
 import { getCatalog, getLiveCategories, getManifest, getUpcomingCategories } from "@/lib/content";
 import { SECTOR_LABEL, TIER_LABEL } from "@/lib/format";
 import { CategoryArt } from "@/components/catalog/CategoryArt";
+import { BatchTesting } from "@/components/catalog/BatchTesting";
 
 const HERO_PRODUCT = "tm-mot-2807-1300";
 
@@ -239,6 +240,8 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <BatchTesting />
+
       <section aria-labelledby="limits-title" className="border-t border-line py-20 sm:py-28">
         <Container>
           <div className="max-w-3xl">
@@ -246,8 +249,8 @@ export default function HomePage() {
               What we do not do yet
             </h2>
             <p className="mt-4 text-lg text-fg-muted">
-              We do not certify parts or suppliers, and nothing here replaces your own qualification testing. Most records rest on a single sample, so they say
-              nothing about batch-to-batch spread. We cannot confirm chip authenticity beyond visible markings, and the origin of raw materials such as
+              We do not certify parts or suppliers, and nothing here replaces your own qualification testing. The evidence on a listing often rests on a single
+              qualification sample; batch testing on every order is what covers spread between batches. We cannot confirm chip authenticity beyond visible markings, and the origin of raw materials such as
               lamination steel is often unknown to us; when it is, we say so. We have not yet run long-duration or in-flight tests on any part.
             </p>
             <Link href="/about" className="mt-6 inline-block text-sm text-accent hover:underline">
