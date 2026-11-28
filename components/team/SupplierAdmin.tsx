@@ -9,7 +9,7 @@ import { inputClass } from "@/components/forms/Field";
 
 async function post(body: Record<string, unknown>) {
   const res = await fetch("/api/team", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; id?: string; code?: string };
+  const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; id?: string; code?: string; emailed?: boolean };
   if (!res.ok || !data.ok) throw new Error(data.error ?? `Failed (${res.status}).`);
   return data;
 }
@@ -53,7 +53,7 @@ export function InviteForm({ categories }: { categories: { id: string; name: str
         e.preventDefault();
         await run({ action: "invite", ...v, meeting: v.meeting ? new Date(v.meeting).toISOString() : "" }, "Supplier created.", (d) => {
           setV(blank);
-          if (d.id) router.push(`/team/suppliers/${d.id}`);
+          if (d.id) router.push(`/team/suppliers/${d.id}?new=1`);
         });
       }}
       className="space-y-5 rounded-xl border border-line p-5 sm:p-6"
@@ -273,5 +273,48 @@ export function DeleteSupplier({ a }: { a: SupplierAccount }) {
       </button>
       {note}
     </div>
+  );
+}
+
+/** Send the supplier their invitation: automatically when email is set up, or as a ready Gmail draft. */
+export function InvitePanel({ id, gmail, text, link, auto, emails, fresh }: { id: string; gmail: string; text: string; link: string; auto: boolean; emails: string[]; fresh: boolean }) {
+  const { busy, run, note } = useAction();
+  const [copied, setCopied] = useState<string | null>(null);
+  const copy = async (what: string, value: string) => {
+    await navigator.clipboard.writeText(value);
+    setCopied(what);
+    setTimeout(() => setCopied(null), 2000);
+  };
+  return (
+    <section className={cn("rounded-xl border p-5", fresh ? "border-accent bg-accent/5" : "border-line")}>
+      <h2 className="font-semibold">{fresh ? "Supplier created. Now send the invitation" : "Invitation"}</h2>
+      <p className="mt-1 text-sm text-fg-muted">
+        It welcomes them, gives their TMS code, lists what to keep ready and links straight to sign-in with {emails.join(" or ")} pre-selected.
+      </p>
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        {auto ? (
+          <Button loading={busy} loadingLabel="Sending" onClick={() => void run({ action: "send-invite", id }, "Invitation emailed.")}>
+            Email the invitation
+          </Button>
+        ) : (
+          <a
+            href={gmail}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => void run({ action: "invite-sent", id }, "Opened in Gmail. Press Send there.")}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-inverse px-5 text-sm font-medium text-inverse-fg hover:opacity-85"
+          >
+            Open the invitation in Gmail
+          </a>
+        )}
+        <Button variant="secondary" onClick={() => void copy("text", text)}>
+          {copied === "text" ? "Copied" : "Copy invitation text"}
+        </Button>
+        <Button variant="ghost" onClick={() => void copy("link", link)}>
+          {copied === "link" ? "Copied" : "Copy sign-in link"}
+        </Button>
+      </div>
+      <div className="mt-3">{note}</div>
+    </section>
   );
 }

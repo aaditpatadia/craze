@@ -8,7 +8,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Container } from "@/components/ui/Layout";
 import { requireSupplierSession } from "@/lib/auth-server";
 import { SITE } from "@/lib/config";
-import { getProducts } from "@/lib/content";
+import { getCategory, getProducts } from "@/lib/content";
 import { AGREEMENT_VERSION, SUBMISSION_KINDS, checklist, isUpcoming, supplierStatusOf } from "@/lib/portal";
 import { getAccount, submissionsFor } from "@/lib/portal-server";
 
@@ -42,7 +42,7 @@ export default async function SupplierPortalPage({ searchParams }: { searchParam
   const c = checklist(a, subs);
   const status = supplierStatusOf(a.status);
   const requests = a.requests.filter((r) => r.status === "open");
-  const partCodes = getProducts().map((p) => p.code.replace(/-A$/, ""));
+  const products = getProducts().map((p) => ({ code: p.code.replace(/-A$/, ""), name: p.name, category: getCategory(p.category)?.name ?? "Other" }));
   const next = c.items.find((i) => i.state === "missing" || i.state === "changes");
   const pct = Math.round((c.done / c.total) * 100);
 
@@ -180,7 +180,7 @@ export default async function SupplierPortalPage({ searchParams }: { searchParam
             samples).
           </p>
           <div className="mt-6">
-            <SubmitForm key={kind ?? "first"} sid={a.id} initialKind={kind} requests={a.requests} partCodes={partCodes} />
+            <SubmitForm key={kind ?? "first"} sid={a.id} initialKind={kind} requests={a.requests} products={products} />
           </div>
         </section>
 
@@ -248,8 +248,8 @@ export default async function SupplierPortalPage({ searchParams }: { searchParam
                   </div>
                 ))}
               </dl>
-              <Link href="/codes" className="mt-4 inline-block text-sm text-accent hover:underline">
-                How TM codes work
+              <Link href="/codes" target="_blank" rel="noopener" className="mt-4 inline-block text-sm text-accent hover:underline">
+                How TM codes work <span className="sr-only">(opens in a new tab)</span>
               </Link>
             </section>
 
@@ -257,7 +257,7 @@ export default async function SupplierPortalPage({ searchParams }: { searchParam
               <h2 className="text-lg font-semibold text-fg">Your data</h2>
               <p className="mt-2">
                 Files you upload are stored privately and are visible only to you and the Timule team. We never show your company name, documents or prices to buyers. See the{" "}
-                <Link href="/legal/privacy" className="text-accent hover:underline">
+                <Link href="/legal/privacy" target="_blank" rel="noopener" className="text-accent hover:underline">
                   privacy notice
                 </Link>
                 .

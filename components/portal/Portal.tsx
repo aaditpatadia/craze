@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { SUBMISSION_KINDS, VAULT_FILE, fieldsOf, fileHref, kindOf, type PortalFile, type SubmissionKind, type SupplierProfile, type TeamRequest } from "@/lib/portal";
 import { Button } from "@/components/ui/Button";
@@ -15,6 +15,19 @@ async function post(body: Record<string, unknown>) {
   const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; ref?: string };
   if (!res.ok || !data.ok) throw new Error(data.error ?? `Something went wrong (${res.status}). Please try again.`);
   return data;
+}
+
+/** Asks before the tab closes or reloads while a form holds unsaved work. */
+function useLeaveWarning(dirty: boolean) {
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
 }
 
 const ctl = cn(inputClass, "mt-1.5 h-11 border-line");
@@ -36,7 +49,7 @@ const PROFILE_FIELDS: { k: keyof SupplierProfile; label: string; required?: bool
   { k: "address", label: "Registered address", required: true, long: true },
   { k: "city", label: "City", required: true, half: true },
   { k: "state", label: "State", required: true, half: true },
-  { k: "gstin", label: "GSTIN", placeholder: "24ABCDE1234F1Z5", half: true },
+  { k: "gstin", label: "GSTIN", required: true, placeholder: "24ABCDE1234F1Z5", half: true },
   { k: "udyam", label: "Udyam registration number", placeholder: "UDYAM-GJ-01-0012345", half: true },
   { k: "founded", label: "Year founded", placeholder: "2014", half: true },
   { k: "employees", label: "People employed", placeholder: "45", half: true },
@@ -51,8 +64,11 @@ const PROFILE_FIELDS: { k: keyof SupplierProfile; label: string; required?: bool
 
 export function ProfileForm({ initial }: { initial?: SupplierProfile }) {
   const router = useRouter();
-  const [v, setV] = useState<Record<string, string>>(() => Object.fromEntries(PROFILE_FIELDS.map((f) => [f.k, (initial?.[f.k] as string | undefined) ?? ""])));
+  const start = () => Object.fromEntries(PROFILE_FIELDS.map((f) => [f.k, (initial?.[f.k] as string | undefined) ?? ""]));
+  const [v, setV] = useState<Record<string, string>>(start);
+  const [saved, setSaved] = useState<Record<string, string>>(start);
   const [busy, setBusy] = useState(false);
+  useLeaveWarning(PROFILE_FIELDS.some((f) => v[f.k] !== saved[f.k]));
   const [m, setM] = useState<{ ok: boolean; text: string } | null>(null);
   return (
     <form
@@ -62,6 +78,7 @@ export function ProfileForm({ initial }: { initial?: SupplierProfile }) {
         setM(null);
         try {
           await post({ action: "profile", profile: v });
+          setSaved(v);
           setM({ ok: true, text: "Saved." });
           router.refresh();
         } catch (err) {
@@ -158,8 +175,13 @@ export function AgreementForm({ accepted }: { accepted?: { name: string; title: 
 }
 
 /** Submit any item on the checklist: the fields for that kind, files and a note. */
-export function SubmitForm({ sid, initialKind, requests, partCodes }: { sid: string; initialKind?: string; requests: TeamRequest[]; partCodes: string[] }) {
+export type PortalProduct = { code: string; name: string; category: string };
+
+export function SubmitForm({ sid, initialKind, requests, products }: { sid: string; initialKind?: string; requests: TeamRequest[]; products: PortalProduct[] }) {
   const router = useRouter();
+  const groups = [...new Set(products.map((p) => p.category))].map((c) => [c, products.filter((p) => p.category === c)] as const);
+  const [pick, setPick] = useState("");
+  const [pickQty, setPickQty] = useState("");
   const start = (kindOf(initialKind ?? "")?.id ?? "registration") as SubmissionKind;
   const [kind, setKind] = useState<SubmissionKind>(start);
   const [title, setTitle] = useState("");
@@ -172,6 +194,7 @@ export function SubmitForm({ sid, initialKind, requests, partCodes }: { sid: str
   const [m, setM] = useState<{ ok: boolean; text: string } | null>(null);
   const def = kindOf(kind)!;
   const open = requests.filter((r) => r.status === "open");
+  useLeaveWarning(files.length > 0 || !!title || !!note || Object.values(fields).some(Boolean));
 
   const reset = (k: SubmissionKind) => {
     setKind(k);
@@ -231,19 +254,64 @@ export function SubmitForm({ sid, initialKind, requests, partCodes }: { sid: str
           <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder={kind === "product" ? "2807 1300 KV outrunner" : def.label} className={ctl} />
         </label>
         <label className={lbl}>
-          TM code it relates to{opt}
-          <input list="portal-codes" value={partCode} onChange={(e) => setPartCode(e.target.value.toUpperCase())} placeholder="TM-MOT-2807-1300" className={cn(ctl, "code-text")} />
-          <datalist id="portal-codes">
-            {partCodes.map((c) => (
-              <option key={c} value={c} />
+          Which Timule part is it for?{opt}
+          <select value={partCode} onChange={(e) => setPartCode(e.target.value)} className={ctl}>
+            <option value="">Not a specific part, or not in the list</option>
+            {groups.map(([cat, list]) => (
+              <optgroup key={cat} label={cat}>
+                {list.map((p) => (
+                  <option key={p.code} value={p.code}>
+                    {p.name}
+                  </option>
+                ))}
+              </optgroup>
             ))}
-          </datalist>
+          </select>
+          <span className="mt-1 block text-xs font-normal text-fg-subtle">
+            {partCode ? (
+              <>
+                TM code: <span className="code-text text-fg">{partCode}</span>
+              </>
+            ) : (
+              "Pick the part by name. We add its TM code for you."
+            )}
+          </span>
         </label>
         {fieldsOf(kind).map((f) => (
           <label key={`${kind}-${f.id}`} className={cn(lbl, f.long ? "sm:col-span-2" : "")}>
             {f.label}
             {f.required ? null : opt}
             {f.hint ? <span className="block text-xs font-normal text-fg-subtle">{f.hint}</span> : null}
+            {kind === "sample" && f.id === "items" ? (
+              <span className="mt-1.5 flex flex-wrap items-center gap-2 font-normal">
+                <select value={pick} onChange={(e) => setPick(e.target.value)} aria-label="Part to add" className={cn(ctl, "mt-0 min-w-0 flex-1")}>
+                  <option value="">Choose a part to add…</option>
+                  {groups.map(([cat, list]) => (
+                    <optgroup key={cat} label={cat}>
+                      {list.map((p) => (
+                        <option key={p.code} value={p.code}>
+                          {p.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+                <input value={pickQty} onChange={(e) => setPickQty(e.target.value.replace(/[^\d]/g, ""))} inputMode="numeric" placeholder="Qty" aria-label="Quantity" className={cn(ctl, "mt-0 w-24")} />
+                <Button
+                  variant="secondary"
+                  disabled={!pick || !pickQty}
+                  onClick={() => {
+                    const name = products.find((p) => p.code === pick)?.name ?? "";
+                    const line = `${pick} × ${pickQty}  (${name})`;
+                    setFields((s) => ({ ...s, items: s.items ? `${s.items.trimEnd()}\n${line}` : line }));
+                    setPick("");
+                    setPickQty("");
+                  }}
+                >
+                  Add part
+                </Button>
+              </span>
+            ) : null}
             {f.long ? (
               <textarea rows={4} required={f.required} value={fields[f.id] ?? ""} placeholder={f.placeholder} onChange={(e) => setFields({ ...fields, [f.id]: e.target.value })} className={area} />
             ) : (

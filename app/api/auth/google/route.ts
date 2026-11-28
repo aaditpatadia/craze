@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { OAUTH_COOKIE, googleConfigured, startFlow } from "@/lib/google";
+import { OAUTH_COOKIE, googleConfigured, isEmailHint, startFlow } from "@/lib/google";
 import { clientIp, rateLimited } from "@/lib/submissions";
 
 export const runtime = "nodejs";
@@ -15,7 +15,8 @@ export async function GET(req: Request) {
     back.searchParams.set("error", "busy");
     return NextResponse.redirect(back);
   }
-  const { url, cookie } = startFlow(req);
+  const hint = new URL(req.url).searchParams.get("hint") ?? "";
+  const { url, cookie } = startFlow(req, isEmailHint(hint) ? hint : undefined);
   const res = NextResponse.redirect(url);
   // Lax, so the browser sends it back when Google redirects to our callback. Ten minutes.
   res.headers.append("Set-Cookie", `${OAUTH_COOKIE}=${cookie}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=600`);

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SubmissionCard } from "@/components/portal/SubmissionCard";
-import { AskForm, DeleteSupplier, OpenAsButton, RequestToggle, ReviewControls, SupplierSettings } from "@/components/team/SupplierAdmin";
+import { AskForm, DeleteSupplier, InvitePanel, OpenAsButton, RequestToggle, ReviewControls, SupplierSettings } from "@/components/team/SupplierAdmin";
 import { TeamNav } from "@/components/team/TeamNav";
 import { Icon } from "@/components/ui/Icon";
 import { Container } from "@/components/ui/Layout";
@@ -10,6 +10,7 @@ import { requireTeam } from "@/lib/auth-server";
 import { getCategories } from "@/lib/content";
 import { AGREEMENT_VERSION, SUBMISSION_KINDS, checklist, supplierStatusOf } from "@/lib/portal";
 import { getAccount, submissionsFor } from "@/lib/portal-server";
+import { autoEmailConfigured, gmailDraft, invitation, inviteLink } from "@/lib/invite";
 
 export const metadata: Metadata = { title: "Supplier", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -23,8 +24,9 @@ const STATE = {
   missing: { label: "Missing", cls: "border-line text-fg-subtle" },
 } as const;
 
-export default async function TeamSupplierPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function TeamSupplierPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ new?: string }> }) {
   const { id } = await params;
+  const fresh = (await searchParams).new === "1";
   const me = await requireTeam(`/team/suppliers/${id}`);
   const a = await getAccount(id);
   if (!a) notFound();
@@ -52,6 +54,18 @@ export default async function TeamSupplierPage({ params }: { params: Promise<{ i
             </p>
           </div>
           <OpenAsButton id={a.id} />
+        </div>
+
+        <div className="mt-8">
+          <InvitePanel
+            id={a.id}
+            gmail={gmailDraft(a, me.name)}
+            text={invitation(a, me.name).text}
+            link={inviteLink(a.emails[0] ?? "")}
+            auto={autoEmailConfigured()}
+            emails={a.emails}
+            fresh={fresh}
+          />
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12">

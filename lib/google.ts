@@ -22,7 +22,10 @@ export const redirectUri = (req: Request) => {
 
 const b64url = (b: Buffer) => b.toString("base64url");
 
-export function startFlow(req: Request) {
+/** A plausible email address, for the optional login hint. */
+export const isEmailHint = (s: unknown): s is string => typeof s === "string" && /^[^\s@]{1,64}@[^\s@]{1,190}\.[a-z]{2,}$/i.test(s);
+
+export function startFlow(req: Request, hint?: string) {
   const state = b64url(randomBytes(24));
   const verifier = b64url(randomBytes(48));
   const nonce = b64url(randomBytes(24));
@@ -38,6 +41,7 @@ export function startFlow(req: Request) {
     code_challenge: challenge,
     code_challenge_method: "S256",
     prompt: "select_account",
+    ...(hint ? { login_hint: hint } : {}),
   }).toString();
   return { url: url.toString(), cookie: `${state}.${verifier}.${nonce}` };
 }

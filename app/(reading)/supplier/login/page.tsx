@@ -7,6 +7,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Container } from "@/components/ui/Layout";
 import { SUPPLIER_COOKIE, supplierSession } from "@/lib/auth";
 import { SITE } from "@/lib/config";
+import { isEmailHint } from "@/lib/google";
 
 export const metadata: Metadata = { title: "Supplier portal sign-in", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -40,9 +41,10 @@ function GoogleG() {
   );
 }
 
-export default async function SupplierLoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function SupplierLoginPage({ searchParams }: { searchParams: Promise<{ error?: string; email?: string }> }) {
   if (await supplierSession((await cookies()).get(SUPPLIER_COOKIE)?.value)) redirect("/supplier");
-  const { error } = await searchParams;
+  const { error, email } = await searchParams;
+  const hint = isEmailHint(email) ? email : "";
   const message = typeof error === "string" ? ERRORS[error] : undefined;
   return (
     <Container className="py-14 sm:py-20">
@@ -62,11 +64,12 @@ export default async function SupplierLoginPage({ searchParams }: { searchParams
           ) : null}
           {/* A plain link: the server sends the browser to Google, and Google sends it back. */}
           <a
-            href="/api/auth/google"
+            href={hint ? `/api/auth/google?hint=${encodeURIComponent(hint)}` : "/api/auth/google"}
             className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full border border-line-strong/60 bg-bg px-6 font-medium transition-colors hover:border-fg hover:bg-bg-subtle"
           >
             <GoogleG /> Continue with Google
           </a>
+          {hint ? <p className="mt-3 text-center text-sm text-fg-muted">Invited as <span className="font-medium text-fg">{hint}</span></p> : null}
           <p className="mt-4 text-xs text-fg-subtle">
             We receive only your name and email address from Google, to check that you were invited. By signing in you agree to the{" "}
             <Link href="/legal/supplier-terms" className="underline hover:text-fg">

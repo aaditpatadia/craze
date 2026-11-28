@@ -124,7 +124,7 @@ export const SUBMISSION_KINDS = [
     files: "Upload a photo of the packed samples and the courier receipt.",
     minFiles: 0,
     fields: [
-      { id: "items", label: "Parts and quantities, one per line", placeholder: "TM-MOT-2807-1300 × 5\nYour part 2807-1300KV-B × 5", long: true, required: true },
+      { id: "items", label: "Parts and quantities, one per line", placeholder: "Use Add part above, or type your own part number and quantity, like: 2807-1300KV-B × 5", long: true, required: true },
       { id: "courier", label: "Courier", placeholder: "Blue Dart" },
       { id: "tracking", label: "Tracking number" },
       { id: "sentOn", label: "Sent on", placeholder: "2026-12-02" },
@@ -188,7 +188,7 @@ export type SupplierProfile = {
   address: string;
   city: string;
   state: string;
-  gstin?: string;
+  gstin: string;
   udyam?: string;
   founded?: string;
   employees?: string;

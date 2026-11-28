@@ -6,6 +6,7 @@ import { REVIEW_STATES, SUPPLIER_STATUSES, type ReviewState, type SupplierStatus
 import { createAccount, getAccount, getAccounts, getSubmissions, removeSubmission, saveAccount, saveSubmission } from "@/lib/portal-server";
 import { guard, readJson, text } from "@/lib/security";
 import { deleteRecord, secretId } from "@/lib/store";
+import { sendInvitation } from "@/lib/invite";
 
 export const runtime = "nodejs";
 
@@ -46,7 +47,15 @@ export async function POST(req: Request) {
       { company, emails, categories: categoriesFrom(body.categories), meeting: text(body.meeting, 30) || undefined, notes: text(body.notes, 3000).trim() || undefined },
       by,
     );
-    return done({ id: a.id, code: a.code });
+    // Email the invitation straight away when automatic email is set up. Never blocks creating the account.
+    let emailed = false;
+    try {
+      emailed = await sendInvitation(a, team.name);
+      if (emailed) await saveAccount(a, by, `Invitation emailed to ${a.emails.join(", ")}`);
+    } catch (e) {
+      console.error("[team] invitation email failed", e);
+    }
+    return done({ id: a.id, code: a.code, emailed });
   }
 
   const account = body.id ? await getAccount(text(body.id, 20)) : null;
@@ -73,6 +82,23 @@ export async function POST(req: Request) {
     if (body.meeting !== undefined) next.meeting = text(body.meeting, 30) || undefined;
     if (body.notes !== undefined) next.notes = text(body.notes, 3000).trim() || undefined;
     await saveAccount(next, by, changes.length ? `Updated by ${by}: ${changes.join(", ")}` : `Details updated by ${by}`);
+    return done();
+  }
+
+  if (body.action === "send-invite") {
+    if (!account) return err("Supplier not found.", 404);
+    try {
+      if (!(await sendInvitation(account, team.name))) return err("Automatic email is not set up. Use Open in Gmail instead.", 409);
+    } catch {
+      return err("The email service did not accept the message. Use Open in Gmail instead.", 502);
+    }
+    await saveAccount(account, by, `Invitation emailed to ${account.emails.join(", ")} by ${by}`);
+    return done();
+  }
+
+  if (body.action === "invite-sent") {
+    if (!account) return err("Supplier not found.", 404);
+    await saveAccount(account, by, `Invitation sent from Gmail by ${by}`);
     return done();
   }
 

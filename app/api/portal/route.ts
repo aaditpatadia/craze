@@ -45,7 +45,7 @@ export async function POST(req: Request) {
       capacity: s("capacity", 300),
       customers: s("customers", 1000),
     };
-    const missing = (["legalName", "address", "city", "state", "contactName", "contactRole", "phone", "makes"] as const).filter((k) => profile[k].length < 2);
+    const missing = (["legalName", "address", "city", "state", "gstin", "contactName", "contactRole", "phone", "makes"] as const).filter((k) => profile[k].length < 2);
     if (missing.length) return err("Fill in every field marked required.", 422);
     if (profile.gstin && !/^\d{2}[A-Z]{5}\d{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/.test(profile.gstin)) return err("That GSTIN does not look right: 15 characters, like 24ABCDE1234F1Z5.", 422);
     const next = await saveAccount({ ...account, profile }, by, "Company profile saved");
