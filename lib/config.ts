@@ -17,7 +17,7 @@ export const SITE = {
   /** Where people can write to us. Shown in the footer and next to every form. */
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "hellotimule@gmail.com",
   /** Formspree form that emails every submission to contactEmail. */
-  formEndpoint: process.env.FORMSPREE_ENDPOINT ?? "https://formspree.io/f/xdegbjny",
+  formEndpoint: process.env.FORMSPREE_ENDPOINT ?? "https://formspree.io/f/xqpqoqgn",
 } as const;
 
 /**
