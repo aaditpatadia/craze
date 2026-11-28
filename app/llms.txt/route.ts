@@ -12,11 +12,16 @@ export function GET() {
   const u = (p: string) => `${SITE.url}${p}`;
   const body = `# Timule
 
-> Timule supplies critical drone components made in India, such as BLDC motors, ESCs and propellers, under one TM part code and one invoice, with evidence of where each part was made and how it was checked. Indian drone makers use Timule to meet "no foreign components" and indigenous-content rules for the armed forces and Kisan (farm) drone schemes.
+> Timule supplies critical components made in India for drones, robots and data centers, under one TM part code and one invoice, with evidence of where each part was made and how it was checked. Drones: BLDC motors, ESCs, propellers, flight controllers, GNSS modules and carbon-fibre frames. Robotics: robot joint actuators and AGV/AMR drive wheels. Data centers: server fans, server power supplies and liquid cooling. Energy storage, chips and sensors, and transformers are coming next. Indian drone makers use Timule to meet "no foreign components" and indigenous-content rules for the armed forces and Kisan (farm) drone schemes; robotics and data center teams use it for traceable, locally made alternatives to imported parts.
+
+Timule is not only a drone parts supplier: it is a supply layer for critical components across drones, robotics and data centers.
 
 Timule is based in India. It sources from qualified Indian manufacturers, checks batches (documents, its own measurements, outside lab tests), and sells under its own TM code so a buyer has one accountable seller and a backup maker. Makers are identified by TMS supplier codes, not names.
 
-## Free engineering tools
+## Sectors
+- [Drones, robotics and data centers](${u("/sectors")})
+
+## Free engineering tools (for drone teams)
 - [Indigenous content calculator](${u("/tools/content")}): paste a drone parts list and get its Indian content by cost (DAP 2020 method) against 50, 60 or 100 percent targets, with every foreign critical part flagged.
 - [Propulsion sizing](${u("/tools/sizing")}): weight, rotors, propeller and battery in; a matched motor, ESC and propeller, hover time and currents out, corrected for air density in Indian heat and altitude.
 - [CAD and flight-controller files](${u("/tools/files")}): STL envelopes and 1:1 DXF drilling drawings for motors, ESCs and propellers, and ArduPilot and PX4 starting parameters.

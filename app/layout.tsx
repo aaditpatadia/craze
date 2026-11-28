@@ -15,11 +15,20 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: "Timule: Indian drone components with proof of origin", template: `%s | ${SITE.name}` },
+  title: { default: "Timule: Indian components for drones, robots and data centers", template: `%s | ${SITE.name}` },
   description: SITE.description,
   applicationName: SITE.name,
   keywords: [
+    "Indian electronic components supplier",
+    "critical components India",
     "Indian drone components",
+    "robot actuator India",
+    "robot joint actuator manufacturer India",
+    "AGV drive wheel India",
+    "data center components India",
+    "server fan manufacturer India",
+    "server power supply India",
+    "data center liquid cooling India",
     "made in India drone parts",
     "indigenous drone components",
     "BLDC motor India",
@@ -77,7 +86,7 @@ const orgLd = {
       description: SITE.description,
       email: SITE.contactEmail,
       areaServed: "IN",
-      knowsAbout: ["BLDC motors", "Electronic speed controllers", "Drone propellers", "Indigenous content", "Drone supply chain", "Supplier qualification"],
+      knowsAbout: ["BLDC motors", "Electronic speed controllers", "Drone components", "Robot joint actuators", "AGV and AMR drive wheels", "Server fans", "Server power supplies", "Data center liquid cooling", "Indigenous content", "Supplier qualification"],
       founder: FOUNDERS.map((f) => ({ "@type": "Person", name: f.name, jobTitle: f.role, email: f.email, sameAs: [f.linkedin] })),
     },
     {

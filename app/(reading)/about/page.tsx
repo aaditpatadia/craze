@@ -9,9 +9,9 @@ import { FOUNDERS } from "@/lib/team";
 export const metadata: Metadata = {
   title: "About Timule: the founders and why we exist",
   description:
-    "Timule gives every critical drone part one code, one invoice and proof of where it was made. Meet the co-founders, Aadit Patadia and Kashish Shah, and read why India's drones need parts that can be traced.",
+    "Timule supplies Indian-made critical components for drones, robots and data centers, each with one code, one invoice and proof of where it was made. Meet the co-founders, Aadit Patadia and Kashish Shah, and read why India's machines need parts that can be traced.",
   alternates: { canonical: "/about" },
-  keywords: ["Timule", "Timule founders", "Aadit Patadia", "Kashish Shah", "Indian drone components", "indigenous drone parts", "drone supply chain India"],
+  keywords: ["Timule", "Timule founders", "Aadit Patadia", "Kashish Shah", "Indian components supplier", "drone components India", "robot actuators India", "data center components India", "critical components supply chain India"],
 };
 
 const BELIEFS = [
@@ -28,7 +28,7 @@ const BELIEFS = [
   {
     n: "03",
     title: "Buyers should not have to become sourcing experts",
-    body: "A drone team should spend its time on the aircraft. We do the finding, qualifying, checking and paperwork, and we answer for the part on one invoice.",
+    body: "A drone, robotics or data center team should spend its time on the machine. We do the finding, qualifying, checking and paperwork, and we answer for the part on one invoice.",
   },
   {
     n: "04",
@@ -66,13 +66,22 @@ export default function AboutPage() {
       <Container as="header" className="pb-16 pt-14 sm:pt-24">
         <p className="code-text text-xs text-accent">ABOUT TIMULE</p>
         <h1 className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-5xl">
-          Every part in an Indian drone should be able to answer one question:{" "}
+          Every critical part in an Indian machine should be able to answer one question:{" "}
           <span className="text-accent">where did you come from?</span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-fg-muted">
-          Timule gives every critical drone part one code, one invoice and the proof of where it was made. We find the Indian makers, check what they build, and stand
-          behind it when you order.
+          Timule supplies the critical components inside drones, robots and data centers: motors, controllers, actuators, fans, power supplies and cooling. Every part gets
+          one code, one invoice and the proof of where it was made. We find the Indian makers, check what they build, and stand behind it when you order.
         </p>
+        <ul className="mt-8 flex flex-wrap gap-2 text-sm" aria-label="Sectors we supply">
+          {["Drones and aerial systems", "Robotics", "Data centers", "Energy storage (coming)"].map((s) => (
+            <li key={s}>
+              <Link href="/sectors" className="inline-flex min-h-9 items-center rounded-full border border-line px-4 hover:border-line-strong">
+                {s}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </Container>
 
       <section className="border-y border-line bg-bg-subtle">
@@ -82,16 +91,18 @@ export default function AboutPage() {
           </div>
           <div className="space-y-5 text-base text-fg-muted lg:col-span-7">
             <p>
-              India is building drones faster than ever: for farms, for deliveries, for the armed forces. But open one up and most of what makes it fly still comes from
-              abroad. The Drone Federation of India puts the share of imported brushless motors at 70 to 80 percent.
+              India is building its own machines faster than ever: drones for farms and the armed forces, robots for factories and warehouses, data centers for the
+              country&apos;s cloud and AI. But open any of them up and most of the critical parts still come from abroad. In drones alone, the Drone Federation of India puts
+              the share of imported brushless motors at 70 to 80 percent.
             </p>
             <p>
-              In November 2026 the Army said its future drones must carry no foreign components. Farm drones are now scored on how much of them is Indian. Suddenly every
-              drone maker has to prove the origin of parts it bought from a catalogue, often without knowing who really made them.
+              Drones are where the pressure arrived first. In November 2026 the Army said its future drones must carry no foreign components, and farm drones are now scored
+              on how much of them is Indian. Robots and data centers run on the same building blocks: motors and magnets, power electronics, fans and cooling. The same
+              questions about origin follow them.
             </p>
             <p>
               Indian makers exist, and some are very good. What is missing is the layer between them and the buyer: someone who knows which maker to trust for which part,
-              checks the batch, keeps the paperwork, and answers for the part when it arrives. That layer is Timule.
+              checks the batch, keeps the paperwork, and answers for the part when it arrives. That layer is Timule, across every sector that needs it.
             </p>
           </div>
         </Container>
@@ -159,6 +170,7 @@ export default function AboutPage() {
               ["One seller", "You buy from Timule, on one invoice, whoever builds the part."],
               ["Proof on every batch", "Origin declarations to the material, our own measurements, and outside lab tests where it matters."],
               ["A backup maker", "The code stays the same if a maker fails. Your design and paperwork do not change."],
+              ["One supplier, many sectors", "Drone propulsion, robot joints and drive wheels, server fans, power supplies and liquid cooling, all on the same code system."],
               ["Tools engineers use", "Content calculator, propulsion sizing, CAD and flight-controller files, and firmware records, free on this site."],
             ].map(([k, v]) => (
               <div key={k} className="rounded-xl border border-line bg-bg p-5">

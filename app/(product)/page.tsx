@@ -68,7 +68,8 @@ export default function HomePage() {
       <section aria-labelledby="hero-title" className="relative overflow-hidden">
         <Container className="grid grid-cols-1 items-center gap-8 pb-16 pt-14 sm:pt-20 lg:grid-cols-12 lg:pb-24 lg:pt-24">
           <div className="lg:col-span-5">
-            <h1 id="hero-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            <p className="code-text whitespace-normal text-xs text-accent">INDIAN COMPONENTS FOR DRONES, ROBOTS AND DATA CENTERS</p>
+            <h1 id="hero-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
               One code for every critical part.
             </h1>
             <p className="mt-6 max-w-md text-lg text-fg-muted">{SITE.promise}</p>
@@ -81,7 +82,7 @@ export default function HomePage() {
               </LinkButton>
             </div>
             <p className="mt-8 text-sm text-fg-subtle">
-              Drones, robotics and data centers.{" "}
+              Energy storage and chips next.{" "}
               <Link href="/suppliers/join" className="text-fg-muted underline-offset-4 hover:text-fg hover:underline">
                 Make parts? Build to our codes.
               </Link>

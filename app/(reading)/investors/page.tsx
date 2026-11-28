@@ -6,11 +6,11 @@ import { Icon } from "@/components/ui/Icon";
 import { FOUNDERS } from "@/lib/team";
 
 export const metadata: Metadata = {
-  title: "For investors: the trusted supply layer for Indian drones",
+  title: "For investors: the trusted supply layer for Indian drones, robots and data centers",
   description:
-    "India wants drones with no foreign components, and most drone motors are still imported. Timule supplies Indian drone parts under one code, on one invoice, with proof of origin. See the product live and request the deck.",
+    "India is building its own drones, robots and data centers, and most of their critical parts are still imported. Timule supplies Indian-made components for all three under one code, on one invoice, with proof of origin. See the product live and request the deck.",
   alternates: { canonical: "/investors" },
-  keywords: ["Timule investors", "drone startup India", "defence tech India", "drone components market India", "indigenous drone supply chain", "iDEX drone"],
+  keywords: ["Timule investors", "deep tech supply chain India", "drone components market India", "robotics components India", "data center components India", "defence tech India", "iDEX"],
 };
 
 const WHY_NOW = [
@@ -35,6 +35,7 @@ const WHY_NOW = [
 const LIVE = [
   { href: "/tools/content", title: "Indigenous content calculator", body: "Paste a drone's parts list: see how Indian it is and what to replace." },
   { href: "/tools/sizing", title: "Propulsion sizing", body: "Weight in, matched motor, ESC and propeller out, corrected for Indian heat." },
+  { href: "/sectors", title: "Three sectors, one catalogue", body: "Drone propulsion and avionics, robot joints and drive wheels, server fans, power supplies and liquid cooling." },
   { href: "/configure/motor", title: "Motor configurator", body: "28 frames, every option drawn, one TM code and build string." },
   { href: "/tools/firmware", title: "Firmware origin records", body: "Fingerprint the code on every batch, sealed by Timule." },
   { href: "/tools/files", title: "CAD and flight-controller files", body: "Drop a part into a design, and an aircraft into ArduPilot or PX4." },
@@ -50,7 +51,7 @@ const MODEL = [
 const NEXT = [
   ["Now", "Product live at timule.com. First 25 Indian drone makers identified and outreach starting."],
   ["90 days", "Letters of intent from the first buyers. First maker qualified to our Tier 2 checks. GST and DPIIT registration. iDEX application."],
-  ["12 months", "Repeat orders on the top motor, ESC and propeller codes. Stock of the fastest movers. Second category, flight controllers."],
+  ["12 months", "Repeat orders on the top motor, ESC and propeller codes. Stock of the fastest movers. First robotics and data center buyers on actuators, server fans and power supplies."],
 ];
 
 export default function InvestorsPage() {
@@ -58,10 +59,10 @@ export default function InvestorsPage() {
     <>
       <Container as="header" className="pb-16 pt-14 sm:pt-24">
         <p className="code-text text-xs text-accent">FOR INVESTORS</p>
-        <h1 className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-5xl">India wants drones with no foreign parts. Someone has to supply them, and prove it.</h1>
+        <h1 className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight sm:text-5xl">India is building its own drones, robots and data centers. Someone has to supply the parts, and prove where they came from.</h1>
         <p className="mt-6 max-w-2xl text-lg text-fg-muted">
-          Timule is the trusted supply layer between India&apos;s drone makers and the Indian factories that can replace imported parts: one code for every critical part,
-          one invoice, and the evidence of where it was made.
+          Timule is the trusted supply layer between the companies building India&apos;s machines and the Indian factories that can replace imported parts: one code for every
+          critical part, one invoice, and the evidence of where it was made. Drones first, then robots and data centers on the same system.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href="#contact" className="inline-flex min-h-11 items-center rounded-full bg-fg px-5 text-sm font-medium text-bg">
@@ -97,7 +98,8 @@ export default function InvestorsPage() {
           </ul>
           <p className="mt-8 max-w-3xl text-fg-muted">
             The same thing happened in the United States: once drones bought for the government had to be free of Chinese parts, companies that supplied certified
-            components grew quickly, and one, Unusual Machines, is now listed on the stock exchange. India is at that moment now, and no one owns this layer yet.
+            components grew quickly, and one, Unusual Machines, is now listed on the stock exchange. India is at that moment now, and no one owns this layer yet. Drones are where the rule is strictest today, so we start there. Robots and data centers are built
+            from the same blocks, motors and magnets, power electronics, fans and cooling, so every maker we qualify serves more than one market.
           </p>
         </Container>
       </section>
