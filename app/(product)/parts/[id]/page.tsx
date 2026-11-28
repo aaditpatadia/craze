@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 function partDescription(summary: string, code: string, category?: string): string {
   const base = summary.trim().replace(/\.?$/, ".");
   if (base.length >= 140) return base;
-  const extra = ` ${code}: ${category ? `${category.toLowerCase()} ` : ""}sourced from qualified Indian makers, with a build sheet, evidence tier and origin record. Request a quote or reserve it from Timule.`;
+  const extra = ` ${code}: ${category ? `${category} ` : "Parts "}sourced from qualified Indian makers, with a build sheet, evidence tier and origin record. Request a quote or reserve it from Timule.`;
   return (base + extra).slice(0, 300);
 }
 
