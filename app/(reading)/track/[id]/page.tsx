@@ -4,14 +4,18 @@ import { notFound } from "next/navigation";
 import { Container, PageHeader } from "@/components/ui/Layout";
 import { Icon } from "@/components/ui/Icon";
 import { SITE } from "@/lib/config";
-import { STATUSES, statusOf, type Case } from "@/lib/pipeline";
+import { statusOf, statusesFor, type Case } from "@/lib/pipeline";
 import { getRecord } from "@/lib/store";
 
 export const metadata: Metadata = { title: "Track your request", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
-/** The path every order follows. "Letter of intent" appears for letters of intent; "Closed" only as a note. */
-const pathFor = (c: Case) => STATUSES.filter((s) => s.id !== "closed" && (s.id !== "loi" || c.kind === "loi" || c.history.some((h) => h.status === "loi")));
+/** The path this kind of case follows. A request that became a letter of intent shows that step too; "Closed" only as a note. */
+const pathFor = (c: Case) =>
+  [...new Map([...statusesFor(c.kind), ...(c.history.some((h) => h.status === "loi") ? statusesFor("loi") : [])].map((s) => [s.id, s])).values()]
+    .filter((s) => s.id !== "closed")
+    .sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
+const ORDER = ["received", "investigating", "action", "resolved", "reviewing", "quoted", "loi", "ordered", "production", "tested", "dispatched", "delivered"];
 
 const when = (iso: string) => new Date(iso).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Kolkata" });
 
@@ -29,7 +33,7 @@ export default async function TrackPage({ params }: { params: Promise<{ id: stri
     <>
       <PageHeader
         eyebrow={<span className="code-text">{c.ref}</span>}
-        title={c.kind === "loi" ? "Your letter of intent" : "Your sourcing request"}
+        title={c.kind === "loi" ? "Your letter of intent" : c.kind === "complaint" ? "Your complaint" : "Your sourcing request"}
         lead={current.body}
       />
       <Container className="grid grid-cols-1 gap-12 pb-24 lg:grid-cols-12">
@@ -61,12 +65,20 @@ export default async function TrackPage({ params }: { params: Promise<{ id: stri
               );
             })}
           </ol>
-          {c.status === "closed" ? <p className="mt-6 rounded-lg border border-line bg-bg-subtle p-4 text-sm text-fg-muted">This request is closed.</p> : null}
+          {c.status === "closed" ? <p className="mt-6 rounded-lg border border-line bg-bg-subtle p-4 text-sm text-fg-muted">This {c.kind === "complaint" ? "complaint" : "request"} is closed.</p> : null}
+          {c.kind !== "complaint" && ["dispatched", "delivered", "closed"].includes(c.status) ? (
+            <p className="mt-6 text-sm text-fg-muted">
+              Something wrong with the parts?{" "}
+              <Link href={`/complaint?order=${encodeURIComponent(c.ref)}&code=${encodeURIComponent(c.items[0]?.code ?? "")}`} className="text-accent hover:underline">
+                Report a problem
+              </Link>
+            </p>
+          ) : null}
         </section>
 
         <aside className="space-y-8 lg:col-span-5">
           <div>
-            <h2 className="text-sm font-semibold">What you asked for</h2>
+            <h2 className="text-sm font-semibold">{c.kind === "complaint" ? "What you reported" : "What you asked for"}</h2>
             {c.items.length ? (
               <ul className="mt-3 space-y-2">
                 {c.items.map((i) => (
@@ -79,7 +91,26 @@ export default async function TrackPage({ params }: { params: Promise<{ id: stri
             ) : (
               <p className="mt-3 whitespace-pre-wrap break-words text-sm text-fg-muted">{c.summary.slice(0, 600)}</p>
             )}
-            <p className="mt-3 text-sm text-fg-subtle">Needed: {c.timeline}</p>
+            {c.complaint ? (
+              <dl className="mt-3 space-y-1 text-sm">
+                {[
+                  ["Problem", c.complaint.issue],
+                  ["Severity", c.complaint.severity],
+                  ["Order", c.complaint.orderRef],
+                  ["Batch", c.complaint.batch],
+                  ["Files sent", c.complaint.files.length ? String(c.complaint.files.length) : undefined],
+                ]
+                  .filter(([, val]) => val)
+                  .map(([k, val]) => (
+                    <div key={k} className="flex gap-2">
+                      <dt className="w-24 shrink-0 text-fg-subtle">{k}</dt>
+                      <dd className="min-w-0 break-words">{val}</dd>
+                    </div>
+                  ))}
+              </dl>
+            ) : (
+              <p className="mt-3 text-sm text-fg-subtle">Needed: {c.timeline}</p>
+            )}
           </div>
           <div>
             <h2 className="text-sm font-semibold">Updates</h2>

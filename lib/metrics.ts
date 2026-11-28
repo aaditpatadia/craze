@@ -84,7 +84,9 @@ export type Traction = {
 
 const AFTER_ORDER = ["ordered", "production", "tested", "dispatched", "delivered"];
 
-export function traction(cases: Case[]): Traction {
+export function traction(all: Case[]): Traction {
+  // Complaints are quality records, not demand.
+  const cases = all.filter((c) => c.kind !== "complaint");
   const demand = new Map<string, { cases: number; units: number }>();
   for (const c of cases) {
     const items = c.items.length ? c.items : codesIn(c.summary).map((code) => ({ code, qty: 0 }));

@@ -4,21 +4,30 @@
  * are server only.
  */
 
+type Kind = "request" | "loi" | "complaint";
+const ORDER: Kind[] = ["request", "loi"];
+const ALL: Kind[] = ["request", "loi", "complaint"];
+
+/** Every status a case can be in. `for` says which kinds of case use it; "closed" ends any of them. */
 export const STATUSES = [
-  { id: "received", label: "Received", body: "We have your request and will reply within one working day." },
-  { id: "reviewing", label: "Reviewing", body: "We are matching each line to a TM code and a qualified maker." },
-  { id: "quoted", label: "Quoted", body: "A quotation has been sent to you." },
-  { id: "loi", label: "Letter of intent", body: "Your letter of intent is confirmed. We plan maker capacity against it." },
-  { id: "ordered", label: "Ordered", body: "Purchase order received. Production is being scheduled." },
-  { id: "production", label: "In production", body: "The maker is building your batch to the TM code's build sheet." },
-  { id: "tested", label: "Batch tested", body: "Your batch has been tested against the acceptance bands. Only passing parts are released." },
-  { id: "dispatched", label: "Dispatched", body: "Your parts are on the way, with the batch test record and origin dossier." },
-  { id: "delivered", label: "Delivered", body: "Delivered. The evidence pack is filed under each TM code." },
-  { id: "closed", label: "Closed", body: "This request is closed." },
+  { id: "received", label: "Received", body: "We have it and will reply within one working day.", for: ALL },
+  { id: "investigating", label: "Investigating", body: "We are checking the batch record, the test data and the returned units, with the maker.", for: ["complaint"] as Kind[] },
+  { id: "action", label: "Corrective action", body: "The cause is found. We are replacing, reworking or crediting the affected units and fixing the cause at the maker.", for: ["complaint"] as Kind[] },
+  { id: "resolved", label: "Resolved", body: "Resolved. The finding and the corrective action are filed under the TM code and the batch.", for: ["complaint"] as Kind[] },
+  { id: "reviewing", label: "Reviewing", body: "We are matching each line to a TM code and a qualified maker.", for: ORDER },
+  { id: "quoted", label: "Quoted", body: "A quotation has been sent to you.", for: ORDER },
+  { id: "loi", label: "Letter of intent", body: "Your letter of intent is confirmed. We plan maker capacity against it.", for: ["loi"] as Kind[] },
+  { id: "ordered", label: "Ordered", body: "Purchase order received. Production is being scheduled.", for: ORDER },
+  { id: "production", label: "In production", body: "The maker is building your batch to the TM code's build sheet.", for: ORDER },
+  { id: "tested", label: "Batch tested", body: "Your batch has been tested against the acceptance bands. Only passing parts are released.", for: ORDER },
+  { id: "dispatched", label: "Dispatched", body: "Your parts are on the way, with the batch test record and origin dossier.", for: ORDER },
+  { id: "delivered", label: "Delivered", body: "Delivered. The evidence pack is filed under each TM code.", for: ORDER },
+  { id: "closed", label: "Closed", body: "This request is closed.", for: ALL },
 ] as const;
 export type StatusId = (typeof STATUSES)[number]["id"];
 export const STATUS_IDS = STATUSES.map((s) => s.id) as StatusId[];
 export const statusOf = (id: string) => STATUSES.find((s) => s.id === id) ?? STATUSES[0];
+export const statusesFor = (kind: Kind) => STATUSES.filter((s) => s.for.includes(kind));
 
 export type CaseItem = { code: string; qty: number };
 
@@ -26,7 +35,7 @@ export type Case = {
   /** Secret id. Also the tracking link, so never shown anywhere public. */
   id: string;
   ref: string;
-  kind: "request" | "loi";
+  kind: Kind;
   createdAt: string;
   updatedAt: string;
   status: StatusId;
@@ -39,7 +48,34 @@ export type Case = {
   /** Private: shown only on the founder desk. */
   contact: { company: string; name?: string; email: string; role?: string; phone?: string };
   history: { at: string; status: StatusId; note?: string }[];
+  /** Customer complaints only. */
+  complaint?: {
+    issue: string;
+    severity: string;
+    orderRef?: string;
+    batch?: string;
+    affected?: number;
+    files: { name: string; url: string; size: number; type: string }[];
+  };
 };
+
+export const COMPLAINT_ISSUES = [
+  "Does not work on arrival",
+  "Out of specification",
+  "Failed in service",
+  "Damaged in transit",
+  "Wrong part delivered",
+  "Short or missing quantity",
+  "Documents missing or wrong",
+  "Other",
+] as const;
+
+export const COMPLAINT_SEVERITY = [
+  "Safety risk: a failure could hurt someone or damage equipment",
+  "Line stopped: we cannot build or ship",
+  "Serious: affects performance, we have a workaround",
+  "Minor: cosmetic, paperwork or packaging",
+] as const;
 
 export const CHECK_KINDS = [
   { id: "documents", label: "Documents reviewed", tier: 1 },
@@ -52,6 +88,8 @@ export const checkLabel = (k: string) => CHECK_KINDS.find((c) => c.id === k)?.la
 
 export type Check = {
   id: string;
+  /** TMV reference, on checks logged since the code directory. */
+  ref?: string;
   createdAt: string;
   /** Date the check was done, YYYY-MM-DD. */
   date: string;

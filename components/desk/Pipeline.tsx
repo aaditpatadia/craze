@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
-import { CHECK_KINDS, STATUSES, statusOf, type Case } from "@/lib/pipeline";
+import { CHECK_KINDS, statusOf, statusesFor, type Case } from "@/lib/pipeline";
+import { fileHref } from "@/lib/portal";
 import { Button } from "@/components/ui/Button";
 import { inputClass } from "@/components/forms/Field";
 
@@ -43,7 +44,7 @@ export function CaseRow({ c }: { c: Case }) {
     <li className="rounded-xl border border-line p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
         <p className="font-semibold">
-          {c.contact.company} <span className="text-sm font-normal text-fg-subtle">· {c.kind === "loi" ? "Letter of intent" : "Request"}</span>
+          {c.contact.company} <span className="text-sm font-normal text-fg-subtle">· {c.kind === "loi" ? "Letter of intent" : c.kind === "complaint" ? "Complaint" : "Request"}</span>
         </p>
         <p className="code-text text-xs text-fg-subtle">
           {c.ref} · opened {when(c.createdAt)} · {statusOf(c.status).label}
@@ -71,6 +72,25 @@ export function CaseRow({ c }: { c: Case }) {
           ) : (
             <p className="whitespace-pre-wrap break-words text-fg-muted">{c.summary.slice(0, 500)}</p>
           )}
+          {c.complaint ? (
+            <div className="mt-2 space-y-1 text-fg-muted">
+              <p>
+                <span className="font-medium text-fg">{c.complaint.issue}</span>
+                {c.complaint.batch ? ` · batch ${c.complaint.batch}` : ""}
+                {c.complaint.orderRef ? ` · ${c.complaint.orderRef}` : ""}
+              </p>
+              <p className="whitespace-pre-wrap break-words">{c.summary.slice(0, 800)}</p>
+              {c.complaint.files.length ? (
+                <p className="flex flex-wrap gap-x-3">
+                  {c.complaint.files.map((f) => (
+                    <a key={f.url} href={fileHref(f.url)} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                      {f.name}
+                    </a>
+                  ))}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
           <p className="mt-2 text-fg-subtle">
             {c.timeline}
             {c.targetPrice ? ` · target ${c.targetPrice}` : ""}
@@ -79,7 +99,7 @@ export function CaseRow({ c }: { c: Case }) {
         <div className="space-y-2">
           <div className="flex flex-wrap gap-2">
             <select value={status} onChange={(e) => setStatus(e.target.value as Case["status"])} aria-label="Status" className={cn(inputClass, "mt-0 h-10 w-auto border-line")}>
-              {STATUSES.map((s) => (
+              {statusesFor(c.kind).map((s) => (
                 <option key={s.id} value={s.id}>
                   {s.label}
                 </option>

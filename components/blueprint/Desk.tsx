@@ -38,7 +38,7 @@ export function Desk({ parts, suppliers }: { parts: DeskPart[]; suppliers: strin
       stored = raw ? decodeDraft(raw) : null;
     } catch {}
     // eslint-disable-next-line react-hooks/set-state-in-effect -- restore once after mount
-    setDraft(fromHash ?? stored ?? emptyDraft("quotation", makeReference("TMQ")));
+    setDraft(fromHash ?? stored ?? emptyDraft("quotation", makeReference("TMO")));
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { SITE } from "@/lib/config";
+import { makeReference } from "@/lib/codes";
 import { looksLikeSpam, validateInvestor, type InvestorInput } from "@/lib/forms";
 import { guard, readJson, text } from "@/lib/security";
 import { storeSubmission } from "@/lib/submissions";
@@ -27,8 +28,9 @@ export async function POST(req: Request) {
     const { website: _w, startedAt: _s, ...data } = input;
     void _w;
     void _s;
-    await storeSubmission({ kind: "investor", data });
-    return NextResponse.json({ ok: true });
+    const reference = makeReference("TMF");
+    await storeSubmission({ kind: "investor", data, reference });
+    return NextResponse.json({ ok: true, reference });
   } catch (e) {
     console.error("[api/investor] store failed", e);
     return NextResponse.json({ ok: false, error: `We could not send this. Please email ${SITE.contactEmail}.` }, { status: 500 });

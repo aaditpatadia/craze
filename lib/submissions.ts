@@ -10,13 +10,15 @@ import { appendFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import { SITE } from "@/lib/config";
 
-export type Submission = { kind: "request" | "notify" | "supplier" | "investor" | "loi"; data: Record<string, unknown>; reference?: string };
+export type Submission = { kind: "request" | "notify" | "supplier" | "investor" | "loi" | "complaint" | "portal"; data: Record<string, unknown>; reference?: string };
 
 const SUBJECT: Record<Submission["kind"], (s: Submission) => string> = {
   request: (s) => `${s.reference ?? "Request"}: sourcing request from ${String(s.data.company ?? "unknown")}`,
   notify: (s) => `Notify me: ${String(s.data.category ?? "")}`,
   supplier: (s) => `${s.reference ?? "Application"}: supplier application from ${String(s.data.company ?? "unknown")}`,
-  investor: (s) => `Investor enquiry: ${String(s.data.name ?? "")}, ${String(s.data.firm ?? "")}`,
+  investor: (s) => `${s.reference ?? "Investor"}: investor enquiry from ${String(s.data.name ?? "")}, ${String(s.data.firm ?? "")}`,
+  complaint: (s) => `${s.reference ?? "Complaint"}: customer complaint from ${String(s.data.company ?? "unknown")}`,
+  portal: (s) => `${s.reference ?? "Portal"}: ${String(s.data.subject ?? "supplier portal update")}`,
   loi: (s) => `${s.reference ?? "LOI"}: letter of intent from ${String(s.data.company ?? "unknown")}`,
 };
 

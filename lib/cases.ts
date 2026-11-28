@@ -8,7 +8,7 @@ export async function openCase(c: Omit<Case, "id" | "ref" | "createdAt" | "updat
   const record: Case = {
     ...c,
     id: secretId(),
-    ref: c.ref ?? makeReference(c.kind === "loi" ? "TMR" : "TMQ"),
+    ref: c.ref ?? makeReference(c.kind === "loi" ? "TMR" : c.kind === "complaint" ? "TMC" : "TMQ"),
     createdAt: now,
     updatedAt: now,
     status: "received",
@@ -30,7 +30,7 @@ export async function moveCase(id: string, status: StatusId, note?: string): Pro
 }
 
 export async function logCheck(c: Omit<Check, "id" | "createdAt">): Promise<Check> {
-  const record: Check = { ...c, id: `${c.date.replace(/-/g, "")}-${secretId(4)}`, createdAt: new Date().toISOString() };
+  const record: Check = { ...c, id: `${c.date.replace(/-/g, "")}-${secretId(4)}`, ref: makeReference("TMV"), createdAt: new Date().toISOString() };
   await saveRecord(`checks/${record.id}.json`, record);
   return record;
 }

@@ -45,9 +45,12 @@ export default function SupplierJoinPage() {
         title="Build to the code. Show your evidence."
         lead="We list the parts buyers need most. If you make one of them, quote against its TM code and build sheet. Buyers see what you can prove."
       >
-        <LinkButton href="/brief/suppliers" variant="secondary">
-          <Icon name="download" size={16} /> Supplier brief (PDF)
-        </LinkButton>
+        <div className="flex flex-wrap gap-3">
+          <LinkButton href="/supplier/login">Invited? Sign in to the supplier portal</LinkButton>
+          <LinkButton href="/brief/suppliers" variant="secondary">
+            <Icon name="download" size={16} /> Supplier brief (PDF)
+          </LinkButton>
+        </div>
       </PageHeader>
 
       <Container className="pb-16">

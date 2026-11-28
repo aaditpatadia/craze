@@ -7,8 +7,8 @@ import { COMPANY } from "./config";
 
 export type DocKind = "quotation" | "purchase-order" | "invoice";
 
-export const DOC_KIND: Record<DocKind, { label: string; prefix: "TMQ" | "TMP" | "TMI"; party: string; due: string }> = {
-  quotation: { label: "Quotation", prefix: "TMQ", party: "Quoted to", due: "Valid until" },
+export const DOC_KIND: Record<DocKind, { label: string; prefix: "TMO" | "TMP" | "TMI"; party: string; due: string }> = {
+  quotation: { label: "Quotation", prefix: "TMO", party: "Quoted to", due: "Valid until" },
   "purchase-order": { label: "Purchase order", prefix: "TMP", party: "Supplier", due: "Deliver by" },
   invoice: { label: "Invoice", prefix: "TMI", party: "Bill to", due: "Payment due" },
 };

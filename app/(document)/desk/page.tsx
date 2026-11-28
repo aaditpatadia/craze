@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Desk } from "@/components/blueprint/Desk";
 import { getCategories, getProducts, getSuppliers } from "@/lib/content";
-import { requireFounder } from "@/lib/auth-server";
+import { requireTeam } from "@/lib/auth-server";
 
 export const metadata: Metadata = {
   title: "Desk: quotations, purchase orders and invoices",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function DeskPage() {
-  await requireFounder("/desk");
+  await requireTeam("/desk");
   const cats = new Map(getCategories().map((c) => [c.id, c.code]));
   const parts = getProducts().map((p) => ({ code: p.code, name: p.name, cat: cats.get(p.category) ?? "" }));
   // Codes only: the desk never ships maker names to the browser.

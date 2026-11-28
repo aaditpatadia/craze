@@ -17,6 +17,7 @@ const groups = [
       { href: "/bom", label: "BOM checker" },
       { href: "/request", label: "Send a request" },
       { href: "/reserve", label: "Reserve a part" },
+      { href: "/complaint", label: "Report a problem" },
       { href: "/suppliers/join", label: "For suppliers" },
     ],
   },
@@ -26,6 +27,8 @@ const groups = [
       { href: "/about", label: "About us" },
       { href: "/investors", label: "Investors" },
       { href: "/tools", label: "Engineering tools" },
+      { href: "/supplier/login", label: "Supplier portal" },
+      { href: "/team/login", label: "Team sign-in" },
     ],
   },
   {
@@ -41,9 +44,12 @@ const groups = [
   {
     title: "Legal",
     links: [
-      { href: "/legal/terms", label: "Buyer terms" },
-      { href: "/legal/privacy", label: "Privacy" },
+      { href: "/legal/terms", label: "Terms of sale" },
+      { href: "/legal/returns", label: "Complaints and returns" },
       { href: "/legal/supplier-terms", label: "Supplier terms" },
+      { href: "/legal/privacy", label: "Privacy" },
+      { href: "/legal/cookies", label: "Cookies" },
+      { href: "/legal/website-terms", label: "Website terms" },
     ],
   },
 ];

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BlueprintDocument, BlueprintSheet, BpSection } from "@/components/blueprint/Sheet";
 import { BpToolbar } from "@/components/blueprint/Toolbar";
+import { CODE_DIRECTORY } from "@/lib/codes";
 import { getCategories, getProducts, getSupplier, getSuppliers } from "@/lib/content";
 import { FRAMES, frameDims } from "@/lib/motor-config";
 import { SECTOR_LABEL, formatDate } from "@/lib/format";
@@ -12,15 +13,9 @@ export const metadata: Metadata = {
 };
 
 const REFS = [
-  ["TM-MOT-2807-1300-A", "Part code: prefix, category, spec segments, revision"],
-  ["TM-MOT-2807-1300.03", "Part line: one internal part on a build sheet"],
-  ["TM-ESC-40X4-6S-A", "ESC: continuous amps, X4 for a 4-in-1 board, top battery cells"],
-  ["TM-PRP-2480-F2-A", "Propeller: diameter, pitch in tenths, F for folding, blade count"],
-  ["TMS-001", "Supplier code. Buyers see this, never the maker's name"],
-  ["TMQ-261126-7KQ4", "Request or quotation"],
-  ["TMA-261126-M2XD", "Supplier application"],
-  ["TMP-261126-4HZ8", "Purchase order to a supplier"],
-  ["TMI-261126-Q7NB", "Invoice to a buyer"],
+  ...CODE_DIRECTORY.filter((e) => e.public).map((e) => [e.example, e.name] as const),
+  ["TM-ESC-40X4-6S-A", "ESC: continuous amps, X4 for a 4-in-1 board, top battery cells"] as const,
+  ["TM-PRP-2480-F2-A", "Propeller: diameter, pitch in tenths, F for folding, blade count"] as const,
 ];
 
 export default function CodeRegisterPage() {

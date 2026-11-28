@@ -30,9 +30,21 @@ async function putBlob(path: string, body: string) {
     }
   }
   // Public store: never let a record's URL be guessable, so drop the old copy and write with a random suffix.
-  await put(path, body, { ...opts, access: "public", addRandomSuffix: true });
+  const { pathname } = await put(path, body, { ...opts, access: "public", addRandomSuffix: true });
   access = "public";
+  // Remove the older copies, so a record exists once and storage does not grow with every edit.
+  try {
+    const stem = path.slice(0, -5);
+    const { blobs } = await list({ prefix: stem, limit: 100 });
+    const old = blobs.filter((b) => b.pathname !== pathname && isCopy(stem, b.pathname));
+    if (old.length) await del(old.map((b) => b.url));
+  } catch (e) {
+    console.error("[store] could not prune old copies", e);
+  }
 }
+
+/** True when `p` is `stem.json` or `stem-<random suffix>.json`. Ids contain only [a-z0-9-], so the stem needs no escaping. */
+const isCopy = (stem: string, p: string) => p === `${stem}.json` || (p.startsWith(`${stem}-`) && /^[A-Za-z0-9]{20,}\.json$/.test(p.slice(stem.length + 1)));
 
 /** Writes (or replaces) one record. `path` is like "loi/TMR-ABC123.json". */
 export async function saveRecord(path: string, record: unknown): Promise<void> {
@@ -50,9 +62,7 @@ export async function deleteRecord(path: string): Promise<void> {
   if (blobOn()) {
     const stem = path.slice(0, -5);
     const { blobs } = await list({ prefix: stem, limit: 100 });
-    // Ids contain only [a-z0-9-], so the stem needs no escaping.
-    const copy = (p: string) => p.startsWith(`${stem}-`) && /^[A-Za-z0-9]{20,}\.json$/.test(p.slice(stem.length + 1));
-    const mine = blobs.filter((b) => b.pathname === path || copy(b.pathname));
+    const mine = blobs.filter((b) => isCopy(stem, b.pathname));
     if (mine.length) await del(mine.map((b) => b.url));
     return;
   }

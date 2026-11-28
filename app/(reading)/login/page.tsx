@@ -1,19 +1,7 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { SignIn } from "@/components/auth/SignIn";
-import { Container, PageHeader } from "@/components/ui/Layout";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = { title: "Founder sign-in", robots: { index: false, follow: false } };
-
-export default function LoginPage() {
-  return (
-    <>
-      <PageHeader title="Founder sign-in" lead="For the Timule team: quotations, purchase orders, invoices and firmware seals." />
-      <Container className="pb-24">
-        <Suspense>
-          <SignIn />
-        </Suspense>
-      </Container>
-    </>
-  );
+/** The old founder sign-in address. Team sign-in now lives at /team/login. */
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+  const { next } = await searchParams;
+  redirect(typeof next === "string" ? `/team/login?next=${encodeURIComponent(next)}` : "/team/login");
 }

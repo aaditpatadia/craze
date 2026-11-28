@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { isSignedIn } from "@/lib/auth";
 import { logCheck, moveCase } from "@/lib/cases";
 import { deleteRecord } from "@/lib/store";
+import { makeReference } from "@/lib/codes";
 import { CHECK_KINDS, STATUS_IDS, type CheckKind, type StatusId } from "@/lib/pipeline";
 import { guard, readJson, text } from "@/lib/security";
 
@@ -44,7 +45,8 @@ export async function POST(req: Request) {
     if (!["pass", "fail", "info"].includes(result)) return NextResponse.json({ ok: false, error: "Choose a result." }, { status: 400 });
     if (!lines.length) return NextResponse.json({ ok: false, error: "Add at least one measurement or finding." }, { status: 400 });
     const supplier = text(body.supplier, 20).trim().toUpperCase();
-    const batch = text(body.batch, 40).trim();
+    // A batch test without the maker's batch number gets a Timule batch code.
+    const batch = text(body.batch, 40).trim() || (kind === "batch" ? makeReference("TMB") : "");
     const units = Number(body.units);
     const check = await logCheck({
       code,

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckForm, CaseRow } from "@/components/desk/Pipeline";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
-import { requireFounder } from "@/lib/auth-server";
+import { requireTeam } from "@/lib/auth-server";
+import { TeamNav } from "@/components/team/TeamNav";
 import { getProducts } from "@/lib/content";
 import { evidenceStats, getCases, getChecks, traction } from "@/lib/metrics";
 
@@ -10,8 +11,10 @@ export const metadata: Metadata = { title: "Pipeline", robots: { index: false, f
 export const dynamic = "force-dynamic";
 
 export default async function PipelinePage() {
-  await requireFounder("/desk/pipeline");
-  const [cases, checks] = await Promise.all([getCases(), getChecks()]);
+  const me = await requireTeam("/desk/pipeline");
+  const [all, checks] = await Promise.all([getCases(), getChecks()]);
+  const complaints = all.filter((c) => c.kind === "complaint");
+  const cases = all.filter((c) => c.kind !== "complaint");
   const t = traction(cases);
   const e = evidenceStats(checks);
   const codes = getProducts().map((p) => p.code.replace(/-A$/, ""));
@@ -21,18 +24,16 @@ export default async function PipelinePage() {
     ["Buyers", t.buyers],
     ["Units reserved", t.unitsReserved],
     ["Orders", t.ordered],
+    ["Open complaints", complaints.filter((c) => !["resolved", "closed"].includes(c.status)).length],
     ["Checks logged", e.checks],
   ] as const;
 
   return (
     <>
-      <PageHeader title="Pipeline" lead="Every request and letter of intent, the demand for each code, and the verification log. Only founders see this page.">
-        <Link href="/admin" className="text-sm text-accent hover:underline">
-          Back to founder desk
-        </Link>
-      </PageHeader>
+      <TeamNav me={me} active="/desk/pipeline" />
+      <PageHeader title="Pipeline" lead="Requests (TMQ), letters of intent (TMR) and customer complaints (TMC), the demand for each code, and the verification log. Every status and note you save shows on the buyer's tracking page." />
       <Container className="space-y-16 pb-24">
-        <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-7">
           {tiles.map(([k, v]) => (
             <li key={k} className="rounded-xl border border-line p-5">
               <p className="text-xs text-fg-subtle">{k}</p>
@@ -40,6 +41,19 @@ export default async function PipelinePage() {
             </li>
           ))}
         </ul>
+
+        <section aria-labelledby="complaints-title" id="complaints" className="scroll-mt-24">
+          <SectionHeading id="complaints-title" title="Customer complaints" lead="Reply within one working day, within four hours for a safety risk or a stopped line. Work the cause through with the maker by TMC code; never share the buyer's name with them." />
+          {complaints.length ? (
+            <ul className="mt-6 space-y-4">
+              {complaints.map((c) => (
+                <CaseRow key={c.id} c={c} />
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-6 rounded-xl border border-dashed border-line p-6 text-sm text-fg-muted">No complaints. Buyers report problems at /complaint.</p>
+          )}
+        </section>
 
         <section aria-labelledby="cases">
           <SectionHeading id="cases" title="Requests and letters of intent" lead="Move each one along. The buyer sees every status and note on their tracking page." />
@@ -84,7 +98,7 @@ export default async function PipelinePage() {
           )}
         </section>
 
-        <section aria-labelledby="log">
+        <section aria-labelledby="log" className="scroll-mt-24">
           <SectionHeading
             id="log"
             title="Log a check"

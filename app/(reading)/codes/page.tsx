@@ -4,6 +4,7 @@ import { CodeDecoder } from "@/components/codes/CodeDecoder";
 import { LinkButton } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Container, PageHeader, SectionHeading } from "@/components/ui/Layout";
+import { CODE_DIRECTORY } from "@/lib/codes";
 import { getCategories, getProducts, getSuppliers, getSupplier } from "@/lib/content";
 import { SECTOR_LABEL } from "@/lib/format";
 
@@ -14,15 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/codes" },
 };
 
-const references = [
-  { code: "TM-MOT-2807-1300-A", what: "Part code", body: "What is bought and built. Printed on the label, the quote, the purchase order and the delivery note." },
-  { code: "TM-MOT-2807-1300.03", what: "Part line", body: "One internal part on the build sheet, so a supplier and a buyer can point at the same magnet or bearing." },
-  { code: "TMS-001", what: "Supplier code", body: "Each supplier we work with. It stays the same if the company changes its name." },
-  { code: "TMQ-261126-7KQ4", what: "Request reference", body: "Issued when a buyer sends a request. Date first, then four characters that cannot be confused, such as no 0 and O." },
-  { code: "TMA-261126-M2XD", what: "Supplier application", body: "Issued when a maker applies to build a part." },
-  { code: "TMP-261126-4HZ8", what: "Purchase order", body: "Our order to a supplier. Printed on the supplier's labels, invoice and delivery note." },
-  { code: "TMI-261126-Q7NB", what: "Invoice", body: "Our invoice to a buyer, quoting the buyer's order and the TM codes delivered." },
-];
+const references = CODE_DIRECTORY.filter((e) => e.public).map((e) => ({ code: e.example, what: e.name, body: e.issued }));
 
 const rules = [
   "A code describes the part, not the supplier. Two makers building the same sheet ship the same code.",
