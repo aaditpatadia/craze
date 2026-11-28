@@ -13,7 +13,8 @@
     "check": "npm run typecheck && npm run lint && npm run build",
     "postinstall": "node scripts/copy-draco.mjs",
     "indexnow": "tsx scripts/indexnow.ts",
-    "team:account": "tsx scripts/team-account.ts"
+    "team:account": "tsx scripts/team-account.ts",
+    "team:sync": "tsx scripts/team-sync.ts"
   },
   "dependencies": {
     "@react-three/drei": "10.7.9",
